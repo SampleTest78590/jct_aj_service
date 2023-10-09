@@ -1,0 +1,35 @@
+{
+  "production": false,
+  "enableOtp": true,
+  "enablesocket": true,
+  "enableFirebase": true,
+  "DOMAIN_URL": "http://hrplatformdev.ril.com",
+  "HR_URL": "http://hrplatformdev.ril.com",
+  "COMMON_UTIL": "http://commonutilsdev.ril.com/",
+  "apmUrl": "http://hrplatformdev.ril.com/apmrum/",
+  "env": "dev",
+  "VEHICLE_LOG": "https://devnwnjd.ril.com/sap/bc/ui5_ui5/ui2/ushell/shells/abap/Fiorilaunchpad.html?saml2=disabled&sap-client=186&sap-language=EN#ZHR_ESS-vehiclelog",
+  "COV": "https://devnwnjd.ril.com/sap/bc/ui5_ui5/ui2/ushell/shells/abap/Fiorilaunchpad.html?saml2=disabled&sap-client=186&sap-language=EN#ZHR_ESS-covclv",
+  "opentelemetryConfig": {
+    "commonConfig": {
+      "console": true,
+      "production": false,
+      "logBody": true,
+      "serviceName": "JCT_AJ_Services_V3",
+      "probabilitySampler": "0.7",
+      "logLevel": 9999
+    },
+    "batchSpanProcessorConfig": {
+      "maxQueueSize": "2048",
+      "maxExportBatchSize": "512",
+      "scheduledDelayMillis": "5000",
+      "exportTimeoutMillis": "30000"
+    },
+    "otelcolConfig": {
+      "url": "https://gepp-tempo.jio.ril.com/v1/traces"
+    },
+    "jaegerPropagatorConfig": {
+      "customHeader": "custom-header"
+    }
+  }
+}

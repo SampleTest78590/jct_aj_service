@@ -1,0 +1,305 @@
+.missed-reports-root .campaign-status {
+  // padding: 4px 16px;
+  border-radius: 12px;
+  display: block;
+  max-width: 114px !important;
+  height: 24px;
+  line-height: 24px;
+  box-sizing: border-box;
+  font-size: 12px;
+  text-align: center;
+  color: #0e5c4f !important;
+}
+
+
+.missed-reports-root .refresh-ico {
+  cursor: pointer;
+  height: 16px;
+  width: 16px;
+}
+
+.missed-reports-root .refresh-ico:active {
+  -webkit-animation-name: spin;
+  -webkit-animation-duration: 500ms;
+  -webkit-animation-iteration-count: 1;
+}
+
+.missed-reports-root .sec-border {
+  border: 1px solid var(--light-primary-grey-40);
+  border-radius: 12px;
+}
+
+.missed-reports-root .campaign-status {
+  padding: 4px 16px;
+  border-radius: 80px;
+  display: block;
+  max-width: 114px !important;
+  height: 24px;
+  line-height: 17px;
+  box-sizing: border-box;
+}
+
+.missed-reports-root .campaign-status.running-bg {
+  background: #E8FAF7;
+  color: #0E5C4f;
+}
+
+.missed-reports-root .campaign-status.default-bg {
+  background: var(--light-primary-grey-20) !important;
+  color: var(--light-primary-grey-70) !important;
+}
+
+.missed-reports-root .campaign-status.completed-bg {
+  background: var(--light-feedback-success-20) !important;
+  color: var(--light-feedback-success-80) !important;
+}
+
+.missed-reports-root .campaign-status.scheduled-bg {
+  background: var(--light-sparkle-20) !important;
+  color: var(--light-sparkle-70) !important;
+}
+
+.missed-reports-root .campaign-status.stop-bg {
+  background: #FCE6E7 !important;
+  color: #660209 !important;
+}
+
+.missed-reports-root .campaign-status.paused-bg {
+  background: var(--light-marigold-midnight-20) !important;
+  color: #7F4B10 !important;
+}
+
+.missed-reports-root .dot-circle {
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  background-color: var(--color-secondary);
+}
+
+.missed-reports-root .tot-leads-dot {
+  background-color: var(--light-primary-40);
+}
+
+.missed-reports-root .con-calls-dot {
+  background-color: var(--light-secondary-50);
+}
+
+.missed-reports-root .failed-calls-dot {
+  background-color: var(--light-midnight-orange-40);
+}
+
+.missed-reports-root .switch-bttn {
+  border: 1px solid var(--light-text-grey-60);
+  padding: 8px;
+  border-radius: 50%;
+  display: flex;
+  cursor: pointer;
+}
+
+.missed-reports-root .switch-bttn:hover {
+  background-color: var(--light-primary-20);
+}
+
+.missed-reports-root .switch-bttn.active {
+  background-color: var(--light-primary-20);
+}
+
+.missed-reports-root .dot-circle.mint-green {
+  background-color: #7AEBD9;
+}
+
+.missed-reports-root .dot-circle.yellow {
+  background-color: #F7AB20;
+}
+
+.missed-reports-root .dot-circle.crimson {
+  background-color: #ED617F;
+}
+
+.missed-reports-root .dot-circle.sky-blue {
+  background-color: #89DCFF;
+}
+
+.missed-reports-root .dot-circle.violet {
+  background-color: #F680F9;
+}
+
+.missed-reports-root .download-bttn {
+  position: relative;
+}
+
+.missed-reports-root .download-bttn .dropdown-content {
+  top: 45px;
+  min-width: 199px;
+}
+
+.missed-reports-root .download-bttn .dropdown-content .menu-height {
+  line-height: 36px;
+  height: 36px;
+  padding: 0 16px;
+  color: var(--light-primary-grey-80);
+  box-sizing: border-box;
+}
+
+.missed-reports-root .download-bttn .dropdown-content .menu-height:hover {
+  background-color: var(--light-primary-grey-20);
+}
+
+.missed-reports-root .download-bttn .dropdown-content .menu-height img {
+  filter: var(--filter-grey-80);
+}
+
+.missed-reports-root .cstm-dropdown__icon {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  filter: var(--filter-primary-60);
+  margin-top: 5px;
+}
+
+.missed-reports-root .header {
+  position: relative;
+  z-index: 3 !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  cursor: pointer;
+  font-family: var(--font-familiy) !important;
+
+}
+
+.missed-reports-root .overlay-white {
+  // background-color: var(--white);
+  position: absolute;
+  top: 40px;
+  left: 0;
+  right: 0;
+  bottom: -20px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.60);
+  backdrop-filter: blur(10px);
+  z-index: 2;
+}
+
+.missed-reports-root .overlay-white .empty-text {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.missed-reports-root .report-header .dropdown-header .cstm-dropdown__select-container {
+  border: 0 !important
+}
+
+.missed-reports-root .report-header .mt-6 {
+  margin-top: 6px;
+}
+
+.missed-reports-root .report-header .dropdown-header .cstm-dropdown__select.placeholder {
+  color: var(--light-text-grey-100);
+  font-size: var(--font-size-title);
+  font-style: normal;
+  font-weight: 900;
+  line-height: 28px;
+}
+
+.missed-reports-root .campaign-custom-width {
+  max-width: 500px;
+  position: absolute;
+  z-index: 99;
+  margin-top: 50px !important;
+  border-radius: 24px;
+  background: var(--white);
+  box-shadow: var(--shadow-m);
+  padding: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-left: 2px;
+}
+
+
+.missed-reports-root .cstm-dropdown__select-container {
+  height: 36px;
+  box-sizing: border-box;
+  min-width: 170px !important;
+}
+
+.missed-reports-root .charts-empty-data {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
+
+.missed-reports-root .search-result-row {
+  height: 40px;
+  line-height: 40px;
+}
+
+.missed-reports-root .campaign-custom-width .cdk-virtual-scroll-content-wrapper {
+  flex-direction: column !important;
+}
+
+.missed-reports-root .campaign-custom-width .cdk-virtual-scroll-viewport {
+  height: 200px;
+}
+
+.missed-reports-root .cdk-virtual-scroll-content-wrapper {
+  flex-direction: column !important;
+}
+
+.missed-reports-root .min-height-cls {
+  min-height: 22rem;
+}
+
+.missed-reports-root .report-header {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  background: var(--white);
+  z-index: 1;
+  padding-bottom: 4px;
+}
+
+@-ms-keyframes spin {
+  from {
+    -ms-transform: rotate(0deg);
+  }
+
+  to {
+    -ms-transform: rotate(360deg);
+  }
+}
+
+@-moz-keyframes spin {
+  from {
+    -moz-transform: rotate(0deg);
+  }
+
+  to {
+    -moz-transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

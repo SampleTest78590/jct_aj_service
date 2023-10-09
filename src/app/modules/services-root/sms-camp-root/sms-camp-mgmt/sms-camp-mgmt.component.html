@@ -1,0 +1,192 @@
+<div class="sms-camp-mgmt-root" fxFlex="100" fxLayoutAlign="space-between stretch" fxLayout="column">
+    <!-- <div fxLayout="column" fxLayoutGap="16px" class="full-height"> -->
+    <div>
+        <div fxLayout="row" fxLayoutAlign="space-between start" class="mb-16">
+            <div fxLayout="column" fxLayoutGap="8px">
+                <div class="header">SMS Campaign Management </div>
+            </div>
+            <div *ngIf="ELEMENT_DATA?.length > 0 || searchValue !== '' || !initialflag">
+                <button type="button" class="medium-primary-button" (click)="CrateSMSCamp()">
+                    <img src="assets/images/svg/ico-plus-white.svg" class="mr-8" alt="" />
+                    <span class="extra-bold">Create New Campaign</span>
+                </button>
+            </div>
+        </div>
+
+        <div *ngIf="ELEMENT_DATA?.length > 0 || searchValue !== '' || !initialflag" class="pt-12 mb-16">
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <label class="sub-title-text ml-8 bold">All Campaigns ({{ total ? total : "0" }})</label>
+                <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="start center">
+                    <div fxFlex="312px" class="search-align">
+                        <app-custom-search fxFlex="100" [label]="'Search'"
+                            IconSrc="assets/images/svg/ico-search-grey.svg" (outputText)="outputSearch($event)">
+                        </app-custom-search>
+                    </div>
+                    <div class="disabled">
+                        <button type="button" class="medium-secondary-button">
+                            <img src="assets/images/svg/ico-filter-grey.svg" class="ico-small mr-8" alt="" />
+                            <span class="grey-80">Filter</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="!!ELEMENT_DATA?.length" fxLayout="column" [style.overflow]="'overlay'"
+        class="flex-1 scrollable-content custom-table mt-12">
+        <div fxLayout="row" fxLayoutAlign="space-between start" class="custom-table-header-content">
+            <div class="custom-table-header cursor-pointer" fxFlex="27.3">
+                <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
+                    <div>Campaign Name</div>
+                    <!-- <img src="assets/images/svg/ico-swap-vert.svg" alt="" class="ico-extra-small" /> -->
+                </div>
+            </div>
+            <div class="custom-table-header" fxFlex="14.5">Campaign Type</div>
+            <div class="custom-table-header" fxFlex="18.3">Start Time</div>
+            <div class="custom-table-header" fxFlex="12">Sender ID</div>
+            <div class="custom-table-header cursor-pointer" fxFlex="20">
+                Campaign Status
+                <!-- <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
+                        <div>Date created</div>
+                        <img src="assets/images/svg/ico-swap-vert.svg" alt="" class="ico-extra-small" />
+                    </div> -->
+            </div>
+            <div class="custom-table-header text-center" fxFlex="7.9">Action</div>
+        </div>
+        <div [style.min-height.vh]="'27'" [style.overflow]="'overlay'" class="scrollable-content sms-camp-minheight"
+            [ngClass]="dataSource?.length > 2 && dataSource?.length < 8 ? 'scroll-height' : ''" fxLayout="column">
+            <div fxLayout="row" fxLayoutAlign="space-between center" class="custom-table-content"
+                *ngFor="let element of dataSource; let i = index">
+                <div class="contact-list-details" fxFlex="27.3">
+                    <div class="hover-text table-user-info" fxLayout="row" fxLayoutAlign="start center"
+                        class="table-user-info" fxLayoutGap="5px">
+                        <div class="count-text cursor-pointer" (click)="previewSMSCampaign(element?.campaignId)">
+                            {{ 1 + i + ((pageIndex - 1) * pageSize) }}.</div>
+                        <div class="ellipsis-text cursor-pointer" (click)="previewSMSCampaign(element?.campaignId)">
+                            {{ element.campaignName || '-'}}</div>
+                        <div class="info-mouse-hover" [ngClass]="i > 2 ? 'bottom-tooltip' : ''">
+                            <div class="custom-mat-card" fxLayout="column" fxLayoutGap="16px">
+                                <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="space-between center">
+                                    <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
+                                        <span class="user-pics">
+                                            {{getInitials(element?.createdBy) || '-'}}
+                                        </span>
+                                        <span>
+                                            {{( element?.createdBy | titlecase ) || '-'}}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div fxLayout="column" fxLayoutGap="10px">
+                                    <div class="extra-bold sub-title-text grey-100 fs-16">
+                                        SMS Template
+                                    </div>
+                                    <div>
+                                        {{ element?.smsContent?.
+                                        smsTemplateText || '-' }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-list-details" fxFlex="14.5">
+                    <label class="text-nowrap">
+                        <span>{{element.campaignType || '-'}}</span>
+                    </label>
+                </div>
+                <div class="contact-list-details " fxFlex="18.3">
+                    <label class="text-nowrap">
+                        <span>
+                            {{(element.start_Time ) || "-"}}
+                            <!-- 01/03/2023 12:32:23 -->
+                        </span>
+                    </label>
+                </div>
+                <div class="contact-list-details" fxFlex="12">
+                    <label class="text-nowrap">
+                        <span>
+                            {{element.sender_id || '-'}}
+                        </span>
+                    </label>
+                </div>
+                <div class="contact-list-details" fxFlex="20">
+                    <div fxFlex="100" class="campaign-status mini-text ellipsis-text" [ngClass]="[
+                            element.campaignStatus == 'RUNNING' ||
+                            element.campaignStatus == 'ACTIVE'
+                            ? 'running-bg'
+                            : element.campaignStatus == 'SCHEDULE' ||
+                                element.campaignStatus == 'CREATED' ||
+                                element.campaignStatus == 'LEADS-READY'
+                            ? 'scheduled-bg'
+                            : element.campaignStatus == 'DRAFT'
+                            ? 'default-bg'
+                            : element.campaignStatus == 'COMPLETED'
+                            ? 'completed-bg'
+                            : element.campaignStatus == 'STOP' ||
+                                element.campaignStatus == 'SUSPENDED'
+                            ? 'stop-bg'
+                            : element.campaignStatus == 'PAUSED'
+                            ? 'paused-bg'
+                            : '']">{{ (element.campaignStatus | titlecase) || "-" }}</div>
+                </div>
+                <div class="contact-list-details text-center" fxFlex="7.9" fxLayout="column"
+                    fxLayoutAlign="center center">
+                    <!-- <div class="dot-menu-dropdown dropdown">
+                            <button class="small-tertiary-button-icon cursor-pointer" [disabled]="true">
+                                <img src="assets/images/svg/ico-dot-menu.svg" alt="ico-menu" class="" />
+                            </button>
+                        </div> -->
+                    <div class="dot-menu-dropdown dropdown" appDropdown>
+                        <button class="small-tertiary-button-icon cursor-pointer">
+                            <img src="assets/images/svg/ico-dot-menu.svg" alt="ico-menu" class="" />
+                        </button>
+                        <div id="myDropdown" class="dropdown-content">
+                            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px" class="cam-action-bttn"
+                                (click)="campaignActions('reports', element)">
+                                <img class="ico-extra-small" src="assets/images/svg/ico-reports.svg"
+                                    [alt]="'reports'" />
+                                <div class="lh-20">Campaign Reports</div>
+                            </div>
+                            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px"
+                                class="cam-action-bttn disabled">
+                                <img class="ico-extra-small" src="assets/images/svg/ico-edit-grey.svg" [alt]="'edit'" />
+                                <div class="lh-20">Edit Campaign</div>
+                            </div>
+                            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px"
+                                class="cam-action-bttn disabled">
+                                <img class="ico-extra-small" src="assets/images/svg/ico-delete.svg" [alt]="'pause'" />
+                                <div class="lh-20">Delete Campaign</div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!!!ELEMENT_DATA?.length && !initialflag" class="flex-1">
+        <div class="nodata text-center mt-8">
+            No Data Found
+        </div>
+    </div>
+    <div *ngIf="initialflag && !!!ELEMENT_DATA?.length" fxLayout="column" fxLayoutAlign="center center"
+        fxLayoutGap="10px" class="mt-100 flex-1">
+        <div><img src="assets/images/empty-campaigns.png" alt="" /></div>
+        <div class="bold">Your SMS Campaign list is empty</div>
+        <div fxLayoutAlign="center center">
+            <span class="body-text font-weight-light">When you configure SMS Campaign, it'll show up here.</span>
+        </div>
+        <div class="mt-32 mt-22-custom">
+            <button type="button" class="medium-primary-button" (click)="CrateSMSCamp()">
+                <img src="assets/images/svg/ico-add-circle.svg" alt="" class="mr-8" />
+                Create New Campaign
+            </button>
+        </div>
+    </div>
+    <!-- </div> -->
+    <div class="pagination footer-action no-margin" fxLayoutAlign="end end" *ngIf="total > 7">
+        <app-custom-pagination [pageIndex]="pageIndex" [total]="total" [pageSize]="7" [pageSizeOptions]="[5, 10, 20]"
+            (returnPage)="getCurrentPage($event)"></app-custom-pagination>
+    </div>
+</div>

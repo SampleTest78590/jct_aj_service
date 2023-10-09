@@ -1,0 +1,46 @@
+.leadlist-action-root .radio-button {
+    border-radius: 8px;
+    border: 1px solid var(--light-primary-grey-40);
+    padding: 12px;
+    display: inline-block;
+    min-height: 96px;
+  }
+
+  .leadlist-action-root .search-box {
+  background: var(--light-primary-grey-20);
+  border-radius: 30px;
+}
+
+.leadlist-action-root .campaign-custom-width {
+    max-width: 500px;
+    position: absolute;
+    z-index: 99;
+    margin-top: 50px !important;
+    border-radius: 24px;
+    background: var(--white);
+    box-shadow: var(--shadow-m);
+    padding: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    // height: 272px;
+  }
+
+.leadlist-action-root .search-result-row {
+    height: 40px;
+    line-height: 40px;
+  }
+  .leadlist-action-root .campaign-custom-width .cdk-virtual-scroll-content-wrapper {
+    flex-direction: column !important;
+  }
+  .leadlist-action-root .campaign-custom-width .cdk-virtual-scroll-viewport {
+    height: 200px;
+  }
+  .leadlist-action-root .grey-40-border {
+    position: relative;
+  }
+  .leadlist-action-root .cdk-virtual-scroll-content-wrapper {
+    flex-direction: column !important;
+  }
+  .leadlist-action-root .radio-button .checked ~ div .body-text{
+    color: var(--light-text-grey-100)!important;
+  }

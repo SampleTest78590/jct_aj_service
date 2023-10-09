@@ -1,0 +1,28 @@
+<div
+    class="date-view"
+    (touchstart)="swipe($event, 'start')"
+    (touchend)="swipe($event, 'end')"
+>
+    <table aria-describedby="dateViewDataTable">
+        <thead>
+            <tr class="week-header">
+                <th scope="col" class="week-day" *ngFor="let day of weekDays">
+                    {{ day.abbr }}
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let weekRow of weekRows">
+                <td *ngFor="let day of weekRow" class="date-btn-container">
+                    <button
+                        class="date-btn {{ day.classes }}"
+                        *ngIf="day"
+                        (click)="handleDateSelection(day.date)"
+                    >
+                        {{ day.date }}
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

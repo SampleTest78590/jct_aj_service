@@ -1,0 +1,19 @@
+<div class="toast-container {{ position }}" fxFlex="50">
+    <div class="toast-backdrop">
+        <div class="toast-message-container" [ngStyle]="toastStyles">
+            <div class="toast-message">
+                <div class="toast-icon">
+                    <img alt="toast-icon" [src]="kindIconMapData[kindIconMap]" class="{{ kindIconMap }}" />
+                </div>
+
+                <div class="toast-title-description-container">
+                    <div class="toast-title">{{ title }}</div>
+                    <div class="toast-description">{{ description }}</div>
+                </div>
+                <div class="ml-12 mt-5">
+                    <img (click)="closeToasterMsg()" src="assets/images/svg/ico-tosat-close.svg" class="ico-extra-small cursor-pointer" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

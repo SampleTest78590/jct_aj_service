@@ -1,0 +1,455 @@
+<div fxLayout="column" class="test-campaign-modal">
+  <div
+    fxLayout="row"
+    fxLayoutAlign="space-between center"
+    class="grid-layout-row header-modal-action"
+  >
+    <h2 class="no-margin">Test Campaign</h2>
+    <button
+      class="tertiary-button-icon close-btn ico-close-right-top"
+      (click)="cancelModal()"
+    >
+      <img src="assets/images/svg/ico-close-blue.svg" alt="close" />
+    </button>
+  </div>
+  <div class="scrollable-content content-modal-action">
+    <div fxLayout="column" class="grid-layout-column">
+      <div class="test-camp-para mb-24">
+        Understand how your customers will experience the campaign on your
+        device
+      </div>
+    </div>
+    <div fxLayout="column" class="">
+      <div class="test-camp-title mb-12">Contact Settings</div>
+      <div fxLayout="column" fxLayoutGap="4px">
+        <div class="test-camp-subtitle-one">Campaign Name</div>
+        <div class="test-camp-subtitle-two">
+          {{ testCampArray[0].CampaignName?.CampName || "-" }}
+        </div>
+      </div>
+      <div class="divider-line mt-24 mb-24"></div>
+    </div>
+
+    <div fxLayout="column">
+      <div class="test-camp-title mb-12">Audio Message</div>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div fxLayout="column" fxLayoutGap="4px" fxFlex="40">
+          <div class="test-camp-subtitle-one">
+            Audio File Name
+          </div>
+          <div class="test-camp-subtitle-two">
+            {{ testCampArray[0]?.audioDetail[0]?.audioName || "-" }}
+            <!-- {{ testCampArray[0]?.audioDetail[0]?.audioDescription || "-" }} -->
+          </div>
+        </div>
+        <div class="cust-width">
+          <!-- <img
+            src="assets/images/svg/ico-play-bttn.svg"
+            class="ico-small cursor-pointer"
+            *ngIf="!audioData"
+            alt="ico-play"
+          /> -->
+          <div *ngIf="audioData">
+            <app-audio-preview-play [src]="audioData" [index]="2"  [audioDuration]="audioDuration"></app-audio-preview-play>
+          </div>
+        </div>
+      </div>
+      <div class="divider-line mt-24 mb-24"></div>
+    </div>
+
+    <div fxLayout="column" class="grid-layout-column" fxLayoutGap="8px">
+      <div class="test-camp-title">Campaign Schedule</div>
+      <div fxLayout="row" fxFlex="100">
+          <div fxLayout="column" fxLayoutGap="8px" fxFlex="44">
+            <div fxLayout="column" fxLayoutGap="4px">
+              <div class="test-camp-subtitle-one">Campaign Type</div>
+              <div class="test-camp-subtitle-two">
+                {{ testCampArray[0]?.CampaignName?.CampType || "-" }}
+              </div>
+            </div>
+            <div fxLayout="column" fxLayoutGap="4px">
+              <div class="test-camp-subtitle-one">Duration Between Retries</div>
+              <div class="test-camp-subtitle-two">
+                {{ testCampArray[0]?.scheduledDetail?.dRetries || "-"
+                }} {{ testCampArray[0]?.scheduledDetail?.durationHrMnt || "-" }}
+              </div>
+            </div>
+          </div>
+          <div fxLayout="column" fxLayoutGap="8px" fxFlex="40">
+            <div fxLayout="column" fxLayoutGap="4px">
+              <div class="test-camp-subtitle-one">Caller ID</div>
+              <div class="test-camp-subtitle-two">
+                {{ testCampArray[0]?.CampaignName?.CallerId || "-" }}
+              </div>
+            </div>
+            <div fxLayout="column" fxLayoutGap="4px">
+              <div class="test-camp-subtitle-one">Hang-up causes for retries</div>
+              <div class="test-camp-subtitle-two">Busy, No Answer</div>
+            </div>
+          </div>
+          <div fxLayout="column" fxLayoutGap="8px">
+            <div fxLayout="column" fxLayoutGap="4px">
+              <div class="test-camp-subtitle-one">No. of Retries</div>
+              <div class="test-camp-subtitle-two">
+                {{ testCampArray[0]?.scheduledDetail?.noOfRetries || "-" }}
+              </div>
+            </div>
+          </div>
+      </div>
+      <!-- <div fxLayout="row wrap" class="grid-layout-row-wrap-3n">
+        <div fxLayout="column" fxLayoutGap="4px">
+          <div class="test-camp-subtitle-one">Campaign Type</div>
+          <div class="test-camp-subtitle-two">
+            {{ testCampArray[0]?.CampaignName?.CampType || "-" }}
+          </div>
+        </div>
+        <div fxLayout="column" fxLayoutGap="4px">
+          <div class="test-camp-subtitle-one">Caller ID</div>
+          <div class="test-camp-subtitle-two">
+            {{ testCampArray[0]?.CampaignName?.CallerId || "-" }}
+          </div>
+        </div>
+        <div fxLayout="column" fxLayoutGap="4px">
+          <div class="test-camp-subtitle-one">No. of Retries</div>
+          <div class="test-camp-subtitle-two">
+            {{ testCampArray[0]?.scheduledDetail?.noOfRetries || "-" }}
+          </div>
+        </div>
+        <div fxLayout="column" fxLayoutGap="4px">
+          <div>Duration Between Retries</div>
+          <div class="test-camp-subtitle-two">
+            {{ testCampArray[0]?.scheduledDetail?.dRetries || "-"
+            }} {{ testCampArray[0]?.scheduledDetail?.durationHrMnt || "-" }}
+          </div>
+        </div>
+        <div fxLayout="column" fxLayoutGap="4px">
+          <div>Hang-up causes for retries</div>
+          <div class="test-camp-subtitle-two">Busy, No Answer</div>
+        </div>
+      </div> -->
+      <div class="divider-line mt-24 mb-24"></div>
+    </div>
+
+    <div fxLayout="column">
+      <div fxLayout="row" fxLayoutAlign="space-between start">
+        <div>
+          <div class="test-camp-title">Destination Number</div>
+          <div class="grey-70 lh-20">You can add up to 5 numbers</div>
+        </div>
+        <div class="">
+          <button
+            *ngIf="!trialNumber"
+            class="medium-tertiary-button"
+            type="button"
+            (click)="addNumber()"
+            [disabled]="stopAddNumber"
+          >
+            <!-- <div
+              fxLayout="row"
+              fxLayoutGap="10px"
+              fxLayoutAlign="center center"
+            > -->
+            <img
+              src="assets/images/svg/ico-add-circle.svg"
+              alt=""
+              class="mr-8"
+            />Add Number
+            <!-- <span class="primary-text extra-bold"></span> -->
+            <!-- </div> -->
+            <!-- <img src="assets/images/svg/ico-upload-plus" alt="" />Add Number -->
+          </button>
+          <button
+            *ngIf="trialNumber"
+            class="medium-tertiary-button"
+            type="button"
+            (click)="addOtpNumber()"
+            [disabled]="!addNumberV"
+          >
+            <img
+              src="assets/images/svg/ico-add-circle.svg"
+              alt=""
+              class="mr-8"
+            />Add Number
+          </button>
+        </div>
+      </div>
+      <!-- if trial number is choosen then show this for postkyc -->
+      <ng-container *ngIf="!trialNumber">
+        <div fxLayout="column" fxLayoutGap="5px">
+          <!-- <div [formGroup]="destinationNumber">
+            <div formArrayName="desNumber">
+              <div
+                *ngFor="let dn of desNumber?.controls; let i = index"
+                [formGroupName]="i"
+              >
+                <div fxFlex="70" class="mb-10 position-relative">
+                  <div class="grey-70-text small-text full-width mb-10">
+                    Test Number {{ i + 1 }}
+                  </div>
+                  <div
+                    fxLayout="row"
+                    fxLayoutGap="10px"
+                    fxLayoutAlign="start center"
+                    class="border-radius-10"
+                  >
+                    <div
+                      fxLayout="column"
+                      fxFlex="30"
+                      class="outline-input no-label no-border"
+                    ></div>
+                    <div
+                      fxLayout="column"
+                      fxFlex="70"
+                      class="outline-input no-label no-border"
+                    >
+                      <div fxLayout="row" fxFlex="38">
+                      
+                        <input
+                          type="text"
+                          maxlength="10"
+                          class="inputMobile"
+                          formControlName="number"
+                          (input)="numberTest()"
+                          (keypress)="onlyNumberKeyTest($event)"
+                        />
+                      </div>
+                    </div>
+                    <img
+                      src="assets/images/svg/ico-close-button"
+                      (click)="popNumber(i)"
+                      class="cursor-pointer closeIcon"
+                      alt=""
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> -->
+          <div
+            fxLayout="row"
+            class="mt-24 phone-input"
+            fxLayoutAlign="start center"
+          >
+            <div [formGroup]="destinationNumber" class="mb-4">
+              <div formArrayName="desNumber">
+                <div
+                  *ngFor="let dn of desNumber?.controls; let i = index"
+                  [formGroupName]="i"
+                >
+                  <div fxLayout="row">
+                    <div class="mb-4 test-no-color">Test Number {{ i + 1 }}</div>
+                  </div>
+                  <div fxLayout="column" class="mb-16">
+                    <div fxFlex="60" class="dropdown-mg" placeholder="+91" class="mr-4" fxLayout="row">
+                      <app-dropdown fxFlex="50" placeholder="+91" class="dropdown-pad"></app-dropdown>
+                      <div class="cstm-input" fxFlex="100">
+                        <input
+                          type="text"
+                          maxlength="10"
+                          class="inputMobile"
+                          formControlName="number"
+                          (input)="numberTest()"
+                          (keypress)="onlyNumberKeyTest($event)"
+                          placeholder="Enter Contact Number"
+                        />
+                      </div>
+                      <div [ngClass]=" i==0 ? 'delete-icon-test' : ''">
+                        <img
+                        src="assets/images/svg/ico-close-outline.svg"
+                        (click)="popNumber(i)"
+                        class="cursor-pointer ico-small ml-5 mt-5"
+                        alt=""
+                      />
+                      </div>
+                    </div>
+                    
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <!-- if trial number is choosen then show this otp verficatoin for postkyc -->
+      <ng-container *ngIf="trialNumber">
+        <div
+          [formGroup]="destinationOtpNumber"
+          fxLayout="column"
+          fxLayoutGap="16px"
+          fxLayoutAlign="start start"
+          class="mt-24 cls-otp"
+        >
+          <div
+            formArrayName="otpNumber"
+            *ngFor="let dn of otpNumber?.controls; let i = index"
+          >
+            <div [formGroupName]="i">
+              <div
+                fxLayout="column"
+                class="phone-input"
+                fxLayoutAlign="start start"
+              >
+                <div fxLayout="row">
+                  <div class="mb-4 grey-80">Test Number {{ i + 1 }}</div>
+                </div>
+
+                <div fxLayout="row" fxLayoutGap="32px" fxLayoutAlign="start center">
+                  <div class="dropdown-mg" class="mr-4">
+                    <app-dropdown
+                      fxFlex="50"
+                      placeholder="+91"
+                      class="dropdown-pad"
+                      [options]="codeOtp"
+                      [value]="'+91'"
+                    >
+                    </app-dropdown>
+                    <div class="num-inp-field cstm-input" fxFlex="100">
+                      <input
+                        type="text"
+                        maxlength="10"
+                        [readonly]="
+                          otpNumber.controls[i].status === 'VALID' ? true : false
+                        "
+                        class="inputMobile" 
+                        formControlName="number"
+                        placeholder="Enter Contact Number"
+                        (keypress)="onlyNumberKeyTestForOtp($event, dn, true)"
+                      />
+                    </div>
+                  </div>
+                  <button
+                    class="small-primary-button"
+                    [disabled]="
+                      otpNumber.controls[i]['controls'].number.status !== 'VALID'
+                    " 
+                    *ngIf="!!!dn.value.vbutton && dn.value.Vmessage !== true"
+                    (click)="verifyNumber(i, dn)"
+                  >
+                    verify
+                  </button>
+                  <!--  && desNumber.controls[i]['controls'].leadId -->
+                  <img
+                    *ngIf="otpNumber.controls.length !== 1"
+                    (click)="RemoveNumber(dn, i)"
+                    src="assets/images/svg/ico-close-blue.svg"
+                    alt=""
+                    class="ico-standard cursor-pointer"
+                  />
+                </div>
+                <div class="cstm-input" *ngIf="dn.value.errormsg">
+                  <div class="cstm-input__message error">
+                    {{ dn.value.errormsg }}
+                  </div>
+                </div>
+                <!-- *****success message****** -->
+                <div
+                  fxLayout="row"
+                  fxLayoutGap="4px"
+                  fxLayoutAlign="start center"
+                  class="mt-4"
+                >
+                  <div
+                    fxLayout="row"
+                    fxLayoutGap="4px"
+                    fxLayoutAlign="start start"
+                    *ngIf="
+                      otpNumber.controls[i].status === 'VALID' &&
+                      dn.value.Vmessage === true
+                    "
+                  >
+                    <img
+                      src="assets/images/svg/ico-tick-success.svg"
+                      alt=""
+                      class="ico-standard"
+                    />
+                    <span class="success-text mini-text lh-16">Verified</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ***********OTP input Field********** -->
+              <div
+                fxLayout="row"
+                fxLayoutAlign="start start"
+                fxLayoutGap="16px"
+                class="otp-input mt-16"
+                *ngIf="dn.value.vbutton === true"
+              >
+                <div fxLayout="column" fxLayoutGap="4px" class="otp-box cstm-input">
+                  <div class="cstm-input__label mini-text lh-16">OTP</div>
+                  <input
+                    type="text"
+                    class="placeholder"
+                    (keypress)="onlyNumberKeyTestForOtp($event, dn, false)"
+                    maxlength="6"
+                    placeholder="123456"
+                    formControlName="otp"
+                  />
+                  <!-- <div class="cstm-input">
+                  </div> -->
+                  <div fxLayout="row" fxLayoutAlign="space-between center">
+                    <div class="cstm-input" *ngIf="errorMessage">
+                        <div class="cstm-input__message error text-nowrap">
+                          {{ errorMessage }}
+                        </div>
+                      </div>
+                      <div fxLayout="row" fxLayoutAlign="end end" *ngIf="!isuserLocked" class="full-width">
+                        {{ timerVal * 1000 | date : "mm:ss" : "UTC" }}
+                      </div>
+                  </div>
+                  
+                </div>
+                <button
+                  class="small-primary-button mt-20"
+                  [disabled]="isuserLocked || otpNumber.controls[i]['controls'].otp.status !== 'VALID'"
+                  (click)="confirmbutton(dn, i)"
+                >
+                  Confirm
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <div class="footer-modal-action">
+      <div fxLayout="row" fxLayoutGap="12px" fxLayoutAlign="end end">
+        <button
+          type="button"
+          class="large-secondary-button"
+          (click)="cancelModal()"
+        >
+          Cancel
+        </button>
+        <button
+          *ngIf="!trialNumber"
+          type="button"
+          class="large-primary-button"
+          (click)="testCampaignCall()"
+          [disabled]="disableTest"
+        >
+          Test Campaign
+        </button>
+        <button
+          *ngIf="trialNumber"
+          type="button"
+          class="large-primary-button"
+          (click)="testCampaignCall()"
+          [disabled]="destinationOtpNumber.status !== 'VALID'"
+        >
+          Test Campaign
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- modal popup-code for success error message-->
+<ng-container *ngIf="messageModal">
+    <div content>
+      <app-custom-message-modal [icon]="msgIcon" [header]="messageHeader" [subheaderOne]="messageSubheaderOne" [subheaderTwo]="mesasgeSubheaderTwo" (closeEvent)="closeSuccess()"></app-custom-message-modal>
+    </div>
+</ng-container>

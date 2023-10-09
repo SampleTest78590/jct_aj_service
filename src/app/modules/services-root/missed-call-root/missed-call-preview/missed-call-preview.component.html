@@ -1,0 +1,201 @@
+<div fxFlex="100" fxLayoutAlign="space-between stretch" fxLayout="column" class="missed-call-preview-root grid-layout-column">
+    <div fxLayout="column" class="grid-layout-column">
+      <div fxLayout="column" fxLayoutGap="8px" class="mb-24">
+        <div class="header">
+          Welcome to Missed Call Service
+        </div>
+        <div class="sub-header lh-24">
+          Creating a Missed Call Campaign is as simple as counting 1-2-3
+        </div>
+      </div>
+  
+      <div fxLayout="column" fxLayoutGap="16px" [style.overflow]="'auto'" [style.height.vh]="'62'"
+        class="scrollable-content pr-4">
+  
+          <div class="custom-accordion">
+            <div fxLayoutAlign="space-between start" fxLayout="row" fxLayoutGap="24px" fxFlex>
+              <div fxLayout="row" fxLayoutGap="24px" fxFlex="100">
+                <div class="stepper-count">
+                    <span class="accordion-status-placeholder"><img src="assets/images/svg/ico-tick-success.svg" alt="" /></span>
+                  <!-- <span class="count-numbers">1</span> -->
+                </div>
+                <div fxLayout="column" class="mt-4 full-width" fxLayoutGap="8px">
+                  <div class="accordion-header lh-24">Name your Campaign</div>
+                  <!-- <div class="accordion-header lh-24">Lead List</div> -->
+                  <!-- <div class="accordion-sub-header lh-16">
+                    <span>Enter a name for your campaign which will be associated with your Missed Call service</span>
+                  </div> -->
+                  <div fxLayout="column" fxLayoutGap="8px">
+                    <div fxLayout="row">
+                      <div class="grey-70" fxFlex="15">Campaign Name</div>
+                      <div>
+                        <span class="ellipsis-text">JioCare Promotion Campaign</span>
+                      </div>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start start" class="full-width">
+                      <div class="grey-70" fxFlex="15">Description</div>
+                      <div fxLayout="row" fxLayoutAlign="space-between start" class="full-width">
+                        <div [ngClass]="readMore ? '' : 'custom-ellipsis' ">
+                            This campaign is to take care of the sales and promotion of JioCare. Which is a new campaign This campaign is to take care of the sales and promotion of JioCare. Which is a new campaign...  </div>
+                        <div class="primary-text text-nowrap">
+                          <span (click)="readMoreClick()" class="extra-bold primary-60">{{readMoreText}}</span>
+                          <!-- <span>Read Less</span> -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <img src="assets/images/svg/ico-menu-down-arrow.svg" class="ico-small arrow-forword" alt="" (click)="openNameCampaign()"/>
+                <!-- <img src="assets/images/svg/ico-menu-up-arrow.svg" class="ico-small" alt="" /> -->
+              </div>
+            </div>
+            
+          </div>
+  
+        <div class="custom-accordion">
+          <div fxLayoutAlign="space-between start" fxLayout="row" fxLayoutGap="24px" fxFlex>
+            <div fxLayout="row" fxLayoutGap="24px" fxFlex="100">
+              <div class="stepper-count">
+                <!-- <span class="accordion-status-placeholder"><img src="assets/images/svg/ico-tick-success.svg" alt="" /></span> -->
+                <span class="accordion-status-placeholder"><img src="assets/images/svg/ico-tick-success.svg" alt="" /></span>
+              </div>
+              <div fxLayout="column" class="mt-4 full-width" fxLayoutGap="8px">
+                <div class="accordion-header lh-24">Choose your Virtual Number</div>
+                <!-- <div class="accordion-sub-header lh-16">
+                  <span>Select a Virtual Number which will be used in your campaigns</span>
+                </div> -->
+                <div fxLayout="column" fxLayoutGap="8px">
+                  <div fxLayout="row">
+                    <div class="grey-70" fxFlex="15">Virtual Number</div>
+                    <div>
+                      <span class="ellipsis-text">+91 61279 84242</span>
+                    </div>
+                  </div>
+                  <!-- <div fxLayout="row" fxLayoutAlign="start start" class="full-width">
+                    <div class="grey-70" fxFlex="15">Description</div>
+                    <div fxLayout="row" fxLayoutAlign="space-between start" class="full-width">
+                      <div class="two-line-ellipsis">JioCare Promotion Campaign</div>
+                      <div class="primary-text text-nowrap">
+                        <span>Read More</span>
+                      </div>
+                    </div>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+            <div>
+              <img src="assets/images/svg/ico-menu-down-arrow.svg" class="ico-small arrow-forword" alt=""
+                (click)="openVirtualNumbers()" />
+              <!-- <img src="assets/images/svg/ico-menu-up-arrow.svg" class="ico-small" alt="" /> -->
+            </div>
+          </div>
+  
+        </div>
+  
+        <div class="custom-accordion">
+          <div fxLayoutAlign="space-between start" fxLayout="row" fxLayoutGap="24px" fxFlex>
+            <div fxLayout="row" fxLayoutGap="24px" fxFlex="100">
+              <div class="stepper-count">
+                <!-- <span class="accordion-status-placeholder"><img src="assets/images/svg/ico-tick-success.svg" alt="" /></span> -->
+                <span class="accordion-status-placeholder"><img src="assets/images/svg/ico-tick-success.svg" alt="" /></span>
+              </div>
+              <div fxLayout="column" class="mt-4 full-width" fxLayoutGap="8px">
+                <div class="accordion-header lh-24">Perform Lead List Actions</div>
+                <!-- <div class="accordion-sub-header lh-16">
+                  <span>Create, Add, Remove - manage all your leads here</span>
+                </div> -->
+                <div fxLayout="column" fxLayoutGap="8px">
+                  <div fxLayout="row">
+                    <div class="grey-70" fxFlex="18">The Caller will be</div>
+                    <div>
+                      <span class="ellipsis-text">Removed from</span>
+                    </div>
+                  </div>
+                  <div fxLayout="row">
+                    <div class="grey-70" fxFlex="18">Selected Lead List</div>
+                    <div>
+                      <span class="ellipsis-text extra-bold primary-60">Jio Cloud Telephony Pro Subscribers</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <img src="assets/images/svg/ico-menu-down-arrow.svg" class="ico-small arrow-forword" alt=""
+                (click)="leadlistAction()" />
+              <!-- <img src="assets/images/svg/ico-menu-up-arrow.svg" class="ico-small" alt="" /> -->
+            </div>
+          </div>
+  
+        </div>
+  
+        <div class="custom-accordion" (click)="smsConfigure()">
+          <div fxLayoutAlign="space-between start" fxLayout="row" fxLayoutGap="24px" fxFlex>
+            <div fxLayout="row" fxLayoutGap="24px" fxFlex="100">
+              <div class="stepper-count">
+                <!-- <span class="accordion-status-placeholder"><img src="assets/images/svg/ico-tick-success.svg" alt="" /></span> -->
+                <span class="accordion-status-placeholder"><img src="assets/images/svg/ico-tick-success.svg" alt="" /></span>
+              </div>
+              <div fxLayout="column" class="mt-4 full-width" fxLayoutGap="8px">
+                <div class="accordion-header lh-24">Add Feedback SMS (Optional)</div>
+                <!-- <div class="accordion-sub-header lh-16">
+                  <span>Send feedback SMS to your callers through DLT Approved Sender ID & Template</span>
+                </div> -->
+                <div fxLayout="column" fxLayoutGap="8px">
+                  <div fxLayout="row" fxLayoutAlign="start start" class="full-width">
+                    <div class="grey-70" fxFlex="15">Feedback SMS</div>
+                    <div fxLayout="row" fxLayoutAlign="space-between start" class="full-width">
+                      <div [ngClass]="readMore ? '' : 'custom-ellipsis'">We are delighted to have you join our JioCX. Whether you're a new
+                        employee, member, or Ca...</div>
+                      <div class="primary-text text-nowrap">
+                        <span (click)="readMoreClick()" class="extra-bold primary-60">{{readMoreText}}</span>
+                        <!-- <span>Read Less</span> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <img src="assets/images/svg/ico-menu-down-arrow.svg" class="ico-small arrow-forword" alt=""
+                (click)="openSetup()" />
+              <!-- <img src="assets/images/svg/ico-menu-up-arrow.svg" class="ico-small" alt="" /> -->
+            </div>
+          </div>
+  
+        </div>
+  
+        <div class="custom-accordion plus-audio-accordion">
+          <div fxLayoutAlign="space-between start" fxLayout="row" fxLayoutGap="24px" fxFlex>
+            <div fxLayout="row" fxLayoutGap="24px" fxFlex="100">
+              <div class="stepper-count">
+                <span class="accordion-status-placeholder"><img src="assets/images/svg/ico-tick-success.svg" alt="" /></span>
+              </div>
+              <div fxLayout="column" class="mt-4 full-width" fxLayoutGap="8px">
+                <div class="accordion-header lh-24">+ Audio (Optional)</div>
+                    <div class="grey-100 lh-16 mini-text">WelcomeAudio.mp3</div>
+              </div>
+            </div>
+            <div>
+              <img src="assets/images/svg/ico-menu-down-arrow.svg" class="ico-small arrow-forword" alt=""
+                (click)="openPlusAudio()" />
+              <!-- <img src="assets/images/svg/ico-menu-up-arrow.svg" class="ico-small" alt="" /> -->
+            </div>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  
+    <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="end end" class="footer-modal-action">
+      <button type="button" class="large-secondary-button">
+        Discard
+      </button>
+  
+      <button type="button" class="large-primary-button">
+        Sumbit
+      </button>
+    </div>
+  </div>

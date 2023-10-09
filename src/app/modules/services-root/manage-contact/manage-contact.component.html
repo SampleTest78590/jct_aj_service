@@ -1,0 +1,297 @@
+<div fxFlex="100" fxLayoutAlign="space-between stretch" fxLayout="column" class="manage-contact-container">
+  <div fxLayout="column" fxLayoutGap="16px">
+  <div fxLayout="row" fxLayoutAlign="space-between start">
+    <label class="header">Manage Lead List</label>
+    <button
+      type="button"
+      class="medium-primary-button"
+      (click)="openUploadLeadList()"
+      *ngIf="ELEMENT_DATA?.length > 0 || searchValue !== '' || !initialflag"
+    >
+      <img src="assets/images/svg/ico-plus-white.svg" class="mr-8" alt="" />
+      <span class="extra-bold">Upload New Lead List</span>
+    </button>
+  </div>
+
+  <div
+    *ngIf="ELEMENT_DATA?.length > 0 || searchValue !== '' || !initialflag"
+    fxLayout="row"
+    fxLayoutAlign="space-between center"
+    class="mt-12 mb-16"
+  >
+    <label class="sub-title-text ml-8 bold"
+      >All Lead List ({{ total ? total : "0" }})</label
+    >
+    <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="start center">
+      <div fxFlex="312px" class="search-align">
+        <app-custom-search
+          [label]="'Search By Lead List Name'"
+          IconSrc="assets/images/svg/ico-search-grey.svg"
+          (outputText)="outputSearch($event)"
+        ></app-custom-search>
+      </div>
+      <button type="button" class="medium-secondary-button" [disabled]="true">
+        <img
+          src="assets/images/svg/ico-filter-grey.svg"
+          class="ico-small mr-8"
+          alt=""
+        />
+        <span class="grey-80">Filter</span>
+      </button>
+    </div>
+  </div>
+</div>
+<!-- <div class="flex-1"> -->
+  <ng-container *ngIf="ELEMENT_DATA?.length > 0 || searchValue !== '' || !initialflag">
+  <div [style.overflow]="'auto'" fxLayout="column" class="flex-1 custom-table mt-12" *ngIf="!!ELEMENT_DATA?.length">
+    <div
+      fxLayout="row"
+      fxLayoutAlign="space-between start"
+      class="custom-table-header-content">
+      <div class="custom-table-header" fxFlex="5">
+        <label class="cstm-checkbox"  [class.disabled]="true">
+          <input type="checkbox" disabled
+        /></label>
+        <!-- [ngClass]="{ checked: isselectAll }" (change)="checkSingleElement(element)"-->
+      </div>
+      <div
+        class="custom-table-header cursor-pointer"
+        fxFlex="30"
+        (click)="sortData('leadListName')"
+      >
+        <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
+          <div>Lead List Name</div>
+          <img
+            src="assets/images/svg/ico-swap-vert.svg"
+            class="ico-extra-small"
+            alt=""
+          />
+        </div>
+      </div>
+      <div class="custom-table-header" fxFlex>Uploaded By</div>
+      <div
+        class="custom-table-header cursor-pointer"
+        fxFlex
+        (click)="sortData('noOfLeads')"
+      >
+        <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
+          <div>No. of Leads</div>
+          <img
+            src="assets/images/svg/ico-swap-vert.svg"
+            class="ico-extra-small"
+            alt=""
+          />
+        </div>
+      </div>
+      <div class="custom-table-header cursor-pointer" fxFlex>
+        <div
+          fxLayout="row"
+          fxLayoutGap="10px"
+          fxLayoutAlign="start center"
+          (click)="sortData('dateCreated')"
+        >
+          <div>Date Created</div>
+          <img
+            src="assets/images/svg/ico-swap-vert.svg"
+            class="ico-extra-small"
+            alt=""
+          />
+        </div>
+      </div>
+      <div class="custom-table-header text-center" fxFlex="10">Action</div>
+    </div>
+    <div [style.min-height.vh]="'27'" [style.overflow]="'auto'" class="scrollable-content" [ngClass]="dataSource?.length > 2 && dataSource?.length < 8 ? 'scroll-height' : ''"  >
+      <div
+        fxLayout="row"
+        fxLayoutAlign="space-between center"
+        class="custom-table-content"
+        *ngFor="let element of dataSource; let i = index"
+      >
+        <div class="contact-list-details" fxFlex="5" fxLayout="column">
+          <label class="cstm-checkbox" [class.disabled]="true">
+            <input type="checkbox" disabled
+          /></label>
+          <!--  [ngClass]="{ checked: element.checked }" (click)="checkSingleElement(element)"-->
+        </div>
+        <div class="contact-list-details" fxFlex="30">
+          <div
+            fxLayout="row"
+            fxLayoutGap="5px"
+            fxLayoutAlign="start center"
+            class="table-user-info"
+          
+          >
+            <div class="count-text">{{  1 + i + ((pageIndex - 1) * pageSize) }}. </div>
+            <div class="camp-name cursor-pointer two-line-ellipsis" routerLink="lead-list-details" [queryParams]="{leadId: element.leadId,leadName:element.leadName,default:element.isDefault}" [skipLocationChange]="true" >{{ element.leadName }} {{element.isDefault ? '(Default)' : ''}}</div>
+            <div class="info-mouse-hover" [ngClass]="i>2?'bottom-tooltip':''">
+              <div class="custom-mat-card" fxLayout="column" fxLayoutGap="10px">
+                <div fxLayout="column" fxLayoutGap="8px">
+                  <div class="manage-card-title">{{ element.leadName }}</div>
+                  <div class="manage-description">
+                    {{ element.leadDescription }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="contact-list-details" fxFlex>
+          <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="start center">
+            <div class="user-pics" *ngIf="element?.createdBy">
+              {{ element?.initials }}
+              
+            </div>
+            <div>{{ element?.createdBy ? element?.createdBy : "-" }}</div>
+          </div>
+        </div>
+        <div class="contact-list-details" fxFlex="18">
+          <div>
+            {{ element.count }}
+          </div>
+        </div>
+        <div class="contact-list-details" fxFlex="18">
+          <div>
+            {{ element.createdOn | date : "dd/MM/yyyy" || "-" }}
+          </div>
+        </div>
+        <div class="contact-list-details text-center" fxFlex="10" fxLayout="column" fxLayoutAlign="center center">
+          <img src="assets/images/svg/ico-dot-menu.svg" alt="ico-menu" class="ico-extra-small disabled"/>
+          <!-- <div class="dot-menu-dropdown text-center">
+            <button class="small-tertiary-button-icon">
+              <img
+                src="assets/images/svg/ico-dot-menu.svg"
+                alt="ico-menu"
+                class="dropbtn"
+              />
+            </button>
+            <div class="dropdown-content">
+              <div class="sub-child">
+                <div
+                  fxLayout="row"
+                  fxLayoutGap="12px"
+                  fxLayoutAlign="start start"
+                >
+                  <div>
+                    <img
+                      src="assets/images/svg/ico-edit-grey.svg"
+                      alt=""
+                      class="ico-small"
+                    />
+                  </div>
+                  <div>Edit</div>
+                </div>
+              </div>
+              <div class="sub-child">
+                <div
+                  fxLayout="row"
+                  fxLayoutGap="12px"
+                  fxLayoutAlign="start start"
+                >
+                  <div>
+                    <img
+                      src="assets/images/svg/ico-delete-grey.svg"
+                      alt=""
+                      class="ico-small"
+                    />
+                  </div>
+                  <div>Delete</div>
+                </div>
+              </div>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="ELEMENT_DATA?.length === 0 && !initialflag" class="flex-1 nodata text-center">
+    No Data Found
+  </div>
+
+  <div class="flex-1 pb-12"
+    fxLayout="column"
+    fxLayoutAlign="center center"
+    fxLayoutGap="10px"
+    *ngIf="initialflag && !!!ELEMENT_DATA?.length"
+  >
+    <div><img src="assets/images/empty-campaigns.png" alt="" /></div>
+    <div class="extra-bold">Your lead list empty.</div>
+    <div fxLayoutAlign="center center">
+      <span class="body-text bold grey-70"
+        >When you create a lead list, it'll show up here.</span
+      >
+    </div>
+    <div class="mt-15">
+      <button
+        type="button"
+        mat-flat-button
+        class="medium-primary-button"
+        (click)="openUploadLeadList()"
+      >
+        <img src="assets/images/svg/ico-plus-white.svg" alt="" class="mr-8"/> Upload
+        New Lead List
+      </button>
+    </div>
+  </div>
+
+  <div class="flex-1 pb-12" *ngIf="ELEMENT_DATA?.length == 2 && searchValue == '' && stagevalue < 3">
+    <div
+      fxLayout="column"
+      fxLayoutAlign="center center"
+      fxLayoutGap="20px"
+      class="mt-10"
+    >
+      <div>
+        <img
+          src="assets/images/svg/ico-tick-success.svg"
+          class="ico-large"
+          alt=""
+        />
+      </div>
+      <div class="popup-header extra-bold">
+        Your Lead List is uploaded successfully
+      </div>
+      <div fxLayoutAlign="center center">
+        <span class="body-text bold grey-70"
+          >Getting started progress status ({{ stagevalue ? stagevalue : 0  }}/3)</span
+        >
+      </div>
+      <div class="resize-btn mt-36">
+        <button
+          type="button"
+          class="medium-primary-button"
+          (click)="backToStart()"
+        >
+          Back to Getting Started
+        </button>
+      </div>
+    </div>
+  </div>
+<!-- </div> -->
+</ng-container>
+  <div class="pagination" fxLayoutAlign="end end" *ngIf="total > 7">
+    <app-custom-pagination
+      [pageIndex]="pageIndex"
+      [total]="total"
+      [pageSize]="7"
+      [pageSizeOptions]="[5, 10, 20]"
+      (returnPage)="getCurrentPage($event)"
+    ></app-custom-pagination>
+  </div>
+
+</div>
+
+<!-- modal popup-code -->
+<ng-container *ngIf="isopenUploadleadList">
+  <app-sidebar-panel
+    [width]="'590px'"
+    [isSidebarOpen]="isopenUploadleadList"
+    sidebarPosition="right"
+    (sidebarState)="isopenUploadleadList = false"
+  >
+    <div content>
+      <app-upload-lead-list (closeModal)="closeModal($event)">
+      </app-upload-lead-list>
+    </div>
+  </app-sidebar-panel>
+</ng-container>

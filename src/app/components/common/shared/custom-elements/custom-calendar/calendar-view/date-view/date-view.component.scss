@@ -1,0 +1,44 @@
+table {
+    border-collapse: collapse;
+    width: 100%;
+    .week-day {
+        padding-bottom: 12px;
+        height: 15px;
+        line-height: 15px;
+        color: var(--light-text-grey-80);
+    }
+
+    .date-btn-container {
+        width: 30px;
+        height: 30px;
+        text-align: center;
+
+        .today-date.tertiary-button{
+            width: 30px !important;
+            height: 30px !important;
+            padding: 10px !important;
+        }
+        
+        .tertiary-button{
+            padding:10px!important;
+        }
+        .primary-button{
+            width: 30px!important;
+            height: 30px!important;
+            padding:10px!important;
+            font-size: var(--font-size-body);
+        }
+
+        .date-btn {
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+
+            &.today-date,
+            &.date-between {
+                border-color: var(--light-primary-60);
+                background-color: var(--light-primary-20);
+            }
+        }
+    }
+}

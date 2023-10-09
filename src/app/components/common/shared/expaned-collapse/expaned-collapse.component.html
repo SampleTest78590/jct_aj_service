@@ -1,0 +1,33 @@
+<div [class]="'expand-collapse-wrapper ' + className"
+    [ngClass]="{ expanded: isActiveMenu, selected: isSelected && !isExpanded }">
+    <div class="expand-collapse-header" [class.disabled]="isDisabled == 1 ? false : true">
+        <ng-container *ngIf="icon">
+            <a [ngClass]="[icon ? icon : '']" class="ico-extra-small mr-8"></a>
+        </ng-container>
+        <ng-content select="[head-prefix]"></ng-content>
+        <div class="header-title-container">
+            <ng-container *ngIf="title?.length > 19">
+                <span class="header-title" appTooltip [tooltipTemplate]="title">
+                    {{ title }}
+                </span>
+            </ng-container>
+            <ng-container *ngIf="title?.length <= 19">
+                <span class="header-title">
+                {{ title }}
+                </span>
+            </ng-container>
+        </div>
+        <ng-content select="[head-suffix]"></ng-content>
+
+        <button class="small-tertiary-button-icon arrow-btn" (click)="onExpandCollapseClick()">
+            <img alt="arrow" [src]="
+                    isExpanded
+                        ? 'assets/images/svg/ico-chevron-up.svg'
+                        : 'assets/images/svg/ico-chevron-down.svg'
+                " />
+        </button>
+    </div>
+    <div class="expand-collapse-body" *ngIf="isExpanded">
+        <ng-content select="[expand-collapse-content]"></ng-content>
+    </div>
+</div>

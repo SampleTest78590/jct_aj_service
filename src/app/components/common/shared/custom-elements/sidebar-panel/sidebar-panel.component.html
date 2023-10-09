@@ -1,0 +1,18 @@
+<ng-container *ngIf="isSidebarOpen">
+    <div class="overlay"></div>
+    <div [class]="'sidebar-container ' + className" [ngClass]="{
+            left: sidebarPosition === 'left',
+            right: sidebarPosition === 'right',
+            top: sidebarPosition === 'top',
+            bottom: sidebarPosition === 'bottom',
+            open: isSidebarOpen
+        }"  [ngStyle]="{width: width}">
+        <!-- <div class="sidebar-header-container position-relative">
+            <ng-content select="[header]"></ng-content>
+            <button class="tertiary-button-icon close-btn ico-close-right-top" (click)="closeSidebar()">
+                <img src="assets/images/svg/ico-close-blue.svg" alt="close" />
+            </button>
+        </div> -->
+        <ng-content select="[content]"></ng-content>
+    </div>
+</ng-container>

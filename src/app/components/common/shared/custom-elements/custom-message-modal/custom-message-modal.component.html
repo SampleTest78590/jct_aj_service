@@ -1,0 +1,17 @@
+<app-custom-modal [isModalOpen]="true" [isClosable]="true" (closeCallback)="onModalClose($event)">
+    <div content>
+        <div fxLayout="column">
+            <div class="text-center">
+                <img [src]="iconMap[icon]" class="ico-medium-large test-image" alt="" />
+                <div fxLayout="column">
+                    <div class="test-campaign-header header extra-bolder mt-8 mb-16">{{header}}</div>
+                    <div class="test-campaign-sub-title sub-title-text bold">{{subheaderOne}}
+                    </div>
+                    <div class="test-campaign-sub-title sub-title-text bold">{{subheaderTwo}}</div>
+                </div>
+            </div>
+            <button type="button" class="text-campaign-button large-primary-button"
+                (click)="onModalClose($event)">OK</button>
+        </div>
+    </div>
+</app-custom-modal>

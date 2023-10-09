@@ -1,0 +1,66 @@
+.setup-feedback-root .count-text {
+  font-weight: 500;
+}
+.setup-feedback-root .text-color-id {
+  color: var(--light-primary-grey-100);
+}
+.setup-feedback-root .radio-button {
+  border-radius: 8px;
+  border: 1px solid var(--light-primary-grey-40);
+  padding: 12px;
+  display: inline-block;
+  min-height: 96px;
+}
+
+.setup-feedback-root .cstm-input ::placeholder,
+.setup-feedback-root .cstm-textarea ::placeholder {
+  font-size: var(--font-size-body);
+}
+.setup-feedback-root .checked ~ div .body-text {
+  font-weight: 500;
+  font-size: (--font-size-body);
+  // line-height: 20px;
+  color: var(--light-primary-grey-100);
+}
+
+.setup-feedback-root .tertiary-button-icon:hover img {
+  filter: none !important;
+}
+
+.setup-feedback-root .pl-20 {
+  padding-left: 20px !important;
+}
+.setup-feedback-root .cust-camp-table-data .separator-right {
+  border-right: 1px solid var(--light-primary-grey-40);
+}
+.setup-feedback-root .mr-minus-5 {
+  margin-right: -5px;
+}
+
+.setup-feedback-root .content-modal-action {
+  height: calc(100vh - 190px) !important;
+}
+
+.setup-feedback-root .content-modal-action .template {
+  padding: 12px !important;
+  border-radius: 8px !important;
+  border: 1px solid var(--light-primary-grey-40);
+}
+
+.setup-feedback-root .mt-34 {
+  margin-top: 34px !important;
+}
+
+.setup-feedback-root .sms-format {
+  white-space: pre-wrap;
+}
+
+.setup-feedback-root .status-boxs{
+  padding: 4px 8px;
+  border-radius: 4px;
+  background-color: var(--light-primary-grey-20);
+  font-weight: 700;
+  line-height: 16px;
+  font-size: var(--font-size-mini);
+  color: var(--light-primary-grey-80);
+}

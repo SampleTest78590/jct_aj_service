@@ -1,0 +1,117 @@
+<ng-container *ngIf="open">
+    <app-move-in-viewport [anchorEl]="anchorEl" [position]="'bottom'" [offsetObj]="{
+            bottom: 120
+        }" (closeCb)="closeCalendar($event)">
+        <ng-container content>
+            <div class="calendar-container">
+                <div fxLayout="row" fxLayoutAlign="start center" class="header-container">
+                    <button
+                        *ngIf="currentView !== 'date'"
+                        class="tertiary-button calendar-btn back-btn"
+                        (click)="changeCurrentView('date')"
+                    >
+                        <img alt="arrow_left" src="assets/images/svg/ico-chevron-left.svg"/>
+                    </button>
+                    <button
+                        *ngIf="currentView === 'date'"
+                        class="tertiary-button calendar-btn"
+                        (click)="skipMonthBy(-1)"
+                    >
+                        <img alt="arrow_left" src="assets/images/svg/ico-chevron-left.svg" />
+                    </button>
+
+                    <div class="month-year-selector">
+                        <button class="secondary-button selector-btn month-selector-btn"
+                            [class.active]="currentView === 'month'" (click)="changeCurrentView('month')">
+                            <div>{{ selectedMonth }}</div>
+                            <img alt="arrow-up" class="ico-small"
+                                [src]="currentView === 'month'
+                                        ? 'assets/images/svg/ico-menu-up-arrow.svg'
+                                        : 'assets/images/svg/ico-menu-down-arrow.svg'
+                                "
+                            />
+                        </button>
+                        <button class="secondary-button selector-btn year-selector-btn"
+                            [class.active]="currentView === 'year'" (click)="changeCurrentView('year')">
+                            <div>{{ selectedYear }}</div>
+                            <img alt="arrow-down" class="ico-small"
+                                [src]="
+                                    currentView === 'year'
+                                        ? 'assets/images/svg/ico-menu-up-arrow.svg'
+                                        : 'assets/images/svg/ico-menu-down-arrow.svg'
+                                "
+                            />
+                        </button>
+                    </div>
+                    <button
+                        *ngIf="currentView === 'date'"
+                        class="tertiary-button calendar-btn"
+                        (click)="skipMonthBy(1)"
+                    >
+                        <img alt="arrow-right"
+                            src="assets/images/svg/ico-chevron-right.svg"
+                        />
+                    </button>
+                </div>
+
+                <div class="date-picker-section">
+                    <app-date-view [style.visibility]="
+                            currentView === 'date' ? 'visible' : 'hidden'
+                        " [currentViewDate]="currentViewDate" [firstDate]="firstDate" [secondDate]="secondDate"
+                        [min]="min" [max]="max" (dateChange)="handleDateChange($event)" (nextMonth)="skipMonthBy(1)"
+                        (prevMonth)="skipMonthBy(-1)"></app-date-view>
+                    <ng-container *ngIf="currentView !== 'date'">
+                        <ng-container [ngSwitch]="currentView">
+                            <div class="month-year-view-container">
+                                <div class="divider-line"></div>
+                                <ng-container *ngSwitchCase="'month'">
+                                    <app-month-view [currentViewDate]="currentViewDate" (dateChange)="
+                                            handleViewDateChange(
+                                                $event,
+                                                'month'
+                                            )
+                                        "></app-month-view>
+                                </ng-container>
+                                <ng-container *ngSwitchCase="'year'">
+                                    <app-year-view [currentViewDate]="currentViewDate" (dateChange)="
+                                            handleViewDateChange($event, 'year')
+                                        "></app-year-view>
+                                </ng-container>
+                            </div>
+                        </ng-container>
+                    </ng-container>
+                </div>
+
+                <div class="footer-container" *ngIf="firstDate">
+                    <div class="divider-line"></div>
+                    <div class="footer-date-picker">
+                        <span *ngIf="firstDate">
+                            {{ firstDate | date: 'EEE, d MMM y' }}
+                        </span>
+                        <span *ngIf="secondDate">
+                            To {{ secondDate | date: 'EEE, d MMM y' }}</span>
+                    </div>
+                    <div class="footer-btn-container">
+                            <ng-container *ngIf="showDoneBtn">
+                                <button
+                                    class="small-primary-button footer-btn mb-8"
+                                    (click)="handleDone($event)"
+                                >
+                                    Done
+                                </button>
+                            </ng-container>
+    
+                            <ng-container *ngIf="showClearBtn">
+                                <button
+                                    class="small-secondary-button footer-btn"
+                                    (click)="handleClear($event)"
+                                >
+                                    Clear Data
+                                </button>
+                            </ng-container>
+                        </div>
+                </div>
+            </div>
+        </ng-container>
+    </app-move-in-viewport>
+</ng-container>

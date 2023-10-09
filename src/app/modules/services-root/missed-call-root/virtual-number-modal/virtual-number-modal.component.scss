@@ -1,0 +1,92 @@
+.name-virtual-number .select-virtual-number .cstm-input input {
+    text-indent: 18px;
+}
+.name-virtual-number .separator-right {
+    border-right: 1px solid var(--white);
+}
+.name-virtual-number .content-modal-action {
+    height: calc(100vh - 72px) !important;
+}
+.name-virtual-number .text-color-id {
+    color: var(--light-primary-grey-100);
+}
+
+.name-virtual-number .radio-button {
+    border-radius: 8px;
+    border: 1px solid var(--light-primary-grey-40);
+    padding: 12px;
+    display: inline-block;
+    min-height: 96px;
+}
+
+.name-virtual-number .select-virtual-number .cstm-input input {
+    text-indent: 18px;
+}
+
+.name-virtual-number .cstm-input ::placeholder,
+.name-virtual-number .cstm-textarea ::placeholder {
+    font-size: var(--font-size-body);
+}
+
+.name-virtual-number .checked~div .body-text {
+    font-weight: 500;
+    font-size: (--font-size-body);
+    // line-height: 20px;
+    color: var(--light-primary-grey-100);
+}
+
+.name-virtual-number .tertiary-button-icon:hover img {
+    filter: none !important;
+}
+
+.name-virtual-number .pl-20 {
+    padding-left: 20px !important;
+}
+
+.cust-camp-table-data .separator-right {
+    border-right: 1px solid var(--light-primary-grey-40);
+}
+
+.name-virtual-number .mr-minus-1 {
+    margin-right: -1px;
+}
+.name-virtual-number .label-chip{
+    padding: 0px 8px;
+    color: var(--light-text-grey-70);
+    height: 16px;
+    border-radius: 4px;
+    border: 1px solid var(--light-primary-grey-40);
+    font-size: 12px;
+    white-space: nowrap;
+  }
+.name-virtual-number .empty-vn-mssg-header{
+    color: var(--light-primary-grey-90);
+    text-align: center;
+    font-family: var(--font-familiy);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: -0.07px;
+    width: 230px;
+}
+.name-virtual-number .empty-vn-mssg-sub-header{
+    color: var(--light-primary-grey-70);
+    text-align: center;
+    font-family: Jvar(--font-familiy);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: -0.07px;
+    width: 267px;
+}
+.name-virtual-number .kyc-disabled{
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+// @media screen and ( max-height: 767px ){
+//    .name-virtual-number .scrollable-content {
+//     max-height: 50vh !important;
+//    }
+// }

@@ -1,0 +1,55 @@
+<div [ngClass]="classes">
+    <div class="spinner-circles">
+        <div
+            *ngIf="
+                appearance === 'inline' ||
+                appearance === 'normal' ||
+                appearance === 'vibrant'
+            "
+        >
+            <svg class="circle circle-0" viewBox="0 0 28 28">
+                <circle
+                    fill="none"
+                    stroke-width="4"
+                    stroke-linecap="round"
+                    cx="14"
+                    cy="14"
+                    r="12"
+                />
+            </svg>
+            <svg class="circle circle-1" viewBox="0 0 28 28">
+                <circle
+                    fill="none"
+                    stroke-width="4"
+                    stroke-linecap="round"
+                    cx="14"
+                    cy="14"
+                    r="12"
+                />
+            </svg>
+        </div>
+        <div *ngIf="appearance === 'vibrant'">
+            <svg class="circle circle-2" viewBox="0 0 28 28">
+                <circle
+                    fill="none"
+                    stroke-width="4"
+                    stroke-linecap="round"
+                    cx="14"
+                    cy="14"
+                    r="12"
+                />
+            </svg>
+            <svg class="circle circle-3" viewBox="0 0 28 28">
+                <circle
+                    fill="none"
+                    stroke-width="4"
+                    stroke-linecap="round"
+                    cx="14"
+                    cy="14"
+                    r="12"
+                />
+            </svg>
+        </div>
+    </div>
+    <label *ngIf="label">{{ label }}</label>
+</div>

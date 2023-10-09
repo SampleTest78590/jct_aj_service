@@ -1,0 +1,41 @@
+<div fxLayout="column" class="virtual-section" fxLayoutGap="8px">
+    <div fxLayout="column" fxLayoutGap="8px">
+        <div fxLayout="row" fxLayoutAlign="start start">
+            <div class="body-text-14 grey-70 lh-20" fxFlex="40">Virtual Number</div>
+            <div class="body-text-14 grey-100 lh-20 word-break-all text-right">{{missedChartReport?.virtualNumber ||
+                '-'}}
+            </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start start">
+            <div class="body-text-14 grey-70 lh-20" fxFlex="40">Leads will be</div>
+            <div class="body-text-14 grey-100 lh-20 word-break-all text-right"><span
+                    [ngClass]="missedChartReport?.leadAction=='Added to'?'success-text':'error-text'">{{missedChartReport?.leadAction || '-'}}</span>
+            </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start start">
+            <div class="body-text-14 grey-70 lh-20" fxFlex="40">Lead List Name</div>
+            <div class="body-text-14 grey-100 lh-20 word-break-all text-right">
+                {{missedChartReport?.leadListName ||'-'}}</div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start start" class="position-relative">
+            <div class="body-text-14 grey-70 lh-20" fxFlex="40">Description</div>
+            <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="start center" class="cursor-pointer"
+                (click)="openDropdown = !openDropdown">
+                <div class="body-text-14 grey-100 lh-20">{{ openDropdown ? "Hide" : "View" }}</div>
+                <img src="assets/images/svg/ico-menu-{{openDropdown ? 'up' : 'down'}}-arrow.svg" alt=""
+                    class="ico-standard" />
+            </div>
+            <div class="desc-details" *ngIf="openDropdown">
+                <div class="lh-20">{{virtualDetails?.campaignDescription || '-'}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="divider-line mb-12" *ngIf="virtualDetails?.audioData"></div>
+    <div fxLayout="column" fxLayoutGap="8px" *ngIf="virtualDetails?.audioData">
+        <div class="mini-header mtb-2 grey-100 extra-bold">Audio Message</div>
+        <div>
+            <app-audio-preview-play [src]="virtualDetails?.audioData?.audioUrl" [index]="1"
+                [audioDuration]="virtualDetails?.audioData?.audioDuration"></app-audio-preview-play>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,408 @@
+@import './mixins/input';
+@import './mixins/buttons';
+@import './mixins/text';
+
+.cstm-checkbox {
+    @include custom-checkbox();
+}
+
+.cstm-radio {
+    @include custom-radio();
+}
+
+.divider-line {
+    border-top: 1px solid var(--light-primary-grey-40);
+
+    &.divider-line--vertical-margin {
+        margin: 16px 0;
+    }
+}
+
+.cstm-switch {
+    @include custom-switch();
+}
+
+.primary-button {
+    @include primary-button();
+}
+
+.primary-button-icon {
+    @include primary-button();
+    justify-content: center;
+    padding: 0;
+    width: 48px;
+    img {
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        filter: var(--filter-white);
+    }
+}
+
+.small-primary-button {
+    @include primary-button(32px, 'text-body-s-bold');
+    padding-top: 4px;
+    padding-bottom: 4px;
+    img {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        filter: var(--filter-white);
+    }
+}
+
+.small-primary-button-icon {
+    @include primary-button(32px);
+    justify-content: center;
+    padding: 0;
+    width: 32px;
+    img {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        filter: var(--filter-white);
+    }
+}
+
+.medium-primary-button {
+    @include primary-button(40px, 'text-body-s-bold');
+    padding-top: 8px;
+    padding-bottom: 8px;
+    img {
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        filter: var(--filter-white);
+    }
+}
+
+.medium-primary-button-icon {
+    @include primary-button(40px);
+    justify-content: center;
+    padding: 0;
+    width: 40px;
+    img {
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        filter: var(--filter-white);
+    }
+}
+
+.large-primary-button {
+    @include primary-button(48px, 'text-body-m-bold');
+    padding-top: 12px;
+    padding-bottom: 12px;
+    img {
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        filter: var(--filter-white);
+    }
+}
+
+.large-primary-button-icon {
+    @include primary-button(48px);
+    justify-content: center;
+    padding: 0;
+    width: 48px;
+    img {
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        filter: var(--filter-white);
+    }
+}
+.extra-large-primary-button {
+    @include primary-button(64px, 'text-body-l-bold');
+    padding-top: 16px;
+    padding-bottom: 16px;
+    img {
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+        filter: var(--filter-white);
+    }
+}
+
+.extra-large-primary-button-icon {
+    @include primary-button(64px);
+    justify-content: center;
+    padding: 0;
+    width: 64px;
+    img {
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+        filter: var(--filter-white);
+    }
+}
+.secondary-button {
+    @include secondary-button();
+}
+
+.small-secondary-button {
+    @include secondary-button(32px, 'text-body-s-bold');
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.small-secondary-button-icon {
+    @include secondary-button(32px);
+    padding: 0;
+    width: 32px;
+    justify-content: center;
+    img {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        filter: var(--filter-primary-60);
+    }
+}
+
+.medium-secondary-button {
+    @include secondary-button(32px, 'text-body-s-bold');
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.medium-secondary-button-icon {
+    @include secondary-button(40px);
+    padding: 0;
+    width: 40px;
+    justify-content: center;
+    img {
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        filter: var(--filter-primary-60);
+    }
+}
+
+.large-secondary-button {
+    @include secondary-button(48px, 'text-body-m-bold');
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.large-secondary-button-icon {
+    @include secondary-button(48px);
+    padding: 0;
+    width: 48px;
+    justify-content: center;
+    img {
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        filter: var(--filter-primary-60);
+    }
+}
+
+.extra-large-secondary-button {
+    @include secondary-button(64px, 'text-body-l-bold');
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+.extra-large-secondary-button-icon {
+    @include secondary-button(64px);
+    padding: 0;
+    width: 64px;
+    justify-content: center;
+    img {
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+        filter: var(--filter-primary-60);
+    }
+}
+
+.tertiary-button {
+    @include tertiary-button();
+}
+
+.tertiary-button-icon {
+    @include tertiary-button();
+    justify-content: center;
+    padding: 0;
+    width: 48px;
+    img {
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        filter: var(--filter-primary-60);
+    }
+}
+
+.small-tertiary-button {
+    @include tertiary-button(32px, 'text-body-s-bold');
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.small-tertiary-button-icon {
+    @include tertiary-button(32px);
+    padding: 0;
+    width: 32px;
+    justify-content: center;
+
+    img {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        filter: var(--filter-primary-60);
+    }
+}
+
+.medium-tertiary-button {
+    @include tertiary-button(40px, 'text-body-s-bold');
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.medium-tertiary-button-icon {
+    @include tertiary-button(40px);
+    padding: 0;
+    width: 40px;
+    justify-content: center;
+
+    img {
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        filter: var(--filter-primary-60);
+    }
+}
+
+.large-tertiary-button {
+    @include tertiary-button(48px, 'text-body-m-bold');
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.large-tertiary-button-icon {
+    @include tertiary-button(48px);
+    padding: 0;
+    width: 48px;
+    justify-content: center;
+
+    img {
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+        filter: var(--filter-primary-60);
+    }
+}
+
+.extra-large-tertiary-button {
+    @include tertiary-button(64px, 'text-body-l-bold');
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+.extra-large-tertiary-button-icon {
+    @include tertiary-button(64px);
+    padding: 0;
+    width: 64px;
+    justify-content: center;
+
+    img {
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+        filter: var(--filter-primary-60);
+    }
+}
+
+.cstm-input {
+    @include custom-input();
+}
+
+.cstm-tabs {
+    display: flex;
+    padding: 0 16px;
+
+    .cstm-tab-item {
+        @include applyTextStyle('text-body-m');
+        padding: 12px 8px;
+        color: var(--light-text-grey-80);
+        margin-right: 24px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        cursor: pointer;
+        position: relative;
+
+        .cstm-tab-icon {
+            margin-right: 8px;
+            display: flex;
+
+            img {
+                width: 24px;
+                height: 24px;
+            }
+        }
+        .border-line {
+            height: 4px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            border-radius: 4px;
+        }
+
+        &.selected {
+            color: var(--light-text-grey-100);
+            pointer-events: none;
+
+            .border-line {
+                background-color: var(--light-primary-50);
+            }
+        }
+
+        &.disabled {
+            opacity: 0.3;
+            cursor: default;
+            pointer-events: none;
+        }
+    }
+}
+
+.cstm-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--light-primary-20);
+    color: var(--light-sparkle-60);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    .cstm-avatar-image {
+        width: 100%;
+    }
+
+    &.x-small {
+        width: 24px;
+        height: 24px;
+
+        .cstm-avatar-initials {
+            font-size: 0.75rem;
+        }
+    }
+
+    &.small {
+        width: 32px;
+        height: 32px;
+
+        .cstm-avatar-initials {
+            font-size: 0.75rem;
+        }
+    }
+
+    &.x-large {
+        width: 56px;
+        height: 56px;
+    }
+}

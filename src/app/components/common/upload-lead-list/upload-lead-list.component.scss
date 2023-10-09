@@ -1,0 +1,40 @@
+.upload-lead-root .pl-22 {
+    padding-left: 22px;
+}
+
+.upload-lead-root .p-35 {
+    padding: 0px 8px 35px 0px;
+}
+
+.upload-lead-root .cstm-input__label {
+    color: var(--light-primary-grey-90) !important;
+}
+
+.upload-lead-root .placeholder::placeholder {
+    font-size: var(--font-size-body);
+    color: var(--light-primary-grey-60);
+}
+.upload-lead-root .fs-14 {
+    font-size: 14px!important;
+    color: var(--light-primary-grey-100);
+    line-height: 24px !important;
+}
+
+.upload-lead-root .attachment .tertiary-negative-button{
+    padding: 0;
+    height: 24px;
+}
+
+.upload-lead-root .tertiary-button-icon:hover img {
+    filter: none!important;
+}
+// .upload-lead-root .header-modal-action{
+//     padding: 12px 15px 12px 32px !important;
+// }
+
+// .upload-lead-root .placeholder{
+//     color:var(--light-primary-grey-70)!important;
+// }
+.upload-lead-root .preview-btn{
+    color:var(--light-secondary-60) !important;
+}

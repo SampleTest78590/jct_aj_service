@@ -1,0 +1,48 @@
+<ng-container *ngIf="open">
+    <app-move-in-viewport [anchorEl]="anchorEl" [position]="'bottom'" [offsetObj]="{bottom:120}" (closeCb)="closeTimePicker($event)">
+        <ng-container content>
+            <div fxLayout="column" fxLayoutGap="8px" class="time-view-container">
+                <div fxLayout="row" fxLayoutGap="4px" class="time-view-ptlr-16">
+                    <div [style.overflow-x]="'hidden'" [style.max-height.px]="'149'">
+                        <div *ngFor="let hour of hoursArray">
+                            <div class="time-display-data" [ngClass]="hour == selectedHour ? 'active' : ''" (click)="setHours(hour)">{{hour}}</div>
+                        </div>
+                    </div>
+                    <div [style.overflow-x]="'hidden'" [style.max-height.px]="'149'">
+                        <div *ngFor="let minute of minutesArray">
+                            <div class="time-display-data" [ngClass]="minute == selectedMinutes ? 'active' : ''" (click)="setMinutes(minute)">{{minute}}</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div fxLayout="column">
+                            <div class="time-display-data" *ngFor="let format of formatTime" [ngClass]="selectedFormat == format ? 'active' : ''" (click)="setFormat(format)">{{format}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="divider-line"></div>
+                <div class="footer-container time-view-pblr-16">
+                    <div fxLayout="column" fxLayoutGap="8px" class="footer-btn-container">
+                            <ng-container>
+                                <button class="small-primary-button full-width" (click)="handleDone($event)" [disabled]="!selectedHour || !selectedMinutes || !selectedFormat">
+                                    Set
+                                </button>
+                            </ng-container>
+                            
+                            <ng-container>
+                                <div appTooltip [tooltipTemplate]="'This option can only be selected if the Start Date is Today'"  [tooltipDisable]="!startImmediatelyFlag">
+                                    <button class="small-secondary-button full-width" [disabled]="startImmediatelyFlag" (click)="handleSubmit($event)">
+                                        Start Immediately
+                                    </button>
+                                </div>
+                            </ng-container>
+                        </div>
+                </div>
+            </div>
+            
+        </ng-container>
+    </app-move-in-viewport>
+</ng-container> 
+
+
+
+

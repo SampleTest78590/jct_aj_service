@@ -1,0 +1,44 @@
+.info-mouse-hover .hover-two {
+    width: 300px;
+}
+
+.missed-call-mgn-root .footer-modal-action {
+    position: absolute;
+    bottom: -24px;
+    left: -24px;
+    z-index: 3;
+    border-radius: 0;
+    padding: 8px 32px;
+    width: calc(100% - -48px);
+    background: var(--white) !important;
+    // background: var(--light-text-grey-20) !important;
+    right: -24px;
+}
+
+.missed-call-mgn-root .nodata {
+    padding: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.12)
+}
+
+.missed-call-mgn-root .dot-menu-dropdown .dropdown-content {
+    cursor: inherit !important;
+}
+
+.missed-call-mgn-root .dot-menu-dropdown .dropdown-content .cam-action-bttn {
+    height: 36px;
+    padding: 8px 16px;
+    line-height: 20px;
+    cursor: pointer !important;
+    font-size: var(--font-size-body);
+    color: var(--light-primary-grey-80);
+}
+
+.missed-call-mgn-root .dot-menu-dropdown .dropdown-content .cam-action-bttn:hover {
+    background-color: var(--light-primary-grey-20);
+}
+
+.missed-call-mgn-root .audio-ico-submenu {
+    opacity: 1;
+    filter: invert(12%) sepia(77%) saturate(5129%) hue-rotate(268deg) brightness(65%) contrast(118%);
+
+}

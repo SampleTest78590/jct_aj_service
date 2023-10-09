@@ -1,0 +1,28 @@
+<div fxLayout="column" class="name-campaign-modal">
+  <div fxLayout="row" fxLayoutAlign="space-between center" class="header-modal-action">
+    <h2 class="lh-28">Edit Entity ID</h2>
+    <button class="tertiary-button-icon close-btn ico-close-right-top" (click)="onClose()">
+      <img src="assets/images/svg/ico-close-blue.svg" alt="close" />
+    </button>
+  </div>
+  <div class="content-modal-action scrollable-content">
+    <div fxLayout="column" class="mt-24" fxLayoutGap="24px">
+      <div fxLayout="column" fxLayoutGap="4px" class="cstm-input">
+        <div class="cstm-input__label mini-text">Entity ID*</div>
+        <input type="text"  (ngModelChange)="checkTextChange($event)" [(ngModel)]="entityId" placeholder="Entity ID" minlength="12" maxlength="19"
+          autocomplete="off" (keypress)="isNumber($event)"/>
+        <div class="cstm-input__message error" *ngIf="entityId?.length < 12 || entityId?.length>20">
+          <span>Minimum 12 and Maximum 19 character are required</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-modal-action">
+    <div fxLayout="row" fxLayoutGap="12px" fxLayoutAlign="end end">
+      <button type="button" class="large-secondary-button" (click)="onClose()">Cancel</button>
+      <button type="button" [disabled]="(entityId?.length < 12 || entityId?.length>20) || enablebtn" (click)="onSave()"
+        class="large-primary-button">Save</button>
+    </div>
+  </div>
+</div>

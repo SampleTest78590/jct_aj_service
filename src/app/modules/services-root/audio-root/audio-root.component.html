@@ -1,0 +1,200 @@
+<div fxFlex="100" fxLayoutAlign="space-between stretch" fxLayout="column" class="audio-messages-root">
+  <div fxLayout="column" fxLayoutGap="16px">
+    <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="space-between start">
+      <div class="header">Audio Messages</div>
+      <div *ngIf="ELEMENT_DATA?.length > 0 || searchValue !== '' || !initialflag">
+        <button type="button" class="medium-primary-button" (click)="openCreateAudioModal()">
+          <img src="assets/images/svg/ico-add-white-outline.svg" alt="ico-add" class="ico-small mr-8" />
+          Add New File
+        </button>
+      </div>
+    </div>
+    <div *ngIf="ELEMENT_DATA?.length > 0 || searchValue !== '' || !initialflag" fxLayout="row" fxLayoutGap="15px"
+      fxLayoutAlign="space-between center" class="mt-12 mb-16">
+      <div class="sub-title-text ml-8 lh-24">
+        All Audio Messages ({{ total ? total : "0" }})
+      </div>
+      <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="start center" class="search-top-alignment">
+        <div fxFlex="312px">
+          <app-custom-search [label]="'Search by Audio Name'" IconSrc="assets/images/svg/ico-search-grey.svg"
+            (outputText)="outputSearch($event)">
+          </app-custom-search>
+        </div>
+        <button type="button" class="medium-secondary-button" [disabled]="true">
+          <img src="assets/images/svg/ico-filter-grey.svg" class="ico-small mr-8" alt="" /><span
+            class="grey-80">Filter</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- <div > -->
+  <ng-container *ngIf="ELEMENT_DATA?.length > 0 || searchValue !== '' || !initialflag">
+    <div fxLayout="column" [style.overflow]="'auto'" class="flex-1 custom-table mt-12" *ngIf="!!ELEMENT_DATA?.length">
+      <div fxLayout="row" fxLayoutAlign="space-between start" class="custom-table-header-content">
+        <div class="custom-table-header" fxFlex="5">
+          <label class="cstm-checkbox" [class.disabled]="true">
+            <input type="checkbox" disabled /></label>
+          <!-- (change)="SelectAllAudio($event)"  [ngClass]="{ checked: isselectAll }"-->
+        </div>
+        <div class="custom-table-header cursor-pointer" fxFlex="17" (click)="sortData('fileName')">
+          <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
+            <div>File Name</div>
+            <img src="assets/images/svg/ico-swap-vert.svg" alt="" class="ico-extra-small" />
+          </div>
+        </div>
+        <div class="custom-table-header" fxFlex="8">Format</div>
+        <div class="custom-table-header" fxFlex="10">File Size</div>
+        <div class="custom-table-header text-center" fxFlex="20">Play Audio</div>
+        <div class="custom-table-header" fxFlex="13">Uploaded by</div>
+        <div class="custom-table-header" fxFlex="17">Date Created</div>
+        <div class="custom-table-header text-center" fxFlex="10">Action</div>
+      </div>
+      <div [style.overflow]="'auto'" [style.min-height.vh]="'26'" class="scrollable-content"
+        [ngClass]="dataSource?.length > 2 && dataSource?.length < 8 ? 'scroll-height' : ''">
+        <div fxLayout="row" fxLayoutAlign="space-between center" class="custom-table-content"
+          *ngFor="let element of dataSource; let index = index">
+          <div class="contact-list-details" fxFlex="5" fxLayout="column">
+            <label class="cstm-checkbox" [class.disabled]="true">
+              <input type="checkbox" disabled /></label>
+            <!-- (click)="checkSingleElement(element)"  [ngClass]="{ checked: element.checked }"-->
+          </div>
+          <div class="contact-list-details" fxFlex="17">
+            <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="start center" class="table-user-info">
+              <div class="count-text">{{ 1 + index + ((pageIndex - 1) * pageSize) }}. </div>
+              <div class="ellipsis-text camp-name">{{ element?.audioName || '-' }}</div>
+              <!-- <div class="count-text">{{element?.type=='TTS' ?'('+ element.type+')':''}}</div> -->
+
+              <div class="count-text">
+                {{element?.isDefault==true?'(Default)':element?.type=='TTS'?'(TTS)':''}}
+              </div>
+              <div class="info-mouse-hover" [ngClass]="index>2?'bottom-tooltip':''">
+                <div class="custom-mat-card" fxLayout="column" fxLayoutGap="10px">
+                  <div fxLayout="column" fxLayoutGap="10px">
+                    <div fxLayout="row" fxLayoutGap="6px">
+                      <div class="card-header">{{ element?.audioName || '-'}} </div>
+                      <div class="count-text">
+                        {{element?.isDefault==true?'(Default)':element?.type=='TTS'?'(TTS)':''}}
+                      </div>
+                    </div>
+                    <div class="scrollable-content pr-4" [style.overflow]="'overlay'" [style.max-height.px]="'80'">
+                      {{ element?.audioDescription || '-' }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="contact-list-details" fxFlex="8">
+            <label>
+              <!-- {{ element.leadLastName }} -->
+              {{ element?.formatName }}
+            </label>
+          </div>
+          <div class="contact-list-details" fxFlex="10">
+            <label>
+              <!-- {{ element.leadMobileNo }} -->
+              {{ element.fileSize / 1000000 | number : "1.2-2" }} MB
+            </label>
+          </div>
+          <div class="contact-list-details" fxFlex="20">
+            <label>
+              <div class="m-5">
+                <div>
+                  <app-audio-preview-play [src]="element.audioUrl" [index]="index+1" [activePlayerID]="activeAudio"
+                    (activePlayer)="activeAudio=$event" [audioDuration]="element.audioDuration">
+                  </app-audio-preview-play>
+                </div>
+              </div>
+            </label>
+          </div>
+          <div class="contact-list-details" fxFlex="13">
+            <label>
+              <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
+                <div>
+                  <span class="user-pics" title="{{ element.createdBy }}">
+                    {{ getInitials(element.createdBy) }}
+                  </span>
+                </div>
+                <!-- <div>{{ element.createdBy }}</div> -->
+                <span class="ellipsis-text" appTooltip [tooltipTemplate]="element.createdBy">
+                  {{ element.createdBy }}
+                </span>
+              </div>
+            </label>
+          </div>
+          <div class="contact-list-details" fxFlex="17">
+            <label>
+              {{ element.createdOn | date : "dd MMM yyyy, HH:mm" || "-" }}
+            </label>
+          </div>
+          <div class="contact-list-details text-center" fxFlex="10" fxLayout="column" fxLayoutAlign="center center">
+            <div class="dot-menu-dropdown dropdown">
+              <button class="small-tertiary-button-icon cursor-pointer" [disabled]="true">
+                <img src="assets/images/svg/ico-dot-menu.svg" alt="ico-menu" class="" />
+              </button>
+              <!-- action items -->
+              <!-- <div id="myDropdown" class="dropdown-content">
+                <div *ngFor="let menuItem of menuItems" class="more-menu-item"
+                  (click)="onShowMoreOptionsSelect(menuItem.value)">
+                  <app-item-block [label]="menuItem?.label" [disableTooltip]="true">
+                    <ng-container *ngIf="menuItem?.icon" prefix>
+                      <img class="ico-extra-small mr-12" [src]="menuItem.icon" [alt]="menuItem.label" />
+                    </ng-container>
+                  </app-item-block>
+                </div>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!!!ELEMENT_DATA?.length && !initialflag" class="flex-1 nodata text-center">
+      No Data Found
+    </div>
+    <div class="flex-1 pb-12" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px"
+      *ngIf="initialflag && !!!ELEMENT_DATA?.length">
+      <div><img src="assets/images/empty-campaigns.png" alt="" /></div>
+      <div class="extra-bold">Your Audio Messages list empty.</div>
+      <div fxLayoutAlign="center center">
+        <span class="body-text bold grey-70">When you create a Audio Messages, it'll show up here.</span>
+      </div>
+      <div class="mt-35">
+        <button type="button" class="medium-primary-button" (click)="openCreateAudioModal()">
+          <img src="assets/images/svg/ico-add.svg" alt="ico-add" class="ico-small mr-8" />
+          Add New File
+        </button>
+      </div>
+    </div>
+
+    <div class="flex-1 pb-12" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px"
+      *ngIf="ELEMENT_DATA?.length === 2 && searchValue == '' && stagevalue < 3">
+      <div>
+        <img src="assets/images/svg/ico-tick-success.svg" class="ico-large" alt="" />
+      </div>
+      <div class="popup-header extra-bold">Your Audio is uploaded successfully</div>
+      <div fxLayoutAlign="center center">
+        <span class="body-text bold grey-70">Getting started progress status ({{ stagevalue ? stagevalue : 0
+          }}/3)</span>
+      </div>
+      <div class="resize-btn mt-36">
+        <button type="button" class="medium-primary-button" (click)="backToStart()">
+          Back to Getting Started
+        </button>
+      </div>
+    </div>
+    <!-- </div> -->
+  </ng-container>
+  <div class="pagination no-margin" fxLayoutAlign="end end" *ngIf="total > 7">
+    <app-custom-pagination [pageIndex]="pageIndex" [total]="total" [pageSize]="7" (returnPage)="getCurrentPage($event)">
+    </app-custom-pagination>
+  </div>
+</div>
+
+<ng-container *ngIf="isopenAudioModal">
+  <app-sidebar-panel [width]="'540px'" [isSidebarOpen]="isopenAudioModal" sidebarPosition="right"
+    (sidebarState)="isopenAudioModal = false">
+    <div content>
+      <app-upload-audio (closeModal)="closeModal($event)"> </app-upload-audio>
+    </div>
+  </app-sidebar-panel>
+</ng-container>

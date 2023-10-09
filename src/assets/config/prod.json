@@ -1,0 +1,13 @@
+{
+  "production": false,
+  "enableOtp": true,
+  "enablesocket": true,
+  "enableFirebase": true,
+  "DOMAIN_URL": "https://peoplefirst.ril.com",
+  "HR_URL": "https://peoplefirst.ril.com",
+  "COMMON_UTIL": "https://commonutils.ril.com/",
+  "apmUrl": "https://peoplefirst.ril.com/apmrum/",
+  "env": "prod",
+  "VEHICLE_LOG": "https://fiorinjp.ril.com/sap/bc/ui5_ui5/ui2/ushell/shells/abap/Fiorilaunchpad.html?saml2=disabled&sap-ushell-config-url%3Dcfg%2Fsap%2FCacheBuster.json&sap-theme=ZRIL_HC_BASE%40%2Fsap%2Fpublic%2Fbc%2Fthemes%2F~client-586&sap-ushell-config=headerless#ZHR_ESS-vehiclelog?appAct=payroll&semObj=ZHR_ESS",
+  "COV": "https://fiorinjp.ril.com/sap/bc/ui5_ui5/ui2/ushell/shells/abap/Fiorilaunchpad.html?saml2=disabled&sap-ushell-config-url%3Dcfg%2Fsap%2FCacheBuster.json&sap-theme=ZRIL_HC_BASE%40%2Fsap%2Fpublic%2Fbc%2Fthemes%2F~client-586&sap-ushell-config=headerless#ZHR_ESS-covclv?appAct=payroll&semObj=ZHR_ESS"
+}

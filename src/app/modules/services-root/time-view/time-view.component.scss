@@ -1,0 +1,44 @@
+.time-view-container{
+    width: 196px;
+    height: 266px;
+    border-radius: 12px;
+    background-color: var(--white);
+    box-shadow: 0px 4px 16px rgb(0 0 0 / 16%);
+}
+.time-view-container .divider-line {
+    border-top: 1px solid var(--light-primary-grey-40);
+}
+.time-view-container .time-display-data{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    background:var(--white);
+    border-radius: 8px;    
+    width: 52px;
+    height: 32px;
+    font-weight: 700;
+    font-size: var(--font-size-body);
+    line-height: 20px;
+    color: var(--light-primary-grey-80);
+    cursor: pointer;
+}
+.time-view-container .time-view-ptlr-16{
+    padding: 16px 16px 0 16px;
+}
+.time-view-container .time-view-pblr-16{
+    padding: 0 16px 16px 16px;
+}
+.time-view-container .time-display-data:hover{
+    background-color: var(--light-primary-30);
+    color: var(--light-primary-80);
+}
+.time-view-container .time-display-data.active{
+    background-color: var(--light-primary-30);
+    color: var(--light-primary-80);
+}
+
+.time-view-container .footer-container .footer-btn-container .small-secondary-button{
+    padding: 0 12px;
+}

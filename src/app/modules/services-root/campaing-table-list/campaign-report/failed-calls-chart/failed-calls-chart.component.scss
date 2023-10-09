@@ -1,0 +1,8 @@
+.doughnut-chart-root .chart-container{
+    height: 144px!important;
+    width: 144px;
+    padding-left: 18px;
+}
+.doughnut-chart-root .deflaut-zero{
+  background: radial-gradient(circle at center, rgba(0,0,0,0) 0, rgba(0,0,0,0) 38%, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0) 12%, rgba(0,0,0,0) -16%,rgba(0,0,0,0) 1%);
+}

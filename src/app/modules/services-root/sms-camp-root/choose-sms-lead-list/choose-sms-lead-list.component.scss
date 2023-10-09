@@ -1,0 +1,57 @@
+.choose-sms-lead-list-modal .radio-button {
+    border-radius: 8px;
+    border: 1px solid var(--light-primary-grey-40);
+    padding: 12px;
+    display: inline-block;
+    min-height: 96px;
+}
+
+.choose-sms-lead-list-modal .search-box {
+    background: var(--light-primary-grey-20);
+    border-radius: 30px;
+}
+
+.choose-sms-lead-list-modal .campaign-custom-width {
+    max-width: 500px;
+    position: absolute;
+    z-index: 99;
+    margin-top: 50px !important;
+    border-radius: 24px;
+    background: var(--white);
+    box-shadow: var(--shadow-m);
+    padding: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    // height: 272px;
+}
+
+.choose-sms-lead-list-modal .search-result-row {
+    height: 40px;
+    line-height: 40px;
+}
+
+.choose-sms-lead-list-modal .campaign-custom-width .cdk-virtual-scroll-content-wrapper {
+    flex-direction: column !important;
+}
+
+.choose-sms-lead-list-modal .campaign-custom-width .cdk-virtual-scroll-viewport {
+    height: 200px;
+}
+
+.choose-sms-lead-list-modal .grey-40-border {
+    position: relative;
+}
+
+.choose-sms-lead-list-modal .cdk-virtual-scroll-content-wrapper {
+    flex-direction: column !important;
+}
+
+// .choose-sms-lead-list-modal .radio-button .checked~div .body-text {
+//     color: var(--light-text-grey-100) !important;
+// }
+.choose-sms-lead-list-modal .customized-content-lead-list{
+    background-color: var(--light-primary-20)!important;
+    padding: 16px;
+    border-radius: 8px;
+    color: var(--light-text-grey-80);
+}

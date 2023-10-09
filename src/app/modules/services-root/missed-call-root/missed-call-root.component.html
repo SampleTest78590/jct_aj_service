@@ -1,0 +1,242 @@
+<div fxFlex="100" fxLayoutAlign="space-between stretch" fxLayout="column" class="missed-call-root">
+  <!-- <div fxLayout="column" class="grid-layout-column"> -->
+    <div fxLayout="column" fxLayoutGap="8px" class="mb-24">
+      <div class="header">
+        Welcome to Missed Call Service
+      </div>
+      <div class="sub-header lh-24">
+        Creating a Missed Call Campaign is as simple as counting 1-2-3
+      </div>
+    </div>
+
+    <div fxLayout="column" fxLayoutGap="16px" [style.overflow]="'auto'" class="scrollable-content pr-4 flex-1">
+        <div class="custom-accordion" [ngClass]="!submittedFlag? '' : 'hand-cursor-defualt'">
+          <div fxLayoutAlign="space-between start" fxLayout="row" fxLayoutGap="24px" fxFlex>
+            <div fxLayout="row" fxLayoutGap="24px" fxFlex="100">
+              <div class="stepper-count" (click)="!submittedFlag?openNameCampaign():''">
+                <span *ngIf="gettingStartedData?.campaignData?.campaignName" class="accordion-status-placeholder"><img src="assets/images/svg/ico-tick-success.svg" alt="" /></span>
+                <span *ngIf="!gettingStartedData?.campaignData?.campaignName" class="count-numbers">1</span>
+              </div>
+              <div fxLayout="column" class="full-width" fxLayoutGap="8px">
+                <div class="accordion-header lh-24" (click)="!submittedFlag?openNameCampaign():''">Name your Campaign</div>
+                <!-- <div class="accordion-header lh-24">Lead List</div> -->
+                <div class="accordion-sub-header lh-16" (click)="!submittedFlag?openNameCampaign():''" *ngIf="!gettingStartedData?.campaignData?.campaignName">
+                  <span>Enter a name for your campaign which will be associated with your Missed Call service</span>
+                </div>
+                  <div fxLayout="column" fxLayoutGap="8px" *ngIf="gettingStartedData?.campaignData?.campaignName" class="view-text-length">
+                    <div fxLayout="row" fxLayoutGap="16px" (click)="!submittedFlag?openNameCampaign():''">
+                      <div class="grey-70 misscall-subheader-info">Campaign Name</div>
+                      <div (click)="!submittedFlag?openNameCampaign():''">
+                        <span class="two-line-ellipsis">{{gettingStartedData?.campaignData?.campaignName}}</span>
+                      </div>
+                    </div>
+                    <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="start start" class="full-width">
+                      <div class="grey-70 misscall-subheader-info" (click)="!submittedFlag?openNameCampaign():''">Description</div>
+                      <div fxLayout="row" fxLayoutAlign="space-between start" class="full-width">
+                        <div [ngClass]="readMorecamp ? '' : 'two-line-ellipsis' " (click)="!submittedFlag?openNameCampaign():''">
+                          {{gettingStartedData?.campaignData?.campaignDescription}} </div> 
+                        <div class="primary-text text-nowrap" *ngIf="moreCamp">
+                          <span (click)="readMoreClick()" class="extra-bold primary-60 cursor-pointer">{{readMoreTextcamp}}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+            <div *ngIf="!submittedFlag">
+              <img src="assets/images/svg/ico-menu-down-arrow.svg" class="ico-small arrow-forword" alt="" (click)="openNameCampaign()"/>
+              <!-- <img src="assets/images/svg/ico-menu-up-arrow.svg" class="ico-small" alt="" /> -->
+            </div>
+          </div>
+          
+        </div>
+
+      <div class="custom-accordion" [ngClass]="!submittedFlag? '' : 'hand-cursor-defualt'">
+        <div fxLayoutAlign="space-between start" fxLayout="row" fxLayoutGap="24px" fxFlex>
+          <div fxLayout="row" fxLayoutGap="24px" fxFlex="100" (click)="!submittedFlag?openVirtualNumbers():''">
+            <div class="stepper-count">
+              <span *ngIf="gettingStartedData?.virtualNumber" class="accordion-status-placeholder"><img src="assets/images/svg/ico-tick-success.svg" alt="" /></span>
+              <span *ngIf="!gettingStartedData?.virtualNumber" class="count-numbers">2</span>
+            </div>
+            <div fxLayout="column" class="full-width view-text-length" fxLayoutGap="8px">
+              <div class="accordion-header lh-24">Choose your Virtual Number</div>
+              <div class="accordion-sub-header lh-16" *ngIf="!gettingStartedData?.virtualNumber">
+                <span>Select a Virtual Number which will be used in your campaigns</span>
+              </div>
+              <div fxLayout="column" fxLayoutGap="8px" *ngIf="gettingStartedData?.virtualNumber">
+                <div fxLayout="row" fxLayoutGap="16px" >
+                  <div class="grey-70 misscall-subheader-info">Virtual Number</div>
+                  <div>
+                    <span class="two-line-ellipsis">{{gettingStartedData?.virtualNumber}}</span>
+                  </div>
+                </div>
+                <!-- <div fxLayout="row" fxLayoutAlign="start start" class="full-width">
+                  <div class="grey-70" fxFlex="15">Description</div>
+                  <div fxLayout="row" fxLayoutAlign="space-between start" class="full-width">
+                    <div class="two-line-ellipsis">JioCare Promotion Campaign</div>
+                    <div class="primary-text text-nowrap">
+                      <span>Read More</span>
+                    </div>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+          </div>
+          <div *ngIf="!submittedFlag">
+            <img src="assets/images/svg/ico-menu-down-arrow.svg" class="ico-small arrow-forword" alt=""
+              (click)="openVirtualNumbers()" />
+            <!-- <img src="assets/images/svg/ico-menu-up-arrow.svg" class="ico-small" alt="" /> -->
+          </div>
+        </div>
+
+      </div>
+
+      <div class="custom-accordion" [ngClass]="!submittedFlag? '' : 'hand-cursor-defualt'">
+        <div fxLayoutAlign="space-between start" fxLayout="row" fxLayoutGap="24px" fxFlex>
+          <div fxLayout="row" fxLayoutGap="24px" fxFlex="100" (click)="!submittedFlag?leadlistAction():''">
+            <div class="stepper-count">
+              <span *ngIf="gettingStartedData?.leadListUpload" class="accordion-status-placeholder"><img src="assets/images/svg/ico-tick-success.svg" alt="" /></span>
+              <span *ngIf="!gettingStartedData?.leadListUpload" class="count-numbers">3</span>
+            </div>
+            <div fxLayout="column" class="full-width view-text-length" fxLayoutGap="8px">
+              <div class="accordion-header lh-24">Perform Lead List Actions</div>
+              <div class="accordion-sub-header lh-16" *ngIf="!gettingStartedData?.leadListUpload?.leadName">
+                <span>Create, Add, Remove - manage all your leads here</span>
+              </div>
+              <div fxLayout="column" fxLayoutGap="8px" *ngIf="gettingStartedData?.leadListUpload?.leadName">
+                <div fxLayout="row" fxLayoutGap="16px">
+                  <div class="grey-70 misscall-subheader-info">The Caller will be</div>
+                  <div>
+                    <span class="two-line-ellipsis" *ngIf="gettingStartedData?.leadAction === 'A'">Added to</span>
+                    <span class="two-line-ellipsis" *ngIf="gettingStartedData?.leadAction === 'D'">Removed from</span>
+                  </div>
+                </div> 
+                <div fxLayout="row" fxLayoutGap="16px">
+                  <div class="grey-70 misscall-subheader-info">Selected Lead List</div>
+                  <div>
+                    <span class="two-line-ellipsis lh-20">{{gettingStartedData?.leadListUpload?.leadName}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="!submittedFlag">
+            <img src="assets/images/svg/ico-menu-down-arrow.svg" class="ico-small arrow-forword" alt=""
+              (click)="leadlistAction()" />
+            <!-- <img src="assets/images/svg/ico-menu-up-arrow.svg" class="ico-small" alt="" /> -->
+          </div>
+        </div>
+
+      </div>
+
+      <div class="custom-accordion" [ngClass]="!submittedFlag? '' : 'hand-cursor-defualt'">
+        <div fxLayoutAlign="space-between start" fxLayout="row" fxLayoutGap="24px" fxFlex>
+          <div fxLayout="row" fxLayoutGap="24px" fxFlex="100">
+            <div class="stepper-count" (click)="!submittedFlag?smsConfigure():''">
+              <span *ngIf="gettingStartedData?.feedbackSMS" class="accordion-status-placeholder"><img src="assets/images/svg/ico-tick-success.svg" alt="" /></span>
+              <span *ngIf="!gettingStartedData?.feedbackSMS" class="count-numbers">4</span>
+            </div>
+            <div fxLayout="column" class="full-width view-text-length" fxLayoutGap="8px">
+              <div class="accordion-header lh-24" (click)="!submittedFlag?smsConfigure():''">Add Feedback SMS (Optional)</div>
+              <div class="accordion-sub-header lh-16" (click)="!submittedFlag?smsConfigure():''"*ngIf="!gettingStartedData?.feedbackSMS">
+                <span>Send feedback SMS to your callers through DLT Approved Sender ID & Template</span>
+              </div>
+              <div fxLayout="column" fxLayoutGap="8px" *ngIf="gettingStartedData?.feedbackSMS" >
+                <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="start start" class="full-width">
+                  <div class="grey-70 misscall-subheader-info" (click)="!submittedFlag?smsConfigure():''" >Feedback SMS</div>
+                  <!-- <div fxLayout="row" fxLayoutAlign="space-between start" class="full-width">
+                    <div class="two-line-ellipsis">{{gettingStartedData?.feedbackSMS?.smsTemplateText}} </div>
+                    <div class="primary-text text-nowrap">
+                      <span>Read More</span>
+                      <span>Read Less</span>
+                    </div>
+                  </div> -->
+                  <div fxLayout="row" fxLayoutAlign="space-between start" class="full-width">
+                    <div (click)="!submittedFlag?smsConfigure():''" [ngClass]="readMoreSMS ? 'sms-format' : 'two-line-ellipsis sms-format'" [innerHTML]="gettingStartedData?.feedbackSMS?.smsTemplateText">
+                    </div>
+                    <div class="primary-text text-nowrap" *ngIf="moreText">
+                      <span (click)="readMoreSMSClick()" class="extra-bold primary-60 cursor-pointer">{{readMoreTextSMS}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="!submittedFlag">
+            <img src="assets/images/svg/ico-menu-down-arrow.svg" class="ico-small arrow-forword" alt=""
+               (click)="smsConfigure()"/>
+            <!-- <img src="assets/images/svg/ico-menu-up-arrow.svg" class="ico-small" alt="" /> -->
+          </div>
+        </div>
+
+      </div>
+
+      <div class="custom-accordion plus-audio-accordion"[ngClass]="!submittedFlag? '' : 'hand-cursor-defualt'">
+        <div fxLayoutAlign="space-between start" fxLayout="row" fxLayoutGap="24px" fxFlex>
+          <div fxLayout="row" fxLayoutGap="24px" fxFlex="100" >
+            <div class="stepper-count" (click)="!submittedFlag?openPlusAudio():''">
+              <span *ngIf="gettingStartedData?.audioUpload" class="accordion-status-placeholder"><img src="assets/images/svg/ico-tick-success.svg" alt="" /></span>
+              <span *ngIf="!gettingStartedData?.audioUpload" class="count-numbers">5</span>
+            </div>
+            <div fxLayout="column" class="full-width view-text-length" fxLayoutGap="8px">
+              <div class="accordion-header lh-24" (click)="!submittedFlag?openPlusAudio():''">+ Audio (Optional)</div>
+              <div class="accordion-sub-header lh-16" *ngIf="!gettingStartedData?.audioUpload" (click)="!submittedFlag?openPlusAudio():''">
+                <span>An add-on feature which allows you to play a custom audio message for your incoming callers
+                  instead of disconnecting the call</span>
+              </div>
+              <div fxLayout="column" fxLayoutGap="8px" *ngIf="gettingStartedData?.audioUpload">
+                <div fxLayout="row" (click)="!submittedFlag?openPlusAudio():''">
+                  <div class="grey-70 misscall-subheader-info">Audio Name</div>
+                  <div>
+                    <span class="two-line-ellipsis">{{gettingStartedData?.audioUpload?.audioName}}</span>
+                  </div>
+                </div>
+                <div fxLayout="row" fxLayoutGap="10px">
+                  <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="space-between center" 
+                  class="mt-8"
+                    >
+                    <div *ngIf="gettingStartedData?.audioUpload?.audioUrl">
+                      <app-audio-preview-play *ngIf="gettingStartedData?.audioUpload?.audioUrl" [src]="gettingStartedData?.audioUpload?.audioUrl" [index]="index+1"
+                        [audioDuration]="gettingStartedData?.audioUpload?.audioDuration">
+                      </app-audio-preview-play>
+                    </div>
+                    <img *ngIf="!submittedFlag" src="assets/images/svg/ico-close-outline.svg" (click)="deleteAudio()" class="ico-small cursor-pointer" alt=""
+                      />
+                  </div>
+                </div>
+                <!-- <div fxLayout="row" fxLayoutAlign="start start" class="full-width">
+                  <div class="grey-70" fxFlex="15">Description</div>
+                  <div fxLayout="row" fxLayoutAlign="space-between start" class="full-width">
+                    <div class="two-line-ellipsis">JioCare Promotion Campaign</div>
+                    <div class="primary-text text-nowrap">
+                      <span>Read More</span>
+                      <span>Read Less</span>
+                    </div>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+          </div>
+          <div *ngIf="!submittedFlag">
+            <img src="assets/images/svg/ico-menu-down-arrow.svg" class="ico-small arrow-forword" alt=""
+              (click)="openPlusAudio()" />
+            <!-- <img src="assets/images/svg/ico-menu-up-arrow.svg" class="ico-small" alt="" /> -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+  <!-- </div> -->
+  
+  <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="end end" class="footer-action">
+    <div>
+      <button *ngIf="!submittedFlag" type="button" [disabled]="submittedFlag || !(gettingStartedData?.campaignData?.campaignName || gettingStartedData?.virtualNumber || gettingStartedData?.leadListUpload?.leadName || gettingStartedData?.audioUpload || gettingStartedData?.feedbackSMS)" class="large-secondary-button" (click)="discardClick()">Discard</button>
+    </div>
+    <div>
+      <button *ngIf="!submittedFlag" type="button"  [disabled]="!(!submittedFlag && gettingStartedData?.campaignData?.campaignName && gettingStartedData?.virtualNumber && gettingStartedData?.leadListUpload?.leadName)" class="large-primary-button" (click)="submitClick()">Submit</button>
+    </div>
+    <div *ngIf="submittedFlag">
+      <button type="button"  class="large-secondary-button" (click)="backToMain()">Back</button>
+    </div>
+  </div>
+</div>

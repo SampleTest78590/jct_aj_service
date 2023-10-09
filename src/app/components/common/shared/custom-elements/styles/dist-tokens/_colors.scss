@@ -1,0 +1,238 @@
+$colors: (
+    light-marigold-midnight-20: #fef7e9,
+
+    //common colors
+    white: #fff,
+    black: #000,
+
+    /* ==================================== Text colors ================================ */
+        // light colors
+    light-text-grey-100: #141414,
+    light-text-grey-90: #373737,
+    light-text-grey-80: rgba(0, 0, 0, 0.65),
+    light-text-grey-70: #767676,
+    light-text-grey-60: #b5b5b5,
+    light-text-grey-50: #CACACA,
+    light-text-grey-40: #E0E0E0,
+    light-text-grey-30: #EBEBEB,
+    light-text-grey-20: #F5F5F5,
+    light-text-grey-10: #F9F9F9,
+
+    // dark colors
+    dark-text-grey-90: rgba(255, 255, 255, 0.9),
+    dark-text-grey-80: rgba(255, 255, 255, 0.8),
+    dark-text-grey-70: rgba(255, 255, 255, 0.7),
+    dark-text-grey-60: rgba(255, 255, 255, 0.6),
+    dark-text-grey-50: rgba(255, 255, 255, 0.5),
+    dark-text-grey-40: rgba(255, 255, 255, 0.4),
+    dark-text-grey-30: rgba(255, 255, 255, 0.3),
+    dark-text-grey-20: rgba(255, 255, 255, 0.2),
+    dark-text-grey-10: rgba(255, 255, 255, 0.1),
+
+    /* ==================================== primary colors ================================ */
+    // light colors
+    light-primary-80: #130028,
+    light-primary-70: #1F0042,
+    light-primary-60: #2B005C,
+    light-primary-50: #3E0084,
+    light-primary-40: #6D17CE,
+    light-primary-30: #CBA2FA,
+    light-primary-20: #F0E8FA,
+
+    // light primary grey colors
+    light-primary-grey-100: #141414,
+    light-primary-grey-90: #373737,
+    light-primary-grey-80: #595959,
+    light-primary-grey-70: #767676,
+    light-primary-grey-60: #B5B5B5,
+    light-primary-grey-50: #cacaca,
+    light-primary-grey-40: #E0E0E0,
+    light-primary-grey-30: #EBEBEB,
+    light-primary-grey-20: #f5f5f5,
+    light-primary-grey-10: #F9F9F9,
+
+    // dark colors
+    dark-primary-80: #E7D8F7,
+    dark-primary-70: #C8A8ED,
+    dark-primary-60: #AA77E2,
+    dark-primary-50: #853DD6,
+    dark-primary-40: #5D2B96,
+    dark-primary-30: #421F6B,
+    dark-primary-20: #281240,
+
+    // bold colors
+    bold-primary-80: #FBF9FF,
+    bold-primary-70: #EEE1FD,
+    bold-primary-60: #E4CFFC,
+    bold-primary-40: rgba(203, 162, 250, 0.6),
+    bold-primary-30: rgba(203, 162, 250, 0.4),
+    bold-primary-20: rgba(203, 162, 250, 0.2),
+    bold-primary-inverse: #1F0042,
+    bold-primary-background: #3E0084,
+    bold-primary-grey-80: rgba(255, 255, 255, 0.8),
+    bold-primary-grey-70: rgba(255, 255, 255, 0.7),
+    bold-primary-grey-60: rgba(255, 255, 255, 0.6),
+    bold-primary-grey-50: rgba(255, 255, 255, 0.5),
+    bold-primary-grey-40: rgba(255, 255, 255, 0.4),
+    bold-primary-grey-30: rgba(255, 255, 255, 0.3),
+    bold-primary-grey-20: rgba(255, 255, 255, 0.2),
+    bold-primary-grey-10: rgba(255, 255, 255, 0.1),
+    /* ==================================== secondary colors ================================ */
+        // Light Colors
+    light-secondary-80: #001E2B,
+    light-secondary-70: #00364E,
+    light-secondary-60: #0C5273,
+    light-secondary-50: #0078AD,
+    light-secondary-40: #67C3EF,
+    light-secondary-30: #89DCFF,
+    light-secondary-20: #E5F1F7,
+    light-secondary-inverse: #FFFFFF,
+
+    // dark colors
+    dark-secondary-80: #CCE5EF,
+    dark-secondary-70: #8CC5DA,
+    dark-secondary-60: #4CA5C6,
+    dark-secondary-50: #007FAD,
+    dark-secondary-40: #00638F,
+    dark-secondary-30: #004766,
+    dark-secondary-20: #002B3D,
+    dark-secondary-inverse: #FFFFFF,
+    dark-secondary-background: #141414,
+
+    // bold colors
+    bold-secondary-80: #FFFFFF,
+    bold-secondary-70: #FFFFFF,
+    bold-secondary-60: #EEFAFF,
+    bold-secondary-50: #89DCFF,
+    bold-secondary-40: rgba(137, 220, 255, 0.6),
+    bold-secondary-30: rgba(137, 220, 255, 0.4),
+    bold-secondary-20: rgba(137, 220, 255, 0.2),
+    bold-secondary-inverse: #00364E,
+    bold-secondary-background: #0078AD,
+    bold-secondary-grey-100: #FFFFFF,
+    bold-secondary-grey-90: rgba(255, 255, 255, 0.9),
+    bold-secondary-grey-80: rgba(255, 255, 255, 0.8),
+    bold-secondary-grey-70: rgba(255, 255, 255, 0.7),
+    bold-secondary-grey-60: rgba(255, 255, 255, 0.6),
+    bold-secondary-grey-50: rgba(255, 255, 255, 0.5),
+    bold-secondary-grey-40: rgba(255, 255, 255, 0.4),
+    bold-secondary-grey-30: rgba(255, 255, 255, 0.3),
+    bold-secondary-grey-20: rgba(255, 255, 255, 0.2),
+    bold-secondary-grey-10: rgba(255, 255, 255, 0.1),
+    /* ==================================== sparkle colors ================================ */
+        // Light Colors
+    light-sparkle-80: #46070B,
+    light-sparkle-70: #7B1604,
+    light-sparkle-60: #CD3D00,
+    light-sparkle-50: #FA7D19,
+    light-sparkle-40: #FFAA66,
+    light-sparkle-30: #FFD2AD,
+    light-sparkle-20: #FEF2E9,
+
+    // dark colors
+    dark-sparkle-80: #FDE9D8,
+    dark-sparkle-70: #FACDA8,
+    dark-sparkle-60: #F7B178,
+    dark-sparkle-50: #F48F3E,
+    dark-sparkle-40: #AB642B,
+    dark-sparkle-30: #7A471F,
+    dark-sparkle-20: #492B13,
+
+    // bold colors
+    bold-sparkle-80: #2E0B00,
+    bold-sparkle-70: #3D0F00,
+    bold-sparkle-60: #5C1700,
+    bold-sparkle-50: #7B1604,
+    bold-sparkle-40: rgba(123, 22, 4, 0.6),
+    bold-sparkle-30: rgba(123, 22, 4, 0.4),
+    bold-sparkle-20: rgba(123, 22, 4, 0.2),
+    bold-sparkle-inverse: #FEF2E9,
+    bold-sparkle-background: #FA7D19,
+    bold-sparkle-grey-100: #46070B,
+    bold-sparkle-grey-90: rgba(70, 7, 11, 0.9),
+    bold-sparkle-grey-80: rgba(70, 7, 11, 0.8),
+    bold-sparkle-grey-70: rgba(70, 7, 11, 0.7),
+    bold-sparkle-grey-60: rgba(70, 7, 11, 0.6),
+    bold-sparkle-grey-50: rgba(70, 7, 11, 0.5),
+    bold-sparkle-grey-40: rgba(70, 7, 11, 0.4),
+    bold-sparkle-grey-30: rgba(70, 7, 11, 0.3),
+    bold-sparkle-grey-20: rgba(70, 7, 11, 0.2),
+    bold-sparkle-grey-10: rgba(70, 7, 11, 0.1),
+    /* ==================================== Extra custom colors ================================ */
+    
+    light-orange-30: #ffd2ad,
+    light-green-30: #94f6c5,
+    light-reliance-30: #9eb5fa,
+    light-marigold-30: #ffe3ae,
+    light-mint-30: #a7f6e9,
+    light-violet-30: #f7a8fa,
+
+    light-midnight-crimson-40: #aa0023,
+    light-midnight-red-40: #e30513,
+    light-midnight-orange-40: #fa7d19,
+    light-midnight-marigold-40: #ffd947,
+    light-midnight-green-40: #00b259,
+    light-midnight-reliance-40: #0f3cc9,
+    light-midnight-purple-40: #6d17ce,
+    light-midnight-violet-40: #c135c5,
+    light-midnight-pink-40: #d9008d,
+
+    light-crimson-40: #ed617f,
+    light-crimson-20: #f7e5e9,
+    light-red-40: #fc6770,
+    light-orange-40: #ffaa66,
+    light-marigold-40: #ffd947,
+    light-green-40: #10d974,
+    light-reliance-40: #6789f4,
+    light-purple-40: #a680ff,
+    light-violet-40: #f680f9,
+    light-pink-40: #ff6dcc,
+
+    light-green-80: #002d16,
+    light-green-20: #e5f7ee,
+    light-marigold-80: #401d0c,
+
+    /* ==================================== Feedback colors ================================ */
+    light-feedback-error-80: #660014,
+    light-feedback-error-50: #f50031,
+    light-feedback-error-20: #FEE6EA,
+    light-feedback-warning-80: #7D2F08,
+    light-feedback-warning-50: #f06d0f,
+    light-feedback-warning-20: #fef0e7,
+    light-feedback-success-80: #135610,
+    light-feedback-success-50: #25ab21,
+    light-feedback-success-20: #e9f7e9,
+
+    dark-feedback-error-80: #FEE6EA,
+    dark-feedback-error-50: #F50031,
+    dark-feedback-error-20: #660014,
+    dark-feedback-warning-80: #FEF0E7,
+    dark-feedback-warning-50: #F06D0F,
+    dark-feedback-warning-20: #7D2F08,
+    dark-feedback-success-80: #E9F7E9,
+    dark-feedback-success-50: #25AB21,
+    dark-feedback-success-20: #135610,
+
+    /* ==================================== Shadow colors ================================ */
+        shadow-s: 0px 4px 16px rgba(0, 0, 0, 0.08),
+    shadow-m: 0px 4px 16px rgba(0, 0, 0, 0.16),
+    shadow-l: 0px 4px 16px rgba(0, 0, 0, 0.24),
+    /* ==================================== Image Filter colors ================================ */
+        filter-white: brightness(0) saturate(100%) invert(100%) sepia(0%)
+        saturate(5044%) hue-rotate(198deg) brightness(114%) contrast(106%),
+    filter-primary-70: brightness(0) saturate(100%) invert(20%) sepia(34%)
+        saturate(3057%) hue-rotate(173deg) brightness(98%) contrast(91%),
+    filter-primary-60: brightness(0) saturate(100%) invert(20%) sepia(34%)
+        saturate(3057%) hue-rotate(173deg) brightness(98%) contrast(91%),
+    filter-primary-50: brightness(0) saturate(100%) invert(34%) sepia(85%)
+        saturate(1170%) hue-rotate(166deg) brightness(89%) contrast(101%),
+    filter-grey-100: brightness(0) saturate(100%) invert(0%) sepia(6%)
+        saturate(410%) hue-rotate(348deg) brightness(91%) contrast(84%),
+    filter-grey-80: brightness(0) saturate(100%) invert(0%) sepia(0%)
+        saturate(7500%) hue-rotate(173deg) brightness(89%) contrast(109%)
+        opacity(65%),
+    filter-grey-60: brightness(0) saturate(100%) invert(75%) sepia(8%)
+        saturate(0%) hue-rotate(159deg) brightness(95%) contrast(93%),
+    filter-grey-50: brightness(0) saturate(100%) invert(96%) sepia(0%)
+        saturate(0%) hue-rotate(178deg) brightness(85%) contrast(91%),
+);

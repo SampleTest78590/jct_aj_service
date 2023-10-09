@@ -1,0 +1,21 @@
+:root {
+    /* Font Size */
+
+    --font-size-big-title: 40px; /* 40px --- 2.5em */
+    --font-size-big-head: 32px; /*32px --- 2em */
+    --font-size-head: 24px; /* 24px --- 1.714em */
+    --font-size-subhead: 22px; /* 22px --- 1.571em */
+    --font-size-big: 20px; /*20px --- 1.429em */
+    --font-size-title: 18px; /*18px --- 1.286em */
+    --font-size-sub-title: 16px; /*16px -- 1.143em */
+    --font-size-15: 15px; /* 15px --- 1.071em */
+    --font-size-body: 14px;  /*14px --- 1em */
+    --font-size-small: 13px; /* 13px --- 0.929em */
+    --font-size-mini: 12px; /* 12px --- 0.857em */
+    --font-size-11: 11px; /* 11px --- 0.786em */
+    --font-size-10: 10px; /* 10px --- 0.714em */
+    /* New Font Size */
+
+    /*font Familiy */
+    --font-familiy : "JioType";
+}

@@ -1,0 +1,40 @@
+.menu-block-container {
+    background: var(--white);
+    box-shadow: 0px 4px 16px rgb(0 0 0 / 16%);
+    border-radius: 8px;
+    max-height: 80vh;
+    overflow-y: auto;
+
+    .menu-block-item {
+        padding: 8px 16px;
+        cursor: pointer;
+        font-size: 16px;
+        letter-spacing: -0.08px;
+        line-height: 1.5;
+        color: var(--light-text-grey-80);
+        display: flex;
+
+        &:hover {
+            background-color: var(--light-primary-grey-20);
+        }
+        &.disabled {
+            cursor: default;
+            pointer-events: none;
+            opacity: 0.3;
+        }
+
+        .icon-container {
+            display: flex;
+
+            img {
+                filter: var(--filter-grey-80);
+                width: 16px;
+                margin-right: 8px;
+            }
+        }
+    }
+
+    .divider-line {
+        border-top: 1px solid var(--light-text-grey-40);
+    }
+}

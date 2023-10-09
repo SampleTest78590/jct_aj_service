@@ -1,0 +1,30 @@
+<ng-container second-panel-content>
+  <div class="second-panel__setting-header">
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="second-panel__setting-title mt-30 mb-20">
+      <div class="sub-title-text extra-bolder ml-12">Services</div>
+      <div>
+        <img src="assets/images/svg/ico-filter-blue.svg" class="ico-extra-small mr-12" alt="" />
+      </div>
+    </div>
+  </div>
+  <div class="scrollable-content sevice-sidemenu">
+    <div class="services-team" *ngFor="let team of secondPanelData; index as teamIndex">
+      <ng-container *ngIf="team?.subMenuList?.length > 0">
+        <app-expaned-collapse [title]="team.name" [icon]="team.iconImage" (click)="onTeamClick(team)"
+          [isExpanded]="checkExistExpand(team.menuid)" [isDisabled]="team.isActive" [isActiveMenu]="checkExistClassExpand(team.menuid)">
+          <ng-container expand-collapse-content>
+            <ng-container *ngFor="let teamSetting of team.subMenuList; index as teamSettingndex ">
+              <app-item-block [label]="teamSetting.subDisplayName" [icon]="teamSetting.subiconImage"
+                [isSelected]="teamSetting.subname === menuService.subselectedItem" (click)="teamSetting.isActive == 1 ? getSettings(teamSetting,team.subMenuList,team) : ''" [activeMenu]="teamSetting.isActive" >
+              </app-item-block>
+            </ng-container>
+          </ng-container>
+        </app-expaned-collapse>
+      </ng-container>
+      <ng-container *ngIf="team?.subMenuList?.length < 1">
+        <app-item-block [label]="team.displayName" [icon]="team.iconImage" [activeMenu]="team.isActive" ></app-item-block>
+      </ng-container>
+    </div>
+  </div>
+  <!-- <div class="divider-line divider-line--vertical-margin"></div> -->
+</ng-container>

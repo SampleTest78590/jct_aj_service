@@ -1,0 +1,30 @@
+.manage-sms-template-root .secondary-60{
+    color: var(--light-secondary-60);
+}
+
+.manage-sms-template-root .custom-table .custom-table-content{
+    min-height: auto !important;
+}
+
+.manage-sms-template-root .config-btn.medium-primary-button{
+    width: 341px;
+}
+.manage-sms-template-root .sms-format{
+    white-space: pre-wrap;
+}
+.manage-sms-template-root .footer-modal-action {
+    position: absolute;
+    bottom: -24px;
+    left: -24px;
+    z-index: 3;
+    border-radius: 0;
+    padding: 8px 32px;
+    width: calc(100% - -48px);
+    background: var(--white)!important;
+    right: -24px;
+}
+
+.manage-sms-template-root .nodata {
+    padding: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.12)
+}

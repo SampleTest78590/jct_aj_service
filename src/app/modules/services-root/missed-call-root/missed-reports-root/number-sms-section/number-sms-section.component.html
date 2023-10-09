@@ -1,0 +1,86 @@
+<div fxLayout="column" fxLayoutGap="16px" class="number-sms-section">
+    <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="16px">
+        <div class="grey-100 lh-24 sub-title-text extra-bold">Number of SMS <span
+                class="grey-70">({{chartsData.smsCount}})</span></div>
+        <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="40px">
+            <div fxLayout="row" fxLayoutGap="16px" *ngIf="!noOfSMS">
+                <div fxLayout="row" fxLayoutGap="6px" fxLayoutAlign="center center">
+                    <div class="dot-circle tot-leads-dot"></div>
+                    <div>Number of SMS</div>
+                </div>
+            </div>
+            <div fxLayout="row" fxLayoutGap="8px">
+                <div class="switch-bttn" [ngClass]="{active:!noOfSMS}" (click)="noOfSMS=false"><img
+                        src="assets/images/svg/ico-table-view-list.svg" class="ico-standard" alt="" />
+                </div>
+                <div class="switch-bttn" [ngClass]="{active:noOfSMS}" (click)="noOfSMS=true"><img
+                        src="assets/images/svg/ico-view-list.svg" class="ico-standard" alt="" /></div>
+            </div>
+        </div>
+    </div>
+    <div fxLayout="column" class="position-relative">
+        <div *ngIf="!noOfSMS">
+            <app-sms-chart [BarChartData]="smsChartData" [emptyStateMsg]="smsEmptyStateMsg"></app-sms-chart>
+        </div>
+        <div *ngIf="noOfSMS">
+            <div class="custom-table">
+                <div fxLayout="row wrap" class="grid-layout-row-wrap-2n border-radius-0">
+                    <div class="no-padding separator-right-white">
+                        <div fxLayout="row" fxLayoutAlign="space-between start" class="custom-table-header-content">
+                            <div fxLayout="column" fxFlex="50" class="custom-table-header">
+                                <div>Time</div>
+                            </div>
+                            <div fxLayout="column" fxFlex="50" class="custom-table-header">
+                                <div>Number of SMS</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="no-padding">
+                        <div fxLayout="row" fxLayoutAlign="space-between start" class="custom-table-header-content">
+                            <div fxLayout="column" fxFlex="50" class="custom-table-header">
+                                <div>Time</div>
+                            </div>
+                            <div fxLayout="column" fxFlex="50" class="custom-table-header">
+                                <div>Number of SMS</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="scrollable-content scrollable-content border-radius-02" [style.overflow]="'auto'"
+                    [style.overflow-x]="'hidden'" [style.max-height.vh]="'70'">
+
+                    <div fxLayout="row wrap" class="grid-layout-row-wrap-2n">
+                        <div class="no-padding no-margin separator-right" *ngFor="let element of smsTable">
+                            <div fxLayout="row" fxLayoutAlign="space-between start" class="custom-table-content">
+                                <div fxLayout="column" fxFlex="50" class="contact-list-details">
+                                    <div>{{element.time}}</div>
+                                </div>
+                                <div fxLayout="column" fxFlex="50" class="contact-list-details">
+                                    <div> {{element.smsCount}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div fxLayout="row" fxLayoutAlign="space-between start" class="">
+                        <div class="contact-list-details" fxFlex="50">
+                            <div fxFlex="100">
+
+                            </div>
+                        </div>
+                        <div class="contact-list-details" fxFlex="50">
+                            <div fxFlex="100">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center" *ngIf="smsTable?.length == 0">
+                    No Data Found
+                  </div>
+            </div>
+            
+        </div>
+    </div>
+</div>

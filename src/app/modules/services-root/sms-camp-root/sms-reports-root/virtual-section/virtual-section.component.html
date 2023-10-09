@@ -1,0 +1,64 @@
+<div fxLayout="column" class="virtual-section" fxLayoutGap="8px">
+    <div fxLayout="column" fxLayoutGap="16px" class="sms-chart-bar">
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+            <div class="mini-header mtb-2 grey-100 extra-bold">Campaign Progress</div>
+            <div class="cp-percentage lh-20">{{missedChartReport?.campaignProgress}}%</div>
+        </div>
+        <div fxFlex="100" class="progress-bar">
+            <progress value="{{missedChartReport?.campaignProgress}}" max="100" fxFlex="100" class="mtb-2"></progress>
+            <!-- <app-audio-preview-play [src]="virtualDetails?.audioData?.audioUrl" [index]="1"
+                [audioDuration]="virtualDetails?.audioData?.audioDuration"></app-audio-preview-play> -->
+        </div>
+    </div>
+    <div fxLayout="column" fxLayoutGap="8px" class="mt-4">
+        <div fxLayout="row" fxFlex="100" fxLayoutGap="32px">
+            <div fxLayout="row" fxLayoutAlign="space-between center" fxFlex="50">
+                <div class="body-text-14 grey-70 lh-20">Sender ID</div>
+                <div class="body-text-14 grey-100 lh-20 word-break-all text-right">{{missedChartReport?.senderId ||
+                '-'}}
+                </div>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between center" fxFlex="50">
+                <div class="body-text-14 grey-70 lh-20">SMS Type</div>
+                <div class="body-text-14 grey-100 lh-20 word-break-all text-right"><span>{{missedChartReport?.smsType
+                        || '-'}}</span>
+                </div>
+            </div>
+        </div>
+        <div fxLayout="row" fxLayoutGap="32px">
+            <div fxLayout="row" fxLayoutAlign="space-between center" fxFlex="50">
+                <div class="body-text-14 grey-70 lh-20">Start Date</div>
+                <div class="body-text-14 grey-100 lh-20 word-break-all text-right">
+                    {{missedChartReport?.startDate |
+                        date:'dd/MM/YYYY' || '-'}}</div>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between center" fxFlex="50">
+                <div class="body-text-14 grey-70 lh-20">End Date</div>
+                <div class="body-text-14 grey-100 lh-20 word-break-all text-right">
+                    {{missedChartReport?.endDate |
+                        date:'dd/MM/YYYY' || '-'}}</div>
+            </div>
+        </div>
+        <div fxLayout="row" fxLayoutGap="32px" fxLayoutAlign="start start" class="position-relative">
+            <div fxLayout="row" fxLayoutAlign="space-between center" fxFlex="50">
+                <div class="body-text-14 grey-70 lh-20" fxFlex="100">SMS Template</div>
+                <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="start center" class="cursor-pointer"
+                    (click)="openDropdown = !openDropdown">
+                    <div class="body-text-14 grey-100 lh-20">{{ openDropdown ? "Hide" : "View" }}</div>
+                    <img src="assets/images/svg/ico-menu-{{openDropdown ? 'up' : 'down'}}-arrow.svg" alt=""
+                        class="ico-standard" />
+                </div>
+                <div fxLayout="column" fxLayoutGap="8px" class="desc-details" *ngIf="openDropdown">
+                    <div fxLayout="row" fxLayoutGap="8px">
+                        <div class="grey-70 lh-20">Template ID:</div>
+                        <div class="bold"> {{missedChartReport?.smsTemplateId ||'-'}}</div>
+                    </div>
+                    <div class="lh-20 sms-format">{{missedChartReport?.smsTemplateText || '-'}}</div>
+                </div>
+            </div>
+            <div fxFlex="50">&nbsp;</div>
+        </div>
+    </div>
+    <!-- <div class="divider-line mb-12" *ngIf="virtualDetails?.audioData"></div> -->
+
+</div>

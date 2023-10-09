@@ -1,0 +1,43 @@
+<div fxLayout="column" class="name-campaign-modal">
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="header-modal-action">
+      <h2 class="lh-28">Name Your Campaign</h2>
+      <button class="tertiary-button-icon close-btn ico-close-right-top" (click)="onCancel()">
+        <img src="assets/images/svg/ico-close-blue.svg" alt="close" />
+      </button>
+    </div>
+    <div class="content-modal-action scrollable-content mt-24">
+      <div fxLayout="column" fxLayoutGap="24px">
+        <div fxLayout="column" fxLayoutGap="4px" class="cstm-input">
+          <div class="cstm-input__label mini-text">Campaign Name*</div>
+          <input type="text" placeholder="Campaign Name" [(ngModel)]="CampName" 
+          maxlength="30" autocomplete="off" (keypress)="validateCharNum($event)"  />
+          <div class="cstm-input__message error" *ngIf="CampName?.length > 0 && CampName?.length < 3">
+            <span>Minimum 3 character are required</span>
+          </div>
+        </div>
+        <div fxLayout="column" fxLayoutGap="4px" class="cstm-textarea">
+            <div class="cstm-input__label mini-text">Description</div>
+            <textarea id="camptextarea" (keyup)="autogrowtextArea()" #camptextarea class="resizer" name="text" placeholder="Description" [(ngModel)]="CampDes" 
+            maxlength="150" rows="1"></textarea>
+            <!-- rows="1" -->
+            <!-- <input type="text" placeholder="Description" [(ngModel)]="CampDes" 
+            maxlength="150" autocomplete="off" /> -->
+            <!-- <div class="cstm-input__message error">
+              <span>Minimum 3 character are required</span>
+            </div> -->
+          </div>
+      </div>
+    </div>
+  
+    <div class="footer-modal-action">
+      <div fxLayout="row" fxLayoutGap="12px" fxLayoutAlign="end end">
+        <button type="button" class="large-secondary-button" (click)="onCancel()">
+          Cancel
+        </button>
+        <button type="button" [disabled]="CampName?.length >= 0 && CampName?.length < 3" class="large-primary-button" (click)="saveCampaign()">
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+  

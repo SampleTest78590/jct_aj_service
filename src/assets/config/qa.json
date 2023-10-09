@@ -1,0 +1,13 @@
+{
+  "production": false,
+  "enableOtp": false,
+  "enablesocket": true,
+  "enableFirebase": true,
+  "DOMAIN_URL": "https://hrplatformqa.ril.com",
+  "HR_URL": "https://hrplatformqa.ril.com",
+  "COMMON_UTIL": "https://commonutilsqa.ril.com/",
+  "apmUrl": "https://hrplatformqa.ril.com/apmrum/",
+  "env": "qa",
+  "VEHICLE_LOG" : "https://qasnwnjq.ril.com:1443/sap/bc/ui5_ui5/ui2/ushell/shells/abap/Fiorilaunchpad.html?saml2=disabled&sap-client=386&sap-language=EN#ZHR_ESS-vehiclelog",
+  "COV" : "https://qasnwnjq.ril.com:1443/sap/bc/ui5_ui5/ui2/ushell/shells/abap/Fiorilaunchpad.html?saml2=disabled&sap-client=386&sap-language=EN#ZHR_ESS-covclv"
+}

@@ -1,0 +1,36 @@
+.test-campaign-root .test-campaign-label {
+    font-size: 14px;
+}
+
+.test-campaign-root .inputMobile {
+    width: 295px !important;
+}
+
+.test-campaign-root .medium-tertiary-button {
+    padding: 8px 0px !important;
+}
+
+.test-campaign-root .test-no-color {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    color: var(light-text-grey-70);
+}
+
+.test-campaign-root .separator-bottom {
+    border-bottom: 1px solid var(--light-text-grey-40) !important;
+
+}
+
+.test-campaign-root .phone-input .disabled .dropdown-pad>div>label>.cstm-dropdown__select.placeholder {
+    color: var(--light-text-grey-100) !important;
+}
+
+.test-campaign-root .one-line-ellipsis {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 80%
+}

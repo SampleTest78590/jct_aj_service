@@ -1,0 +1,101 @@
+// @import '/assets/scss/mixins/_text.scss';
+
+// .welcome-page-card .header{
+//     @include applyTextStyle('text-heading-xs');
+// }
+// .welcome-page-card .sub-header {
+//     @include applyTextStyle('text-body-s');
+// }
+// .welcome-page-card .accordion-header {
+//     @include applyTextStyle('text-body-s');
+// }
+.welcome-page-card .p-all {
+    padding: 8px 24px;
+}
+
+.welcome-page-card .custom-mat-accordion .mat-expansion-panel {
+    border: 1px solid var(--light-primary-grey-40);
+}
+
+.welcome-page-card .sample-header-bold {
+    font-weight: 700;
+    line-height: 16px;
+}
+
+.welcome-page-card .mat-expansion-indicator {
+    position: relative;
+    top: -18px !important;
+    right: 16px;
+}
+
+.welcome-page-card .mat-expanded .mat-expansion-indicator {
+    top: -14px !important;
+}
+
+// Accordian CSS
+// .welcome-page-card p {
+//     font-family: Lato;
+// }
+
+.welcome-page-card .custom-accordion {
+    background-color: var(--white);
+    border: 1px solid var(--light-text-grey-40);
+    border-radius: 8px;
+    color: var(--light-text-grey-100);
+    cursor: pointer;
+    padding: 16px 24px;
+    text-align: left;
+    outline: none;
+    transition: 0.4s;
+}
+
+.welcome-page-card .panel {
+    padding: 0 18px 0  64px;
+    display: none;
+    background-color: white;
+    overflow: hidden;
+}
+
+.welcome-page-card .visible {
+    display: block;
+}
+.welcome-page-card .audio-player {
+    margin-top: 8px;
+}
+.welcome-page-card .pl-64{
+    padding-left:64px;
+}
+
+.welcome-page-card .campaign-custom-width {
+    max-width: 500px;
+    position: absolute;
+    z-index: 99;
+    margin-top: 50px !important;
+    border-radius: 24px;
+    background: var(--white);
+    box-shadow: var(--shadow-m);
+    padding: 8px 16px;
+    width: 100%;
+    box-sizing: border-box;
+    height: 240px;
+  }
+  .welcome-page-card .search-result-row {
+    height: 40px;
+    line-height: 40px;
+  }
+  .welcome-page-card  .search-bar-divider {
+    margin: 0px -16px !important;
+    padding: 0px 16px;
+  }
+
+  .welcome-page-card .campaign-custom-width .cdk-virtual-scroll-content-wrapper {
+    flex-direction: column !important;
+  }
+  .welcome-page-card .campaign-custom-width .cdk-virtual-scroll-viewport {
+    // overflow: inherit !important;
+    height: 135px;
+    // contain: inherit !important;
+  }
+  .welcome-page-card .info-text-color {
+    color: var(--light-secondary-60);
+  }

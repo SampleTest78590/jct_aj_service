@@ -1,0 +1,232 @@
+<div fxLayout="column" class="test-campaign-root">
+  <div
+    fxLayout="row"
+    fxLayoutAlign="space-between center"
+    class="header-modal-action"
+  >
+    <h2 class="lh-28">Test Campaign</h2>
+    <button
+      class="tertiary-button-icon close-btn ico-close-right-top"
+      (click)="onCancel()"
+    >
+      <img src="assets/images/svg/ico-close-blue.svg" alt="close" />
+    </button>
+  </div>
+
+  <div class="content-modal-action scrollable-content">
+    <div fxLayout="column">
+      <div class="sub-header mb-24 lh-20 grey-80 bold fs-14">
+        Understand how your customers will experience the campaign on your
+        device
+      </div>
+    </div>
+
+    <div fxLayout="column">
+      <div class="test-campaign-label grey-70 lh-20 mb-4">Campaign Name</div>
+      <div class="campaign-name test-campaign-label grey-100 lh-20 b">
+        {{ gettingStartedObj?.campaignData?.campaignName }}
+      </div>
+    </div>
+    <div fxLayout="column">
+      <div class="title-text extra-bold lh-24 grey-100 mt-16 mb-8">
+        SMS Details:
+      </div>
+      <div fxLayout="row" fxLayoutGap="237px">
+        <div fxLayout="column">
+          <div class="test-campaign-label mb-4 grey-70 lh-20 b">Sender ID:</div>
+          <div class="test-campaign-label grey-100 lh-20 b">
+            {{ gettingStartedObj?.feedbackSMS?.senderId }}
+          </div>
+        </div>
+        <div fxLayout="column">
+          <div class="test-campaign-label grey-70 lh-20 b">SMS Type:</div>
+          <div class="test-campaign-label grey-100 lh-20 b">
+            {{ gettingStartedObj?.feedbackSMS?.smsType }}
+          </div>
+        </div>
+      </div>
+      <div fxLayout="column">
+        <div class="test-campaign-label grey-70 lh-20 b mt-16 mb-4">
+          SMS Message:
+        </div>
+        <ng-container
+          *ngIf="gettingStartedObj?.smsContentType?.type !== 'customized'"
+        >
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            <div
+              class="test-campaign-label grey-100 lh-20 b"
+              [ngClass]="
+                readMoreSMS ? 'sms-format' : 'one-line-ellipsis sms-format'
+              "
+              [innerHTML]="gettingStartedObj?.feedbackSMS?.smsTemplateText"
+            ></div>
+            <div class="primary-text text-nowrap">
+              <span
+                class="extra-bold primary-60 cursor-pointer"
+                (click)="readMoreSMSClick()"
+                >{{ readMoreTextcamp }}</span
+              >
+            </div>
+          </div>
+        </ng-container>
+
+        <ng-container
+          *ngIf="gettingStartedObj?.smsContentType?.type == 'customized'"
+        >
+          <!-- <div fxLayout="column">Dear {var}, Your account has been credited by amount Rs. {var} . Thanks!</div> -->
+          <div fxLayout="column">{{ customize_msg }}</div>
+          <div fxLayout="column" [formGroup]="customizeFieldForm">
+            <div fxLayout="column" formArrayName="fieldValues">
+              <div
+                fxLayout="column"
+                fxLayoutGap="4px"
+                class="cstm-input"
+                fxFlex="40"
+                *ngFor="
+                  let item of customizeFieldForm.get('fieldValues').controls;
+                  let i = index
+                "
+                [formGroupName]="i"
+              >
+                <div
+                  class="cstm-input__label mini-text grey-70 lh-20 b mt-16 lh-16"
+                >
+                  Custom Field {{ i + 1 }}*
+                </div>
+                <input
+                  type="text"
+                  placeholder=" Enter the text for first variable"
+                  maxlength="30"
+                  autocomplete="off"
+                  formControlName="fieldVal"
+                />
+              </div>
+            </div>
+          </div>
+        </ng-container>
+        <div></div>
+      </div>
+    </div>
+    <div fxLayout="column" class="separator-bottom mt-24 mb-24"></div>
+    <div fxLayout="column" fxLayoutAlign="start stretch">
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div fxLayout="column">
+          <div class="title-text extra-bold grey-100 lh-24">
+            Destination Number
+          </div>
+          <div class="test-campaign-label grey-70 lh-20 b">
+            You can add up to 5 numbers
+          </div>
+        </div>
+        <div fxLayout="column">
+          <button
+            class="medium-tertiary-button add-no"
+            (click)="addNumber()"
+            [disabled]="stopAddNumber"
+          >
+            <img
+              src="assets/images/svg/ico-add-circle.svg"
+              alt=""
+              class="mr-8"
+            />
+            Add Number
+          </button>
+        </div>
+      </div>
+      <div
+        fxLayout="row"
+        class="phone-input"
+        fxLayoutAlign="start center"
+        [formGroup]="destinationNumber"
+      >
+        <div
+          class="mb-4"
+          fxLayout="column"
+          fxLayoutAlign="start stretch"
+          formArrayName="desNumber"
+        >
+          <div
+            fxLayout="column"
+            fxLayoutAlign="start stretch"
+            *ngFor="let dn of desNumber?.controls; let i = index"
+            [formGroupName]="i"
+            [class.disabled]="!!gettingStartedObj?.destinationNumber && !!!i"
+          >
+            <div fxLayout="row">
+              <div class="mt-24 mb-4 test-no-color">
+                Test Number {{ i + 1 }}
+              </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutGap="32px" fxLayoutAlign="start center">
+              <div class="dropdown-mg mr-4">
+                <app-dropdown
+                  fxFlex="20"
+                  placeholder="+91"
+                  class="dropdown-pad"
+                  [options]="code"
+                  [value]="+91"
+                ></app-dropdown>
+                <div class="cstm-input" fxFlex="100">
+                  <input
+                    type="text"
+                    maxlength="10"
+                    class="inputMobile"
+                    formControlName="number"
+                    (input)="numberTest()"
+                    (keypress)="onlyNumberKeyTest($event)"
+                    placeholder="Enter Contact Number"
+                  />
+                </div>
+
+                <div [ngClass]="i == 0 ? 'delete-icon-test' : ''" *ngIf="i > 0">
+                  <img
+                    src="assets/images/svg/ico-close-outline.svg"
+                    (click)="popNumber(i)"
+                    class="cursor-pointer ico-small ml-5 mt-5"
+                    alt=""
+                  />
+                </div>
+              </div>
+            </div>
+            <div *ngIf="i == 0" class="mt-4">Your verified number</div>
+            <div *ngIf="desNumber.controls[i].status == 'INVALID' && invalidFlag" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="4px" class="mt-4">
+              <div> <img src="assets/images/svg/ico-warning.svg" alt=""></div>
+              <div class="warning-text bold mini-text ">
+                Please fill in this field and ensure it is verified.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-modal-action">
+    <div fxLayout="row" fxLayoutGap="12px" fxLayoutAlign="end end">
+      <button type="button" class="large-secondary-button" (click)="onCancel()">
+        Cancel
+      </button>
+      <button
+        type="button"
+        class="large-primary-button"
+        (click)="testCampaign()"
+        [class.disabled]="
+          gettingStartedObj?.smsContentType?.type === 'customized'
+            ? customizeFieldForm.status !== 'VALID'
+            : false">
+        Test Campaign
+      </button>
+    </div>
+  </div>
+</div>
+<ng-container *ngIf="messageModal">
+  <div content>
+    <app-custom-message-modal
+      [icon]="msgIcon"
+      [header]="messageHeader"
+      [subheaderOne]="messageSubheaderOne"
+      [subheaderTwo]="mesasgeSubheaderTwo"
+      (closeEvent)="closeSuccess()"
+    ></app-custom-message-modal>
+  </div>
+</ng-container>

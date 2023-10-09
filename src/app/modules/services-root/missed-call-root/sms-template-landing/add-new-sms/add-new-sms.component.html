@@ -1,0 +1,111 @@
+<div fxLayout="column" class="sms-template-root">
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="header-modal-action">
+        <h2 class="lh-28">Add New SMS Template</h2>
+        <button class="tertiary-button-icon close-btn ico-close-right-top" (click)="onClose()">
+            <img src="assets/images/svg/ico-close-blue.svg" alt="close" />
+        </button>
+    </div>
+    <div class="content-modal-action">
+        <div fxLayout="column" [style.overflow]="'auto'" [style.max-height.vh]="'73'" class="scrollable-content p-35">
+            <div fxLayout="column" fxLayoutGap="16px" class="grid-layout-column no-label"></div>
+            <div fxLayout="column" fxLayoutGap="16px" class="grid-layout-column no-label">
+                <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="start center" class="">
+                    <div class="extra-bold title-text dark-text grey-100 lh-24" fxLayoutAlign="start center">
+                        1. Sender ID
+                    </div>
+                    <div>
+                        <span class="pt-2" appTooltip
+                        [tooltipTemplate]="'SMS sender ID is the header as approved On DLT Platform with which your outbound SMS will be sent.  use 6 digit numeric sender for promotional SMS or 6 alpha  characters for Transactional SMS'">
+                        <img class="ico-extra-small cursor-pointer" src="assets/images/svg/ico-info.svg" alt="" />
+                    </span>
+                    </div>
+                </div>
+                <div fxLayout="column" class="ml-22">
+                    <div fxLayout="column" fxLayoutGap="4px" class="cstm-input">
+                        <div class="cstm-input__label mini-text lh-16">
+                            Choose your DLT approved sender ID
+                        </div>
+                        <app-dropdown placeholder="Select sender ID provided by the DLT Platform"
+                            [value]="selectedSendorId" [options]="sendorIdList" (handleChange)="selectCategory($event)"
+                            [AddButton]="true" (handleChangebutton)="newsenderId($event)"></app-dropdown>
+
+
+                    </div>
+                </div>
+            </div>
+            <div fxLayout="column" fxLayoutGap="16px" class="grid-layout-column no-label">
+                <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="start center" class="mt-24">
+                    <div class="extra-bold title-text dark-text grey-100 lh-24" fxLayoutAlign="start center">
+                        2. SMS Template
+                    </div>
+                    <div class="pt-4">
+                        <span class="pt-2" appTooltip [tooltipTemplate]="
+              'As per TRAI regulations, we require your content template ID as  Registered on the DLT operator portal against your new template'
+            ">
+                        <img class="ico-extra-small cursor-pointer" src="assets/images/svg/ico-info.svg" alt="" />
+                    </span>
+                    </div>
+                </div>
+
+                <div fxLayout="column" class="ml-22 dropdown-sms">
+                    <div fxLayout="column" fxLayoutGap="4px" class="cstm-input">
+                        <div class="cstm-input__label mini-text  lh-16">SMS Type*</div>
+                        <app-dropdown placeholder="Select" [value]="selectedTypeCategory" [options]="categoryTypeList"
+                            (handleChange)="selectTypeCategory($event)">
+                        </app-dropdown>
+                        <!-- <div class="cstm-input__message error" *ngIf="smsTempId?.length > 0 && smsTempId?.length < 12">(handleChange)="selectCategory($event)"
+                            <span>Minimum 12 and Maximum 19 character are required</span>
+                        </div>  -->
+
+                    </div>
+                </div>
+
+                <div fxLayout="column" class="ml-22">
+                    <div fxLayout="column" fxLayoutGap="4px" class="cstm-input">
+                        <div class="cstm-input__label mini-text lh-16">
+                            SMS Template ID*
+                        </div>
+                        <input type="text" [(ngModel)]="smstempId" (ngModelChange)="validateCharNum($event)"
+                            class="placeholder" placeholder="Enter Template ID provided by the DLT Platform"
+                            minlength="12" maxlength="19" autocomplete="off" />
+                        <div class="cstm-input__message error"
+                            *ngIf="smstempId?.length > 0 && smstempId?.length < 12 || smstempId?.length>20">
+                            <span>Minimum 12 and Maximum 19 character are required</span>
+                        </div>
+                    </div>
+                </div>
+                <div fxLayout="column" class="ml-22 dropdown-sms">
+                    <div fxLayout="column" fxLayoutGap="4px" class="cstm-input">
+                        <div class="cstm-input__label mini-text  lh-16">SMS Language</div>
+                        <app-dropdown placeholder="Select" [value]="selectedSmsLanguage" [options]="smsLanguageList"
+                            (handleChange)="SmsLanguageSelected($event)">
+                        </app-dropdown>
+                    </div>
+                </div>
+                <div fxLayout="column" class="ml-22">
+                    <div fxLayout="column" fxLayoutGap="4px" class="cstm-textarea">
+                        <div class="cstm-input__label mini-text lh-16">
+                            SMS Template Text*
+                        </div>
+                        <textarea id="smstextarea" (keyup)="autogrowtextArea()" #smstextarea class="resizer"
+                            [(ngModel)]="smstempText" (ngModelChange)="validateCharNum($event)" name="description"
+                            placeholder="Enter SMS Approved by DLT Platform" rows="1" minlength="1"
+                            maxlength="1000"></textarea>
+                        <div class="cstm-textarea__message error"
+                            *ngIf="smstempText?.length > 0 && smstempText?.length < 1 || smstempText?.length>1001">
+                            <span>Minimum 1 and Maximum 1000 character are required</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-modal-action">
+        <div fxLayout="row" fxLayoutGap="12px" fxLayoutAlign="end end">
+            <button type="button" (click)="onClose()" class="large-secondary-button">Cancel</button>
+            <button type="button" [disabled]="!saveButtonEnabled" (click)="saveSMSTemplate()"
+                class="large-primary-button">Save</button>
+        </div>
+    </div>
+</div>

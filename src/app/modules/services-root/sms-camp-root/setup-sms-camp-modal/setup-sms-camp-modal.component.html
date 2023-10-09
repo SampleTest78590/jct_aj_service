@@ -1,0 +1,273 @@
+<div fxLayout="column" class="setup-sms-camp-modal">
+  <div fxLayout="row" fxLayoutAlign="space-between center" class="header-modal-action">
+    <h2 class="lh-28">Setup SMS Campaign</h2>
+    <button class="tertiary-button-icon close-btn ico-close-right-top" (click)="onCancel()">
+      <img src="assets/images/svg/ico-close-blue.svg" alt="close" />
+    </button>
+  </div>
+
+  <div class="content-modal-action modal-scrollable-content pr-8">
+    <div fxLayout="column">
+      <div class="sub-header mb-12 lh-20 grey-80 bold fs-14">
+        Reach your audience with easy-to-use SMS campaign setup
+      </div>
+      <div class="mb-24">
+        <div class="grid-layout-row-wrap-2n">
+          <div fxLayout="row" fxLayoutGap="20px" fxFlex="100" class="no-padding" fxLayoutAlign="space-between stretch">
+            <div fxLayout="row" fxLayoutGap="16px" fxFlex="100" fxLayoutAlign="space-between stretch"
+              class="radio-options-container grid-layout-row-wrap-2n">
+              <div class="radio-button" fxLayout="row" fxLayoutAlign="start start">
+                <label class="cstm-radio" [ngClass]="{ checked: smsCampaignType == 1 }">
+                  <input value="1" type="radio" name="inviteMember" [checked]="smsCampaignType == 1"
+                    [(ngModel)]="smsCampaignType" />
+                </label>
+                <div>
+                  <div class="" [ngClass]="smsCampaignType == 1 ? 'grey-100' : 'body-text'">Schedule Campaign</div>
+                  <div class="mini-text mt-4 grey-70 lh-16">
+                    Effortlessly schedule SMS campaigns and reach your audience
+                    effectively with your specified date & time
+                  </div>
+                </div>
+              </div>
+
+              <div class="radio-button" fxLayout="row" fxLayoutAlign="start start">
+                <label class="cstm-radio" [ngClass]="{ checked: smsCampaignType == 2 }">
+                  <input value="2" type="radio" name="inviteMember" [checked]="smsCampaignType == 2"
+                    [(ngModel)]="smsCampaignType" (ngModelChange)="getAPIKey()" />
+                </label>
+                <div>
+                  <div class="" [ngClass]="smsCampaignType == 2 ? 'grey-100' : 'body-text'">On Demand</div>
+                  <div class="mini-text mt-4 grey-70 lh-16">
+                    Instantly send on-demand SMS and connect with your
+                    recipients instantly via API
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div fxLayout="column" fxLayoutGap="16px" class="mb-12" *ngIf="smsCampaignType == 2">
+        <div class="camp-title-one">API Key Configuration</div>
+        <div fxLayout="column" fxLayoutGap="12px" *ngIf="!apiKeyAvailable">
+          <div class="lh-20">
+            You can use JIOCX API to send SMS on-demand using your favorite
+            programming language.
+          </div>
+          <div class="lh-20">You have not generated an API Key</div>
+        </div>
+        <div class="api-conf-text" *ngIf="apiKeyAvailable">
+          An API Key has been generated, If you wish to reset API key, click the
+          button below
+        </div>
+        <div>
+          <button type="button" class="medium-secondary-button" (click)="routetoAPISetting()">
+            <span class="extra-bold">Go to API Settings</span>
+          </button>
+        </div>
+      </div>
+      <ng-container *ngIf="smsCampaignType == 1">
+        <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="start center">
+          <div class="camp-title-one" fxLayoutAlign="start center">Date</div>
+          <span class="pt-2" appTooltip [tooltipTemplate]="
+              'Select Dates between which you want to run a Campaign'
+            " tooltipPosition="right">
+            <img class="ico-extra-small cursor-pointer" src="assets/images/svg/ico-info.svg" alt="" />
+          </span>
+        </div>
+        <div fxLayout="row" class="mt-12" fxLayoutGap="16px">
+          <div class="cstm-input position-relative date-container" fxFlex="50">
+            <div class="cstm-input__label mini-text grey-80 mb-4">Start Date</div>
+            <input readonly type="text" placeholder="Select Date" #startDateSMS class="date-input"
+              (click)="openDatePickerSMS = true" [(ngModel)]="sDateSMS" />
+            <div class="ico-right img-toggle" aria-label="Clear">
+              <img class="cursor-pointer" src="assets/images/svg/ico-calendar.svg" alt="" #startDateSMS
+                (click)="openDatePickerSMS = true" />
+            </div>
+
+            <ng-container *ngIf="openDatePickerSMS">
+              <app-calendar-view [open]="true" [type]="'single'" [firstDate]="sDateSMS" [min]="validatedMinDateSMS"
+                [anchorEl]="startDateSMS" (getValues)="getDates($event, 'smsSDate')"
+                (closeCalendarCb)="onCalendarClose('smsSDate')">
+              </app-calendar-view>
+            </ng-container>
+          </div>
+          <div class="cstm-input position-relative date-container" fxFlex="50">
+            <div class="cstm-input__label mini-text grey-80 mb-4">End Date</div>
+            <input readonly type="text" placeholder="Select Date" #endDateSMS class="date-input"
+              (click)="openEndDatePickerSMS = true" [(ngModel)]="eDateSMS" />
+            <div class="ico-right img-toggle" aria-label="Clear">
+              <img class="cursor-pointer" src="assets/images/svg/ico-calendar.svg" alt="" #endDateSMS
+                (click)="openEndDatePickerSMS = true" />
+            </div>
+
+            <ng-container *ngIf="openEndDatePickerSMS">
+              <app-calendar-view [open]="true" [type]="'single'" [firstDate]="eDateSMS"
+                [min]="sDateSMS ? sDateSMS : validatedMinDateSMS" [anchorEl]="endDateSMS"
+                (getValues)="getDates($event, 'smsEDate')" (closeCalendarCb)="onCalendarClose('smsEDate')">
+              </app-calendar-view>
+            </ng-container>
+          </div>
+        </div>
+        <div fxLayout="column" class="mt-24">
+          <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="start center">
+            <div class="camp-title-one" fxLayoutAlign="start center">
+              Active Days
+            </div>
+            <span class="pt-4" appTooltip [tooltipTemplate]="
+                'Select the Days on which the campaign is active'
+              " tooltipPosition="right">
+              <img class="ico-extra-small cursor-pointer" src="assets/images/svg/ico-info.svg" alt="" />
+            </span>
+          </div>
+          <div fxLayout="row wrap" class="grid-layout-row-wrap-5n  mt-12">
+            <div>
+              <label class="cstm-checkbox" [ngClass]="{ checked: allDaysCheckedSMS }"
+                [class.disabled]="allDaysDisabledSMS">
+                <input type="checkbox" (change)="allDaysDisabledSMS ? '' : allDaysCheckedChange()" />
+                All
+              </label>
+            </div>
+
+            <div *ngFor="let day of daysCheckboxSMS; let i = index">
+              <label class="cstm-checkbox" [ngClass]="{ checked: day.checked }" [class.disabled]="day.disabled">
+                <input type="checkbox" [(ngModel)]="day.checked" (change)="day.disabled ? '' : onDaysCheckboxChange()"
+                  name="chk{{ i }}" />
+                {{ day.name }}
+              </label>
+            </div>
+            <!-- </ng-container> -->
+          </div>
+        </div>
+        <div class="mt-24">
+          <div fxLayout="row" class="mb-12" fxLayoutGap="4px" fxLayoutAlign="start center">
+            <div class="camp-title-one" fxLayoutAlign="start center">Time</div>
+            <span class="pt-4" appTooltip [tooltipTemplate]="
+                'Select the Time between which your campaign will run'
+              " tooltipPosition="right">
+              <img class="ico-extra-small cursor-pointer" src="assets/images/svg/ico-info.svg" alt="" />
+            </span>
+          </div>
+          <div fxLayout="row">
+            <div class="cstm-input position-relative mr-16 time-container" fxFlex="30">
+              <div class="cstm-input__label mini-text mb-4 position-relative">
+                <span class="mr-5">From</span>
+                <span class="pt-4 cus-pr" appTooltip [tooltipTemplate]="'15 mins post current time allowed'">
+                  <img class="ico-extra-small cursor-pointer" src="assets/images/svg/ico-info.svg" alt="" />
+                </span>
+              </div>
+              <input class="time-ico-cls" type="text" placeholder="Select Time" name="fTimeSMS" [(ngModel)]="fTimeSMS"
+                readonly #startTimeSMS (click)="openSTimePickerSMS=true" />
+              <div class="ico-right img-toggle" aria-label="Clear">
+                <img class="cursor-pointer" src="assets/images/svg/ico-timepicker.svg" alt="" #startTimeSMS
+                  (click)="openSTimePickerSMS=true" />
+              </div>
+
+              <ng-container *ngIf="openSTimePickerSMS">
+                <app-time-view [open]="true" [anchorEl]="startTimeSMS" (closeTimeCb)="onTimeClose('fTimeSMS')"
+                  (getValues)="getTimepicker($event,'fTimeSMS')"
+                  [startImmediatelyFlag]="sDateSMS == nowSMS ? false : true" [selectedHour]="startObjSMS.hour"
+                  [selectedMinutes]="startObjSMS.minutes" [selectedFormat]="startObjSMS.format">
+                </app-time-view>
+              </ng-container>
+            </div>
+            <div class="cstm-input position-relative time-container" fxFlex="30">
+              <div class="cstm-input__label mini-text mb-4">To</div>
+              <input readonly type="text" class="time-ico-cls" placeholder="Select Time" name="tTimeSMS"
+                [(ngModel)]="tTimeSMS" autocomplete="off" #endTimeSMS (click)="openTTimePickerSMS=true" />
+              <div class="ico-right img-toggle" aria-label="Clear">
+                <img class="cursor-pointer" src="assets/images/svg/ico-timepicker.svg" alt="" #endTimeSMS
+                  (click)="openTTimePickerSMS=true" />
+              </div>
+              <ng-container *ngIf="openTTimePickerSMS">
+                <app-time-view [open]="true" [anchorEl]="endTimeSMS" (closeTimeCb)="onTimeClose('tTimeSMS')"
+                  (getValues)="getTimepicker($event,'tTimeSMS')" [startImmediatelyFlag]="true"
+                  [selectedHour]="endObjSMS.hour" [selectedMinutes]="endObjSMS.minutes"
+                  [selectedFormat]="endObjSMS.format">
+                </app-time-view>
+              </ng-container>
+            </div>
+          </div>
+          <!-- <div class="divider-line mt-24"></div> -->
+          <!-- future release UI -->
+          <!-- <div fxLayout="column" fxLayoutGap="24px" class="mt-24">
+            <div fxLayout="column">
+              <div fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="camp-title-one">Advanced Settings</div>
+                <div class="lh-20 pt-4">
+                  <label class="custom-switch">
+                    <input type="checkbox" name="toggles" />
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="mt-12 subtitle-2">
+                                You can choose if you want to retry calls to numbers which did not pick in the first attempt.
+                            </div> -->
+          <!-- </div>
+            <div>
+              <ng-container>
+                <div class="light-primary-grey-80">Require URL Shortening?</div>
+                <div fxLayout="row" class="mt-8" fxLayoutGap="16px">
+                  <label class="cstm-radio">
+                    <input type="radio" name="noOfRetries" />
+                    <span>Yes</span>
+                  </label>
+                  <label class="cstm-radio">
+                    <input type="radio" name="noOfRetries1" />
+                    <span>No</span>
+                  </label>
+                </div>
+              </ng-container>
+            </div>
+            <div>
+              <ng-container>
+                <div class="light-primary-grey-80">Enable Click Tracking</div>
+                <div fxLayout="row" class="mt-8" fxLayoutGap="16px">
+                  <label class="cstm-radio">
+                    <input type="radio" name="tracking" />
+                    <span>Yes</span>
+                  </label>
+                  <label class="cstm-radio">
+                    <input type="radio" name="tracking1" />
+                    <span>No</span>
+                  </label>
+                </div>
+              </ng-container>
+            </div>
+            <div>
+              <div
+                fxLayout="row"
+                fxLayoutGap="8px"
+                fxLayoutAlign="start center"
+              >
+                <div class="cstm-input light-primary-grey-80" fxFlex="100">
+                  <div class="cstm-input__label mini-text mb-4 lh-16">
+                    Click Tracking Callback URL
+                  </div>
+                  <input
+                    placeholder="Enter Duration"
+                    value="https://hrplatformqa.ril.com/jiocloud/"
+                  />
+                </div>
+              </div>
+            </div>
+            <div>&nbsp;</div>
+          </div> -->
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <div class="footer-modal-action">
+    <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="end end">
+      <button type="button" class="large-secondary-button" (click)="onCancel()">
+        Cancel
+      </button>
+      <button *ngIf="smsCampaignType == 1" [disabled]="!(sDateSMS && eDateSMS && fTimeSMS && tTimeSMS)" type="button"
+        class="large-primary-button" (click)="proceedSMSContent()">Proceed</button>
+      <button *ngIf="smsCampaignType == 2" type="button" [disabled]="!apiKeyAvailable" class="large-primary-button"
+        (click)="proceedSMSContent()">Proceed</button>
+    </div>
+  </div>
+</div>

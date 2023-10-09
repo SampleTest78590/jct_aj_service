@@ -1,0 +1,88 @@
+.lead-list-details-container .edit-height {
+  width: 24px !important;
+  height: 28px !important;
+}
+
+.lead-list-details-container .info-mouse-hover .custom-mat-card .text-black {
+  color: var(--light-primary-grey-100);
+}
+
+.lead-list-details-container .dot-menu-dropdown .dropdown-content {
+  top: 30px;
+  right: 22px;
+  border-radius: 8px;
+  background-color: var(--white);
+}
+
+.lead-list-details-container .custom-mat-card .manage-card-title {
+  font-weight: 700 !important;
+  font-size: var(--font-size-sub-title) !important;
+  line-height: 24px !important;
+  color: var(--light-primary-grey-100);
+}
+
+
+.lead-list-details-container .search-container {
+  padding: 10px 12px !important;
+}
+
+.lead-list-details-container .search-input {
+  font-size: 14px !important;
+}
+
+.lead-list-details-container .custom-mat-card .manage-description {
+  font-weight: 500 !important;
+  line-height: 20px !important;
+  font-size: var(--font-size-body) !important;
+}
+
+.lead-list-details-container .custom-padding-search {
+  padding: 10px 12px;
+}
+
+.lead-list-details-container .sub-title-text {
+  line-height: 24px !important;
+}
+
+.lead-list-details-container .nodata {
+  padding: 15px !important;
+  border: 1px solid rgba(0, 0, 0, 0.12) !important
+}
+
+.lead-list-details-container .header {
+  line-height: 28px !important;
+}
+
+// .lead-list-details-container .medium-secondary-button {
+//   border: 1px solid var(--light-primary-grey-40) !important;
+// }
+
+.lead-list-details-container .ellipsis-text {
+  max-width: 150px !important;
+}
+
+// .lead-list-details-container .scrollable-content{
+//   overflow-y: auto;
+//   height:44vh;
+// }
+
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  // .clead-list-details-container .scrollable-content {
+  //   max-height: 65vh !important;
+  //   overflow: inherit !important;
+  // }
+}
+
+@media only screen and (min-width: 1920px) {
+  // .lead-list-details-container .scrollable-content {
+  //   max-height: 70vh !important;
+  //   overflow: inherit !important;
+  // }
+}
+
+@media only screen and (min-width: 1920px) {
+  // .lead-list-details-container .scrollable-content {
+  //   max-height: 70vh !important;
+  //   overflow: inherit !important;
+  // }
+}

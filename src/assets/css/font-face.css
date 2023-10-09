@@ -1,0 +1,36 @@
+@font-face {
+    font-family: 'JioType';
+    font-style: normal;
+    font-weight: 300;
+    src: local('JioType-light'), local('JioType light'), url(../fonts/JioType-Light.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'JioType';
+    font-style: italic;
+    font-weight: 300;
+    src: local('JioType-LightItalic'), local('JioType LightItalic'), url(../fonts/JioType-LightItalic.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'JioType';
+    font-style: normal;
+    font-weight: 500;
+    src: local('JioType-Medium'), local('JioType Medium'), url(../fonts/JioType-Medium.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'JioType';
+    font-style: italic;
+    font-weight: 500;
+    src: local('JioType-MediumItalic'), local('JioType MediumItalic'), url(../fonts/JioType-MediumItalic.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'JioType';
+    font-style: normal;
+    font-weight: 700;
+    src: local('JioType-Bold'), local('JioType Bold'), url(../fonts/JioType-Bold.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'JioType';
+    font-style: normal;
+    font-weight: 900;
+    src: local('JioType-Black'), local('JioType Black'), url(../fonts/JioType-Black.ttf) format('truetype');
+}

@@ -1,0 +1,125 @@
+.camp-table-report-container .search-container {
+  padding: 10px 12px !important;
+}
+
+.camp-table-report-container .search-input {
+  font-size: 14px !important;
+}
+
+.camp-table-report-container .campaign-status {
+  border-radius: 80px;
+  display: block;
+  max-width: 114px !important;
+  height: 24px;
+  line-height: 24px;
+  box-sizing: border-box;
+  // margin: 0 auto; text-align: center; 
+  margin: 0 auto;
+  text-align: center;
+
+}
+
+.camp-table-report-container .campaign-status.multi-status {
+  background: #e8faf7;
+  color: #0e5c4f !important;
+  font-size: var(--font-size-mini) !important;
+}
+
+.camp-table-report-container .mt-21 {
+  margin-top: 21px;
+}
+
+.camp-table-report-container .mt-2 {
+  margin-top: 2px;
+}
+
+.camp-table-report-container .download-bttn {
+  position: relative;
+}
+
+.camp-table-report-container .download-bttn .dropdown-content {
+  top: 45px;
+  min-width: 114px;
+}
+
+.camp-table-report-container .download-bttn .dropdown-content .menu-height {
+  line-height: 36px;
+  height: 36px;
+  text-align: center;
+  color: var(--light-primary-grey-100);
+}
+
+.camp-table-report-container .download-bttn .dropdown-content .menu-height:hover {
+  background-color: var(--light-primary-grey-20);
+}
+
+.camp-table-report-container .custom-table-content .table-user-info .ellipsis-text {
+  max-width: 100% !important;
+}
+
+.camp-table-report-container .nodata {
+  padding: 15px !important;
+  border: 1px solid rgba(0, 0, 0, 0.12) !important
+}
+
+.camp-table-report-container .report-header {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  background: var(--white);
+  z-index: 1;
+  padding-bottom: 4px;
+}
+
+// .camp-table-report-container .campaign-status {
+//   padding: 5px 10px;
+//   border-radius: 80px;
+//   display: block;
+//   max-width: 114px !important;
+//   height: 24px;
+//   line-height: 17px;
+//   box-sizing: border-box;
+//   margin: 0 auto;
+//   text-align: center;
+// }
+
+.camp-table-report-container .campaign-status.running-bg {
+  background: #E8FAF7;
+  color: #0E5C4f;
+}
+
+.camp-table-report-container .campaign-status.default-bg {
+  background: var(--light-primary-grey-20) !important;
+  color: var(--light-primary-grey-70) !important;
+}
+
+.camp-table-report-container .campaign-status.completed-bg {
+  background: var(--light-feedback-success-20) !important;
+  color: var(--light-feedback-success-80) !important;
+}
+
+.camp-table-report-container .campaign-status.scheduled-bg {
+  background: var(--light-sparkle-20) !important;
+  color: var(--light-sparkle-70) !important;
+}
+
+.camp-table-report-container .campaign-status.stop-bg {
+  background: #FCE6E7 !important;
+  color: #660209 !important;
+}
+
+.camp-table-report-container .campaign-status.paused-bg {
+  background: var(--light-marigold-midnight-20) !important;
+  color: #7F4B10 !important;
+}
+
+
+.camp-table-report-container .custom-table-content .ellipsis-text {
+  width: 120px;
+}
+
+.camp-table-report-container .refresh-ico:active {
+  -webkit-animation-name: spin;
+  -webkit-animation-duration: 500ms;
+  -webkit-animation-iteration-count: 1;
+}

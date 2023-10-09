@@ -1,0 +1,85 @@
+<div fxLayout="column" class="upload-single-root">
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="header-modal-action lh-28">
+        <h2>Add New Contact</h2>
+
+        <button class="tertiary-button-icon close-btn ico-close-right-top" (click)="onClose()">
+            <img src="assets/images/svg/ico-close-blue.svg" alt="close" />
+        </button>
+    </div>
+    <div [formGroup]="newContact" class="content-modal-action scrollable-content ">
+        <div fxLayout="column" fxLayoutGap="24px" class="grid-layout-column mt-24">
+            <div fxLayout="column" fxLayoutGap="4px" class="cstm-input">
+                <div class="cstm-input__label mini-text lh-16">First Name</div>
+                <input type="text" (keyup)="clearError()" (keypress)="validateCharNumAudio($event)"
+                    formControlName="name" placeholder="Enter First Name" minlength="3" maxlength="30"
+                    autocomplete="off" />
+                <div *ngIf="
+                newContact.controls['name'].invalid &&
+                newContact.controls['name'].touched
+                " class="cstm-input__message error">
+                    <span *ngIf="getErrorMessage('name')">{{
+                        getErrorMessage("name")
+                        }}</span>
+                </div>
+            </div>
+            <div fxLayout="column" fxLayoutGap="4px" class="cstm-input">
+                <div class="cstm-input__label mini-text lh-16">Last Name</div>
+                <input type="text" formControlName="lastname" (keypress)="validateCharNumAudio($event)" placeholder="Enter Last Name" maxlength="30"
+                    autocomplete="off" />
+            </div>
+            <div class="phone-input">
+                <div fxLayout="column" fxLayoutGap="4px">
+                    <div class="cstm-input__label mini-text lh-16">Contact Number*</div>
+                    <div class="dropdown-mg" class="mr-4">
+                        <app-dropdown fxFlex="17" placeholder="+91" class="dropdown-pad" [options]="code"></app-dropdown>
+                        <div class="cstm-input" fxFlex="100">
+                            <input type="text" (keypress)="onlyNumberKey($event)" formControlName="number"
+                                maxlength="10" minlength="10" class="inputMobile" placeholder="Enter Contact Number" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- </div> -->
+            <!-- </div> -->
+            <div fxLayout="column" fxLayoutGap="4px" class="cstm-input">
+                <div class="cstm-input__label mini-text lh-16">Email ID</div>
+                <input type="text" (keyup)="clearError()" [pattern]="emailvalidation" formControlName="email"
+                    placeholder=" Enter Email ID" maxlength="30" autocomplete="off" />
+                <div *ngIf="
+                newContact.controls['email'].invalid &&
+                newContact.controls['email'].touched
+                " class="cstm-input__message error">
+                    <span *ngIf="getErrorMessage('email')">{{
+                        getErrorMessage("email")
+                        }}</span>
+                </div>
+            </div>
+            <div fxLayout="column" fxLayoutGap="4px" class="cstm-input">
+                <div class="cstm-input__label mini-text lh-16">Company</div>
+                <input type="text" formControlName="company" placeholder="Enter Company Name" maxlength="30"
+                    autocomplete="off" />
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-modal-action">
+        <ng-container>
+            <div fxLayout="row" fxLayoutGap="12px" fxLayoutAlign="space-between center">
+                <div>
+                    <button type="button" class="large-secondary-button" (click)="onClose()">
+                        Cancel
+                    </button>
+                </div>
+                <div fxLayoutGap="12px">
+                    <button type="button" [disabled]="this.newContact.invalid" class="large-secondary-button"
+                        (click)="saveSingleLead('SaveAdd')">Save & Add another</button>
+                    <button type="button" [disabled]="this.newContact.invalid" class="large-primary-button"
+                        (click)="saveSingleLead('Save')">save
+                    </button>
+                </div>
+
+            </div>
+        </ng-container>
+    </div>
+</div>

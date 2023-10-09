@@ -1,0 +1,112 @@
+<div fxFlex="100" fxLayoutAlign="space-between stretch" fxLayout="column" class="lead-list-details-container">
+  <div fxLayout="column" fxLayoutGap="16px">
+    <div fxLayout fxLayoutAlign="space-between center">
+      <div fxLayout="row" fxLayout="start center" fxLayoutGap="12px" class="lh-28">
+        <div (click)="navigateToManageContact()"> <img src="assets/images/svg/ico-back.svg" alt=""
+            class="ico-small cursor-pointer" /></div>
+        <label class="header">{{leadListName}}</label>
+
+        <img src="assets/images/svg/ico-edit-light-grey.svg" alt="" class="edit-height" />
+      </div>
+      <div>
+        <button type="button" class="medium-primary-button" (click)="openSingleLead()" [disabled]="deafultLead == 'true'">
+          <img src="assets/images/svg/ico-plus-white.svg" class="mr-8" alt="" />
+          <span class="extra-bold">Add New Contact</span>
+        </button>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="mt-12">
+      <label class="sub-title-text ml-8 bold">Total Records Found({{ total ? total : "0" }})</label>
+      <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="start center">
+        <div fxFlex="312px" class="search-align">
+          <app-custom-search [label]="'Search by Contact Name'" IconSrc="assets/images/svg/ico-search-grey.svg"
+            (outputText)="outputSearch($event)"></app-custom-search>
+        </div>
+        <button type="button" class="medium-secondary-button disabled">
+          <img src="assets/images/svg/ico-filter-grey.svg" class="ico-small mr-8" alt="" />
+          <span class="grey-80">Filter</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="flex-1">
+    <div class="custom-table mt-12" *ngIf="!!ELEMENT_DATA?.length">
+      <div fxLayout="row" fxLayoutAlign="space-between start" class="custom-table-header-content">
+        <div class="custom-table-header" fxFlex="5">
+          <label class="cstm-checkbox" [class.disabled]="true">
+            <input type="checkbox" disabled/></label>
+            <!--[ngClass]="{ checked: isselectAll }" (change)="SelectAllContact($event)"  -->
+        </div>
+        <div class="custom-table-header cursor-pointer" fxFlex="15" (click)="sortData('leadListFirstName')">
+          <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
+            <div>First Name</div>
+            <img src="assets/images/svg/ico-swap-vert.svg" class="ico-extra-small" alt="" />
+          </div>
+        </div>
+        <div class="custom-table-header cursor-pointer" fxFlex="15" (click)="sortData('leadListLastName')">
+          <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
+            <div>Last Name</div>
+            <img src="assets/images/svg/ico-swap-vert.svg" class="ico-extra-small" alt="" />
+          </div>
+
+        </div>
+        <div class="custom-table-header cursor-pointer" fxFlex="15">
+          Contact Number
+        </div>
+        <div class="custom-table-header cursor-pointer" fxFlex="22">
+          Email ID
+        </div>
+        <div class="custom-table-header cursor-pointer" fxFlex="18">
+          Company
+        </div>
+        <div class="custom-table-header text-center" fxFlex="10">Action</div>
+      </div>
+      <div [style.overflow]="'auto'" [style.min-height.vh]="'26'" class="scrollable-content" *ngIf="!!ELEMENT_DATA?.length">
+        <div fxLayout="row" fxLayoutAlign="space-between center" class="custom-table-content"
+          *ngFor="let element of dataSource; let i = index">
+          <div class="contact-list-details" fxFlex="5" fxLayout="column">
+            <label class="cstm-checkbox" [class.disabled]="true">
+              <input type="checkbox"  disabled/></label>
+              <!--  [ngClass]="{ checked: element.checked }"(click)="checkSingleElement(element)"-->
+          </div>
+          <div class="contact-list-details" fxFlex="15">
+            <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="start center">
+              <div class="count-text">{{ 1 + i + ((pageIndex - 1) * pageSize) }}.</div>
+              <!-- <div>{{element.leadFirstName|| "-"}}</div> -->
+              <span class="ellipsis-text" appTooltip [tooltipTemplate]="element.leadFirstName">
+                {{element.leadFirstName|| "-"}} </span>
+            </div>
+
+          </div>
+          <div class="contact-list-details" fxFlex="15">
+            <span class="ellipsis-text" appTooltip [tooltipTemplate]="element.leadLastName"> {{element.leadLastName||
+              "-"}} </span>
+          </div>
+          <div class="contact-list-details" fxFlex="15">
+            {{element.leadMobileNo || "-"}}
+          </div>
+          <div class="contact-list-details" fxFlex="22">
+            <!-- <span class="ellipsis-text" appTooltip [tooltipTemplate]="'-'">{{"-"}}</span> -->
+            {{"-"}}
+          </div>
+          <div class="contact-list-details" fxFlex="18">
+            <!-- <span class="two-line-ellipsis" appTooltip [tooltipTemplate]="'-'">{{"-"}}</span> -->
+            {{"-"}}
+          </div>
+          <div class="contact-list-details text-center" fxFlex="10" fxLayout="column" fxLayoutAlign="center center">
+            <img src="assets/images/svg/ico-dot-menu.svg" alt="ico-menu" class="ico-extra-small" />
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    <div *ngIf="!!!ELEMENT_DATA?.length && !initialflag" class="nodata text-center">
+      No Data Found
+    </div>
+  </div>
+
+  <div class="pagination" fxLayoutAlign="end end" *ngIf="total > 7">
+    <app-custom-pagination [pageIndex]="pageIndex" [total]="total" [pageSize]="7" [pageSizeOptions]="[5, 10, 20]"
+      (returnPage)="getCurrentPage($event)"></app-custom-pagination>
+  </div>
+</div>

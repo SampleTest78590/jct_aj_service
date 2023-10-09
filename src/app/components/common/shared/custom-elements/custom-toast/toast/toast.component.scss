@@ -1,0 +1,90 @@
+@import '../../styles/mixins/text';
+
+.toast-container {
+    display: flex;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 24px;
+    z-index: 999;
+
+    &.bottom-left,
+    &.top-left {
+        justify-content: flex-start;
+    }
+
+    &.bottom-center,
+    &.top-center {
+        justify-content: center;
+    }
+
+    &.bottom-right,
+    &.top-right {
+        justify-content: flex-end;
+    }
+
+    &.top-left,
+    &.top-center,
+    &.top-right {
+        top: 0;
+        bottom: auto;
+    }
+
+    .toast-backdrop {
+        opacity: 0.99;
+
+        .toast-message-container {
+            background-color: rgba(0, 0, 0, 0.65);
+            // background-color: var(--light-primary-grey-80);
+            border-radius: 24px;
+            backdrop-filter: blur(24px);
+            min-height: 30px;
+            max-height: 120px;
+            overflow: hidden;
+            padding: 16px;
+            transition: transform cubic-bezier(0.35, 0, 0.8, 1) 500ms;
+            transform: translate(-2400%);
+
+            .toast-message {
+                display: flex;
+                align-items: center;
+                overflow: hidden;
+
+                .toast-icon {
+                    display: flex;
+                    // padding: 8px 0;
+
+                    img {
+                        width: 32px;
+                        height: 32px;
+
+                        &.default,
+                        &.info {
+                            filter: brightness(0) saturate(100%) invert(74%)
+                                sepia(53%) saturate(479%) hue-rotate(170deg)
+                                brightness(101%) contrast(102%);
+                        }
+                    }
+                }
+
+                .toast-title-description-container {
+                    flex: 1;
+                    margin-left:15px;
+                    display: flex;
+                    flex-direction: column;
+
+                    .toast-title {
+                        @include applyTextStyle('text-body-s-bold');
+                        color: var(--white);
+                    }
+
+                    .toast-description {
+                        @include applyTextStyle('text-body-xs');
+                        color: var(--light-primary-grey-20);
+                    }
+                }
+            }
+        }
+    }
+}

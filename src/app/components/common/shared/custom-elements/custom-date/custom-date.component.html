@@ -1,0 +1,44 @@
+<div class="date-container">
+    <label class="cstm-input">
+        <div class="cstm-input__label">{{ title }}</div>
+
+        <div #calendarElem class="no-action-container">
+            <input
+                type="text"
+                class="date-text"
+                style="margin-left: 0"
+                [value]="day"
+                placeholder="dd"
+                [disabled]="inputDisabled"
+            />
+            <span class="date-separator"></span>
+            <input
+                type="text"
+                class="date-text"
+                [value]="month"
+                placeholder="mm"
+                [disabled]="inputDisabled"
+            />
+            <span class="date-separator"></span>
+            <input
+                type="text"
+                class="date-text"
+                [value]="year"
+                placeholder="yyyy"
+                [disabled]="inputDisabled"
+            />
+            <div class="overlay-elem" (click)="openCalendar()"></div>
+        </div>
+    </label>
+
+    <ng-container *ngIf="openDatePicker">
+        <app-calendar-view
+            [open]="true"
+            [type]="'single'"
+            [firstDate]="_selectedDate"
+            [anchorEl]="calendarElem"
+            (getValues)="getDates($event)"
+            (closeCalendarCb)="onCalendarClose()"
+        ></app-calendar-view>
+    </ng-container>
+</div>

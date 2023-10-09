@@ -1,0 +1,16 @@
+<ul id="accordion" class="web-accordion" >
+  <li *ngFor="let menu of menus; let i = index" 
+    [class.active]="menu.active">
+    <div class="menu" (click)="toggle(i)">
+      <!-- <i [class]="menu.iconClass"></i> -->
+      {{ menu.name }}
+      <div class="ico-status-change ico-small ico-plus-minus"></div>
+    </div>
+    <ul class="submenu" #submenu 
+      [style.height.px]="menu.active ? submenu.scrollHeight : 0">
+      <li *ngFor="let submenu of menu.submenu">
+        <a [href]="submenu.url">{{ submenu.name }}</a>
+      </li>
+    </ul>
+  </li>
+</ul>

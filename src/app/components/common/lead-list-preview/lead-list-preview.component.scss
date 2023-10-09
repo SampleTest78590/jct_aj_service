@@ -1,0 +1,42 @@
+.lead-list-preview-root .custom-table .custom-table-header-content .custom-table-header{
+    border-radius: 0!important;
+}
+.lead-list-preview-root .custom-table .custom-table-header-content .custom-table-header:first-child{
+    border-radius: 8px 0 0 0 !important;
+}
+
+.lead-list-preview-root .custom-table .custom-table-header-content .custom-table-header:last-child{
+    border-radius: 0 8px 0 0 !important;
+}
+
+.lead-list-preview-root .custom-table .custom-table-content{
+    padding: 0!important;
+    line-height: 48px;
+    width: calc(100% - 0px) !important;
+}
+.lead-list-preview-root .custom-table .custom-table-content .separator-right{
+    border-right: 1px solid var(--light-text-grey-40);
+    height: 48px;
+}
+
+.lead-list-preview-root .fs-14{
+    font-size: 14px !important;
+    color: var(--light-primary-grey-80);
+}
+
+.lead-list-preview-root .tertiary-button-icon:hover img {
+    filter: none!important;
+}
+
+
+.lead-list-preview-root .header-modal-action{
+    padding: 12px 24px 12px 32px !important;
+}
+
+.lead-list-preview-root .mr-minus-1{
+    margin-right: -1px;
+}
+
+.lead-list-preview-root .custom-table .contact-list-details{
+    padding: 0 16px;
+}

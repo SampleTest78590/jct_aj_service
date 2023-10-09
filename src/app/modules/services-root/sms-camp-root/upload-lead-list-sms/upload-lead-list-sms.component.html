@@ -1,0 +1,177 @@
+<div fxLayout="column" class="upload-lead-root">
+  <div fxLayout="row" fxLayoutAlign="space-between center" class="header-modal-action ">
+    <h2 class="lh-28">Upload Lead List</h2>
+    <button class="tertiary-button-icon close-btn ico-close-right-top" (click)="onCancel()">
+      <img src="assets/images/svg/ico-close-blue.svg" alt="close" />
+    </button>
+  </div>
+  <div class="scrollable-content content-modal-action">
+    <div fxLayout="column" [style.overflow]="'auto'" [style.max-height.vh]="'79'" class="scrollable-content p-35">
+      <div fxLayout="column" fxLayoutGap="16px" class="grid-layout-column no-label">
+        <div class="extra-bold title-text dark-text grey-100 lh-24">1. Fill Details</div>
+        <div fxLayout="column" class="pl-22">
+          <div fxLayout="column" fxLayoutGap="4px" class="cstm-input">
+            <div class="cstm-input__label mini-text  lh-16">Lead List Name*</div>
+            <input type="text" class="placeholder" placeholder="Enter Lead List Name" [(ngModel)]="leadName"
+              maxlength="30" autocomplete="off" (keypress)="validateCharNumLead($event)" />
+            <div class="cstm-input__message error" *ngIf="leadName?.length > 0 && leadName?.length < 3">
+              <span>Minimum 3 character are required</span>
+            </div>
+          </div>
+        </div>
+
+        <div fxLayout="column" class="pl-22">
+          <div fxLayout="column" fxLayoutGap="4px" class="cstm-textarea">
+            <div class="cstm-input__label mini-text lh-16">Description</div>
+            <textarea name="description" class="placeholder resizer" placeholder="Add your description here"
+              [(ngModel)]="leadDescription" rows="1" maxlength="100"></textarea>
+          </div>
+        </div>
+
+        <div fxLayout="column" fxLayoutGap="8px">
+          <div class="extra-bold title-text dark-text mt-16  grey-100 lh-24">2. Select your file</div>
+          <div class="body-text pl-22">
+            <div fxLayout="column" class="mini-text grey-70 lh-16" fxFlex="100">
+              Before you choose your file below, make sure your file is ready to
+              be imported.You can download the Customized Lead List template.
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="15px" class="resize-btn pl-22">
+            <button fxLayout="row" fxLayoutGap="10px" type="button" mat-flat-button
+              class="medium-secondary-button mt-8 mb-16" (click)="downloadSample()">
+              <img src="assets/images/svg/ico-download.svg" class="ico-small mr-8" alt="" />
+              <span>Download Sample Template</span>
+            </button>
+          </div>
+        </div>
+
+        <div fxLayout="column" fxLayoutGap="8px" class="no-margin">
+          <div *ngIf="uploadDragDrop">
+            <app-attach-drag-drop (filesDropped)="readyToUpload($event)" (viewClicked)="openFile($event)"
+              (filesDeleted)="removeFile($event)" [existingFilesArray]="existingFileArray" [fileSizeLimit]="2000000"
+              [multiple]="false" [maxUploadLimit]="1" [attachmentTextLink]="'Click to Upload'"
+              [attachmentText]="'or Drag and Drop your file'" [acceptedFormats]="acceptedFormats"
+              [validationMsg]="validationMsg" [filesizeText]="false">
+            </app-attach-drag-drop>
+          </div>
+        </div>
+        <div *ngIf="!uploadDragDrop">
+          <div class="uplaod-status-popup">
+            <div fxLayout="column" fxLayoutGap="4px" class="uplaod-content">
+              <div fxLayout="column" fxLayoutGap="4px" class="uplaod-content-center">
+                <div>
+                  <img src="assets/images/svg/ico-file-uploaded.svg" class="ico-large" alt="" />
+                </div>
+                <div class="bold mini-text fs-14 grey-80">
+                  {{ attachFileName }}
+                </div>
+                <div class="mb-16">
+                  <span class="bold mini-text grey-80">file size:
+                    {{ totalSize / 1000000 | number : "1.2-2" }} MB</span>
+                </div>
+                <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="8px" class="attachment">
+                  <button type="button" [disabled]="leadlistPreview.length === 0"
+                    class="small-secondary-button preview-btn" (click)="openUploadPreview()">
+                    <span>Preview</span>
+                  </button>
+                  <button class="tertiary-negative-button cursor-pointer" (click)="removeAttachment()">Remove
+                    file</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+      <div fxLayout="column" class="mt-8 lh-16" *ngIf="!uploadDragDrop && !preKycFlag">
+        <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="4px">
+          <div> <img src="assets/images/svg/ico-warning.svg" alt=""></div>
+          <div class="warning-text bold mini-text ">Since KYC is pending,
+            please note that your lead list cannot be used while creating a new campaign
+          </div>
+        </div>
+
+      </div>
+
+
+
+      <div fxLayout="column" fxLayoutGap="5px" *ngIf="summarydetail && !uploadDragDrop" class="mt-24">
+        <div class="sub-title-text extra-bold grey-100 lh-20 mb-16">Summary of scanned file</div>
+        <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="center stretch"
+          class="separator-around border-radius-10 p-15">
+          <div fxLayout="column" fxFlex="33" fxLayoutAlign="center center" fxLayoutGap="4px">
+            <div class="mini-text grey-70 lh-16 bold">
+              Leads Uploaded
+            </div>
+            <div class="sub-title-text grey-100 extra-bold lh-24">{{ validNumber }}</div>
+          </div>
+          <div class="separator-right">&nbsp;</div>
+          <div fxLayout="column" fxFlex="33" fxLayoutAlign="center center" fxLayoutGap="4px">
+            <div class="mini-text grey-70 lh-16 bold">
+              Invalid Leads
+            </div>
+            <div class="sub-title-text error-50 extra-bold lh-24">{{ invalidNumber }}</div>
+          </div>
+          <div class="separator-right">&nbsp;</div>
+          <div fxLayout="column" fxFlex="33" fxLayoutAlign="center center" fxLayoutGap="4px">
+            <div class="mini-text grey-70 lh-16 bold">
+              Duplicate Leads
+            </div>
+            <div class="sub-title-text grey-100 extra-bold lh-24">{{ duplicateNumber }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- <div fxLayout="column" fxLayoutGap="5px" *ngIf="summarydetail && !uploadDragDrop" class="mt-25">
+        <div class="extra-bold mb-16 grey-100">Summary of scanned file</div>
+        <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="space-between"
+          class="separator-around border-radius-10 summary-border">
+          <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="4px">
+            <div class="grey-70  mini-text">
+              Leads Uploaded
+            </div>
+            <div class="sub-title-text grey-100 extra-bold">{{ validNumber }}</div>
+          </div>
+          <div class="separator-right">&nbsp;</div>
+          <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="4px">
+            <div class="grey-70  mini-text">
+              Invalid Leads
+            </div>
+            <div class="sub-title-text error-50 extra-bold">{{ invalidNumber }}</div>
+          </div>
+          <div class="separator-right">&nbsp;</div>
+          <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="4px">
+            <div class="grey-70  mini-text">
+              Duplicate Leads
+            </div>
+            <div class="sub-title-text grey-100 extra-bold">{{ duplicateNumber }}</div>
+          </div>
+        </div>
+      </div> -->
+  </div>
+
+  <div class="footer-modal-action">
+    <div fxLayout="row" fxLayoutGap="12px" fxLayoutAlign="end end">
+      <button type="button" class="large-secondary-button" (click)="onCancel()">
+        Cancel
+      </button>
+      <button type="button" class="large-primary-button" (click)="UploadSubmit()"
+        [disabled]="!(leadName?.length >= 3 && this.filesToUpload.length > 0 && disabledUpload)">
+        <img src="assets/images/svg/ico-uplaod-white.svg" class="ico-small mr-8" alt="" /><span>Upload and Select</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<ng-container *ngIf="isopenPreviewUploadleadList">
+  <app-sidebar-panel [width]="'540px'" [isSidebarOpen]="isopenPreviewUploadleadList" sidebarPosition="right"
+    (sidebarState)="isopenPreviewUploadleadList=false;">
+    <div content>
+      <app-lead-list-preview [data]="leadlistPreview" [leadName]="leadName" (closeModal)="isopenPreviewUploadleadList=false">
+      </app-lead-list-preview>
+    </div>
+  </app-sidebar-panel>
+</ng-container>

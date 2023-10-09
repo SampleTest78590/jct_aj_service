@@ -1,0 +1,29 @@
+<div fxLayout="column" class="campaign-action-modal">
+    <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="8px" class="mb-20">
+        <img src="assets/images/svg/ico-alert.svg" alt="alert" />
+        <div class="header"> KYC Required for Services </div>
+        <div class="grey-sub-header"> Your step by step  process for seamless experience </div>
+    </div>
+    <div fxLayout="column" fxLayoutGap="24px" class="mt-20">
+        <div>
+            <div class=" title-text grey-100 mb-8 lh-24  extra-bold ">Why is it required?</div>
+            <div class="lh-20">According to the TRAI, we are required to have certain documents which helps us identify and work with you in 
+                case of any issues which arise in the future. You can learn more <span class="primary-text  extra-bold">here</span></div>
+        </div>
+        <div>
+            <div class=" title-text grey-100 mb-8 lh-24  extra-bold ">Which documents are required?</div>
+            <div  class="lh-20">Based on your type of your organisation. <span class="primary-text  extra-bold">Click here</span> </div>
+        </div>
+        <div>
+            <div class="title-text grey-100 mb-8 lh-24  extra-bold ">What if I don’t do KYC?</div>
+            <div  class="lh-20">If your KYC documents is not verified, you will not be able to use your lead lists 
+                for campaigns but could use our verified list for creating a test campaign.
+                You can get in touch with our<span class="primary-text"> customer support team</span> for more information 
+                you could refer the process <span class="primary-text  extra-bold">here</span>. </div>
+        </div>
+        <div fxLayout="row" fxLayoutGap="12px" fxLayoutAlign="end end" class=""> 
+            <button type="button" class="medium-secondary-button" (click)="actionModal('skip')"> Skip for now </button>
+            <button type="button" class="medium-primary-button" (click)="actionModal('proceed')">Proceed with KYC</button>
+        </div>
+    </div>
+</div>

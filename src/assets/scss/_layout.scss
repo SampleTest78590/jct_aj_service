@@ -1,0 +1,21 @@
+// define Layout structure
+.cdk-overlay-dark-backdrop {
+  background: #000000;
+}
+.cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+  opacity: 0.8;
+}
+
+// Footer Css Starts here
+
+@media only screen and (max-width: 599px) {}
+
+@media only screen and (min-width: 600px) and (max-width: 1279px) { }
+
+@media only screen and (min-width: 1280px) and (max-width: 1439px) { }
+
+@media only screen and (min-width: 1440px) and (max-width: 1919px) { }
+
+@media only screen and (min-width: 1920px) {
+
+}

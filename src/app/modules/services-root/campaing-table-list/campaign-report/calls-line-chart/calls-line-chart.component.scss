@@ -1,0 +1,17 @@
+.line-chart-root{
+  position: relative;
+}
+.line-chart-root .chart-container{
+    // height: 365px!important;
+    padding-left: 18px;
+}
+.line-chart-root canvas{
+  width: 99%!important;
+}
+.line-chart-root .charts-empty-data{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}

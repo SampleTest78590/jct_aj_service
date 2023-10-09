@@ -1,0 +1,520 @@
+<div fxLayout="column" class="campaign-root" fxLayoutAlign="space-between stretch" fxFlex="100">
+  <div fxLayout="column" fxLayoutGap="16px">
+    <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="16px">
+      <div fxLayout="column" fxFlex="75">
+        <!-- <span *ngIf="!welcomeflag"> <app-breadcrumb-card [breadcrumb]="breadcrumbJson"></app-breadcrumb-card></span> -->
+
+        <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
+          <span class="header two-line-ellipsis">{{ CampaignData?.CampName || "-" }}</span>
+          <img src="assets/images/svg/ico-edit-light-grey.svg" class="ico-small cursor-pointer" alt="" />
+        </div>
+      </div>
+      <button  *ngIf="testedCamp && !firstCamp" type="button" class="medium-secondary-button" (click)="openTestCampaign()" [disabled]="
+          !(
+            campaignscheduleData &&
+            CampaignData &&
+            audioDetail.length > 0 &&
+            leadDetail?.length > 0 
+          )
+        ">
+        <span>Test Campaign</span>
+      </button>
+    </div>
+    <div class="separator-bottom grey-40-border mb-16"></div>
+  </div>
+    <div class="flex-1 scrollable-content pr-4 position-relative pb-10" [style.overflow]="'overlay'" [style.overflow-x]="'hidden'">
+      <div fxLayout="column" fxLayoutGap="16px">
+        <div class="custom-accordion" fxLayout="column">
+          <div fxLayout="row" (click)="
+              expandLeadList = !expandLeadList;
+              expandAudioList = false;
+              expandScheduleList = false
+            ">
+            <div fxLayoutAlign="space-between center" fxFlex="100" fxLayout="row" fxLayoutGap="10px">
+              <div fxLayoutAlign="center center" fxLayout="row" fxLayoutGap="24px">
+                <div class="stepper-count">
+                  <span class="accordion-status-placeholder" *ngIf="leadDetail.length > 0">
+                    <img src="assets/images/svg/ico-tick-success.svg" alt="" />
+                  </span>
+                  <span class="count-numbers" *ngIf="leadDetail.length == 0">1</span>
+                </div>
+                <div fxLayout="column" fxLayoutGap="4px">
+                  <div class="accordion-header">Lead List</div>
+                  <div class="accordion-sub-header">
+                    Select or upload new list that you would like to send this
+                    campaign to
+                  </div>
+                </div>
+              </div>
+            </div>
+            <img src="assets/images/svg/ico-menu-down-arrow.svg" class="ico-small" alt="" *ngIf="!expandLeadList" />
+            <img src="assets/images/svg/ico-menu-up-arrow.svg" class="ico-small" alt="" *ngIf="expandLeadList" />
+          </div>
+
+          <div *ngIf="leadDetail?.length > 0" class="pl-64">
+            <div fxLayout="column" fxLayoutGap="10px" class="mt-18">
+              <div [style.overflow]="'auto'" [style.max-height.px]="'100'" class="scrollable-content pr-8">
+                <div fxLayout="column" fxLayoutGap="15px">
+                  <div fxLayout="column" *ngFor="let item of leadDetail;let i=index;">
+                    <div fxLayout="row" fxLayoutGap="10px">
+                      <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-between center">
+                        <img src="assets/images/svg/ico-file-upload-blue.svg" class="ico-medium" alt="" />
+                        <div class="body-text">
+                          {{ item?.leadName || item?.leadListName }}
+                        </div>
+                        <img src="assets/images/svg/ico-close-outline.svg" alt="" class="ico-small cursor-pointer"
+                          (click)="deleteLeadList(item,i)" />
+                      </div>
+                    </div>
+                    <div *ngIf="!preKycFlag && campaignscheduleData?.destinationNumbers?.length == 1" fxLayout="row" fxLayoutGap="4px"
+                      class="info-text-color mt-8 lh-16">
+                      <img src="assets/images/svg/ico-info-green.svg" class="ico-extra-small mr-4" alt=""/>Test Lead List
+                      contains only your number
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel" [ngClass]="{ visible: expandLeadList }">
+            <div class="mt-20">
+              <div class="pl-46">
+                <div fxLayout="row" fxLayoutGap="15px">
+                  <div class="table-user-info" *ngIf="!isWelcome" fxLayout="row" fxLayoutGap="12px">
+                    <button class="medium-primary-button" (click)="onclickLead(); $event.stopPropagation()">
+                      <span class="mr-8">Select Lead List</span>
+                      <img src="assets/images/svg/ico-chevron-down.svg" class="ico-small" alt="" />
+                      <!-- <img src="assets/images/svg/ico-chevronUp.svg"> -->
+                    </button>
+                    <div appTooltip [tooltipDisable]="preKycFlag"
+                      [tooltipTemplate]="'To Upload lead list, first complete KYC'">
+                      <button [disabled]="!preKycFlag" type="button" class="medium-secondary-button"
+                        (click)="openCreateLeadModal()">
+                        <img src="assets/images/svg/ico-upload-blue.svg" class="ico-small mr-8" alt="" />
+                        <span>Upload New Lead List</span>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="campaign-custom-width" *ngIf="visibleLead" (click)="$event.stopPropagation()">
+                    <div class="search-box mb-8">
+                      <div fxLayout="column">
+                        <div class="calc-width">
+                          <app-custom-search [label]="'Search'" IconSrc="assets/images/svg/ico-search-grey.svg"
+                            IconClr="assets/images/svg/ico-close-outline.svg"
+                            (outputText)="onSearch($event, 'LeadDropdown')">
+                          </app-custom-search>
+                        </div>
+                      </div>
+                    </div>
+                    <div fxLayoutAlign="space-between center" fxLayout="row" fxLayoutGap="5px">
+                      <div fxLayout="column" fxFlex="100" fxLayoutGap="5px">
+                        <div [style.height]="calculateContainerHeight(LeadDropdown?.length)" *ngIf="LeadDropdown">
+                          <cdk-virtual-scroll-viewport itemSize="40">
+                            <div class="search-result-row" fxLayout="column" fxFlex="100" fxLayoutGap="5px"
+                              *cdkVirtualFor="let item of LeadDropdown">
+                              <div *ngIf="!preKycFlag" appTooltip
+                                [tooltipDisable]="item?.isDefault === false || !item.hasOwnProperty('isDefault')? false:true"
+                                [tooltipTemplate]="'To use this uploaded lead list, first complete KYC'">
+                                <div [class.disabled]="item?.isDefault === false || !item.hasOwnProperty('isDefault')"
+                                  fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100">
+                                  <div fxLayoutAlign="center center" fxLayout="row" fxLayoutGap="8px" fxFlex="100" [class.disabled]="item.notallowed">
+                                    <img src="assets/images/svg/ico-uploded-gray.svg" alt="" class="ico-extra-small" />
+                                    <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-between center"
+                                      class="sub-title-text bold cursor-pointer" (click)="item.notallowed ? '' : Selectedlead(item)">
+                                      <div>{{ item?.leadName }}</div>
+                                      <div class="mini-text bold grey-80 mr-8">
+                                        count:
+                                        {{ item?.count ? item?.count : "0"}}
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div fxLayoutAlign="start center" fxLayout="row" fxLayoutGap="5px" class="mini-text">
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- kyc done -->
+                              <div *ngIf="preKycFlag">
+                                <div fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100">
+                                  <div fxLayoutAlign="center center" fxLayout="row" fxLayoutGap="8px" fxFlex="100" [class.disabled]="item.notallowed">
+                                    <img src="assets/images/svg/ico-uploded-gray.svg" alt="" class="ico-extra-small" />
+                                    <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-between center"
+                                      class="sub-title-text bold cursor-pointer" (click)="item.notallowed ? '' : Selectedlead(item)">
+                                      <div>{{ item?.leadName }}</div>
+                                      <div class="mini-text bold grey-80 mr-8">
+                                        count:
+                                        {{ item?.count ? item?.count : "0"}}
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div fxLayoutAlign="start center" fxLayout="row" fxLayoutGap="5px" class="mini-text">
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </cdk-virtual-scroll-viewport>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="custom-accordion" fxLayout="column">
+          <div fxLayout="row" (click)="
+              expandAudioList = !expandAudioList;
+              expandLeadList = false;
+              expandScheduleList = false
+            ">
+            <div fxLayoutAlign="space-between center" fxFlex="100" fxLayout="row" fxLayoutGap="10px">
+              <div fxLayoutAlign="center center" fxLayout="row" fxLayoutGap="24px">
+                <div>
+                  <div class="stepper-count">
+                    <span class="accordion-status-placeholder" *ngIf="audioDetail.length > 0">
+                      <img src="assets/images/svg/ico-tick-success.svg" class="ico-medium-large" alt="" />
+                    </span>
+                    <span class="count-numbers" *ngIf="audioDetail.length == 0">2</span>
+                  </div>
+                </div>
+                <div fxLayout="column" fxLayoutGap="4px">
+                  <div class="accordion-header">Audio Message</div>
+                  <div class="accordion-sub-header">
+                    Select or upload the audio message that you would like set
+                    for this campaign
+                  </div>
+                </div>
+              </div>
+            </div>
+            <img src="assets/images/svg/ico-menu-down-arrow.svg" class="ico-small" alt="" *ngIf="!expandAudioList" />
+            <img src="assets/images/svg/ico-menu-up-arrow.svg" class="ico-small" alt="" *ngIf="expandAudioList" />
+          </div>
+
+          <div class="pl-64 mt-15" *ngIf="audioDetail?.length>0">
+            <div fxLayout="column" fxLayoutGap="15px">
+              <div fxLayout="column" fxLayoutGap="8px" *ngFor="let item of audioDetail; let index = index">
+                <div class="extra-bold mini-text">{{ item.audioName }}</div>
+                <div fxLayout="row" fxLayoutGap="10px">
+                  <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="space-between center" class="mt-8"
+                    *ngIf="!isTestCampaignModalModal">
+                    <!-- <div class="audio-player" *ngIf="!audioId">
+                    <div fxLayout="row" class="controlsCamp">
+                      <img (click)="getAudio(item.audioId)" src="assets/images/svg/ico-play-outline.svg"
+                        class="ico-medium cursor-pointer mr-8" alt="" />
+                      <input type="range" class="timelineCamp" max="100" value="0" />
+                    </div>
+                  </div> -->
+                    <div *ngIf="item.audioUrl">
+                      <app-audio-preview-play *ngIf="item.audioUrl" [src]="item.audioUrl" [index]="index+1"
+                        [audioDuration]="item.audioDuration">
+                      </app-audio-preview-play>
+                    </div>
+                    <img src="assets/images/svg/ico-close-outline.svg" class="ico-small cursor-pointer" alt=""
+                      (click)="deleteAudio()" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel" [ngClass]="{ visible: expandAudioList }">
+            <div class="mt-20" *ngIf="audioDetail.length === 0">
+              <div class="pl-46">
+                <div fxLayout="row" fxLayoutGap="15px">
+                  <div class="table-user-info" *ngIf="!isWelcome" fxLayout="row" fxLayoutGap="15px">
+                    <button class="medium-primary-button" (click)="onclick(); $event.stopPropagation()">
+                      <span class="mr-8">Select file</span>
+                      <img src="assets/images/svg/ico-chevron-down.svg" class="ico-small" alt="down" />
+                      <!-- <img src="assets/images/svg/ico-chevronUp.svg"> -->
+                    </button>
+                    <button type="button" class="medium-secondary-button" (click)="openCreateAudioModal()">
+                      <img src="assets/images/svg/ico-upload-blue.svg" class="ico-small mr-8" alt="" />
+                      <span>Upload New File</span>
+                    </button>
+                  </div>
+
+                  <div class="campaign-custom-width mt-10" *ngIf="visible" (click)="$event.stopPropagation()">
+                    <div class="search-box mb-8">
+                      <div fxLayout="column" class="">
+                        <div class="calc-width">
+                          <app-custom-search [label]="'Search'" IconSrc="assets/images/svg/ico-search-grey.svg"
+                            IconClr="assets/images/svg/ico-close-outline.svg"
+                            (outputText)="onSearch($event, 'AudioDropdown')">
+                          </app-custom-search>
+                        </div>
+                      </div>
+                    </div>
+                    <div fxLayoutAlign="space-between center" fxLayout="row" fxLayoutGap="5px">
+                      <div fxLayout="column" fxFlex="100" fxLayoutGap="5px">
+                        <div [style.height]="calculateContainerHeight(AudioDropdown?.length)">
+                          <cdk-virtual-scroll-viewport itemSize="40">
+                            <div class="search-result-row" fxLayout="column" fxFlex="100" fxLayoutGap="5px"
+                              *cdkVirtualFor="let item of AudioDropdown">
+                              <div fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100">
+                                <div fxLayoutAlign="start center" fxLayout="row" fxLayoutGap="10px">
+                                  <div>
+                                    <div class="ico-medium audio-ico-submenu"></div>
+                                  </div>
+                                  <div class="sub-title-text bold cursor-pointer" (click)="SelectedAudio(item)">
+                                    {{ item.audioName }}
+                                  </div>
+                                </div>
+                                <!-- <div
+                              fxLayoutAlign="start center"
+                              fxLayout="row"
+                              fxLayoutGap="5px"
+                              class="mini-text grey-80"
+                            >
+                              <div>29</div>
+                              <div>secs</div>
+                            </div> -->
+                              </div>
+                            </div>
+                          </cdk-virtual-scroll-viewport>
+                        </div>
+                        <div class="divider-line divider-line--vertical-margin search-bar-divider"></div>
+                      </div>
+                    </div>
+                    <!-- <div fxLayoutAlign="end end">
+                    <span class="primary-text bold mt-10">
+                      count:
+                      {{ AudioDropdown?.length ? AudioDropdown?.length : "0" }}
+                    </span>
+                  </div> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="custom-accordion" fxLayout="column">
+          <div fxLayout="row" (click)="
+              expandScheduleList = !expandScheduleList;
+              expandAudioList = false;
+              expandLeadList = false
+            ">
+            <div fxLayoutAlign="space-between start" fxFlex="100" fxLayout="row" fxLayoutGap="10px">
+              <div fxLayoutAlign="center start" fxLayout="row" fxLayoutGap="24px">
+                <div>
+                  <div class="stepper-count">
+                    <span class="accordion-status-placeholder" *ngIf="setupflag">
+                      <img src="assets/images/svg/ico-tick-success.svg" alt="" />
+                    </span>
+                    <span class="count-numbers" *ngIf="!setupflag">3</span>
+                    <!-- <mat-icon class="ico-extra-small"></mat-icon> -->
+                  </div>
+                </div>
+                <div fxLayout="column" fxLayoutGap="4px">
+                  <div fxLayout="row" fxLayoutGap="16px">
+                    <div class="accordion-header">Campaign Schedule</div>
+                    <div class="primary-text" fxLayout="row" fxLayoutGap="16px"
+                      *ngIf="campaignscheduleData && setupflag" (click)="onEditCampaignSchedule()">
+                      <img class="ico-extra-small mr-5 primary-text" src="assets/images/svg/ico-edit-blue.svg" alt="" />
+                      <span class="primary-text extra-bold">Edit</span>
+                    </div>
+                  </div>
+                  <div class="accordion-sub-header" *ngIf="!setupflag">
+                    Schedule your campaign, Set retry options then you're all
+                    ready to go!
+                  </div>
+                </div>
+              </div>
+            </div>
+            <img src="assets/images/svg/ico-menu-down-arrow.svg" class="ico-small" alt="" *ngIf="!expandScheduleList" />
+            <img src="assets/images/svg/ico-menu-up-arrow.svg" class="ico-small" alt="" *ngIf="expandScheduleList" />
+          </div>
+          <div class="panel pl-40" [ngClass]="{ visible: expandScheduleList }">
+            <div class="pl-46 mt-20" *ngIf="!setupflag">
+              <div fxLayout="row" class="grid-layout-row">
+                <button type="button" class="medium-primary-button" (click)="openSetupModal()">
+                  Setup
+                </button>
+              </div>
+            </div>
+            <div class="pl-46 mt-10" *ngIf="setupflag">
+              <div fxLayout="row" class="grid-layout-row">
+                <div fxLayout="column" fxFlex="35" fxLayoutGap="8px">
+                  <div fxLayout="row" fxLayoutGap="10px">
+                    <div class="view-light-lable" fxFlex="45">
+                      Campaign Type
+                    </div>
+                    <div class="view-bold-lable" fxFlex="55">
+                      {{ CampaignData?.CampType }}
+                    </div>
+                  </div>
+                  <div fxLayout="row" fxLayoutGap="10px">
+                    <div class="view-light-lable" fxFlex="45">Caller ID</div>
+                    <div class="view-bold-lable" fxFlex="65">
+                      {{ CampaignData?.CallerId || "-" }}
+                    </div>
+                  </div>
+                  <div fxLayout="row" fxLayoutGap="10px">
+                    <div class="view-light-lable" fxFlex="45">Start Date</div>
+                    <div class="view-bold-lable" fxFlex="65">
+                      {{ campaignscheduleData?.sDate | date: 'dd/MM/YYYY' || "-" }}
+                    </div>
+                  </div>
+                  <div fxLayout="row" fxLayoutGap="10px">
+                    <div class="view-light-lable" fxFlex="45">End Date</div>
+                    <div class="view-bold-lable" fxFlex="65">
+                      {{ campaignscheduleData?.eDate | date: 'dd/MM/YYYY' || "-" }}
+                    </div>
+                  </div>
+                </div>
+
+                <div fxLayout="column" fxFlex="25" fxLayoutGap="8px">
+                  <div fxLayout="row" fxLayoutGap="10px">
+                    <div class="view-light-lable" fxFlex="40">Start Time</div>
+                    <div class="view-bold-lable" fxFlex="60">
+                      {{ campaignscheduleData?.formatedStartTime || '-' }}
+                    </div>
+                  </div>
+                  <div fxLayout="row" fxLayoutGap="10px">
+                    <div class="view-light-lable" fxFlex="40">End Time</div>
+                    <div class="view-bold-lable" fxFlex="60">
+                      {{ campaignscheduleData?.formatedEndTime || '-'  }}
+                    </div>
+                  </div>
+                  <div fxLayout="row" fxLayoutGap="10px">
+                    <div class="view-light-lable" fxFlex="40">Active Days</div>
+                    <div class="view-bold-lable" fxFlex="60">
+                      {{
+                      campaignscheduleData?.activeDays &&
+                      campaignscheduleData?.activeDays.length
+                      ? campaignscheduleData?.formattedActiveDays.join(", ")
+                      : "-"
+                      }}
+                    </div>
+                  </div>
+                </div>
+
+                <div fxLayout="column" fxFlex="40" fxLayoutGap="8px">
+                  <div fxLayout="row" fxLayoutGap="10px">
+                    <div class="view-light-lable" fxFlex="59">
+                      No. of Retries
+                    </div>
+                    <div class="view-bold-lable">
+                      {{ campaignscheduleData?.noOfRetries || "-" }}
+                    </div>
+                  </div>
+                  <div fxLayout="row" fxLayoutGap="10px">
+                    <div class="view-light-lable" fxFlex="59">
+                      Duration Between Retries
+                    </div>
+                    <div class="view-bold-lable">
+                      {{ campaignscheduleData?.dRetries || "-" }}
+                      {{ campaignscheduleData?.durationHrMnt || "-" }}
+                    </div>
+                  </div>
+                  <div fxLayout="row" fxLayoutGap="10px">
+                    <div class="view-light-lable" fxFlex="59">
+                      Hang-up causes for retries
+                    </div>
+                    <div class="view-bold-lable">
+                      {{campaignscheduleData?.hangupCause | titlecase}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- </mat-expansion-panel>
+        </mat-accordion> -->
+      </div>
+    </div>
+
+  <div fxLayout="row" class="footer-action" fxLayoutGap="12px" fxLayoutAlign="end end">
+    <button type="button" class="large-secondary-button" (click)="OnCancel()">
+      Cancel
+    </button>
+    <button type="button" class="large-secondary-button" (click)="saveAsDraf()" [disabled]="CampaignData?.campaignStatus != 'DRAFT' && CampaignData?.campaignStatus != 'CREATED' && CampaignData?.hasOwnProperty('campaignStatus')">
+      Save as Draft
+    </button>
+    <button *ngIf="!CampaignData?.trialNumber && testedCamp && !firstCamp" type="button" class="large-primary-button" (click)="runCampaignNow()" [disabled]="
+      !(
+          campaignscheduleData && setupflag &&
+          CampaignData &&
+          audioDetail.length > 0 &&
+          leadDetail?.length > 0
+        ) || (CampaignData?.campaignStatus != 'DRAFT' && CampaignData?.campaignStatus != 'CREATED' && CampaignData?.hasOwnProperty('campaignStatus'))
+      ">
+      Create
+    </button>
+    <button *ngIf="CampaignData?.trialNumber" type="button" class="large-primary-button" appTooltip 
+      [tooltipTemplate]="'Campaign can not be run as you have selected Trial Number for caller ID'" 
+      [tooltipDisable]="!CampaignData?.trialNumber" [ngClass]="{'create-disabled': CampaignData?.trialNumber}"
+      [tooltipPosition]="'left'">
+      Create
+    </button>
+    <button *ngIf="!testedCamp && firstCamp" type="button" class="large-primary-button" (click)="openTestCampaign()"
+      [disabled]="
+      !(
+        campaignscheduleData &&
+        CampaignData &&
+        audioDetail.length > 0 &&
+        leadDetail?.length > 0 
+      )
+    ">
+      Test Campaign
+    </button>
+  </div>
+</div>
+
+<ng-container *ngIf="isopenCampaignModal">
+  <app-sidebar-panel [width]="'590px'" [isSidebarOpen]="isopenCampaignModal" sidebarPosition="right"
+    (sidebarState)="isopenCampaignModal = false">
+    <div content>
+      <app-campaign-schedule [data]="campaignscheduleData" (closeModal)="closeModal($event, 'campaignSchedule')">
+      </app-campaign-schedule>
+    </div>
+  </app-sidebar-panel>
+</ng-container>
+<ng-container *ngIf="isCapmaignCreateOpen">
+  <app-sidebar-panel [width]="'590px'" [isSidebarOpen]="isCapmaignCreateOpen" sidebarPosition="right"
+    (sidebarState)="isCapmaignCreateOpen = false">
+    <div content>
+      <app-upload-lead-list (closeModal)="closeModal($event, 'uploadLead')">
+      </app-upload-lead-list>
+    </div>
+  </app-sidebar-panel>
+</ng-container>
+<ng-container *ngIf="openAudioModal">
+  <app-sidebar-panel [width]="'540px'" [isSidebarOpen]="openAudioModal" sidebarPosition="right"
+    (sidebarState)="openAudioModal = false">
+    <div content>
+      <app-upload-audio (closeModal)="closeModal($event, 'uploadAudio')">
+      </app-upload-audio>
+    </div>
+  </app-sidebar-panel>
+</ng-container>
+<ng-container *ngIf="isopenCampaignCreateModal">
+  <app-sidebar-panel [width]="'540px'" [isSidebarOpen]="isopenCampaignCreateModal" sidebarPosition="right"
+    (sidebarState)="isopenCampaignCreateModal = false">
+    <div content>
+      <app-create-campaign (closeModal)="closeModal($event)">
+      </app-create-campaign>
+    </div>
+  </app-sidebar-panel>
+</ng-container>
+<ng-container *ngIf="isTestCampaignModalModal">
+  <app-sidebar-panel [width]="'640px'" [isSidebarOpen]="isTestCampaignModalModal" sidebarPosition="right"
+    (sidebarState)="isTestCampaignModalModal = false">
+    <div content>
+      <app-test-campaign-modal [data]="campaigntestData" [trialNumber]="CampaignData?.trialNumber" (closeModal)="closeModal($event, 'test')">
+      </app-test-campaign-modal>
+    </div>
+  </app-sidebar-panel>
+</ng-container>
+<!-- modal popup-code for success error message-->
+<ng-container *ngIf="messageModal">
+  <div content>
+    <app-custom-message-modal [icon]="msgIcon" [header]="messageHeader" [subheaderOne]="messageSubheaderOne"
+      [subheaderTwo]="mesasgeSubheaderTwo" (closeEvent)="closeSuccess()"></app-custom-message-modal>
+  </div>
+</ng-container>

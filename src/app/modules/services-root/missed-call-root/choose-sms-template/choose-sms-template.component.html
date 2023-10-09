@@ -1,0 +1,98 @@
+<div fxLayoutAlign="space-between stretch" fxLayout="column" class="choose-sms-template-root">
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="header-modal-action">
+        <h2 class="lh-28">Choose SMS Template</h2>
+        <button class="tertiary-button-icon close-btn ico-close-right-top" (click)="onCancel()">
+            <img src="assets/images/svg/ico-close-blue.svg" alt="close" />
+        </button>
+    </div>
+    <div fxLayout="column" fxLayoutGap="16px" class="content-modal-action">
+        <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="space-between center" class="search-top-alignment">
+            <app-custom-search fxFlex="100" [label]="'Search by Keyword'" (outputText)="outputSearch($event)"
+                IconSrc="assets/images/svg/ico-search-grey.svg"></app-custom-search>
+            <div class="position-relative">
+                <button type="button" class="medium-secondary-button" (click)="openFilterModal($event)">
+                    <img src="assets/images/svg/ico-filter-grey.svg" class="ico-small mr-8" alt="" /><span
+                        class="grey-80 text-nowrap">Filter{{filterCount ? ' / ' + filterCount : ''}}</span>
+                </button>
+                <div class="open-filter-data" id="popup" *ngIf="openFilterData" (click)="$event.stopPropagation()">
+                    <div fxLayout="column" fxFlex="100" fxLayoutGap="8px">
+                        <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="8px">
+                            <div class="filter-header">Filters</div>
+                            <div fxLayout="row" fxLayoutGap="12px" fxLayoutAlign="center center">
+                                <button type="button" class="small-secondary-button" (click)="clearAll()" [disabled]="!filterCount">
+                                    Clear All
+                                </button>
+                                <button class="tertiary-button-icon close-btn ico-close-right-top" (click)="openFilterData=false">
+                                    <img src="assets/images/svg/ico-close-blue.svg" alt="close" />
+                                </button>
+                            </div>
+                        </div>
+                        <div fxLayout="row" fxFlex="100" fxLayoutAlign="start start" xLayoutGap="8px">
+                            <div fxFlex="50" class="sms-filter-text lh-20">SMS Type</div>
+                            <div fxFlex="50" class="sms-filter-text lh-20">SMS Language</div>
+                        </div>
+                        <div>
+                            <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="8px">
+                                <div id='smstype' fxLayout="column" fxFlex="100" fxLayoutGap="8px" (mouseenter)="onHoverSmsType=true" (mouseleave)="onHoverSmsType=false" [ngClass]="{'scrollable-content': onHoverSmsType}" [style.overflow]="'auto'" [style.overflow-x]="'hidden'" [style.height.px]="'200'">
+                                    <div class="loop-filter-type" *ngFor="let item  of smsTypeArray; let i = index" (click)="selectMultiple(item, 'type')" [ngClass]="{'highlight': isSelected(item, 'type')}">{{item}}</div>
+                                </div>
+                                <div id='smslang' fxLayout="column" fxFlex="100" fxLayoutGap="8px" (mouseenter)="onHoverSmsLang=true" (mouseleave)="onHoverSmsLang=false" [ngClass]="{'scrollable-content': onHoverSmsLang}" [style.overflow]="'auto'" [style.overflow-x]="'hidden'" [style.height.px]="'200'">
+                                    <div class="loop-filter-type" *ngFor="let item  of smsLanguageArray; let i = index" (click)="selectMultiple(item, 'lang')" [ngClass]="{'highlight': isSelected(item, 'lang')}">{{item}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="8px" class="mt-8">
+                            <button type="button" class="small-secondary-button" (click)="closeFilterModal()">
+                                Cancel
+                            </button>
+                            <button type="button" class="small-primary-button" (click)="applyFilter('filter')" [ngClass]="[selectedSmsLang?.length > 0 || selectedSmsType?.length > 0 ? '' : 'disabled']">
+                                Apply Filter
+                            </button>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="templateSms.length> 0" fxLayout="column" fxLayoutGap="16px" class="scrollable-content pr-8"
+            [style.overflow]="'auto'" [style.overflow-x]="'hidden'" [style.height.vh]="'70'">
+            <div fxLayout="column" *ngFor="let item of templateSms">
+                <div fxLayout="row" fxLayoutGap="20px" fxFlex="100" class="no-padding"
+                    fxLayoutAlign="space-between start">
+                    <div fxLayout="row" fxLayoutGap="8px" fxFlex="100" fxLayoutAlign="start start"
+                        class="radio-options-container grid-layout-row">
+                        <div class="radio-button" fxLayout="column" fxLayoutGap="8px">
+                            <div fxLayout="row" fxLayoutAlign="start start">
+                                <label class="cstm-radio"
+                                    [ngClass]="{ checked: textRadioSelected == item.smsTemplateText }">
+                                    <input [value]="item.smsTemplateText" type="radio"
+                                        (ngModelChange)="chooseText(item)" name="inviteMember"
+                                        [(ngModel)]="textRadioSelected" />
+                                </label>
+                                <div fxLayout="column" fxLayoutGap="8px">
+                                    <div>
+                                        <span class="status-boxs"> {{item?.smsType || '-'}}</span>
+                                    </div>
+
+                                    <div class="body-text sms-format" [innerHTML]="item?.smsTemplateText">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center" *ngIf="templateSms.length<= 0">No data found</div>
+    </div>
+    <div class="footer-modal-action">
+        <div fxLayout="row" fxLayoutGap="12px" fxLayoutAlign="end end">
+            <button type="button" class="large-secondary-button" (click)="onCancel()">
+                Cancel
+            </button>
+            <button type="button" [disabled]="!textRadioSelected" class="large-primary-button"
+                (click)="SelectAndBack()">
+                Save
+            </button>
+        </div>
+    </div>
+</div>

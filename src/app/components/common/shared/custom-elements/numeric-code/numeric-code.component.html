@@ -1,0 +1,22 @@
+<label class="cstm-input">
+    <div class="inputs-container">
+        <input
+            #otpInputs
+            maxlength="1"
+            type="text"
+            autocomplete="off"
+            pattern="[0-9]"
+            [class.error]="state === 'error'"
+            *ngFor="let inp of numericCodeArr; let idx = index"
+            [disabled]="disabled"
+            (keypress)="isNumberKey($event)"
+            (keydown)="onKeyDown($event)"
+            (keyup)="onKeyUp($event, idx)"
+            [value]="otpInputValues[idx]"
+        />
+    </div>
+
+    <div class="cstm-input__message" [class.error]="state === 'error'">
+        {{ errorText }}
+    </div>
+</label>

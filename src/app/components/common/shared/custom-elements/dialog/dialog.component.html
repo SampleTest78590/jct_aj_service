@@ -1,0 +1,14 @@
+<!-- <div class="card">
+<button (click)="close()">close </button>
+<div>
+    <p>dialog works! {{_id}}</p>
+    <ng-template #content></ng-template>
+</div>
+   
+</div> -->
+<!-- <ng-container> -->
+<div class="overlay" [ngStyle]="{opacity: 1/DialogRef.dialog.length}"></div>
+<div [class]="'sidebar-container open' + className" [ngClass]="sidebarPosition ? sidebarPosition : 'right'" [ngStyle]="{width: width ? width : '540px'}">
+    <ng-template #content></ng-template>
+</div>
+<!-- </ng-container> -->

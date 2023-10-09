@@ -1,0 +1,237 @@
+<div fxLayout="column">
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="header-modal-action">
+        <h2 class="lh-28">Campaign Schedule</h2>
+        <button class="tertiary-button-icon close-btn ico-close-right-top" (click)="onCancel()">
+            <img src="assets/images/svg/ico-close-blue.svg" alt="close" />
+        </button>
+    </div>
+
+    <div class="content-modal-action modal-scrollable-content pr-8">
+        <div class="campaign-schedule-root">
+            <div class="sub-header mb-24 lh-20 grey-80 bold fs-14">
+                Please choose the schedule on which you will like this campaign to run.
+            </div>
+            <div fxLayout="column" fxLayoutGap="16px" class="p-16 destination-num-container" *ngIf="!kycFlag">
+                <div fxLayout="column" fxLayoutGap="8px">
+                    <div class="camp-title-one extra-bold">Destination Number</div>
+                    <div class="lh-16 mini-text grey-70">Your Test lead list contains only your verified number. You can add 4 more numbers.  </div>
+                </div>
+                <div fxLayout="column" fxLayoutGap="8px">
+                    <div class="extra-bold body-text lh-20 grey-100">Selected Numbers</div>
+                    <div fxLayout="row wrap"  class="grid-layout-row-wrap-2n">
+                        <div fxLayout="row" fxLayoutGap="12px" *ngFor="let number of selectedNumbers;let i=index;">
+                            <div fxLayout="row" fxLayout="row" fxLayoutGap="4px" class="body-text lh-20">
+                                <span class="grey-60">{{i+1}}.</span>
+                                <div fxLayout="row" fxLayoutGap="4px" class="grey-80">
+                                    <div>{{number?.code}}</div>
+                                    <div>{{number?.number}}</div> 
+                                </div>
+                            </div>
+                            <img src="assets/images/svg/ico-close-blue.svg" alt="" class="ico-standard cursor-pointer" *ngIf="i !== 0" (click)="delete(i)">
+                        </div>
+                    </div>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start center" *ngIf="selectedNumbers?.length < 5">
+                    <button class="medium-secondary-button" (click)="openDestModal()">
+                        <div class="mr-8">Add Numbers</div>
+                        <img src="assets/images/svg/ico-chevron-right-circle.svg" alt="">
+                    </button>
+                </div>
+            </div>
+            <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="start center" class="mt-24">
+                <div class="camp-title-one" fxLayoutAlign="start center">Date</div>
+                <span class="pt-2" appTooltip
+                    [tooltipTemplate]="'Select Dates between which you want to run a Campaign'">
+                    <img class="ico-extra-small cursor-pointer" src="assets/images/svg/ico-info.svg" alt="" />
+                </span>
+            </div>
+            <div fxLayout="row" class="mt-12" fxLayoutGap="16px">
+                <div class="cstm-input position-relative date-container" fxFlex="50">
+                    <div class="cstm-input__label mini-text mb-4">Start Date*</div>
+                    <input readonly type="text" placeholder="mm/dd/yyyy" [(ngModel)]="sDate" #startDate
+                        (click)="openDatePicker=true" class="" />
+                    <div class="ico-right img-toggle" aria-label="Clear">
+                        <img class="cursor-pointer" src="assets/images/svg/ico-calendar.svg" alt=""  #startDate (click)="openDatePicker=true"/>
+                    </div>
+
+                    <ng-container *ngIf="openDatePicker">
+                        <app-calendar-view [open]="true" [type]="'single'" [firstDate]="sDate" [min]="validatedMinDate"
+                            [anchorEl]="startDate" (getValues)="getDates($event,'sDate')"
+                            (closeCalendarCb)="onCalendarClose('sDate')">
+                        </app-calendar-view>
+                    </ng-container>
+                </div>
+                <div class="cstm-input position-relative date-container" fxFlex="50">
+                    <div class="cstm-input__label mini-text mb-4">End Date*</div>
+                    <input readonly type="text" placeholder="mm/dd/yyyy" [(ngModel)]="eDate" #endDate
+                        (click)="openEndDatePicker=true" class="date-input" />
+                    <div class="ico-right img-toggle" aria-label="Clear">
+                        <img class="cursor-pointer" src="assets/images/svg/ico-calendar.svg" alt="" #endDate (click)="openEndDatePicker=true"/>
+                    </div>
+
+                    <ng-container *ngIf="openEndDatePicker">
+                        <app-calendar-view [open]="true" [type]="'single'" [firstDate]="eDate"
+                            [min]='sDate ? sDate : validatedMinDate' [anchorEl]="endDate"
+                            (getValues)="getDates($event,'eDate')" (closeCalendarCb)="onCalendarClose('eDate')">
+                        </app-calendar-view>
+                    </ng-container>
+
+                </div>
+            </div>
+            <div fxLayout="column" class="mt-24">
+                <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="start center">
+                    <div class="camp-title-one" fxLayoutAlign="start center">Active Days</div>
+                    <span class="pt-4" appTooltip [tooltipTemplate]="'Select the Days on which the campaign is active'">
+                        <img class="ico-extra-small cursor-pointer" src="assets/images/svg/ico-info.svg" alt="" />
+                    </span>
+                </div>
+                <div fxLayout="row wrap" class="grid-layout-row-wrap-5n mt-12">
+                    <div><label class="cstm-checkbox" [ngClass]="{ checked: allDaysChecked }" [class.disabled]="allDaysDisabled"> <input type="checkbox"
+                                (change)="allDaysDisabled ? '' : allDaysCheckedChange()" />
+                            All </label></div>
+
+                    <!-- <ng-container  *ngFor="let day of daysCheckbox;let i=index"> -->
+                    <div *ngFor="let day of daysCheckbox;let i=index">
+                        <label class="cstm-checkbox " [ngClass]="{ checked: day.checked }" [class.disabled]="day.disabled"> <input type="checkbox"
+                                [(ngModel)]="day.checked" (change)="day.disabled ? '' : onDaysCheckboxChange()" name="chk{{i}}"/> {{
+                            day.name }} </label>
+                    </div>
+                    <!-- </ng-container> -->
+
+                </div>
+            </div>
+            <div class="mt-24">
+                <div fxLayout="row" class="mb-8" fxLayoutGap="4px" fxLayoutAlign="start center">
+                    <div class="camp-title-one" fxLayoutAlign="start center">Time</div>
+                    <span class="pt-4" appTooltip
+                        [tooltipTemplate]="'Select the Time between which your campaign will run'">
+                        <img class="ico-extra-small cursor-pointer" src="assets/images/svg/ico-info.svg" alt="" />
+                    </span>
+                </div>
+                <div fxLayout="row">
+                    <div class="cstm-input position-relative mr-24 time-container" fxFlex="196px" [class.disabled]="!sDate">
+                        <div class="cstm-input__label mini-text mb-4 position-relative">
+                            <span class="mr-5">From*</span>
+                             <span class="pt-4 cus-pr" appTooltip
+                            [tooltipTemplate]="'15 mins post current time allowed'">
+                                <img class="ico-extra-small cursor-pointer" src="assets/images/svg/ico-info.svg" alt="" />
+                            </span>
+                        </div>
+                        <input class="time-ico-cls" type="text" placeholder="Select Time" name="fTime" 
+                            [(ngModel)]="fTime" readonly #startTime (click)="openSTimePicker=true"/>
+                        <div class="ico-right img-toggle" aria-label="Clear">
+                            <img class="cursor-pointer" src="assets/images/svg/ico-timepicker.svg" alt="" #startTime (click)="openSTimePicker=true"/>
+                        </div>
+
+                        <ng-container *ngIf="openSTimePicker">
+                            <app-time-view [open]="true" [anchorEl]="startTime" (closeTimeCb)="onTimeClose('fTime')" (getValues)="getTimepicker($event,'fTime')"
+                            [selectedHour]="startObj.hour" [selectedMinutes]="startObj.minutes" [selectedFormat]="startObj.format" [startImmediatelyFlag]="sDate == now ? false : true">
+                            </app-time-view>
+                        </ng-container>
+
+                    </div>
+                    <div class="cstm-input position-relative time-container" fxFlex="196px" [class.disabled]="!eDate">
+                        <div class="cstm-input__label mini-text mb-4">To*</div>
+                        <input readonly type="text" class="time-ico-cls" placeholder="Select Time" name="tTime" 
+                         [(ngModel)]="tTime" autocomplete="off" #endTime (click)="openTTimePicker=true"/>
+                        <div class="ico-right img-toggle" aria-label="Clear">
+                            <img class="cursor-pointer" src="assets/images/svg/ico-timepicker.svg" alt="" #endTime (click)="openTTimePicker=true"/>
+                        </div>
+                        <ng-container *ngIf="openTTimePicker">
+                            <app-time-view [open]="true" [anchorEl]="endTime" (closeTimeCb)="onTimeClose('tTime')" (getValues)="getTimepicker($event,'tTime')"
+                            [selectedHour]="endObj.hour" [selectedMinutes]="endObj.minutes" [selectedFormat]="endObj.format" [startImmediatelyFlag]="true">
+                            </app-time-view>
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="cstm-input" *ngIf="errorTimeFlag" fxLayout="row">
+                    <span class="cstm-input__message error">{{errorTimeFlag}}</span>
+                </div>
+                <div class="divider-line mt-24"></div>
+                <div fxLayout="column" class="mt-24">
+                    <div fxLayout="row" fxLayoutAlign="space-between center">
+                        <div class="camp-title-one">
+                            Call Retry Settings
+                        </div>
+                        <div class="lh-20 pt-4">
+                            <label class="custom-switch">
+                                <input type="checkbox" [value]="retrySettings" name="toggles"
+                                    [(ngModel)]="retrySettings" (click)="onretryToggle($event)" />
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="mt-12 subtitle-2" *ngIf="!retrySettings">
+                        You can choose if you want to retry calls to numbers which did not pick in the first attempt.
+                    </div>
+                </div>
+                <div class="mt-24">
+                    <ng-container *ngIf="retrySettings">
+                        <div>
+                            Select number of retries
+                        </div>
+                        <div fxLayout="row" class="mt-8" fxLayoutGap="16px">
+                            <label class="cstm-radio" *ngFor="let retry of retrys"
+                                [ngClass]="{ checked: retry==noOfRetries }">
+                                <input type="radio" [value]="retry" [(ngModel)]="noOfRetries"
+                                    (ngModelChange)="checkToggleValue()" name="noOfRetries" />
+                                {{ retry }}
+                            </label>
+                        </div>
+                    </ng-container>
+                </div>
+                <div *ngIf="retrySettings">
+                    <div fxLayout="row" class="mt-24" fxLayoutGap="24px" fxLayoutAlign="start center">
+                        <div class="cstm-input  position-relative" fxFlex="62">
+                            <div class="cstm-input__label mini-text mb-4">Duration Between Retries*</div>
+                            <input placeholder="Enter Duration" [(ngModel)]="dRetries" (ngModelChange)="checkToggleValue()"
+                                (keypress)="onlyNumberKey($event)" maxlength="5"/>
+                        </div>
+                        <div fxLayout="column" fxFlex="38" class="dropdown-mg">
+                            <div class="mini-text mb-4">Hours/Minutes</div>
+                            <app-dropdown placeholder="Hrs/Mins" [value]="selectedDuration" [options]="durations"
+                                (handleChange)="onFolderChange($event)"></app-dropdown>
+                        </div>
+                    </div>
+                    <div class="mt-24 pb-52" fxLayout="column" fxLayoutGap="8px">
+                        <div class="subtitle-2">Select hang-up causes for which retries will be attempted*</div>
+                        <div fxLayout="row" fxLayoutGap="16px">
+                            <div fxLayout="row" *ngFor="let causes of hangupCause;">
+                                <div>
+                                    <label class="cstm-checkbox" [ngClass]="{ checked: causes.checked }"> 
+                                    <input type="checkbox" [checked]="causes.checked" [(ngModel)]="causes.checked" (change)="getHangupCauses()"/>
+                                    {{causes?.key}}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-modal-action">
+        <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="end end">
+            <button type="button" class="large-secondary-button" (click)="onCancel()">
+                Cancel
+            </button>
+            <button type="button" class="large-primary-button" (click)="onProceed()" [disabled]="
+              !(sDate && eDate && fTime && tTime && activeDaysFlag && !retryCheckFlag)
+            ">
+                Proceed
+            </button>
+        </div>
+    </div>
+</div>
+<ng-container *ngIf="isModalOpen">
+    <app-sidebar-panel [width]="'560px'" [isSidebarOpen]="isModalOpen" sidebarPosition="right"
+      (sidebarState)="isModalOpen = false">
+      <div content>
+        <!-- <app-destination-number  (closeModal)="isModalOpen=false">
+
+        </app-destination-number> -->
+         <!-- <app-campaign-schedule [data]="campaignscheduleData" (closeModal)="closeModal($event, 'campaignSchedule')">
+        </app-campaign-schedule> -->
+      </div>
+    </app-sidebar-panel>
+  </ng-container>

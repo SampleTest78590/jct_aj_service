@@ -1,0 +1,115 @@
+.missed-call-preview-root .p-all {
+    padding: 8px 24px;
+}
+
+.missed-call-preview-root .custom-mat-accordion .mat-expansion-panel {
+    border: 1px solid var(--light-primary-grey-40);
+}
+
+.missed-call-preview-root .sample-header-bold {
+    font-weight: 700;
+    line-height: 16px;
+}
+
+.missed-call-preview-root .mat-expansion-indicator {
+    position: relative;
+    top: -18px !important;
+    right: 16px;
+}
+
+.missed-call-preview-root .mat-expanded .mat-expansion-indicator {
+    top: -14px !important;
+}
+
+.missed-call-preview-root .custom-accordion {
+    background-color: var(--white);
+    border: 1px solid var(--light-text-grey-40);
+    border-radius: 8px;
+    color: var(--light-text-grey-100);
+    cursor: pointer;
+    padding: 16px 24px;
+    text-align: left;
+    outline: none;
+    transition: 0.4s;
+}
+
+.missed-call-preview-root .panel {
+    padding: 0 18px 0  64px;
+    display: none;
+    background-color: white;
+    overflow: hidden;
+}
+
+.missed-call-preview-root .visible {
+    display: block;
+}
+.missed-call-preview-root .audio-player {
+    margin-top: 8px;
+}
+.missed-call-preview-root .pl-64{
+    padding-left:64px;
+}
+
+.missed-call-preview-root .campaign-custom-width {
+    max-width: 500px;
+    position: absolute;
+    z-index: 99;
+    margin-top: 50px !important;
+    border-radius: 24px;
+    background: var(--white);
+    box-shadow: var(--shadow-m);
+    padding: 8px 16px;
+    width: 100%;
+    box-sizing: border-box;
+    height: 240px;
+  }
+  .missed-call-preview-root .search-result-row {
+    height: 40px;
+    line-height: 40px;
+  }
+  .missed-call-preview-root  .search-bar-divider {
+    margin: 0px -16px !important;
+    padding: 0px 16px;
+  }
+
+  .missed-call-preview-root .campaign-custom-width .cdk-virtual-scroll-content-wrapper {
+    flex-direction: column !important;
+  }
+  .missed-call-preview-root .campaign-custom-width .cdk-virtual-scroll-viewport {
+    // overflow: inherit !important;
+    height: 135px;
+    // contain: inherit !important;
+  }
+  .missed-call-preview-root .info-text-color {
+    color: var(--light-secondary-60);
+  }
+
+  .missed-call-preview-root .arrow-forword{
+    -ms-transform: rotate(-90deg); /* IE 9 */
+    transform: rotate(-90deg);
+  }
+
+  .missed-call-preview-root .footer-modal-action {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: calc(100% - 0px) !important;
+    background-color: var(--white)!important;
+    border-radius: 0 0 10px 10px;
+    position: inherit !important;
+}
+
+
+.missed-call-preview-root .custom-ellipsis{
+    display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 88%;
+}
+
+
+// .missed-call-preview-root .plus-audio-accordion.custom-accordion{
+//   border-color: var(--light-midnight-marigold-40);
+// }

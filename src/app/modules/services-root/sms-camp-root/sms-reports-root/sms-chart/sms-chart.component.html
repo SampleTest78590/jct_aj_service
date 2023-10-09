@@ -1,0 +1,10 @@
+<div fxLayout="column" fxLayoutAlign="space-between start" class="bar-chart-root">
+    <div class="chart-container full-width" [style.height]="'454px'">
+        <canvas id="MyChart">{{ chart }}</canvas>
+    </div>
+    <div *ngIf="emptyStateMsg" fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="16px"
+        class="charts-empty-data">
+        <div><img src="assets/images/svg/ico-info-grey.svg" class="ico-medium cursor-pointer" alt="" /></div>
+        <div class="title-text grey-100 lh-24">No Data Available</div>
+    </div>
+</div>

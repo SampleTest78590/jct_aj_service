@@ -1,0 +1,987 @@
+.action-cards-row > * {
+    position: relative;
+}
+.action-cards-row > *:before {
+    content: "";
+    float: left;
+    padding-top: 100%;
+}
+
+@media only screen and (max-width: 599px) {
+
+    /* Responsive CSS for fxLayout=row */
+    .grid-layout-row > * {
+        margin-right: 8px;
+    }
+    .grid-layout-row > *:last-child {
+        margin-right: 0px;
+    }
+
+    /* Responsive CSS for fxLayout=column */
+    .grid-layout-column > * {
+        margin-bottom: 8px;
+    }
+    .grid-layout-column > *:last-child {
+        margin-bottom: 0px;
+    }
+
+    /* Row wrap with 2 cards in one row */
+    .grid-layout-row-wrap-2n > * {
+        max-width: 50%;
+        margin-bottom: 8px;
+        flex: 1 1 50%;
+        box-sizing: border-box;
+        padding-right: 4px;
+        padding-left: 4px;
+    }
+    .grid-layout-row-wrap-2n > *:nth-child(odd) {
+        padding-left: 0;
+    }
+    .grid-layout-row-wrap-2n > *:nth-child(even) {
+        padding-right: 0;
+    }
+    .grid-layout-row-wrap-2n > *:nth-last-child(1),
+    .grid-layout-row-wrap-2n > *:nth-last-child(2):nth-child(odd) {
+        margin-bottom: 0;
+    }
+
+    /* Row wrap with 3 cards in one row */
+    .grid-layout-row-wrap-3n > * {
+        max-width: 33.3%;
+        margin-bottom: 8px;
+        flex: 1 1 33.3%;
+        box-sizing: border-box;
+        padding-right: 4px;
+        padding-left: 4px;
+    }
+    .grid-layout-row-wrap-3n > *:nth-child(3n+1) {
+        padding-left: 0;
+    }
+    .grid-layout-row-wrap-3n > *:nth-child(3n+3) {
+        padding-right: 0;
+    }
+    .grid-layout-row-wrap-3n > *:nth-last-child(1),
+    .grid-layout-row-wrap-3n > *:nth-last-child(2):nth-child(3n+1),
+    .grid-layout-row-wrap-3n > *:nth-last-child(2):nth-child(3n+2),
+    .grid-layout-row-wrap-3n > *:nth-last-child(3):nth-child(3n+1) {
+        margin-bottom: 0;
+    }
+
+    /* Row wrap with 4 cards in one row */
+    .grid-layout-row-wrap-4n > * {
+        max-width: 25%;
+        margin-bottom: 8px;
+        flex: 1 1 25%;
+        box-sizing: border-box;
+        padding-right: 4px;
+        padding-left: 4px;
+    }
+    .grid-layout-row-wrap-4n > *:nth-child(4n+1) {
+        padding-left: 0;
+    }
+    .grid-layout-row-wrap-4n > *:nth-child(4n+4) {
+        padding-right: 0;
+    }
+    .grid-layout-row-wrap-4n > *:nth-last-child(1),
+    .grid-layout-row-wrap-4n > *:nth-last-child(2):nth-child(4n+1),
+    .grid-layout-row-wrap-4n > *:nth-last-child(2):nth-child(4n+2),
+    .grid-layout-row-wrap-4n > *:nth-last-child(2):nth-child(4n+3),
+    .grid-layout-row-wrap-4n > *:nth-last-child(3):nth-child(4n+1),
+    .grid-layout-row-wrap-4n > *:nth-last-child(3):nth-child(4n+2),
+    .grid-layout-row-wrap-4n > *:nth-last-child(4):nth-child(4n+1) {
+        margin-bottom: 0;
+    }
+ /* Row wrap with 5 cards in one row */
+ .grid-layout-row-wrap-5n > * {
+    max-width: 20%;
+    margin-bottom: 8px;
+    flex: 1 1 20%;
+    box-sizing: border-box;
+    padding-right: 4px;
+    padding-left: 4px;
+}
+.grid-layout-row-wrap-5n > *:nth-child(5n+1) {
+    padding-left: 0;
+}
+.grid-layout-row-wrap-5n > *:nth-child(5n+5) {
+    padding-right: 0;
+}
+.grid-layout-row-wrap-5n > *:nth-last-child(1),
+.grid-layout-row-wrap-5n > *:nth-last-child(2):nth-child(5n+1),
+.grid-layout-row-wrap-5n > *:nth-last-child(2):nth-child(5n+2),
+.grid-layout-row-wrap-5n > *:nth-last-child(2):nth-child(5n+3),
+.grid-layout-row-wrap-5n > *:nth-last-child(3):nth-child(5n+1),
+.grid-layout-row-wrap-5n > *:nth-last-child(3):nth-child(5n+2),
+.grid-layout-row-wrap-5n > *:nth-last-child(4):nth-child(5n+1) {
+    margin-bottom: 0;
+}
+
+ /* Row wrap with 7 cards in one row */
+ .grid-layout-row-wrap-7n > * {
+    max-width: 14.28%;
+    margin-bottom: 8px;
+    flex: 1 1 14.28%;
+    box-sizing: border-box;
+    padding-right: 4px;
+    padding-left: 4px;
+}
+.grid-layout-row-wrap-7n > *:nth-child(7n+1) {
+    padding-left: 0;
+}
+.grid-layout-row-wrap-7n > *:nth-child(7n+7) {
+    padding-right: 0;
+}
+.grid-layout-row-wrap-7n > *:nth-last-child(1),
+.grid-layout-row-wrap-7n > *:nth-last-child(2):nth-child(7n+1),
+.grid-layout-row-wrap-7n > *:nth-last-child(2):nth-child(7n+2),
+.grid-layout-row-wrap-7n > *:nth-last-child(2):nth-child(7n+3),
+.grid-layout-row-wrap-7n > *:nth-last-child(2):nth-child(7n+4),
+.grid-layout-row-wrap-7n > *:nth-last-child(2):nth-child(7n+5),
+.grid-layout-row-wrap-7n > *:nth-last-child(2):nth-child(7n+6),
+.grid-layout-row-wrap-7n > *:nth-last-child(3):nth-child(7n+1),
+.grid-layout-row-wrap-7n > *:nth-last-child(3):nth-child(7n+2),
+.grid-layout-row-wrap-7n > *:nth-last-child(3):nth-child(7n+3),
+.grid-layout-row-wrap-7n > *:nth-last-child(3):nth-child(7n+4),
+.grid-layout-row-wrap-7n > *:nth-last-child(3):nth-child(7n+5),
+.grid-layout-row-wrap-7n > *:nth-last-child(4):nth-child(7n+1),
+.grid-layout-row-wrap-7n > *:nth-last-child(4):nth-child(7n+2),
+.grid-layout-row-wrap-7n > *:nth-last-child(4):nth-child(7n+3),
+.grid-layout-row-wrap-7n > *:nth-last-child(4):nth-child(7n+4),
+.grid-layout-row-wrap-7n > *:nth-last-child(5):nth-child(7n+1),
+.grid-layout-row-wrap-7n > *:nth-last-child(5):nth-child(7n+2),
+.grid-layout-row-wrap-7n > *:nth-last-child(5):nth-child(7n+3),
+.grid-layout-row-wrap-7n > *:nth-last-child(6):nth-child(7n+1),
+.grid-layout-row-wrap-7n > *:nth-last-child(6):nth-child(7n+2),
+.grid-layout-row-wrap-7n > *:nth-last-child(7):nth-child(7n+1){
+    margin-bottom: 0;
+}
+
+    /* Buttons in a row */
+    .action-btn-row > .mat-button,
+    .action-btn-row > .mat-fab,
+    .action-btn-row > .mat-flat-button,
+    .action-btn-row > .mat-icon-button,
+    .action-btn-row > .mat-mini-fab,
+    .action-btn-row > .mat-raised-button,
+    .action-btn-row > .mat-stroked-button,
+    .action-btn-row > button,
+    .action-btn-row > * {
+        margin-right: 8px;
+    }
+    .action-btn-row > .mat-button:last-child,
+    .action-btn-row > .mat-fab:last-child,
+    .action-btn-row > .mat-flat-button:last-child,
+    .action-btn-row > .mat-icon-button:last-child,
+    .action-btn-row > .mat-mini-fab:last-child,
+    .action-btn-row > .mat-raised-button:last-child,
+    .action-btn-row > .mat-stroked-button:last-child,
+    .action-btn-row > button:last-child,
+    .action-btn-row > *:last-child {
+        margin-right: 0px;
+    }
+
+    /* Buttons in a column */
+    .action-btn-col > .mat-button,
+    .action-btn-col > .mat-fab,
+    .action-btn-col > .mat-flat-button,
+    .action-btn-col > .mat-icon-button,
+    .action-btn-col > .mat-mini-fab,
+    .action-btn-col > .mat-raised-button,
+    .action-btn-col > .mat-stroked-button,
+    .action-btn-col > button {
+        margin-bottom: 8px;
+    }
+    .action-btn-col > .mat-button:last-child,
+    .action-btn-col > .mat-fab:last-child,
+    .action-btn-col > .mat-flat-button:last-child,
+    .action-btn-col > .mat-icon-button:last-child,
+    .action-btn-col > .mat-mini-fab:last-child,
+    .action-btn-col > .mat-raised-button:last-child,
+    .action-btn-col > .mat-stroked-button:last-child,
+    .action-btn-col > button:last-child {
+        margin-bottom: 0px;
+    }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 1279px) {
+
+    /* Responsive CSS for fxLayout=row */
+    .grid-layout-row > * {
+        margin-right: 12px;
+    }
+    .grid-layout-row > *:last-child {
+        margin-right: 0px;
+    }
+
+    /* Responsive CSS for fxLayout=column */
+    .grid-layout-column > * {
+        margin-bottom: 12px;
+    }
+    .grid-layout-column > *:last-child {
+        margin-bottom: 0px;
+    }
+
+    /* Row wrap with 2 cards in one row */
+    .grid-layout-row-wrap-2n > * {
+        max-width: 50%;
+        margin-bottom: 12px;
+        flex: 1 1 50%;
+        box-sizing: border-box;
+        padding-right: 6px;
+        padding-left: 6px;
+    }
+    .grid-layout-row-wrap-2n > *:nth-child(odd) {
+        padding-left: 0;
+    }
+    .grid-layout-row-wrap-2n > *:nth-child(even) {
+        padding-right: 0;
+    }
+    .grid-layout-row-wrap-2n > *:nth-last-child(1),
+    .grid-layout-row-wrap-2n > *:nth-last-child(2):nth-child(odd) {
+        margin-bottom: 0;
+    }
+
+    /* Row wrap with 3 cards in one row */
+    .grid-layout-row-wrap-3n > * {
+        max-width: 33.3%;
+        margin-bottom: 12px;
+        flex: 1 1 33.3%;
+        box-sizing: border-box;
+        padding-right: 6px;
+        padding-left: 6px;
+    }
+    .grid-layout-row-wrap-3n > *:nth-child(3n+1) {
+        padding-left: 0;
+    }
+    .grid-layout-row-wrap-3n > *:nth-child(3n+3) {
+        padding-right: 0;
+    }
+    .grid-layout-row-wrap-3n > *:nth-last-child(1),
+    .grid-layout-row-wrap-3n > *:nth-last-child(2):nth-child(3n+1),
+    .grid-layout-row-wrap-3n > *:nth-last-child(2):nth-child(3n+2),
+    .grid-layout-row-wrap-3n > *:nth-last-child(3):nth-child(3n+1) {
+        margin-bottom: 0;
+    }
+
+    /* Row wrap with 4 cards in one row */
+    .grid-layout-row-wrap-4n > * {
+        max-width: 25%;
+        margin-bottom: 12px;
+        flex: 1 1 25%;
+        box-sizing: border-box;
+        padding-right: 6px;
+        padding-left: 6px;
+    }
+    .grid-layout-row-wrap-4n > *:nth-child(4n+1) {
+        padding-left: 0;
+    }
+    .grid-layout-row-wrap-4n > *:nth-child(4n+4) {
+        padding-right: 0;
+    }
+    .grid-layout-row-wrap-4n > *:nth-last-child(1),
+    .grid-layout-row-wrap-4n > *:nth-last-child(2):nth-child(4n+1),
+    .grid-layout-row-wrap-4n > *:nth-last-child(2):nth-child(4n+2),
+    .grid-layout-row-wrap-4n > *:nth-last-child(2):nth-child(4n+3),
+    .grid-layout-row-wrap-4n > *:nth-last-child(3):nth-child(4n+1),
+    .grid-layout-row-wrap-4n > *:nth-last-child(3):nth-child(4n+2),
+    .grid-layout-row-wrap-4n > *:nth-last-child(4):nth-child(4n+1) {
+        margin-bottom: 0;
+    }
+    /* Row wrap with 5 cards in one row */
+    .grid-layout-row-wrap-5n > * {
+        max-width: 20%;
+        margin-bottom: 12px;
+        flex: 1 1 20%;
+        box-sizing: border-box;
+        padding-right: 6px;
+        padding-left: 6px;
+    }
+    .grid-layout-row-wrap-5n > *:nth-child(5n+1) {
+        padding-left: 0;
+    }
+    .grid-layout-row-wrap-5n > *:nth-child(5n+5) {
+        padding-right: 0;
+    }
+    .grid-layout-row-wrap-5n > *:nth-last-child(1),
+    .grid-layout-row-wrap-5n > *:nth-last-child(2):nth-child(5n+1),
+    .grid-layout-row-wrap-5n > *:nth-last-child(2):nth-child(5n+2),
+    .grid-layout-row-wrap-5n > *:nth-last-child(2):nth-child(5n+3),
+    .grid-layout-row-wrap-5n > *:nth-last-child(3):nth-child(5n+1),
+    .grid-layout-row-wrap-5n > *:nth-last-child(3):nth-child(5n+2),
+    .grid-layout-row-wrap-5n > *:nth-last-child(4):nth-child(5n+1) {
+        margin-bottom: 0;
+    }
+
+    /* Buttons in a row */
+    .action-btn-row > .mat-button,
+    .action-btn-row > .mat-fab,
+    .action-btn-row > .mat-flat-button,
+    .action-btn-row > .mat-icon-button,
+    .action-btn-row > .mat-mini-fab,
+    .action-btn-row > .mat-raised-button,
+    .action-btn-row > .mat-stroked-button,
+    .action-btn-row > button,
+    .action-btn-row > * {
+        margin-right: 12px;
+    }
+    .action-btn-row > .mat-button:last-child,
+    .action-btn-row > .mat-fab:last-child,
+    .action-btn-row > .mat-flat-button:last-child,
+    .action-btn-row > .mat-icon-button:last-child,
+    .action-btn-row > .mat-mini-fab:last-child,
+    .action-btn-row > .mat-raised-button:last-child,
+    .action-btn-row > .mat-stroked-button:last-child,
+    .action-btn-row > button:last-child,
+    .action-btn-row > *:last-child {
+        margin-right: 0px;
+    }
+    
+    /* Buttons in a column */
+    .action-btn-col > .mat-button,
+    .action-btn-col > .mat-fab,
+    .action-btn-col > .mat-flat-button,
+    .action-btn-col > .mat-icon-button,
+    .action-btn-col > .mat-mini-fab,
+    .action-btn-col > .mat-raised-button,
+    .action-btn-col > .mat-stroked-button,
+    .action-btn-col > button {
+        margin-bottom: 12px;
+    }
+    .action-btn-col > .mat-button:last-child,
+    .action-btn-col > .mat-fab:last-child,
+    .action-btn-col > .mat-flat-button:last-child,
+    .action-btn-col > .mat-icon-button:last-child,
+    .action-btn-col > .mat-mini-fab:last-child,
+    .action-btn-col > .mat-raised-button:last-child,
+    .action-btn-col > .mat-stroked-button:last-child,
+    .action-btn-col > button:last-child {
+        margin-bottom: 0px;
+    }
+
+    .grid-layout-row-wrap-7n > * {
+        max-width: 14.28%;
+        margin-bottom: 12px;
+        flex: 1 1 14.28%;
+        box-sizing: border-box;
+        padding-right: 6px;
+        padding-left: 6px;
+    }
+    .grid-layout-row-wrap-7n > *:nth-child(7n+1) {
+        padding-left: 0;
+    }
+    .grid-layout-row-wrap-7n > *:nth-child(7n+7) {
+        padding-right: 0;
+    }
+    .grid-layout-row-wrap-7n > *:nth-last-child(1),
+    .grid-layout-row-wrap-7n > *:nth-last-child(2):nth-child(7n+1),
+    .grid-layout-row-wrap-7n > *:nth-last-child(2):nth-child(7n+2),
+    .grid-layout-row-wrap-7n > *:nth-last-child(2):nth-child(7n+3),
+    .grid-layout-row-wrap-7n > *:nth-last-child(2):nth-child(7n+4),
+    .grid-layout-row-wrap-7n > *:nth-last-child(2):nth-child(7n+5),
+    .grid-layout-row-wrap-7n > *:nth-last-child(2):nth-child(7n+6),
+    .grid-layout-row-wrap-7n > *:nth-last-child(3):nth-child(7n+1),
+    .grid-layout-row-wrap-7n > *:nth-last-child(3):nth-child(7n+2),
+    .grid-layout-row-wrap-7n > *:nth-last-child(3):nth-child(7n+3),
+    .grid-layout-row-wrap-7n > *:nth-last-child(3):nth-child(7n+4),
+    .grid-layout-row-wrap-7n > *:nth-last-child(3):nth-child(7n+5),
+    .grid-layout-row-wrap-7n > *:nth-last-child(4):nth-child(7n+1),
+    .grid-layout-row-wrap-7n > *:nth-last-child(4):nth-child(7n+2),
+    .grid-layout-row-wrap-7n > *:nth-last-child(4):nth-child(7n+3),
+    .grid-layout-row-wrap-7n > *:nth-last-child(4):nth-child(7n+4),
+    .grid-layout-row-wrap-7n > *:nth-last-child(5):nth-child(7n+1),
+    .grid-layout-row-wrap-7n > *:nth-last-child(5):nth-child(7n+2),
+    .grid-layout-row-wrap-7n > *:nth-last-child(5):nth-child(7n+3),
+    .grid-layout-row-wrap-7n > *:nth-last-child(6):nth-child(7n+1),
+    .grid-layout-row-wrap-7n > *:nth-last-child(6):nth-child(7n+2),
+    .grid-layout-row-wrap-7n > *:nth-last-child(7):nth-child(7n+1){
+        margin-bottom: 0;
+    }
+
+}
+
+@media only screen and (min-width: 1280px) and (max-width: 1439px) {
+
+    /* Responsive CSS for fxLayout=row */
+    .grid-layout-row > * {
+        margin-right: 16px;
+    }
+    .grid-layout-row > *:last-child {
+        margin-right: 0px;
+    }
+
+    /* Responsive CSS for fxLayout=column */
+    .grid-layout-column > * {
+        margin-bottom: 16px;
+    }
+    .grid-layout-column > *:last-child {
+        margin-bottom: 0px;
+    }
+
+    /* Row wrap with 2 cards in one row */
+    .grid-layout-row-wrap-2n > * {
+        max-width: 50%;
+        margin-bottom: 16px;
+        flex: 1 1 50%;
+        box-sizing: border-box;
+        padding-right: 8px;
+        padding-left: 8px;
+    }
+    .grid-layout-row-wrap-2n > *:nth-child(odd) {
+        padding-left: 0;
+    }
+    .grid-layout-row-wrap-2n > *:nth-child(even) {
+        padding-right: 0;
+    }
+    .grid-layout-row-wrap-2n > *:nth-last-child(1),
+    .grid-layout-row-wrap-2n > *:nth-last-child(2):nth-child(odd) {
+        margin-bottom: 0;
+    }
+
+    /* Row wrap with 3 cards in one row */
+    .grid-layout-row-wrap-3n > * {
+        max-width: 33.3%;
+        margin-bottom: 16px;
+        flex: 1 1 33.3%;
+        box-sizing: border-box;
+        padding-right: 8px;
+        padding-left: 8px;
+    }
+    .grid-layout-row-wrap-3n > *:nth-child(3n+1) {
+        padding-left: 0;
+    }
+    .grid-layout-row-wrap-3n > *:nth-child(3n+3) {
+        padding-right: 0;
+    }
+    .grid-layout-row-wrap-3n > *:nth-last-child(1),
+    .grid-layout-row-wrap-3n > *:nth-last-child(2):nth-child(3n+1),
+    .grid-layout-row-wrap-3n > *:nth-last-child(2):nth-child(3n+2),
+    .grid-layout-row-wrap-3n > *:nth-last-child(3):nth-child(3n+1) {
+        margin-bottom: 0;
+    }
+
+    /* Row wrap with 4 cards in one row */
+    .grid-layout-row-wrap-4n > * {
+        max-width: 25%;
+        margin-bottom: 16px;
+        flex: 1 1 25%;
+        box-sizing: border-box;
+        padding-right: 8px;
+        padding-left: 8px;
+    }
+    .grid-layout-row-wrap-4n > *:nth-child(4n+1) {
+        padding-left: 0;
+    }
+    .grid-layout-row-wrap-4n > *:nth-child(4n+4) {
+        padding-right: 0;
+    }
+    .grid-layout-row-wrap-4n > *:nth-last-child(1),
+    .grid-layout-row-wrap-4n > *:nth-last-child(2):nth-child(4n+1),
+    .grid-layout-row-wrap-4n > *:nth-last-child(2):nth-child(4n+2),
+    .grid-layout-row-wrap-4n > *:nth-last-child(2):nth-child(4n+3),
+    .grid-layout-row-wrap-4n > *:nth-last-child(3):nth-child(4n+1),
+    .grid-layout-row-wrap-4n > *:nth-last-child(3):nth-child(4n+2),
+    .grid-layout-row-wrap-4n > *:nth-last-child(4):nth-child(4n+1) {
+        margin-bottom: 0;
+    }
+    /* Row wrap with 5 cards in one row */
+    .grid-layout-row-wrap-5n > * {
+        max-width: 20%;
+        margin-bottom: 16px;
+        flex: 1 1 20%;
+        box-sizing: border-box;
+        padding-right: 8px;
+        padding-left: 8px;
+    }
+    .grid-layout-row-wrap-5n > *:nth-child(5n+1) {
+        padding-left: 0;
+    }
+    .grid-layout-row-wrap-5n > *:nth-child(5n+5) {
+        padding-right: 0;
+    }
+    .grid-layout-row-wrap-5n > *:nth-last-child(1),
+    .grid-layout-row-wrap-5n > *:nth-last-child(2):nth-child(5n+1),
+    .grid-layout-row-wrap-5n > *:nth-last-child(2):nth-child(5n+2),
+    .grid-layout-row-wrap-5n > *:nth-last-child(2):nth-child(5n+3),
+    .grid-layout-row-wrap-5n > *:nth-last-child(3):nth-child(5n+1),
+    .grid-layout-row-wrap-5n > *:nth-last-child(3):nth-child(5n+2),
+    .grid-layout-row-wrap-5n > *:nth-last-child(4):nth-child(5n+1) {
+        margin-bottom: 0;
+    }
+
+    /* Buttons in a row */
+    .action-btn-row > .mat-button,
+    .action-btn-row > .mat-fab,
+    .action-btn-row > .mat-flat-button,
+    .action-btn-row > .mat-icon-button,
+    .action-btn-row > .mat-mini-fab,
+    .action-btn-row > .mat-raised-button,
+    .action-btn-row > .mat-stroked-button,
+    .action-btn-row > button,
+    .action-btn-row > * {
+        margin-right: 16px;
+    }
+    .action-btn-row > .mat-button:last-child,
+    .action-btn-row > .mat-fab:last-child,
+    .action-btn-row > .mat-flat-button:last-child,
+    .action-btn-row > .mat-icon-button:last-child,
+    .action-btn-row > .mat-mini-fab:last-child,
+    .action-btn-row > .mat-raised-button:last-child,
+    .action-btn-row > .mat-stroked-button:last-child,
+    .action-btn-row > button:last-child,
+    .action-btn-row > *:last-child {
+        margin-right: 0px;
+    }
+
+    /* Buttons in a column */
+    .action-btn-col > .mat-button,
+    .action-btn-col > .mat-fab,
+    .action-btn-col > .mat-flat-button,
+    .action-btn-col > .mat-icon-button,
+    .action-btn-col > .mat-mini-fab,
+    .action-btn-col > .mat-raised-button,
+    .action-btn-col > .mat-stroked-button,
+    .action-btn-col > button {
+        margin-bottom: 16px;
+    }
+    .action-btn-col > .mat-button:last-child,
+    .action-btn-col > .mat-fab:last-child,
+    .action-btn-col > .mat-flat-button:last-child,
+    .action-btn-col > .mat-icon-button:last-child,
+    .action-btn-col > .mat-mini-fab:last-child,
+    .action-btn-col > .mat-raised-button:last-child,
+    .action-btn-col > .mat-stroked-button:last-child,
+    .action-btn-col > button:last-child {
+        margin-bottom: 0px;
+    }    
+
+    .grid-layout-row-wrap-7n > * {
+        max-width: 14.28%;
+        margin-bottom: 16px;
+        flex: 1 1 14.28%;
+        box-sizing: border-box;
+        padding-right: 8px;
+        padding-left: 8px;
+    }
+    .grid-layout-row-wrap-7n > *:nth-child(7n+1) {
+        padding-left: 0;
+    }
+    .grid-layout-row-wrap-7n > *:nth-child(7n+7) {
+        padding-right: 0;
+    }
+    .grid-layout-row-wrap-7n > *:nth-last-child(1),
+    .grid-layout-row-wrap-7n > *:nth-last-child(2):nth-child(7n+1),
+    .grid-layout-row-wrap-7n > *:nth-last-child(2):nth-child(7n+2),
+    .grid-layout-row-wrap-7n > *:nth-last-child(2):nth-child(7n+3),
+    .grid-layout-row-wrap-7n > *:nth-last-child(2):nth-child(7n+4),
+    .grid-layout-row-wrap-7n > *:nth-last-child(2):nth-child(7n+5),
+    .grid-layout-row-wrap-7n > *:nth-last-child(2):nth-child(7n+6),
+    .grid-layout-row-wrap-7n > *:nth-last-child(3):nth-child(7n+1),
+    .grid-layout-row-wrap-7n > *:nth-last-child(3):nth-child(7n+2),
+    .grid-layout-row-wrap-7n > *:nth-last-child(3):nth-child(7n+3),
+    .grid-layout-row-wrap-7n > *:nth-last-child(3):nth-child(7n+4),
+    .grid-layout-row-wrap-7n > *:nth-last-child(3):nth-child(7n+5),
+    .grid-layout-row-wrap-7n > *:nth-last-child(4):nth-child(7n+1),
+    .grid-layout-row-wrap-7n > *:nth-last-child(4):nth-child(7n+2),
+    .grid-layout-row-wrap-7n > *:nth-last-child(4):nth-child(7n+3),
+    .grid-layout-row-wrap-7n > *:nth-last-child(4):nth-child(7n+4),
+    .grid-layout-row-wrap-7n > *:nth-last-child(5):nth-child(7n+1),
+    .grid-layout-row-wrap-7n > *:nth-last-child(5):nth-child(7n+2),
+    .grid-layout-row-wrap-7n > *:nth-last-child(5):nth-child(7n+3),
+    .grid-layout-row-wrap-7n > *:nth-last-child(6):nth-child(7n+1),
+    .grid-layout-row-wrap-7n > *:nth-last-child(6):nth-child(7n+2),
+    .grid-layout-row-wrap-7n > *:nth-last-child(7):nth-child(7n+1){
+        margin-bottom: 0;
+    }
+
+}
+
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+    /* Responsive CSS for fxLayout=row */
+    .grid-layout-row > * {
+        margin-right: 20px;
+    }
+    .grid-layout-row > *:last-child {
+        margin-right: 0px;
+    }
+
+    /* Responsive CSS for fxLayout=column */
+    .grid-layout-column > * {
+        margin-bottom: 20px;
+    }
+    .grid-layout-column > *:last-child {
+        margin-bottom: 0px;
+    }
+
+    /* Row wrap with 2 cards in one row */
+    .grid-layout-row-wrap-2n > * {
+        max-width: 50%;
+        margin-bottom: 20px;
+        flex: 1 1 50%;
+        box-sizing: border-box;
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+    .grid-layout-row-wrap-2n > *:nth-child(odd) {
+        padding-left: 0;
+    }
+    .grid-layout-row-wrap-2n > *:nth-child(even) {
+        padding-right: 0;
+    }
+    .grid-layout-row-wrap-2n > *:nth-last-child(1),
+    .grid-layout-row-wrap-2n > *:nth-last-child(2):nth-child(odd) {
+        margin-bottom: 0;
+    }
+
+    /* Row wrap with 3 cards in one row */
+    .grid-layout-row-wrap-3n > * {
+        max-width: 33.3%;
+        margin-bottom: 20px;
+        flex: 1 1 33.3%;
+        box-sizing: border-box;
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+    .grid-layout-row-wrap-3n > *:nth-child(3n+1) {
+        padding-left: 0;
+    }
+    .grid-layout-row-wrap-3n > *:nth-child(3n+3) {
+        padding-right: 0;
+    }
+    .grid-layout-row-wrap-3n > *:nth-last-child(1),
+    .grid-layout-row-wrap-3n > *:nth-last-child(2):nth-child(3n+1),
+    .grid-layout-row-wrap-3n > *:nth-last-child(2):nth-child(3n+2),
+    .grid-layout-row-wrap-3n > *:nth-last-child(3):nth-child(3n+1) {
+        margin-bottom: 0;
+    }
+
+    /* Row wrap with 4 cards in one row */
+    .grid-layout-row-wrap-4n > * {
+        max-width: 25%;
+        margin-bottom: 20px;
+        flex: 1 1 25%;
+        box-sizing: border-box;
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+    .grid-layout-row-wrap-4n > *:nth-child(4n+1) {
+        padding-left: 0;
+    }
+    .grid-layout-row-wrap-4n > *:nth-child(4n+4) {
+        padding-right: 0;
+    }
+    .grid-layout-row-wrap-4n > *:nth-last-child(1),
+    .grid-layout-row-wrap-4n > *:nth-last-child(2):nth-child(4n+1),
+    .grid-layout-row-wrap-4n > *:nth-last-child(2):nth-child(4n+2),
+    .grid-layout-row-wrap-4n > *:nth-last-child(2):nth-child(4n+3),
+    .grid-layout-row-wrap-4n > *:nth-last-child(3):nth-child(4n+1),
+    .grid-layout-row-wrap-4n > *:nth-last-child(3):nth-child(4n+2),
+    .grid-layout-row-wrap-4n > *:nth-last-child(4):nth-child(4n+1) {
+        margin-bottom: 0;
+    }
+
+    /* Row wrap with 5 cards in one row */
+    .grid-layout-row-wrap-5n > * {
+        max-width: 20%;
+        margin-bottom: 20px;
+        flex: 1 1 20%;
+        box-sizing: border-box;
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+    .grid-layout-row-wrap-5n > *:nth-child(5n+1) {
+        padding-left: 0;
+    }
+    .grid-layout-row-wrap-5n > *:nth-child(5n+5) {
+        padding-right: 0;
+    }
+    .grid-layout-row-wrap-5n > *:nth-last-child(1),
+    .grid-layout-row-wrap-5n > *:nth-last-child(2):nth-child(5n+1),
+    .grid-layout-row-wrap-5n > *:nth-last-child(2):nth-child(5n+2),
+    .grid-layout-row-wrap-5n > *:nth-last-child(2):nth-child(5n+3),
+    .grid-layout-row-wrap-5n > *:nth-last-child(3):nth-child(5n+1),
+    .grid-layout-row-wrap-5n > *:nth-last-child(3):nth-child(5n+2),
+    .grid-layout-row-wrap-5n > *:nth-last-child(4):nth-child(5n+1) {
+        margin-bottom: 0;
+    }
+    /* Buttons in a row */
+    .action-btn-row > .mat-button,
+    .action-btn-row > .mat-fab,
+    .action-btn-row > .mat-flat-button,
+    .action-btn-row > .mat-icon-button,
+    .action-btn-row > .mat-mini-fab,
+    .action-btn-row > .mat-raised-button,
+    .action-btn-row > .mat-stroked-button,
+    .action-btn-row > button,
+    .action-btn-row > * {
+        margin-right: 20px;
+    }
+    .action-btn-row > .mat-button:last-child,
+    .action-btn-row > .mat-fab:last-child,
+    .action-btn-row > .mat-flat-button:last-child,
+    .action-btn-row > .mat-icon-button:last-child,
+    .action-btn-row > .mat-mini-fab:last-child,
+    .action-btn-row > .mat-raised-button:last-child,
+    .action-btn-row > .mat-stroked-button:last-child,
+    .action-btn-row > button:last-child,
+    .action-btn-row > *:last-child {
+        margin-right: 0px;
+    }
+
+    /* Buttons in a column */
+    .action-btn-col > .mat-button,
+    .action-btn-col > .mat-fab,
+    .action-btn-col > .mat-flat-button,
+    .action-btn-col > .mat-icon-button,
+    .action-btn-col > .mat-mini-fab,
+    .action-btn-col > .mat-raised-button,
+    .action-btn-col > .mat-stroked-button,
+    .action-btn-col > button {
+        margin-bottom: 20px;
+    }
+    .action-btn-col > .mat-button:last-child,
+    .action-btn-col > .mat-fab:last-child,
+    .action-btn-col > .mat-flat-button:last-child,
+    .action-btn-col > .mat-icon-button:last-child,
+    .action-btn-col > .mat-mini-fab:last-child,
+    .action-btn-col > .mat-raised-button:last-child,
+    .action-btn-col > .mat-stroked-button:last-child,
+    .action-btn-col > button:last-child {
+        margin-bottom: 0px;
+    }
+
+    .grid-layout-row-wrap-7n > * {
+        max-width: 14.28%;
+        margin-bottom: 20px;
+        flex: 1 1 14.28%;
+        box-sizing: border-box;
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+    .grid-layout-row-wrap-7n > *:nth-child(7n+1) {
+        padding-left: 0;
+    }
+    .grid-layout-row-wrap-7n > *:nth-child(7n+7) {
+        padding-right: 0;
+    }
+    .grid-layout-row-wrap-7n > *:nth-last-child(1),
+    .grid-layout-row-wrap-7n > *:nth-last-child(2):nth-child(7n+1),
+    .grid-layout-row-wrap-7n > *:nth-last-child(2):nth-child(7n+2),
+    .grid-layout-row-wrap-7n > *:nth-last-child(2):nth-child(7n+3),
+    .grid-layout-row-wrap-7n > *:nth-last-child(2):nth-child(7n+4),
+    .grid-layout-row-wrap-7n > *:nth-last-child(2):nth-child(7n+5),
+    .grid-layout-row-wrap-7n > *:nth-last-child(2):nth-child(7n+6),
+    .grid-layout-row-wrap-7n > *:nth-last-child(3):nth-child(7n+1),
+    .grid-layout-row-wrap-7n > *:nth-last-child(3):nth-child(7n+2),
+    .grid-layout-row-wrap-7n > *:nth-last-child(3):nth-child(7n+3),
+    .grid-layout-row-wrap-7n > *:nth-last-child(3):nth-child(7n+4),
+    .grid-layout-row-wrap-7n > *:nth-last-child(3):nth-child(7n+5),
+    .grid-layout-row-wrap-7n > *:nth-last-child(4):nth-child(7n+1),
+    .grid-layout-row-wrap-7n > *:nth-last-child(4):nth-child(7n+2),
+    .grid-layout-row-wrap-7n > *:nth-last-child(4):nth-child(7n+3),
+    .grid-layout-row-wrap-7n > *:nth-last-child(4):nth-child(7n+4),
+    .grid-layout-row-wrap-7n > *:nth-last-child(5):nth-child(7n+1),
+    .grid-layout-row-wrap-7n > *:nth-last-child(5):nth-child(7n+2),
+    .grid-layout-row-wrap-7n > *:nth-last-child(5):nth-child(7n+3),
+    .grid-layout-row-wrap-7n > *:nth-last-child(6):nth-child(7n+1),
+    .grid-layout-row-wrap-7n > *:nth-last-child(6):nth-child(7n+2),
+    .grid-layout-row-wrap-7n > *:nth-last-child(7):nth-child(7n+1){
+        margin-bottom: 0;
+    }
+
+}
+
+@media only screen and (min-width: 1920px) {
+    /* Responsive CSS for fxLayout=row */
+    .grid-layout-row > * {
+        margin-right: 24px;
+    }
+    .grid-layout-row > *:last-child {
+        margin-right: 0px;
+    }
+
+    /* Responsive CSS for fxLayout=column */
+    .grid-layout-column > * {
+        margin-bottom: 24px;
+    }
+    .grid-layout-column > *:last-child {
+        margin-bottom: 0px;
+    }
+
+    /* Row wrap with 2 cards in one row */
+    .grid-layout-row-wrap-2n > * {
+        max-width: 50%;
+        margin-bottom: 24px;
+        flex: 1 1 50%;
+        box-sizing: border-box;
+        padding-right: 12px;
+        padding-left: 12px;
+    }
+    .grid-layout-row-wrap-2n > *:nth-child(odd) {
+        padding-left: 0;
+    }
+    .grid-layout-row-wrap-2n > *:nth-child(even) {
+        padding-right: 0;
+    }
+    .grid-layout-row-wrap-2n > *:nth-last-child(1),
+    .grid-layout-row-wrap-2n > *:nth-last-child(2):nth-child(odd) {
+        margin-bottom: 0;
+    }
+
+    /* Row wrap with 3 cards in one row */
+    .grid-layout-row-wrap-3n > * {
+        max-width: 33.3%;
+        margin-bottom: 24px;
+        flex: 1 1 33.3%;
+        box-sizing: border-box;
+        padding-right: 12px;
+        padding-left: 12px;
+    }
+    .grid-layout-row-wrap-3n > *:nth-child(3n+1) {
+        padding-left: 0;
+    }
+    .grid-layout-row-wrap-3n > *:nth-child(3n+3) {
+        padding-right: 0;
+    }
+    .grid-layout-row-wrap-3n > *:nth-last-child(1),
+    .grid-layout-row-wrap-3n > *:nth-last-child(2):nth-child(3n+1),
+    .grid-layout-row-wrap-3n > *:nth-last-child(2):nth-child(3n+2),
+    .grid-layout-row-wrap-3n > *:nth-last-child(3):nth-child(3n+1) {
+        margin-bottom: 0;
+    }
+
+    /* Row wrap with 4 cards in one row */
+    .grid-layout-row-wrap-4n > * {
+        max-width: 25%;
+        margin-bottom: 24px;
+        flex: 1 1 25%;
+        box-sizing: border-box;
+        padding-right: 12px;
+        padding-left: 12px;
+    }
+    .grid-layout-row-wrap-4n > *:nth-child(4n+1) {
+        padding-left: 0;
+    }
+    .grid-layout-row-wrap-4n > *:nth-child(4n+4) {
+        padding-right: 0;
+    }
+    .grid-layout-row-wrap-4n > *:nth-last-child(1),
+    .grid-layout-row-wrap-4n > *:nth-last-child(2):nth-child(4n+1),
+    .grid-layout-row-wrap-4n > *:nth-last-child(2):nth-child(4n+2),
+    .grid-layout-row-wrap-4n > *:nth-last-child(2):nth-child(4n+3),
+    .grid-layout-row-wrap-4n > *:nth-last-child(3):nth-child(4n+1),
+    .grid-layout-row-wrap-4n > *:nth-last-child(3):nth-child(4n+2),
+    .grid-layout-row-wrap-4n > *:nth-last-child(4):nth-child(4n+1) {
+        margin-bottom: 0;
+    }
+
+    /* Row wrap with 4 cards in one row */
+    .grid-layout-row-wrap-5n > * {
+        max-width: 20%;
+        margin-bottom: 24px;
+        flex: 1 1 20%;
+        box-sizing: border-box;
+        padding-right: 12px;
+        padding-left: 12px;
+    }
+    .grid-layout-row-wrap-5n > *:nth-child(5n+1) {
+        padding-left: 0;
+    }
+    .grid-layout-row-wrap-5n > *:nth-child(5n+5) {
+        padding-right: 0;
+    }
+    .grid-layout-row-wrap-5n > *:nth-last-child(1),
+    .grid-layout-row-wrap-5n > *:nth-last-child(2):nth-child(5n+1),
+    .grid-layout-row-wrap-5n > *:nth-last-child(2):nth-child(5n+2),
+    .grid-layout-row-wrap-5n > *:nth-last-child(2):nth-child(5n+3),
+    .grid-layout-row-wrap-5n > *:nth-last-child(3):nth-child(5n+1),
+    .grid-layout-row-wrap-5n > *:nth-last-child(3):nth-child(5n+2),
+    .grid-layout-row-wrap-5n > *:nth-last-child(4):nth-child(5n+1) {
+        margin-bottom: 0;
+    }
+    /* Buttons in a row */
+    .action-btn-row > .mat-button,
+    .action-btn-row > .mat-fab,
+    .action-btn-row > .mat-flat-button,
+    .action-btn-row > .mat-icon-button,
+    .action-btn-row > .mat-mini-fab,
+    .action-btn-row > .mat-raised-button,
+    .action-btn-row > .mat-stroked-button,
+    .action-btn-row > button,
+    .action-btn-row > * {
+        margin-right: 24px;
+    }
+    .action-btn-row > .mat-button:last-child,
+    .action-btn-row > .mat-fab:last-child,
+    .action-btn-row > .mat-flat-button:last-child,
+    .action-btn-row > .mat-icon-button:last-child,
+    .action-btn-row > .mat-mini-fab:last-child,
+    .action-btn-row > .mat-raised-button:last-child,
+    .action-btn-row > .mat-stroked-button:last-child,
+    .action-btn-row > button:last-child,
+    .action-btn-row > *:last-child {
+        margin-right: 0px;
+    }
+
+    /* Buttons in a column */
+    .action-btn-col > .mat-button,
+    .action-btn-col > .mat-fab,
+    .action-btn-col > .mat-flat-button,
+    .action-btn-col > .mat-icon-button,
+    .action-btn-col > .mat-mini-fab,
+    .action-btn-col > .mat-raised-button,
+    .action-btn-col > .mat-stroked-button,
+    .action-btn-col > button {
+        margin-bottom: 24px;
+    }
+    .action-btn-col > .mat-button:last-child,
+    .action-btn-col > .mat-fab:last-child,
+    .action-btn-col > .mat-flat-button:last-child,
+    .action-btn-col > .mat-icon-button:last-child,
+    .action-btn-col > .mat-mini-fab:last-child,
+    .action-btn-col > .mat-raised-button:last-child,
+    .action-btn-col > .mat-stroked-button:last-child,
+    .action-btn-col > button:last-child {
+        margin-bottom: 0px;
+    }
+
+    /* Row wrap with 7 cards in one row */
+    .grid-layout-row-wrap-7n > * {
+        max-width: 14.28%;
+        margin-bottom: 24px;
+        flex: 1 1 14.28%;
+        box-sizing: border-box;
+        padding-right: 12px;
+        padding-left: 12px;
+    }
+    .grid-layout-row-wrap-7n > *:nth-child(7n+1) {
+        padding-left: 0;
+    }
+    .grid-layout-row-wrap-7n > *:nth-child(7n+7) {
+        padding-right: 0;
+    }
+    .grid-layout-row-wrap-7n > *:nth-last-child(1),
+    .grid-layout-row-wrap-7n > *:nth-last-child(2):nth-child(7n+1),
+    .grid-layout-row-wrap-7n > *:nth-last-child(2):nth-child(7n+2),
+    .grid-layout-row-wrap-7n > *:nth-last-child(2):nth-child(7n+3),
+    .grid-layout-row-wrap-7n > *:nth-last-child(2):nth-child(7n+4),
+    .grid-layout-row-wrap-7n > *:nth-last-child(2):nth-child(7n+5),
+    .grid-layout-row-wrap-7n > *:nth-last-child(2):nth-child(7n+6),
+    .grid-layout-row-wrap-7n > *:nth-last-child(3):nth-child(7n+1),
+    .grid-layout-row-wrap-7n > *:nth-last-child(3):nth-child(7n+2),
+    .grid-layout-row-wrap-7n > *:nth-last-child(3):nth-child(7n+3),
+    .grid-layout-row-wrap-7n > *:nth-last-child(3):nth-child(7n+4),
+    .grid-layout-row-wrap-7n > *:nth-last-child(3):nth-child(7n+5),
+    .grid-layout-row-wrap-7n > *:nth-last-child(4):nth-child(7n+1),
+    .grid-layout-row-wrap-7n > *:nth-last-child(4):nth-child(7n+2),
+    .grid-layout-row-wrap-7n > *:nth-last-child(4):nth-child(7n+3),
+    .grid-layout-row-wrap-7n > *:nth-last-child(4):nth-child(7n+4),
+    .grid-layout-row-wrap-7n > *:nth-last-child(5):nth-child(7n+1),
+    .grid-layout-row-wrap-7n > *:nth-last-child(5):nth-child(7n+2),
+    .grid-layout-row-wrap-7n > *:nth-last-child(5):nth-child(7n+3),
+    .grid-layout-row-wrap-7n > *:nth-last-child(6):nth-child(7n+1),
+    .grid-layout-row-wrap-7n > *:nth-last-child(6):nth-child(7n+2),
+    .grid-layout-row-wrap-7n > *:nth-last-child(7):nth-child(7n+1){
+        margin-bottom: 0;
+    }
+
+}

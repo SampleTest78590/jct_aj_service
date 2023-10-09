@@ -1,0 +1,34 @@
+.cstm-input {
+    .inputs-container {
+        display: flex;
+        flex-direction: row;
+
+        input {
+            text-align: center;
+            padding: 8px 2px;
+            display: block;
+            width: 100%;
+
+            &:not(:last-child) {
+                margin-right: 8px;
+            }
+
+            &:disabled {
+                border-color: var(--light-text-grey-80);
+                color: var(--light-text-grey-80);
+                opacity: 0.3;
+            }
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Firefox */
+        input[type='number'] {
+            -moz-appearance: textfield;
+        }
+    }
+}

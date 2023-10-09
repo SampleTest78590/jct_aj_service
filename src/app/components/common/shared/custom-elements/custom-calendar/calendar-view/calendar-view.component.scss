@@ -1,0 +1,96 @@
+@import '../../styles/mixins/text';
+
+.calendar-container {
+    width: 310px;
+    background-color: var(--white);
+    border-radius: 24px;
+    margin-left: 5px;
+    overflow: hidden;
+    box-shadow: 0px 4px 16px rgb(0 0 0 / 16%);
+
+    .header-container {
+        padding: 10px 10px 15px 10px;
+        display: flex;
+        flex-direction: row;
+
+        .calendar-btn {
+            width: 48px;
+            padding: 0!important;
+            justify-content: center;
+        }
+        .back-btn {
+            padding: 12px 6px;
+            img {
+                width: 36px;
+            }
+        }
+        img {
+            // filter: brightness(0) saturate(100%) invert(22%) sepia(89%)
+            //     saturate(883%) hue-rotate(166deg) brightness(91%) contrast(91%);
+            width: 30px;
+        }
+
+        .month-year-selector {
+            margin: 10px 6px 0 6px;
+            display: flex;
+            flex-direction: row;
+
+            .selector-btn {
+                width: 90px;
+                display: flex;
+                flex-direction: row;
+                // justify-content: space-between;
+                margin: 0 6px;
+                height: 30px;
+                padding: 0;
+                justify-content: center;
+
+                &.active {
+                    border-color: var(--light-primary-60);
+                    background-color: var(--light-primary-20);
+                }
+            }
+        }
+    }
+
+    .date-picker-section {
+        padding: 8px;
+        position: relative;
+
+        .month-year-view-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .footer-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: 24px;
+
+        .divider-line {
+            width: 100%;
+        }
+
+        .footer-date-picker {
+            @include applyTextStyle('text-body-s-bold');
+            margin: 8px 0;
+        }
+
+        .footer-btn-container {
+            // padding: 0 24px;
+            width: calc(100% - 30px);
+            padding: 0 15px;
+
+            .footer-btn {
+                width: 100%;
+                margin:0;
+                justify-content: center;
+            }
+        }
+    }
+}

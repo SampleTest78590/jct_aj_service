@@ -1,0 +1,88 @@
+<div fxLayout="column" fxLayoutGap="16px" class="number-cells-section">
+  <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="16px">
+    <div class="grey-100 lh-24 sub-title-text extra-bold">Number of Calls</div>
+    <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="40px">
+      <div fxLayout="row" fxLayoutGap="16px" *ngIf="!noOfCall">
+        <div fxLayout="row" fxLayoutGap="6px" fxLayoutAlign="center center">
+          <div class="dot-circle tot-leads-dot"></div>
+          <div>Total Missed Calls</div>
+        </div>
+        <div fxLayout="row" fxLayoutGap="6px" fxLayoutAlign="center center">
+          <div class="dot-circle con-calls-dot"></div>
+          <div>Unique Calls</div>
+        </div>
+        <div fxLayout="row" fxLayoutGap="6px" fxLayoutAlign="center center">
+          <div class="dot-circle failed-calls-dot"></div>
+          <div>Repeated Calls</div>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutGap="8px">
+        <div class="switch-bttn" [ngClass]="{active:!noOfCall}" (click)="noOfCall=false"><img
+            src="assets/images/svg/ico-view-list.svg" class="ico-standard" alt="" />
+        </div>
+        <div class="switch-bttn" [ngClass]="{active:noOfCall}" (click)="noOfCall=true"><img
+            src="assets/images/svg/ico-table-view-list.svg" class="ico-standard" alt="" /></div>
+      </div>
+    </div>
+  </div>
+  <div fxLayout="column">
+    <div class="position-relative" *ngIf="!noOfCall">
+      <ng-container *ngIf="chartsData">
+        <app-calls-line-chart [chartData]="campLinechart"  [nullStateMsg]="nullstateMsg"></app-calls-line-chart>
+      </ng-container>
+    </div>
+    <div *ngIf="noOfCall" class="custom-table">
+      <div fxLayout="row" fxLayoutAlign="space-between start" class="custom-table-header-content">
+        <div fxLayout="column" fxFlex="25" class="custom-table-header">
+          <div>Time</div>
+        </div>
+        <div fxLayout="column" fxFlex="25" class="custom-table-header">
+          <div>Total Missed Calls</div>
+        </div>
+        <div fxLayout="column" fxFlex="25" class="custom-table-header">
+          <div>Unique Calls</div>
+        </div>
+        <div fxLayout="column" fxFlex="25" class="custom-table-header">
+          <div>Repeated Calls</div>
+        </div>
+      </div>
+      <div class="scrollable-content scrollable-content mr-minus-1" [style.overflow]="'auto'"
+        [style.overflow-x]="'hidden'" [style.max-height.vh]="'70'" *ngIf="!!callsTable.length">
+        <div fxLayout="row" fxLayoutAlign="space-between start" class="custom-table-content"
+          *ngFor="let element of callsTable  | slice:12*(pageIndex-1):12*pageIndex;let i=index">
+          <div class="contact-list-details" fxFlex="25">
+            <div fxFlex="100">
+              {{element.time}}
+            </div>
+          </div>
+          <div class="contact-list-details" fxFlex="25">
+            <div fxFlex="100">
+              {{element.totalCalls}}
+            </div>
+          </div>
+          <div class="contact-list-details" fxFlex="25">
+            <div fxFlex="100">
+              {{element.uniqueCalls}}
+            </div>
+          </div>
+          <div class="contact-list-details" fxFlex="25">
+            <div fxFlex="100">
+              {{element.repeatedCall}}
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div *ngIf="!!!callsTable.length" class="text-center mt-30">
+        No Data Found
+      </div>
+
+      <div *ngIf="!!callsTable.length">
+        <app-custom-pagination [pageIndex]="pageIndex" [total]="chartsData.label?.length" [pageSize]="12"
+          (returnPage)="returnPage($event)" [pageSizeOptions]="[5, 10, 20]">
+        </app-custom-pagination>
+      </div>
+    </div>
+  </div>
+</div>

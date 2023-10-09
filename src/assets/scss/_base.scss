@@ -1,0 +1,183 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,body{
+  height: 100%;
+}
+
+body {
+  background: var(--light-primary-grey-40);
+  font-size: 14px;
+  color: var(--global-black);
+}
+
+.mat-drawer-container,
+.mat-card,
+.mat-list-item,
+.mat-list-base .mat-list-item,
+.mat-expansion-panel-content,
+.mat-expansion-panel,
+.mat-dialog-actions,
+.mat-table,
+.mat-header-cell,
+.mat-cell,
+.mat-footer-cell,
+.mat-tab-group,
+.mat-form-field,
+.mat-input-element,
+.mat-checkbox,
+.mat-radio-button,
+.mat-select,
+.mat-option,
+.mat-option.mat-active,
+.mat-tab-label,
+.mat-tab-link,
+.mat-chip,
+.mat-basic-chip,
+input {
+  color: var(--light-primary-grey-80);
+  font-size: 14px;
+  font-family: var(--font-familiy) !important;
+  
+}
+a {
+  font-family: var(--font-familiy) !important;
+}
+
+/* Mat-icon specific CSS */
+.mat-small,
+.mat-caption,
+.mat-button,
+.mat-flat-button,
+.mat-fab,
+.mat-mini-fab,
+.mat-raised-button,
+.mat-icon-button,
+.mat-stroked-button,
+.mat-stepper-vertical,
+.mat-stepper-horizontal,
+pre {
+  font-family: var(--font-familiy) !important;
+}
+.mat-button, 
+.mat-fab, 
+.mat-flat-button, 
+.mat-icon-button, 
+.mat-mini-fab, 
+.mat-raised-button, 
+.mat-stroked-button {
+  font-weight: 400;
+}
+.mat-card{
+  .mat-card-title {
+    font-size: 14px;
+  }
+}
+
+.mat-card:not([class*=mat-elevation-z]) {
+  box-shadow: 0px 0px 6px #00000029;
+  -webkit-box-shadow: 0px 0px 6px #00000029;
+  border-radius:8px;
+}
+
+.mat-dialog-title, 
+.mat-dialog-container {
+  background: var(--modal-bg-color);
+  color: var(--modal-text-color);
+  font-family: var(--font-familiy) !important;
+}
+.mat-expansion-panel-body {
+  font-weight: 300;
+}
+.mat-chip {
+  font-weight: 400;
+}
+.mat-tab-label,
+.mat-tab-link {
+  font-weight: 300;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 500;
+}
+.mat-button-focus-overlay {
+  background: transparent !important;
+}
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  background: transparent;
+}
+
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  body {
+    font-size: 16px;
+  }
+  .mat-drawer-container,
+  .mat-card,
+  .mat-list-item,
+  .mat-list-base .mat-list-item,
+  .mat-expansion-panel-content,
+  .mat-expansion-panel,
+  .mat-dialog-actions,
+  .mat-table,
+  .mat-header-cell,
+  .mat-cell,
+  .mat-footer-cell,
+  .mat-tab-group,
+  .mat-form-field,
+  .mat-input-element,
+  .mat-checkbox,
+  .mat-radio-button,
+  .mat-select,
+  .mat-option,
+  .mat-option.mat-active,
+  .mat-tab-label,
+  .mat-tab-link,
+  .mat-chip,
+  .mat-basic-chip {
+    font-size: 16px;
+  }
+  .mat-card {
+    .mat-card-title {
+      font-size: 16px;
+    }
+  }
+}
+
+@media only screen and (min-width: 1920px) {
+  body {
+    font-size: 18px;
+  }
+  .mat-drawer-container,
+  .mat-card,
+  .mat-list-item,
+  .mat-list-base .mat-list-item,
+  .mat-expansion-panel-content,
+  .mat-expansion-panel,
+  .mat-dialog-actions,
+  .mat-table,
+  .mat-header-cell,
+  .mat-cell,
+  .mat-footer-cell,
+  .mat-tab-group,
+  .mat-form-field,
+  .mat-input-element,
+  .mat-checkbox,
+  .mat-radio-button,
+  .mat-select,
+  .mat-option,
+  .mat-option.mat-active,
+  .mat-tab-label,
+  .mat-tab-link,
+  .mat-chip,
+  .mat-basic-chip {
+    font-size: 18px;
+  }
+  .mat-card {
+    .mat-card-title {
+      font-size: 18px;
+    }
+  }
+}

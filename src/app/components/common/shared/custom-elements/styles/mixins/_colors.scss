@@ -1,0 +1,5 @@
+@mixin cssColorVariable() {
+    @each $key, $value in $colors {
+        --#{""+$key}: #{$value};
+    }
+}

@@ -1,0 +1,16 @@
+<div fxLayout="column" class="campaign-action-modal">
+    <div fxLayout="row" fxLayoutAlign="end end" class="mb-12">
+        <button class="tertiary-button-icon close-btn ico-close-right-top" (click)="onModalClose()">
+            <img src="assets/images/svg/ico-close-blue.svg" alt="close" />
+        </button>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="16px" class="ml-20 mr-20">
+        <div class="test-campaign-header header">{{ header }}</div>
+        <div class="test-campaign-sub-title grey-100 sub-title-text bold lh-24">{{ subheader }}</div>
+    </div>
+    <div fxLayout="row" fxLayoutGap="12px" fxLayoutAlign="end end" class="mt-32 ml-20 mr-20 mb-20"> 
+        <button type="button"
+            class="large-secondary-button" (click)="onModalClose()"> {{cancelText}} </button>
+        <button type="button" class="large-primary-button" (click)="actionModal()">{{buttonText}}</button>
+    </div>
+</div>

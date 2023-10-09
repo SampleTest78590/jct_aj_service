@@ -1,0 +1,86 @@
+.campaign-schedule-root .count-text {
+  font-weight: 500;
+}
+.campaign-schedule-root .text-color-id {
+  color: var(--light-primary-grey-100);
+}
+.campaign-schedule-root .radio-button {
+  border-radius: 8px;
+  border: 1px solid var(--light-primary-grey-40);
+  padding: 12px;
+  display: inline-block;
+  min-height: 96px;
+}
+.create-campaign-search .search-icon {
+  position: absolute;
+  top: 30px;
+  left: 10px;
+}
+.create-campaign-search .cstm-input input {
+  text-indent: 18px;
+}
+
+.campaign-schedule-root  .cstm-input ::placeholder,
+.campaign-schedule-root  .cstm-textarea ::placeholder{
+  font-size: var(--font-size-body);
+}
+.campaign-schedule-root .checked ~ div .body-text {
+  font-weight: 500;
+  font-size: (--font-size-body);
+  // line-height: 20px;
+  color: var(--light-primary-grey-100);
+}
+
+.campaign-schedule-root .tertiary-button-icon:hover img {
+  filter: none!important;
+}
+
+.campaign-schedule-root .pl-20{
+  padding-left: 20px !important;
+}
+.campaign-schedule-root .cust-camp-table-data .separator-right{
+  border-right: 1px solid var(--light-primary-grey-40);
+}
+
+.campaign-schedule-root .custom-table-header-content .separator-right {
+  border-right: 1px solid var(--white) !important;
+}
+
+.campaign-schedule-root .content-modal-action {
+    height: calc(100vh - 64px) !important;
+}
+.campaign-schedule-root .label-chip{
+  padding: 0px 8px;
+  color: var(--light-feedback-success-50);
+  height: 16px;
+  border-radius: 4px;
+  border: 1px solid var(--light-feedback-success-50);
+  font-size: 12px;
+  white-space: nowrap;
+}
+.campaign-schedule-root .empty-vn-messg-header{
+  color: var(--light-primary-grey-90);
+  text-align: center;
+  font-family: var(--font-familiy);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: -0.07px;
+}
+.campaign-schedule-root .empty-vn-message-sub-header{
+  text-align: center;
+  font-family: Jvar(--font-familiy);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: -0.07px;
+}
+.campaign-schedule-root .callerid-disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+// .campaign-schedule-root .select-caller-scrollbar {
+//   max-height: calc(100vh - 341px) !important;
+// }

@@ -1,0 +1,312 @@
+<div fxFlex="100" fxLayoutAlign="space-between stretch" fxLayout="column" class="sms-camp-root">
+    <!-- <div fxLayout="column" class="grid-layout-column"> -->
+    <div fxLayout="column" fxLayoutGap="8px" class="mb-24">
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+            <div class="header">
+                Welcome to SMS Campaign
+            </div>
+            <div>
+                <button class="large-secondary-button" (click)="OpentestCampaign()" [disabled]="checkValidity()">Test
+                    Campaign</button>
+            </div>
+        </div>
+
+        <div class="sub-title grey-80 lh-24">
+            Creating a SMS Campaign is as simple as counting 1-2-3-4
+        </div>
+    </div>
+    <!-- </div> -->
+    <div fxLayout="column" fxLayoutGap="16px" [style.overflow]="'auto'" class="flex-1 scrollable-content pr-4">
+        <!-- Step1 -->
+        <div class="custom-accordion" [ngClass]="!submittedFlag? '' : 'hand-cursor-defualt'">
+            <div fxLayoutAlign="space-between start" fxLayout="row" fxLayoutGap="24px" fxFlex>
+                <div fxLayout="row" fxLayoutGap="24px" fxFlex="100">
+                    <div class="stepper-count" (click)="!submittedFlag?openNameCampaign():''">
+                        <span *ngIf="gettingStartedData?.campaignData?.campaignName"
+                            class="accordion-status-placeholder"><img src="assets/images/svg/ico-tick-success.svg"
+                                alt="" /></span>
+                        <span *ngIf="!gettingStartedData?.campaignData?.campaignName" class="count-numbers">1</span>
+                    </div>
+                    <div fxLayout="column" class="full-width" fxLayoutGap="8px">
+                        <div class="accordion-header lh-24" (click)="!submittedFlag?openNameCampaign():''">Name your
+                            Campaign</div>
+                        <!-- <div class="accordion-header lh-24">Lead List</div> -->
+                        <div class="accordion-sub-header lh-16" (click)="!submittedFlag?openNameCampaign():''"
+                            *ngIf="!gettingStartedData?.campaignData?.campaignName">
+                            <span>Enter a name for your SMS campaign</span>
+                        </div>
+                        <div fxLayout="column" fxLayoutGap="8px" *ngIf="gettingStartedData?.campaignData?.campaignName">
+                            <div fxLayout="row" (click)="!submittedFlag?openNameCampaign():''">
+                                <div class="grey-70 smscamp-subheader-info view-light-lable">Campaign Name</div>
+                                <div (click)="!submittedFlag?openNameCampaign():''">
+                                    <span
+                                        class="two-line-ellipsis view-bold-lable">{{gettingStartedData?.campaignData?.campaignName}}</span>
+                                </div>
+                            </div>
+                            <div fxLayout="row">
+                                <div class="grey-70 smscamp-subheader-info view-light-lable"
+                                    (click)="!submittedFlag?openNameCampaign():''">
+                                    Description</div>
+                                <div fxLayout="row">
+                                    <div class="view-bold-lable" [ngClass]="readMorecamp ? '' : 'two-line-ellipsis' "
+                                        (click)="!submittedFlag?openNameCampaign():''">
+                                        {{gettingStartedData?.campaignData?.campaignDescription}} </div>
+                                    <div class="primary-text text-nowrap" *ngIf="moreCamp">
+                                        <span (click)="readMoreClick()"
+                                            class="extra-bold primary-60 cursor-pointer">{{readMoreTextcamp}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="!submittedFlag">
+                    <img src="assets/images/svg/ico-menu-down-arrow.svg" class="ico-small arrow-forword" alt=""
+                        (click)="openNameCampaign()" />
+                </div>
+            </div>
+        </div>
+        <!-- Step2 -->
+        <div class="custom-accordion"
+            [ngClass]="!submittedFlag && gettingStartedData?.campaignData?.campaignName? '' : 'hand-cursor-defualt'">
+            <div fxLayoutAlign="space-between start" fxLayout="row" fxLayoutGap="24px" fxFlex
+                (click)="!submittedFlag && gettingStartedData?.campaignData?openSetupSmsCamp():''">
+                <div fxLayout="row" fxLayoutGap="24px" fxFlex="100">
+                    <div class="stepper-count">
+                        <span *ngIf="gettingStartedData?.campaignSchedule" class="accordion-status-placeholder"><img
+                                src="assets/images/svg/ico-tick-success.svg" alt="" /></span>
+                        <span *ngIf="!gettingStartedData?.campaignSchedule" class="count-numbers">2</span>
+                    </div>
+                    <div fxLayout="column" class="full-width" fxLayoutGap="8px">
+                        <div class="accordion-header lh-24">Setup SMS Campaign</div>
+                        <div class="accordion-sub-header lh-16" *ngIf="!gettingStartedData?.campaignSchedule">
+                            <span>Set the schedule and settings of the campaign according to your
+                                requirements</span>
+                        </div>
+                        <div fxLayout="column" fxLayoutGap="8px" *ngIf="gettingStartedData?.campaignSchedule">
+                            <div fxLayout="row" class="grid-layout-row">
+                                <div fxLayout="column" fxFlex="35" fxLayoutGap="8px">
+                                    <div fxLayout="row" fxLayoutGap="10px" *ngIf="gettingStartedData?.campaignSchedule?.campaignType === 'schedule'">
+                                        <div class="view-light-lable" fxFlex="45">
+                                            Setup Type
+                                        </div>
+                                        <div class="view-bold-lable" fxFlex="55">
+                                            {{gettingStartedData?.campaignSchedule?.campaignType | titlecase}}
+                                        </div>
+                                    </div>
+                                    <div fxLayout="row" fxLayoutGap="16px" *ngIf="gettingStartedData?.campaignSchedule?.campaignType === 'ondemand'">
+                                        <div class="view-light-lable" fxFlex="28">
+                                            Setup Type
+                                        </div>
+                                        <div class="view-bold-lable" fxFlex="72">
+                                            {{gettingStartedData?.campaignSchedule?.campaignType | titlecase}}
+                                        </div>
+                                    </div>
+                                    <div *ngIf="gettingStartedData?.campaignSchedule?.campaignType === 'schedule'"
+                                        fxLayout="row" fxLayoutGap="10px">
+                                        <div class="view-light-lable" fxFlex="45">Start Date</div>
+                                        <div class="view-bold-lable" fxFlex="65">
+                                            {{gettingStartedData?.campaignSchedule?.startDate | date:'dd/MM/yyyy'}}
+                                        </div>
+                                    </div>
+                                    <div *ngIf="gettingStartedData?.campaignSchedule?.campaignType === 'schedule'"
+                                        fxLayout="row" fxLayoutGap="10px">
+                                        <div class="view-light-lable" fxFlex="45">End Date</div>
+                                        <div class="view-bold-lable" fxFlex="65">
+                                            {{gettingStartedData?.campaignSchedule?.endDate | date:'dd/MM/yyyy'}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div *ngIf="gettingStartedData?.campaignSchedule?.campaignType === 'schedule'"
+                                    fxLayout="column" fxFlex="30" fxLayoutGap="8px">
+                                    <div fxLayout="row" fxLayoutGap="10px">
+                                        <div class="view-light-lable" fxFlex="40">Start Time</div>
+                                        <div class="view-bold-lable" fxFlex="60">
+                                            {{formatedStartTime}}
+                                        </div>
+                                    </div>
+                                    <div fxLayout="row" fxLayoutGap="10px">
+                                        <div class="view-light-lable" fxFlex="40">End Time</div>
+                                        <div class="view-bold-lable" fxFlex="60">
+                                            {{formatedEndTime}}
+                                        </div>
+                                    </div>
+                                    <div fxLayout="row" fxLayoutGap="10px">
+                                        <div class="view-light-lable" fxFlex="40">Active days</div>
+                                        <div class="view-bold-lable" fxFlex="60">
+                                            {{
+                                            gettingStartedData?.campaignSchedule?.activeDays &&
+                                            gettingStartedData?.campaignSchedule?.activeDays.length
+                                            ? activedaysformat.join(", ")
+                                            : "-"
+                                            }}
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div *ngIf="gettingStartedData?.campaignSchedule?.campaignType === 'schedule'"
+                                    fxLayout="column" fxFlex="35" fxLayoutGap="8px">
+                                    <div fxLayout="row" fxLayoutGap="10px">
+                                        <div class="view-light-lable" fxFlex="65">
+                                            URL Shortening
+                                        </div>
+                                        <div class="view-bold-lable">
+                                            -
+                                        </div>
+                                    </div>
+                                    <div fxLayout="row" fxLayoutGap="10px">
+                                        <div class="view-light-lable" fxFlex="65">
+                                            Enable Click Tracking
+                                        </div>
+                                        <div class="view-bold-lable">
+                                            -
+                                        </div>
+                                    </div>
+                                    <div fxLayout="row" fxLayoutGap="10px">
+                                        <div class="view-light-lable" fxFlex="65">
+                                            Click Tracking URL
+                                        </div>
+                                        <div class="view-bold-lable">
+                                            -
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="!submittedFlag"
+                    [class.disabled]="!submittedFlag && gettingStartedData?.campaignData?.campaignName ? false : true">
+                    <img src="assets/images/svg/ico-menu-down-arrow.svg" class="ico-small arrow-forword" alt="" />
+                </div>
+            </div>
+        </div>
+        <!-- Step3 -->
+        <div class="custom-accordion"
+            [ngClass]="!submittedFlag && gettingStartedData?.campaignSchedule? '' : 'hand-cursor-defualt'">
+            <div fxLayoutAlign="space-between start" fxLayout="row" fxLayoutGap="24px" fxFlex>
+                <div fxLayout="row" fxLayoutGap="24px" fxFlex="100"
+                    (click)="!submittedFlag && gettingStartedData?.campaignData && gettingStartedData?.campaignSchedule? openChoosesmsLeaDList(): ''">
+                    <div class="stepper-count">
+                        <span *ngIf="gettingStartedData?.campaignSchedule?.campaignType === 'schedule' && gettingStartedData?.smsContentType?.type && gettingStartedData?.leadList?.leadName" class="accordion-status-placeholder"><img
+                                src="assets/images/svg/ico-tick-success.svg" alt="" /></span>
+                        <span *ngIf="gettingStartedData?.campaignSchedule?.campaignType === 'ondemand' && gettingStartedData?.smsContentType?.type" class="accordion-status-placeholder"><img
+                            src="assets/images/svg/ico-tick-success.svg" alt="" /></span>    
+                        <span *ngIf="!gettingStartedData?.campaignSchedule?.campaignType || (gettingStartedData?.campaignSchedule?.campaignType === 'schedule' && !gettingStartedData?.leadList?.leadName)" class="count-numbers">3</span>
+                        <span *ngIf="gettingStartedData?.campaignSchedule?.campaignType === 'ondemand' && !gettingStartedData?.smsContentType?.type" class="count-numbers">3</span>
+                    </div>
+                    <div fxLayout="column" class="full-width" fxLayoutGap="8px">
+                        <div class="accordion-header lh-24">Choose SMS Content Type
+                            <span *ngIf="gettingStartedData?.campaignSchedule?.campaignType !== 'ondemand'"> and Lead List </span>
+                        </div>
+                        <div class="accordion-sub-header lh-16" *ngIf="!gettingStartedData?.smsContentType?.type">
+                            <span *ngIf="gettingStartedData?.campaignSchedule?.campaignType !== 'ondemand'">Please select the lead list to which you would like to send bulk SMS, along with
+                                your chosen content type</span>
+                            <span *ngIf="gettingStartedData?.campaignSchedule?.campaignType == 'ondemand'">Please select the SMS Content Type which you would like to send bulk SMS</span>    
+                        </div>
+                        <div fxLayout="column" fxLayoutGap="8px">
+                            <div fxLayout="row" fxLayoutGap="16px" *ngIf="gettingStartedData?.smsContentType?.type">
+                                <div class="grey-70 smscamp-subheader-info2 view-light-lable">The SMS Content Type will
+                                    be</div>
+                                <div>
+                                    <span class="two-line-ellipsis view-bold-lable">{{gettingStartedData?.smsContentType?.type | titlecase}}</span>
+                                </div>
+                            </div>
+                            <div fxLayout="row" fxLayoutGap="16px" *ngIf="gettingStartedData?.leadList?.leadName">
+                                <div class="grey-70 smscamp-subheader-info2 view-light-lable">Selected Lead List</div>
+                                <div>
+                                    <span
+                                        class="two-line-ellipsis view-bold-lable">{{gettingStartedData?.leadList?.leadName}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="!submittedFlag"
+                    [class.disabled]="!submittedFlag && gettingStartedData?.campaignSchedule ? false :  true">
+                    <img src="assets/images/svg/ico-menu-down-arrow.svg" class="ico-small arrow-forword" alt=""
+                        (click)="!submittedFlag && gettingStartedData?.campaignData && gettingStartedData?.campaignSchedule?openChoosesmsLeaDList():''" />
+                    
+                </div>
+            </div>
+
+        </div>
+        <!-- step4 -->
+        <div class="custom-accordion"
+            [ngClass]="(!submittedFlag && gettingStartedData?.campaignData && gettingStartedData?.campaignSchedule && gettingStartedData?.smsContentType?.type) && (demandflag && !gettingStartedData.hasOwnProperty('leadList')) || (!demandflag && gettingStartedData.hasOwnProperty('leadList')) ? '' : 'hand-cursor-defualt'">
+            <div fxLayoutAlign="space-between start" fxLayout="row" fxLayoutGap="24px" fxFlex>
+                <div fxLayout="row" fxLayoutGap="24px" fxFlex="100" (click)="(!submittedFlag && gettingStartedData?.campaignData && gettingStartedData?.campaignSchedule && gettingStartedData?.smsContentType?.type) && (demandflag && !gettingStartedData.hasOwnProperty('leadList')) || (!demandflag && gettingStartedData.hasOwnProperty('leadList')) ? smsConfigure() : '' ">
+                    <div class="stepper-count">
+                        <span *ngIf="gettingStartedData?.feedbackSMS" class="accordion-status-placeholder"><img
+                                src="assets/images/svg/ico-tick-success.svg" alt="" /></span>
+                        <span *ngIf="!gettingStartedData?.feedbackSMS" class="count-numbers">4</span>
+                    </div>
+                    <div fxLayout="column" class="full-width" fxLayoutGap="8px">
+                        <div class="accordion-header lh-24">
+                            Select Your SMS Message</div>
+                        <div class="accordion-sub-header lh-16" *ngIf="!gettingStartedData?.feedbackSMS">
+                            <span>Send SMS to your leads through DLT Approved Sender ID & Template</span>
+                        </div>
+                        <div fxLayout="column" fxLayoutGap="8px" *ngIf="gettingStartedData?.feedbackSMS">
+                            <div fxLayout="row" fxLayoutGap="16px">
+                                <div class="grey-70 smscamp-subheader-info3 view-light-lable">Sender ID</div>
+                                <div>
+                                    <span
+                                        class="two-line-ellipsis view-bold-lable">{{gettingStartedData?.feedbackSMS?.senderId}}</span>
+                                    
+                                </div>
+                            </div>
+                            <div fxLayout="row" fxLayoutGap="16px">
+                                <div class="grey-70 smscamp-subheader-info3 view-light-lable">SMS Type</div>
+                                <div>
+                                    <span class="two-line-ellipsis view-bold-lable">{{gettingStartedData?.feedbackSMS?.smsType
+                                        || '-' }}</span>
+                                </div>
+                            </div>
+                            <div fxLayout="row" fxLayoutGap="16px">
+                                <div class="grey-70 smscamp-subheader-info3 view-light-lable">Feedback SMS</div>
+                                <div fxLayout="row" fxLayoutAlign="space-between start" class="full-width">
+                                    <div class="view-bold-lable"
+                                        [ngClass]="readMoreSMS ? 'sms-format' : 'two-line-ellipsis sms-format'"
+                                        [innerHTML]="gettingStartedData?.feedbackSMS?.smsTemplateText">
+                                    </div>
+                                    <div class="primary-text text-nowrap" *ngIf="moreText">
+                                        <span (click)="readMoreSMSClick()"
+                                            class="extra-bold primary-60 cursor-pointer">{{readMoreTextSMS}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="!submittedFlag"
+                    [class.disabled]="(!submittedFlag && gettingStartedData?.campaignData && gettingStartedData?.campaignSchedule && gettingStartedData?.smsContentType?.type)  && (demandflag && !gettingStartedData.hasOwnProperty('leadList')) || (!demandflag && gettingStartedData.hasOwnProperty('leadList')) ? false : true">
+                    <img src="assets/images/svg/ico-menu-down-arrow.svg" class="ico-small arrow-forword" alt="" (click)="(!submittedFlag && gettingStartedData?.campaignData && gettingStartedData?.campaignSchedule && gettingStartedData?.smsContentType?.type) && (demandflag && !gettingStartedData.hasOwnProperty('leadList')) || (!demandflag && gettingStartedData.hasOwnProperty('leadList')) ? smsConfigure() : '' "/>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="end end" class="footer-action ">
+        <div *ngIf="!submittedFlag">
+            <button
+                [disabled]="submittedFlag || !(gettingStartedData?.campaignData?.campaignName || gettingStartedData?.campaignSchedule || gettingStartedData?.leadList || gettingStartedData?.feedbackSMS)"
+                type="button" class="large-secondary-button" (click)="discardClick()">Discard</button>
+        </div>
+        <div>
+            <button [disabled]="submittedFlag || !(gettingStartedData?.campaignData?.campaignName || gettingStartedData?.campaignSchedule || gettingStartedData?.leadList
+            || gettingStartedData?.feedbackSMS)" *ngIf="!submittedFlag" type="button" class="large-secondary-button"
+                (click)="saveAsDraft()">Save as Draft</button>
+        </div>
+        <div>
+
+            <button *ngIf="!submittedFlag" [disabled]="!((!submittedFlag && gettingStartedData?.campaignData && gettingStartedData?.campaignSchedule && gettingStartedData?.smsContentType?.type && gettingStartedData?.feedbackSMS) && ((demandflag && !gettingStartedData.hasOwnProperty('leadList')) || (!demandflag && gettingStartedData.hasOwnProperty('leadList'))))" type="button" class="large-primary-button"
+                (click)="submitClick()">Create</button>
+        </div>
+        <div *ngIf="submittedFlag">
+            <button type="button" class="large-secondary-button" (click)="backToMain()">Back</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+<div class="month-view-container">
+    <ng-container *ngFor="let month of months; let monthIndex = index">
+        <button
+            [ngClass]="
+                currentDateMonthIndex === monthIndex
+                    ? 'primary-button'
+                    : 'tertiary-button'
+            "
+            (click)="handleDateSelection(monthIndex)"
+        >
+            {{ month }}
+        </button>
+    </ng-container>
+</div>

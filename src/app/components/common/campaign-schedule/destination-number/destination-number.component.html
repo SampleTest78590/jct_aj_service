@@ -1,0 +1,203 @@
+<div fxLayout="column" class="destination-num-root">
+  <div
+    fxLayout="row"
+    fxLayoutAlign="space-between center"
+    class="header-modal-action"
+  >
+    <h2 class="lh-28">Destination Number</h2>
+    <button
+      class="tertiary-button-icon close-btn ico-close-right-top"
+      (click)="closeModal()"
+    >
+      <img src="assets/images/svg/ico-close-blue.svg" alt="close" />
+    </button>
+  </div>
+
+  <div class="content-modal-action">
+    <div fxLayout="column" fxLayoutGap="24px">
+      <div class="sub-title-text bold lh-24 grey-80 mb-24">
+        Verified numbers will be added to pre-uploaded Lead list
+      </div>
+    </div>
+    <div
+      [formGroup]="destinationNumber"
+      fxLayout="column"
+      fxLayoutGap="16px"
+      fxLayoutAlign="start start"
+    >
+      <div
+        formArrayName="desNumber"
+        *ngFor="let dn of desNumber?.controls; let i = index"
+      >
+        <div [formGroupName]="i">
+          <div
+            [class.disabled]="i === 0"
+            fxLayout="column"
+            class="phone-input"
+            fxLayoutAlign="start start"
+          >
+            <div fxLayout="row">
+              <div class="mb-4 grey-80">Test Number {{ i + 1 }}</div>
+            </div>
+
+            <div fxLayout="row" fxLayoutGap="32px" fxLayoutAlign="start center">
+              <div class="dropdown-mg" class="mr-4">
+                <app-dropdown
+                  fxFlex="50"
+                  placeholder="+91"
+                  class="dropdown-pad"
+                  [options]="code"
+                  [value]="'+91'"
+                >
+                </app-dropdown>
+                <div class="num-inp-field cstm-input" fxFlex="100">
+                  <input
+                    type="text"
+                    maxlength="10"
+                    [readonly]="
+                      desNumber.controls[i].status === 'VALID' ? true : false
+                    "
+                    class="inputMobile"
+                    formControlName="number"
+                    placeholder="Enter Contact Number"
+                    (keypress)="onlyNumberKeyTest($event, dn, true)"
+                  />
+                </div>
+              </div>
+
+              <button
+                class="small-primary-button"
+                [disabled]="
+                  desNumber.controls[i]['controls'].number.status !== 'VALID'
+                " 
+                *ngIf="!!!dn.value.vbutton && i !== 0 && dn.value.Vmessage !== true"
+                (click)="verifyNumber(i, dn)"
+              >
+                verify
+              </button>
+              <!--  && desNumber.controls[i]['controls'].leadId -->
+              <img
+                *ngIf="i !== 0 && dn.value.Vmessage === true"
+                (click)="RemoveNumber(dn, i)"
+                src="assets/images/svg/ico-close-blue.svg"
+                alt=""
+                class="ico-standard cursor-pointer"
+              />
+            </div>
+            <div class="cstm-input" *ngIf="dn.value.errormsg">
+              <div class="cstm-input__message error">
+                {{ dn.value.errormsg }}
+              </div>
+            </div>
+            <!-- *****success message****** -->
+            <div
+              fxLayout="row"
+              fxLayoutGap="4px"
+              fxLayoutAlign="start center"
+              class="mt-4"
+            >
+              <div
+                *ngIf="i == 0"
+                fxLayout="row"
+                fxLayoutGap="4px"
+                fxLayoutAlign="start start"
+              >
+                <img
+                  src="assets/images/svg/ico-tick-success.svg"
+                  alt=""
+                  class="ico-standard"
+                />
+                <span class="success-text mini-text lh-16"
+                  >Your verified number</span
+                >
+              </div>
+              <div
+                fxLayout="row"
+                fxLayoutGap="4px"
+                fxLayoutAlign="start start"
+                *ngIf="
+                  i !== 0 &&
+                  desNumber.controls[i].status === 'VALID' &&
+                  dn.value.Vmessage === true
+                "
+              >
+                <img
+                  src="assets/images/svg/ico-tick-success.svg"
+                  alt=""
+                  class="ico-standard"
+                />
+                <span class="success-text mini-text lh-16">Verified</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ***********OTP input Field********** -->
+          <div
+            fxLayout="row"
+            fxLayoutAlign="start start"
+            fxLayoutGap="16px"
+            class="otp-input mt-16"
+            *ngIf="dn.value.vbutton === true"
+          >
+            <div fxLayout="column" fxLayoutGap="4px" class="otp-box cstm-input">
+              <div class="cstm-input__label mini-text lh-16">OTP</div>
+              <input
+                type="text"
+                class="placeholder"
+                (keypress)="onlyNumberKeyTest($event, dn, false)"
+                maxlength="6"
+                placeholder="123456"
+                formControlName="otp"
+              />
+              <!-- <div class="cstm-input">
+              </div> -->
+              <div fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="cstm-input" *ngIf="errorMessage">
+                    <div class="cstm-input__message error text-nowrap">
+                      {{ errorMessage }}
+                    </div>
+                  </div>
+                  <div fxLayout="row" fxLayoutAlign="end end" *ngIf="!isuserLocked" class="full-width">
+                    {{ timerVal * 1000 | date : "mm:ss" : "UTC" }}
+                  </div>
+              </div>
+              
+            </div>
+            <button
+              class="small-primary-button mt-20"
+              *ngIf="i !== 0 "
+              [disabled]="isuserLocked || desNumber.controls[i]['controls'].otp.status !== 'VALID'"
+              (click)="confirmbutton(dn, i)"
+            >
+              Confirm
+            </button>
+          </div>
+        </div>
+
+      </div>
+      <button
+        [disabled]="destinationNumber.status !== 'VALID' && !addNumberV"
+        class="medium-tertiary-button add-no"
+        (click)="addNumber()"
+      >
+        <img src="assets/images/svg/ico-add-circle.svg" alt="" class="mr-8" />
+        Add Number
+      </button>
+    </div>
+  </div>
+  <div class="footer-modal-action">
+    <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="end end">
+      <button type="button" class="large-secondary-button" (click)="closeModal()">
+        Cancel
+      </button>
+      <button
+        type="button"
+        class="large-primary-button"
+        (click)="save()"
+        [disabled]="!desNumber.valid"
+      >
+        Save
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,65 @@
+<div class="pagination" fxLayoutAlign="end center">
+  <button
+    class="small-tertiary-button-icon square-bttn"
+    [disabled]="currentPage == 1"
+    (click)="onFirstPage()"
+  >
+    <img
+      src="assets/images/svg/ico-pre-bttn.svg"
+      class="ico-extra-small cursor-pointer"
+      alt=""
+    />
+  </button>
+  <button
+    class="small-tertiary-button-icon square-bttn"
+    [disabled]="currentPage == 1"
+    (click)="onPreviousPage()"
+  >
+    <img
+      src="assets/images/svg/ico-pre-arrow.svg"
+      class="ico-extra-small cursor-pointer"
+      alt=""
+    />
+  </button>
+
+  <div class="pagination-helper-text">
+    <!-- {{ getCurrentPageAndIndex() }} -->
+    {{ currentPage }} /
+    {{
+      lastPage
+    }}
+    <!-- of {{ total }} -->
+  </div>
+  <!-- <ng-container *ngIf="!!pageSizeOptions.length">
+    <select [(ngModel)]="pageSize" (change)="onPageSizeChange()">
+      <option
+        *ngFor="let pageSizeOption of pageSizeOptions"
+        [value]="pageSizeOption"
+      >
+        {{ pageSizeOption }}
+      </option>
+    </select>
+  </ng-container> -->
+  <button
+    class="small-tertiary-button-icon square-bttn"
+    [disabled]="this.currentPage >= this.lastPage"
+    (click)="onNextPage()"
+  >
+    <img
+      src="assets/images/svg/ico-next-arrow.svg"
+      class="ico-extra-small cursor-pointer"
+      alt=""
+    />
+  </button>
+  <button
+    class="small-tertiary-button-icon square-bttn"
+    [disabled]="this.currentPage >= this.lastPage"
+    (click)="onLastPage()"
+  >
+    <img
+      src="assets/images/svg/ico-next-bttn.svg"
+      class="ico-extra-small cursor-pointer"
+      alt=""
+    />
+  </button>
+</div>

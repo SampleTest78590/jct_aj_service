@@ -1,0 +1,60 @@
+.upload-audio-root {
+    .sub-header {
+        color: var(--light-text-grey-100) !important;
+        line-height: 24px;
+        font-size: var(--font-size-title);
+    }
+    .body-color-text.checked {
+        color: var(--light-text-grey-100);
+    }
+    .bttn-header-text{
+        word-break: break-all!important;
+    }
+   .radio-button {
+        border-radius: 8px;
+        border: 1px solid var(--light-primary-grey-40);
+        padding: 12px;
+        display: inline-block;
+        min-height: 80px;
+    }
+    .textspeech {
+        background-color: var(--light-text-grey-10);
+        border-radius: 8px;
+        .sample-audio-btn {
+            font-size: 14px;
+            padding: 4px 7px !important;
+        }
+        .pause-btn.sample-audio-btn{
+            width: 161.34px;
+        }
+        .convert-audio {
+            width: 190px !important;
+            &:focus {
+                .hide-text {
+                    display: none;
+                }
+                .loader {
+                    border: 4px solid var(--light-primary-grey-40);
+                    border-top: 4px solid var(--light-primary-50);
+                    border-radius: 50%;
+                    width: 16px;
+                    height: 16px;
+                    margin: 0px;
+                    animation: spin 2s linear infinite;
+                    border-left:4px solid var(--light-primary-50);
+                }
+                  @keyframes spin {
+                    0% {transform: rotate(0deg);}
+                    100% {transform: rotate(360deg);}
+                }
+            }
+        }
+        .audio-player-width{
+            width: 299px;
+        }
+        .tts-disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+    }
+}

@@ -1,0 +1,248 @@
+<div fxLayout="column" class="upload-audio-root">
+  <div fxLayout="row" fxLayoutAlign="space-between center" class="header-modal-action">
+    <h2 class="lh-28">Upload Audio File</h2>
+    <!-- <h2 class="lh-28">Upload New Audio</h2> -->
+    <!-- <h2>Upload Audio Message</h2> -->
+    <button class="tertiary-button-icon close-btn ico-close-right-top" (click)="onCancel()">
+      <img src="assets/images/svg/ico-close-blue.svg" alt="close" />
+    </button>
+  </div>
+  <div class="content-modal-action scrollable-content">
+    <div fxLayout="column" class="mb-24">
+      <label class="body-text lh-20">Choose or create an audio message for your campaign – either upload one or generate
+        it using our text-to-speech tool</label>
+      <div class="grid-layout-row-wrap-2n">
+        <div fxLayout="row" fxLayoutGap="20px" fxFlex="100" class="mt-16 no-padding"
+          fxLayoutAlign="space-between start">
+          <div fxLayout="row" fxLayoutGap="8px" fxFlex="100" fxLayoutAlign="start start"
+            class="radio-options-container grid-layout-row-wrap-2n">
+            <div class="radio-button" fxLayout="row" fxLayoutAlign="start start">
+              <label class="cstm-radio" [ngClass]="{ checked: radioSelected == 1 }">
+                <input value="1" [checked]="radioSelected == 1" type="radio" name="inviteMember"
+                  [(ngModel)]="radioSelected" (change)="resetValue()"/>
+              </label>
+              <div>
+                <div [ngClass]="{ 'grey-100' : radioSelected == 1 }" class="">Upload Audio File</div>
+                <div class="mini-text mt-4 grey-70 lh-16">
+                  You can select Pre-uploaded or Upload New Audio File
+                </div>
+              </div>
+            </div>
+
+            <div class="radio-button" fxLayout="row" fxLayoutAlign="start start">
+              <label class="cstm-radio" [ngClass]="{ checked: radioSelected == 2 }">
+                <input value="2" [checked]="radioSelected == 2" type="radio" name="inviteMember"
+                  [(ngModel)]="radioSelected" (change)="resetValue()"/>
+              </label>
+              <div>
+                <div [ngClass]="{ 'grey-100' : radioSelected == 2 }" class="">Text to Speech</div>
+                <div class="mini-text mt-4 grey-70 lh-16">
+                  Convert your text to audio file and use for any campaign
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-container *ngIf="radioSelected === '1'">
+      <div fxLayout="column" class="mt-5" fxLayoutGap="32px">
+        <div fxLayout="column" fxLayoutGap="16px">
+          <div class="sub-header">
+            1. Fill Details
+          </div>
+          <div fxLayout="column" fxLayoutGap="4px" class="cstm-input">
+            <div class="cstm-input__label mini-text">File Name*</div>
+            <input type="text" [(ngModel)]="AudioName" placeholder="Enter Audio Name" maxlength="30" autocomplete="off"
+              (keypress)="validateCharNumAudio($event)" />
+            <div class="cstm-input__message error" *ngIf="AudioName?.length > 0 && AudioName?.length < 3">
+              <span>Minimum 3 character are required</span>
+            </div>
+          </div>
+          <div fxLayout="column" fxLayoutGap="4px" class="cstm-textarea">
+            <div class="cstm-input__label mini-text">Description</div>
+            <textarea id="audiotextarea" (keyup)="autogrowtextArea()" #audiotextarea name="description"
+              [(ngModel)]="AudioDescription" class="resizer placeholder" placeholder="Add your description here"
+              rows="1" maxlength="100"></textarea>
+          </div>
+        </div>
+
+      </div>
+      <div fxLayout="column" class="mt-32" fxLayoutGap="16px">
+        <div fxLayout="column" fxLayoutGap="10px">
+          <div class="sub-header">2. Upload your file</div>
+        </div>
+        <div fxLayout="column" fxLayoutGap="5px" class="position-relative" *ngIf="uploadDragDrop">
+          <div>
+            <app-attach-drag-drop [attachmentTextLink]="'Click to select'"
+              [attachmentText]="'or Drag and Drop your file'" (filesDropped)="readyToUpload($event)"
+              (filesDeleted)="removeFile($event)" [fileSizeLimit]="2000000" [acceptedFormats]="['mp3', 'wav']"
+              [multiple]="false" [maxUploadLimit]="1" [validationMsg]="'Only MP3 and WAV format supported(max. 2MB)'">
+            </app-attach-drag-drop>
+          </div>
+        </div>
+        <div fxLayout="column" fxLayoutGap="5px" class="position-relative" *ngIf="!uploadDragDrop">
+          <div class="uplaod-status-popup">
+            <div fxLayout="column" class="uplaod-content">
+              <div fxLayout="column" fxLayoutGap="4px" class="uplaod-content-center">
+                <div>
+                  <img src="assets/images/svg/ico-file-uploaded.svg" class="ico-large" alt="" />
+                </div>
+                <div class="bttn-header-text">{{ AudioAttachedName }}</div>
+                <div>
+                  <span class="bttn-light-text">File Size:
+                    {{ totalSize / 1000000 | number : "1.2-2" }} MB</span>
+                </div>
+                <div>
+                  <app-audio-preview-play [src]="this.base64data" [index]="9999" [audioDuration]="mediaDur">
+                  </app-audio-preview-play>
+                </div>
+                <div class="mt-12">
+                  <button class="small-tertiary-negative-button cursor-pointer" (click)="removeFile($event)">
+                    Remove file
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div fxLayout="column" class="grey-80 mini-text mt-16 bold" *ngIf="base64data">
+        <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="0px">
+          <div>
+            <label class="cstm-checkbox lh-16" [ngClass]="{ checked: indeminityFlag }">
+              <input type="checkbox" [checked]="indeminityFlag" [(ngModel)]="indeminityFlag" /></label>
+          </div>
+          <div [ngClass]="{ checked: indeminityFlag }" class="body-color-text">
+            I confirm that the following sound file does not contain any hateful
+            messages, abusive or vulgar language, not it contains any attacks or
+            abuse based on race, ethnicity,national origin, sex, gender/gender
+            identity,sexualorientation, religion, disability or disease,
+            politically sensitive, detrimental to state or national-security,
+            detrimental to sovereignty of our country or harmful to cordial
+            relationship with other countries, neither it promotes substance abuse
+            or luring the public with financial schemes or offers in contravention
+            with laws established by RBI or other authorities.
+          </div>
+
+        </div>
+        <div>&nbsp;</div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="radioSelected === '2'">
+      <div fxLayout="column" class="textspeech pt-24 pb-24 pr-16 pl-16" fxLayoutGap="24px">
+        <div fxLayout="column" fxLayoutGap="4px" class="cstm-input">
+          <div class="cstm-input__label mini-text  lh-16">File Name*</div>
+          <input type="text" class="placeholder" placeholder="Enter Audio File Name" [(ngModel)]="AudioName"
+            maxlength="30" autocomplete="off" />
+          <div class="cstm-input__message error" *ngIf="AudioName?.length > 0 && AudioName?.length < 3">
+            <span>Minimum 3 character are required</span>
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutGap="24px" fxLayoutAlign="start end">
+          <div fxLayout="column" fxFlex="26" class="dropdown-mg">
+            <div class="cstm-input__label mini-text lh-16 mb-4">Select Language</div>
+            <app-dropdown placeholder="Select Language" [value]="selectedlanguage" [options]="languageList"
+              (handleChange)="onLanguageChange($event)"></app-dropdown>
+          </div>
+
+          <div fxLayout="column" fxFlex="26" class="dropdown-mg">
+            <div class="cstm-input__label mini-text lh-16 mb-4">Select Voice</div>
+            <app-dropdown placeholder="Select Voice" [value]="selectedvoice" [options]="voiceList"
+              (handleChange)="onSelectChange($event)">
+            </app-dropdown>
+          </div>
+          <ng-container *ngIf="audioElement">
+            <button *ngIf="audioElement.paused" type="button" class="small-secondary-button sample-audio-btn"
+              (click)="audioElement.play()">
+              <img src="assets/images/svg/ico-play.svg" alt="ico-add" class="ico-extra-small mr-5" />Play Sample
+              Audio</button>
+            <button *ngIf="!audioElement.paused" type="button" class="small-secondary-button pause-btn sample-audio-btn"
+              (click)="audioElement.pause()">
+              <img src="assets/images/svg/ico-pause.svg" alt="ico-add" class="ico-extra-small mr-5" />Pause</button>
+          </ng-container>
+
+        </div>
+        <div fxLayout="column" fxLayoutGap="4px" class="cstm-textarea mb-16">
+          <div class="cstm-input__label mini-text">Enter your Text Message which you want to send your caller</div>
+          <textarea id="audiotextarea" (keyup)="autogrowtextArea()" #callertextarea name="description"
+            [(ngModel)]="AudioDescription" class="resizer placeholder" placeholder="Enter your text here" rows="1"
+            maxlength="500"></textarea>
+          <div class="cstm-input__message mini-text mt-4">
+            <span>Character Limit 500 words</span>
+          </div>
+        </div>
+        <div>
+          <button *ngIf="ttsLimit" [class.tts-disabled]="ttsLimit" appTooltip
+          [tooltipTemplate]="'You\'ve reached your daily limit of 50 attempts for today'" [tooltipDisable]="!ttsLimit" class="small-primary-button convert-audio" type="button" (click)="getTTSAudio()">
+            <span  *ngIf="!showLoader">Convert Text to Audio</span>
+            <!-- <span class="hide-text" *ngIf="!showLoader">Convert Text to Audio</span> -->
+            <div class="loader" *ngIf="showLoader"></div>
+          </button>
+          <button *ngIf="showConvertButton" class="small-primary-button convert-audio" type="button" (click)="getTTSAudio()" [ngClass]="{'disabled': disabledConvertButton}">
+            <span  *ngIf="!showLoader">Convert Text to Audio</span>
+            <!-- <span class="hide-text" *ngIf="!showLoader">Convert Text to Audio</span> -->
+            <div class="loader" *ngIf="showLoader"></div>
+          </button>
+        </div>
+        <div [ngClass]="{ 'disabled': !base64data }" class="audio-player-width">
+          <app-audio-preview-play [src]="base64data" [index]="9999" [audioDuration]="mediaDur" [replayButtonInput]="true">
+          </app-audio-preview-play>
+        </div>
+      </div>
+      <div fxLayout="column" class="grey-80 mini-text mt-16 bold" *ngIf="base64data">
+        <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="0px">
+          <div>
+            <label class="cstm-checkbox lh-16" [ngClass]="{ checked: indeminityFlag }">
+              <input type="checkbox" [checked]="indeminityFlag" [(ngModel)]="indeminityFlag"/></label>
+          </div>
+          <div [ngClass]="{ checked: indeminityFlag }" class="body-color-text">
+            I hereby confirm that the sound file/message uploaded by me does not contain any hateful remarks against any
+            individual or entity, pornographic material, abusive or vulgar language, or insults or abuse based on race,
+            ethnicity, national origin, sex, gender/gender identity, sexual orientation, religion, disability, or
+            illness and does not infringe upon any person’s privacy or impersonates any person, does not contain any
+            thing that could cause harm to India’s security or sovereignty, or harm India’s friendly relations with any
+            other country, or is politically sensitive. I further confirm that the sound file/message does not promote
+            any kind of substance abuse, gambling or entice any member of the public with any financial scheme,
+            investment or offers that are in violation of RBI regulations or any other applicable laws/regulations and
+            the sound file/message does not violate any third party’s intellectual property rights. I fully understand
+            and acknowledge that any violation or misrepresentation of the above would make me liable for prosecution
+            and penal/legal action as per the applicable laws. 
+          </div>
+        </div>
+        <div>&nbsp;</div>
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="footer-modal-action">
+    <div fxLayout="row" fxLayoutGap="12px" fxLayoutAlign="end end">
+      <button type="button" class="large-secondary-button" (click)="onCancel()">
+        Cancel
+      </button>
+      <button type="button" class="large-primary-button" [disabled]="
+          !(
+            AudioName?.length >= 3 &&
+            this.filesToUpload.length > 0 &&
+            disabledUpload &&
+            indeminityFlag
+          )
+        " (click)="UploadAudioSubmit()">
+        <img src="assets/images/svg/ico-uplaod-white.svg" class="ico-small mr-8" alt="" /><span>Upload</span>
+      </button>
+      <!-- <button
+        type="button"
+        class="large-primary-button"
+      >
+      <span>Upload</span>
+      </button> -->
+    </div>
+  </div>
+</div>
+<div class="hidden">
+  <audio #audioElement [src]="sampalAudioUrl" preload="auto" (timeupdate)="changeTimelinePosition()">
+    The “audio” tag is not supported by your browser.
+  </audio>
+  <!-- <app-audio-preview-play [src]="sampalAudioUrl" [index]="9999">
+  </app-audio-preview-play> -->
+</div>

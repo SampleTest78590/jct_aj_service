@@ -1,0 +1,413 @@
+<div
+  class="campaing-table-list-root"
+  fxFlex="100"
+  fxLayoutAlign="space-between stretch"
+  fxLayout="column"
+>
+  <div fxLayout="column" fxLayoutGap="16px">
+    <div fxLayout="row" fxLayoutAlign="space-between start">
+      <div class="header">Campaigns</div>
+      <div
+        class=""
+        *ngIf="ELEMENT_DATA?.length > 0 || searchValue !== '' || !initialflag"
+      >
+        <button
+          *ngIf="ELEMENT_DATA?.length > 0 || searchValue !== '' || !initialflag"
+          type="button"
+          class="medium-primary-button"
+          (click)="openNewCampaign()"
+        >
+          <img src="assets/images/svg/ico-plus-white.svg" class="mr-8" alt="" />
+          <span class="extra-bold">New Campaign</span>
+        </button>
+      </div>
+    </div>
+    <div *ngIf="ELEMENT_DATA?.length > 0 || searchValue !== '' || !initialflag">
+      <div fxLayout="row" fxLayoutAlign="space-between center" class="mt-12 mb-16">
+        <label class="sub-title-text bold lh-24 ml-8"
+          >All Campaigns ({{ total ? total : "0" }})</label
+        >
+        <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="start center">
+          <div fxFlex="312px">
+            <app-custom-search
+              fxFlex="100"
+              [label]="'Search By Campaign Name'"
+              IconSrc="assets/images/svg/ico-search-grey.svg"
+              (outputText)="outputSearch($event)"
+            ></app-custom-search>
+          </div>
+          <!-- <div class="custom-button"> -->
+          <button type="button" class="medium-secondary-button" [disabled]="true">
+            <img
+              src="assets/images/svg/ico-filter-grey.svg"
+              class="ico-small mr-8"
+              alt=""
+            />
+            <span class="grey-80">Filter</span>
+          </button>
+          <!-- </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class=""> -->
+    <div fxLayout="column" [style.overflow]="'auto'" class="flex-1 custom-table mt-12" *ngIf="!!ELEMENT_DATA?.length">
+      <div
+        fxLayout="row"
+        fxLayoutAlign="space-between start"
+        class="custom-table-header-content"
+      >
+        <div class="custom-table-header" fxFlex="5">
+          <label class="cstm-checkbox" [class.disabled]="true">
+            <input type="checkbox" disabled
+          /></label>
+          <!-- (change)="SelectAll($event)" [ngClass]="{ checked: isselectAll }"-->
+        </div>
+
+        <div
+          class="custom-table-header cursor-pointer"
+          fxFlex="32"
+          (click)="sortData('campaignName')"
+        >
+          <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
+            <div>Campaign Name</div>
+            <img
+              src="assets/images/svg/ico-swap-vert.svg"
+              class="ico-extra-small cursor-pointer"
+              alt=""
+            />
+          </div>
+        </div>
+        <div
+          class="custom-table-header cursor-pointer"
+          fxFlex="20"
+          (click)="sortData('vnNumberAssigned')"
+        >
+          <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
+            <div>Lead List Name</div>
+            <img
+              src="assets/images/svg/ico-swap-vert.svg"
+              class="ico-extra-small cursor-pointer"
+              alt=""
+            />
+          </div>
+        </div>
+        <div class="custom-table-header" fxFlex="16">
+          <div>Campaign Status</div>
+        </div>
+        <div
+          class="custom-table-header cursor-pointer"
+          fxFlex="17"
+          (click)="sortData('dateCreated')"
+        >
+          <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
+            <div>Date Created</div>
+            <img
+              src="assets/images/svg/ico-swap-vert.svg"
+              class="ico-extra-small cursor-pointer"
+              alt=""
+            />
+          </div>
+        </div>
+        <div class="custom-table-header text-center" fxFlex="10">Action</div>
+      </div>
+      <div [style.min-height.vh]="'27'" [style.overflow]="'overlay'"  [ngClass]="dataSource?.length > 2 && dataSource?.length < 8 ? 'scroll-height' : ''" class="scrollable-content">
+        <div
+          fxLayout="row"
+          fxLayoutAlign="space-between start"
+          class="custom-table-content"
+          *ngFor="let element of dataSource; let index = index"
+        >
+          <div class="contact-list-details" fxFlex="5" fxLayout="column">
+            <label
+              class="cstm-checkbox"
+              [class.disabled]="true"
+            >
+              <input type="checkbox" disabled
+            /></label>
+            <!-- (click)="checkSingleElement(element)" [ngClass]="{ checked: element.checked }"-->
+          </div>
+          <div class="contact-list-details" fxFlex="32">
+            <label>
+              <div
+                fxLayout="row"
+                fxLayoutGap="4px"
+                fxLayoutAlign="start center"
+                class="table-user-info"
+                (click)="navigateToCamp(element)"
+              >
+                <div class="count-text">
+                  {{ 1 + index + (pageIndex - 1) * pageSize }}.
+                </div>
+                <div
+                  class="camp-name ellipsis-text cursor-pointer"
+                  (click)="navigateToCamp(element)"
+                >
+                  {{ element.campaignName || "-" }}
+                </div>
+                <div
+                  class="info-mouse-hover"
+                  [ngClass]="index > 2 ? 'bottom-tooltip' : ''"
+                >
+                  <div
+                    class="custom-mat-card"
+                    fxLayout="column"
+                    fxLayoutGap="16px"
+                  >
+                    <div
+                      fxLayout="row"
+                      fxLayoutGap="8px"
+                      fxLayoutAlign="space-between center"
+                    >
+                      <div
+                        fxLayout="row"
+                        fxLayoutGap="8px"
+                        fxLayoutAlign="start center"
+                      >
+                        <span
+                          class="user-pics"
+                        >
+                          {{ getInitials(element.createdBy) }}
+                        </span>
+                        <span>{{
+                          element.createdBy
+                        }}</span>
+                      </div>
+
+                      <div fxLayout="row" fxLayoutGap="8px">
+                        <span>VN No Assigned :</span>
+                        <span class="bold grey-90">{{ element.callerId }}</span>
+                      </div>
+                    </div>
+                    <div fxLayout="column" fxLayoutGap="10px">
+                      <div class="extra-bold sub-title-text grey-100 fs-16">
+                        {{ element.campaignName }}
+                      </div>
+                      <div>
+                        {{ element.campaignDescription }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </label>
+          </div>
+          <div class="contact-list-details" fxFlex="20">
+            <label>
+              <span
+                *ngFor="let list of element.leadList;let i=last;">
+                {{ list.leadName }} {{i ? '' : ','}}
+              </span>
+            </label>
+          </div>
+          <div class="contact-list-details" fxFlex="16">
+            <span
+              fxFlex="100"
+              class="campaign-status mini-text ellipsis-text"
+              [ngClass]="[
+                element.campaignStatus == 'RUNNING' ||
+                element.campaignStatus == 'ACTIVE'
+                  ? 'running-bg'
+                  : element.campaignStatus == 'SCHEDULE' ||
+                    element.campaignStatus == 'CREATED' ||
+                    element.campaignStatus == 'LEADS-READY'
+                  ? 'scheduled-bg'
+                  : element.campaignStatus == 'DRAFT'
+                  ? 'default-bg'
+                  : element.campaignStatus == 'COMPLETED'
+                  ? 'completed-bg'
+                  : element.campaignStatus == 'STOP' ||
+                    element.campaignStatus == 'SUSPENDED'
+                  ? 'stop-bg'
+                  : element.campaignStatus == 'PAUSED'
+                  ? 'paused-bg'
+                  : ''
+              ]"
+              >{{ (element.campaignStatus | titlecase) || "-" }}</span>
+          </div>
+          <div class="contact-list-details" fxFlex="17">
+            {{ element.createdOn | date : "dd/MM/yyyy" || "-" }}
+          </div>
+          <div
+            class="contact-list-details text-center"
+            fxFlex="10"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+          >
+            <div class="dot-menu-dropdown" appDropdown>
+              <button class="small-tertiary-button-icon cursor-pointer">
+                <img
+                  src="assets/images/svg/ico-dot-menu.svg"
+                  alt="ico-menu"
+                  class=""
+                />
+              </button>
+              <div id="myDropdown" class="dropdown-content">
+                <div
+                  fxLayout="row"
+                  fxLayoutAlign="start center"
+                  fxLayoutGap="12px"
+                  class="cam-action-bttn"
+                  (click)="campaignActions('E', element)"
+                >
+                  <img
+                    class="ico-extra-small"
+                    src="assets/images/svg/ico-edit-grey.svg"
+                    [alt]="'edit'"
+                  />
+                  <div class="lh-20">Edit Campaign</div>
+                </div>
+                <div
+                  fxLayout="row"
+                  fxLayoutAlign="start center"
+                  fxLayoutGap="12px"
+                  class="cam-action-bttn"
+                  [class.disabled]="!element.pause"
+                  (click)="campaignActions('P', element)"
+                >
+                  <img
+                    class="ico-extra-small"
+                    src="assets/images/svg/ico-pause-camp.svg"
+                    [alt]="'pause'"
+                  />
+                  <div class="lh-20">Pause Campaign</div>
+                </div>
+                <div
+                  fxLayout="row"
+                  fxLayoutAlign="start center"
+                  fxLayoutGap="12px"
+                  class="cam-action-bttn"
+                  [class.disabled]="!element.stop"
+                  (click)="campaignActions('C', element)"
+                >
+                  <img
+                    class="ico-extra-small"
+                    src="assets/images/svg/ico-stop.svg"
+                    [alt]="'stop'"
+                  />
+                  <div class="lh-20">Stop Campaign</div>
+                </div>
+                <div
+                  fxLayout="row"
+                  fxLayoutAlign="start center"
+                  fxLayoutGap="12px"
+                  class="cam-action-bttn"
+                  [class.disabled]="!element.resume"
+                  (click)="campaignActions('R', element)"
+                >
+                  <img
+                    class="ico-extra-small"
+                    src="assets/images/svg/ico-duplicate.svg"
+                    [alt]="'resume'"
+                  />
+                  <div class="lh-20">Resume Campaign</div>
+                </div>
+                <div
+                  fxLayout="row"
+                  fxLayoutAlign="start center"
+                  fxLayoutGap="12px"
+                  class="cam-action-bttn"
+                  (click)="campaignActions('reports', element)"
+                >
+                  <img
+                    class="ico-extra-small"
+                    src="assets/images/svg/ico-reports.svg"
+                    [alt]="'reports'"
+                  />
+                  <div class="lh-20">Campaign Reports</div>
+                </div>
+                <!-- <div *ngFor="let menuItem of menuItems" [ngClass]="getClassValue(menuItem,element)"
+                  (click)="campaignActions(menuItem.value,element)">
+                  <app-item-block [label]="menuItem?.label" [disableTooltip]="true"
+                    [activeMenu]="menuItem.value == 'P' ? element.pause : menuItem.value == 'R' ? element.resume : menuItem.value == 'C' ? element.stop : 1">
+                    <ng-container *ngIf="menuItem?.icon" prefix>
+                      <img class="ico-extra-small mr-12" [src]="menuItem.icon" [alt]="menuItem.label" />
+                    </ng-container>
+                  </app-item-block>
+                </div> -->
+                <div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- </div> -->
+
+    <div
+      *ngIf="!!!ELEMENT_DATA?.length && !initialflag"
+      class="flex-1 nodata text-center"
+    >
+      No Data Found
+    </div>
+    
+    <div class="mb-12"
+      *ngIf="initialflag && !!!ELEMENT_DATA?.length"
+      fxLayout="column"
+      fxLayoutAlign="center center"
+      fxLayoutGap="10px"
+      class="full-height flex-1"
+    >
+      <div><img src="assets/images/empty-campaigns.png" alt="" /></div>
+      <div class="extra-bold">Your campaigns list empty.</div>
+      <div fxLayoutAlign="center center">
+        <span class="body-text bold grey-70"
+          >When you create a campaign, it'll show up here.</span
+        >
+      </div>
+      <div class="mt-22-custom mt-35">
+        <button
+          type="button"
+          class="medium-primary-button"
+          (click)="openNewCampaign()"
+        >
+          <img src="assets/images/svg/ico-add-circle.svg" alt="" class="mr-8" />
+          Add New Campaign
+        </button>
+      </div>
+    </div>
+  
+  <div
+    class="pagination"
+    fxLayoutAlign="end end"
+    *ngIf="total > 7"
+  >
+    <app-custom-pagination
+      [total]="total"
+      [pageSize]="7"
+      [pageSizeOptions]="[5, 10, 20]"
+      (returnPage)="getCurrentPage($event)"
+    ></app-custom-pagination>
+  </div>
+</div>
+
+<ng-container *ngIf="isopenCampaignModal">
+  <app-sidebar-panel
+    [width]="'540px'"
+    [isSidebarOpen]="isopenCampaignModal"
+    sidebarPosition="right"
+    (sidebarState)="isopenCampaignModal = false"
+  >
+    <div content>
+      <app-create-campaign (closeModal)="closeModal($event)" [createCampData]="createCampignData">
+      </app-create-campaign>
+    </div>
+  </app-sidebar-panel>
+</ng-container>
+
+<!-- <div *ngIf="ELEMENT_DATA.length === 1 && searchValue == ''">
+    <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px" class="mt-30">
+      <div>
+        <img src="assets/images/svg/success-thik-ico.svg" class="ico-large" alt="" />
+      </div>
+      <div class="popup-header">Your 1st campaign is created successfully</div>
+      <div fxLayoutAlign="center center">
+        <span class="body-text bold grey-70">Getting started progress status ({{ stagevalue }}/3)</span>
+      </div>
+      <div class="resize-btn">
+        <button type="button" mat-flat-button class="primary-btn" (click)="backToStart()">
+          Back to Getting Started
+        </button>
+      </div>
+    </div>
+  </div> -->

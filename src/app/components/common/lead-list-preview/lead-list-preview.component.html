@@ -1,0 +1,62 @@
+<div fxLayout="column" class="lead-list-preview-root">
+  <div fxLayout="row" fxLayoutAlign="space-between center" class="header-modal-action">
+    <h2 class="lh-28">Lead List Preview</h2>
+    <button class="tertiary-button-icon close-btn ico-close-right-top" (click)="onCancel()">
+      <img src="assets/images/svg/ico-close-blue.svg" alt="close" />
+    </button>
+  </div>
+
+  <div class="content-modal-action">
+    <div fxLayout="column" fxLayoutGap="6px">
+      <div class="title-text extra-bold lh-24 grey-100">
+        {{leadName || '-'}}
+      </div>
+      <div class="sub-header mb-24 lh-20 grey-80 bold fs-14">
+        Showing first 10 contacts as sample preview
+      </div>
+    </div>
+
+    <div class="custom-table">
+      <div fxLayout="row" fxLayoutAlign="space-between start" class="custom-table-header-content">
+        <div class="custom-table-header" fxFlex>First Name</div>
+        <div class="separator-right"></div>
+        <div class="custom-table-header" fxFlex>Last Name</div>
+        <div class="separator-right"></div>
+        <div class="custom-table-header" fxFlex>Contact Numbers</div>
+      </div>
+      <div class="scrollable-content mr-minus-1" [style.overflow]="'auto'" [style.overflow-x]="'hidden'"
+        [style.max-height.vh]="'54'">
+        <div fxLayout="row" fxLayoutAlign="space-between start" class="custom-table-content"
+          *ngFor="let element of data">
+          <div class="contact-list-details seperator" fxFlex>
+            <label>
+              {{ element.leadFirstName }}
+            </label>
+          </div>
+          <div class="separator-right"></div>
+          <div class="contact-list-details" fxFlex>
+            <label>
+              {{ element.leadLastName }}
+            </label>
+          </div>
+          <div class="separator-right"></div>
+          <div class="contact-list-details" fxFlex>
+            <label>
+              {{ element.leadMobileNo }}
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-modal-action">
+    <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="space-between end">
+      <button type="button" class="large-secondary-button" [disabled]="true">
+        View More
+      </button>
+      <button type="button" class="large-primary-button" (click)="onCancel()">
+        Done
+      </button>
+    </div>
+  </div>
+</div>

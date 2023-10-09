@@ -1,0 +1,39 @@
+<div class="attach-drag-drop cursor-pointer" (click)="fileDropRef?.click()"
+  *ngIf="multiple && !viewOnly || !multiple && !viewOnly && choosenFiles.length == 0">
+  <div [style.max-width.px]="dragMaxWidth">
+    <div fxLayout="column" fxLayoutGap="5px" class="drag-drop-container">
+      <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="8px">
+        <div class="mb-8">
+          <img src="assets/images/svg/ico-dragdrop-upload.svg" class="ico-large" alt="">
+        </div>
+        <div fxLayout="row" fxLayoutGap="6px" fxLayoutAlign="center center" class="mb-16">
+          <span class="primary-text extra-bold">{{ attachmentTextLink }}</span>
+          <span class="bold grey-90">{{ attachmentText }}</span>
+          <input type="file" class="hidden" [multiple]="multiple" (change)="checkFormats($event, false)" #fileDropRef />
+          <!-- <button type="button" mat-icon-button class="upload-ico"></button> -->
+        </div>
+        <div fxLayout="column" class="suport-format-text bold" fxLayoutAlign="center center">
+          <p class="validation-msg-alignment" [innerHTML]="validationMsg"></p>
+          <span class="mini-text" *ngIf="filesizeText">Max file size limit:<span class="extra-bold"> {{fileSizeLimit/
+              1000000}}
+              MB</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div fxLayout="row wrap" fxLayoutGap="15px" class="attach-drag-drop">
+  <div class="mb-5" *ngFor="let file of choosenFiles; let i = index">
+    <div fxLayout="row" fxLayoutGap="30px" class="attached-file-wrapper">
+      <div *ngIf="file?.name" class="word-break-all">{{ file.name }}</div>
+      <div *ngIf="!file.name" class="word-break-all">{{ file }}</div>
+      <div fxLayout="row" fxLayoutGap="10px">
+        <img alt="view" src="assets/images/svg/view-ico.svg" class="ico-extra-small cursor-pointer"
+          (click)="emitViewEvent(i)" alt="" />
+        <img alt="delete" *ngIf="!viewOnly" src="assets/images/svg/delete-ico.svg"
+          class="ico-extra-small cursor-pointer" (click)="deleteFile(file)" />
+      </div>
+    </div>
+  </div>
+</div>

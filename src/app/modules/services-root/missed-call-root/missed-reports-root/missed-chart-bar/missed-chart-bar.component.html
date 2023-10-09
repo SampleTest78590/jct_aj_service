@@ -1,0 +1,99 @@
+<div class="missed-chart-bar full-height" fxLayout="column" fxLayoutGap="16px">
+    <div class="extra-bold title-text grey-100 lh-24">
+        Missed Call Summary and Breakdown
+    </div>
+    <div fxLayout="column" fxLayoutGap="24px" fxFlex="100" class="flex-1">
+        <div fxLayout="row" fxLayoutGap="8px">
+            <div fxLayout="column" fxLayoutGap="8px" class="summary-card leads-border" fxFlex="33.33">
+                <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="space-between center">
+                    <div class="grey-80 lh-20 body-text">Total Missed Calls</div>
+                    <!-- <img src="assets/images/svg/ico-dot-menu.svg" alt="" class="ico-standard" /> -->
+                </div>
+                <div class="grey-100 lh-24 title-text extra-bold">{{missedChartSectionData?.totalCallCount || '-'}}
+                </div>
+            </div>
+            <div fxLayout="column" fxLayoutGap="8px" class="summary-card conn-calls" fxFlex="33.33">
+                <div fxLayout="row" fxLayoutAlign="space-between center">
+                    <div class="grey-80 lh-20 body-text">Unique Calls</div>
+                    <!-- <img src="assets/images/svg/ico-dot-menu.svg" alt="" class="ico-standard" /> -->
+                </div>
+                <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="space-between center">
+                    <div class="conn-number grey-100">{{missedChartSectionData?.uniqueCallCount || '-'}}</div>
+                    <div class="conn-percent mini-text lh-16" *ngIf="!!missedChartSectionData?.uniqueCallPercent">
+                        {{missedChartSectionData?.uniqueCallPercent+'%'}}
+                    </div>
+                </div>
+            </div>
+            <div fxLayout="column" fxLayoutGap="8px" class="summary-card fail-calls" fxFlex="33.33">
+                <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-between center">
+                    <div class="grey-80 lh-20 body-text">Repeated Calls</div>
+                    <!-- <img src="assets/images/svg/ico-dot-menu.svg" alt="" class="ico-standard" /> -->
+                </div>
+                <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="space-between center">
+                    <div class="fail-number grey-100">{{missedChartSectionData?.repeatedCallCount || '-'}}</div>
+                    <div class="failed-percent mini-text lh-16" *ngIf="!!missedChartSectionData?.repeatedCallPercent">
+                        {{missedChartSectionData?.repeatedCallPercent+'%'}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div fxLayout="column" fxLayoutGap="16px" class="flex-1 position-relative">
+            <div fxLayout="column" fxLayoutGap="20px"
+                *ngIf="missedChartSectionData?.totalCallCount && !!!selectedCampaign?.audioData">
+                <div fxLayout="row" fxLayoutAlign="space-between start" class="lh-20">
+                    <div class="body-text extra-bold lh-20">Missed Call Breakdown</div>
+                </div>
+                <div fxFlex="100" class="progress-bar">
+                    <progress value="
+                    {{missedChartSectionData?.uniqueCallPercent}}" max="100" fxFlex="100" class="mtb-2">
+                    </progress>
+                </div>
+                <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="space-between start">
+                    <div fxLayout="row" fxLayoutGap="6px" fxLayoutAlign="center center">
+                        <div class="dot-circle con-calls-dot"></div>
+                        <div class="body-text bold lh-20">Unique Calls</div>
+                    </div>
+                    <div fxLayout="row" fxLayoutGap="6px" fxLayoutAlign="center center">
+                        <div class="dot-circle failed-calls-dot"></div>
+                        <div class="body-text bold lh-20">Repeated Calls</div>
+                    </div>
+                </div>
+            </div>
+            <div fxLayout="column" fxLayoutGap="12px" *ngIf="!!selectedCampaign?.audioData">
+                <div class="extra-bold body-text-14 lh-20 grey-100">
+                    Audio - Duration Listened Breakdown
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="30px"
+                    *ngIf="!!missedChartSectionData?.pieChartData?.length">
+                    <div fxFlex="42">
+                        <div>
+                            <app-failed-calls-chart [chartData]="missedChartSectionData?.pieChartData">
+                            </app-failed-calls-chart>
+                        </div>
+                    </div>
+
+                    <div fxFlex="58" fxLayout="column" class="fcb-text-status" fxLayoutGap="10px">
+                        <div fxLayout="row" fxLayoutGap="12px" fxLayoutAlign="start start"
+                            *ngFor="let item of missedChartSectionData?.pieChartData;let i=index">
+                            <div fxLayout="row" fxLayoutGap="12px" fxLayoutAlign="start start" fxFlex="60">
+                                <div fxFlex="6">
+                                    <span class="dot-circle" [ngClass]="backgroundColor[i]"></span>
+                                </div>
+                                <div class="grey-70 lh-20" fxFlex="86">
+                                    <span class="ellipsis-text">{{item?._id}}</span>
+                                </div>
+                            </div>
+                            <div class="grey-100 lh-20" fxFlex="40">{{item?.count}} calls</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div fxLayout="column" class="text-center charts-empty-data" fxLayoutAlign="space-between center"
+                fxFlex="100" fxLayoutGap="16px"
+                *ngIf="!!!missedChartSectionData?.pieChartData?.length && !!!missedChartSectionData?.totalCallCount">
+                <div><img src="assets/images/svg/ico-info-grey.svg" class="ico-medium cursor-pointer" alt="" /></div>
+                <div class="title-text grey-100 lh-24">No Data available</div>
+            </div>
+        </div>
+    </div>
+</div>

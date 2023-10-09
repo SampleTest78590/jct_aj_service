@@ -1,0 +1,102 @@
+<div fxLayout="column" fxLayoutAlign="stretch space-between" class="name-virtual-number">
+  <div fxLayout="row" fxLayoutAlign="space-between center" class="header-modal-action">
+    <h2 class="lh-28">Choose your Virtual Number</h2>
+    <button class="tertiary-button-icon close-btn ico-close-right-top" (click)="onCancel()">
+      <img src="assets/images/svg/ico-close-blue.svg" alt="close" />
+    </button>
+  </div>
+
+  <div class="content-modal-action mt-24" fxLayout="column">
+    <div *ngIf="createCamp.preKycFlag">
+      <div fxLayout="column" class="grid-layout-column">
+        <div fxFlex="100" fxLayout="column" class="select-virtual-number">
+          <div>
+            <app-custom-search [label]="'Search Number'" (outputText)="searchCallerId($event)"
+              IconSrc="assets/images/svg/ico-search-grey.svg"></app-custom-search>
+          </div>
+        </div>
+        <div class="mt-8" fxLayout="row" fxLayoutAlign="space-between center">
+          <div class="body-text">Choose from your subscribed number list</div>
+          <!-- <div>Count: {{callerDataClone?.length}}</div> -->
+          <button type="button" class="small-secondary-button" (click)="redirectToVn()">Buy Virtual Number</button>
+        </div>
+      </div>
+      <div fxLayout="column" [style.overflow]="'overlay'" class="custom-table flex-1 mt-15">
+        <div fxLayout="row" fxLayoutAlign="space-between start" class="custom-table-header-content">
+          <div fxLayout="column" fxLayoutAlign="center center" fxFlex="50" class="custom-table-header separator-right">
+            <div>Virtual Numbers</div>
+          </div>
+          <div fxLayout="column" fxLayoutAlign="center center" fxFlex="50" class="custom-table-header">
+            <div>Virtual Numbers</div>
+          </div>
+        </div>
+        <div fxLayout="column" class="scrollable-content" [style.overflow]="'overlay'">
+          <div fxLayout="row" fxLayoutAlign="space-between start" class="cust-camp-table-data">
+            <div fxLayout="column" fxLayoutAlign="start start" fxFlex="50" class="separator-right no-padding no-margin">
+              <div class="custom-table-content" fxFlex="100" *ngFor="let item of dataSourceOne">
+                <div class="contact-list-details" fxFlex="100" fxLayout="row">
+                  <label fxLayout="row" class="cstm-radio"
+                    [ngClass]="{ checked: callerIdRadioSelect?.number == item?.number }">
+                    <input [value]="item" type="radio" name="callerIdRadioSelect" (ngModelChange)="radioChange($event)"
+                      [(ngModel)]="callerIdRadioSelect" />
+                    <span class="pl-20 mr-8">{{ item?.number }}</span>
+                    <div *ngIf="item?.draft_number === 'D'" class="label-chip" fxLayout="row" fxLayoutAlign="center center">In
+                      Draft</div>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div fxLayout="column" fxLayoutAlign="start start" fxFlex="50">
+              <div class="custom-table-content" fxFlex="100" *ngFor="let item of dataSourceTwo">
+                <div class="contact-list-details" fxFlex="100">
+                  <label fxLayout="row" class="cstm-radio"
+                    [ngClass]="{ checked: callerIdRadioSelect?.number == item?.number }">
+                    <input [value]="item" type="radio" name="callerIdRadioSelect" (ngModelChange)="radioChange($event)"
+                      [(ngModel)]="callerIdRadioSelect" />
+                    <span class="pl-20 mr-8">{{ item?.number }}</span>
+                    <div *ngIf="item?.draft_number === 'D'" class="label-chip" fxLayout="row" fxLayoutAlign="center center">In
+                      Draft</div>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!dataSourceOne?.length && !dataSourceTwo?.length" class="nodata text-center mt-32">
+          No Data Found
+        </div>
+      </div>
+    </div>
+    <!-- <div class="text-center mt-30" *ngIf="callerDataClone?.length == 0">
+        No Data Found
+      </div> -->
+    <div *ngIf="!createCamp.preKycFlag" fxLayout="column" fxLayoutAlign="center center" class="full-height">
+      <div><img src="assets/images/svg/ico-empty-vn.svg" alt="" /></div>
+      <div fxLayout="column" fxLayoutAlign="center center">
+        <div class="empty-vn-mssg-header">Your Virtual numbers List is empty</div>
+        <div fxLayoutAlign="center center" class="empty-vn-mssg-sub-header">
+          <span>You must have atleast one virtual number
+            to create your campaign</span>
+        </div>
+      </div>
+      <div class="mt-32">
+        <button type="button" class="medium-primary-button" [style.width.px]="267" appTooltip
+          [tooltipTemplate]="'To buy a Virtual Number, Kindly finish your KYC process.'"
+          [tooltipDisable]="createCamp.preKycFlag" [ngClass]="{'kyc-disabled': !createCamp.preKycFlag}">
+          Buy Virtual Number
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-modal-action">
+    <div fxLayout="row" fxLayoutGap="12px" fxLayoutAlign="end end">
+      <button type="button" class="large-secondary-button" (click)="onCancel()">
+        Cancel
+      </button>
+      <button type="button" class="large-primary-button" [disabled]="!isDraftNumber" (click)="backtoscreen()">
+        Save
+      </button>
+    </div>
+  </div>
+</div>

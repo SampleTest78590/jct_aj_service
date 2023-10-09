@@ -1,0 +1,90 @@
+.web-accordion {
+  width: 100%;
+  margin: auto;
+  border-radius: 4px;
+}
+
+.web-accordion .menu {
+  position: relative;
+  padding: 15px 15px 15px 45px;
+  color: #4d4d4d;
+  font-weight: bold;
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.web-accordion li:last-child .menu {
+  border-bottom: 0;
+}
+
+.web-accordion li .ico-status-change {
+  position: absolute;
+  top: 1.2rem;
+  left: 1rem;
+  color: #595959;
+  transition: all 0.4s ease;
+}
+
+.web-accordion li .ico-status-change.ico-plus-minus {
+  right: 1rem;
+  left: auto;
+  display: block;
+  // background-image: url("../../../../../assets/images/svg/ico-plus.svg");
+}
+
+.web-accordion li.active .ico-status-change.ico-plus-minus {
+  // background-image: url("../../../../../assets/images/svg/ico-minus.svg");
+}
+
+.web-accordion li.active .menu {
+  color: #b63b4d;
+}
+
+.web-accordion li.active i {
+  color: #b63b4d;
+}
+
+/* Show submenu */
+.web-accordion li.active .submenu {
+  /*height: 0 -> ght: 
+  /* max-height: 1000px; */
+  /* max-height: 1hei33px; */
+  /*height:1000px*/
+  /* max-height: 1000px; */
+  /* max-height: 133px; */
+}
+
+.web-accordion .submenu {
+  height: 0;
+  overflow: hidden;
+  background: #444359;
+  font-size: 14px;
+  transition: height 0.4s ease;
+}
+
+.web-accordion .submenu li {
+  border-bottom: 1px solid #4b4a5e;
+}
+
+.web-accordion li:last-child .submenu {
+  border-radius: 0 0 4px 4px;
+}
+
+.web-accordion li:last-child .submenu li:last-child {
+  border-bottom: 0;
+}
+
+.web-accordion .submenu a {
+  display: block;
+  text-decoration: none;
+  color: #d9d9d9;
+  padding: 12px;
+  padding-left: 42px;
+  transition: all 0.25s ease-in-out;
+}
+
+.web-accordion .submenu a:hover {
+  background: #b63b4d;
+  color: #fff;
+}

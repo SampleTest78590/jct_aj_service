@@ -1,0 +1,15 @@
+.bar-chart-root-missed {
+    position: relative;
+}
+
+.bar-chart-root-missed .charts-empty-data {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.bar-chart-root-missed canvas{
+    width: 99%!important;
+}

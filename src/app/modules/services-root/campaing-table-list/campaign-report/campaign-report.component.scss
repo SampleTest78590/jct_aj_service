@@ -1,0 +1,391 @@
+.campaign-report-root .campaign-status {
+  border-radius: 12px;
+  display: block;
+  max-width: 114px !important;
+  height: 24px;
+  line-height: 24px;
+  box-sizing: border-box;
+  font-size: 12px;
+  // margin: 0 auto;
+  text-align: center;
+  color: #0e5c4f !important;
+  //background: #E8FAF7;
+}
+
+.campaign-report-root .report-header {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  background: var(--white);
+  z-index: 1;
+  padding-bottom: 4px;
+}
+
+// .campaign-report-root .campaign-status.multi-status {
+//   background-color: #E8FAF7;
+// }
+
+.campaign-report-root .mt-2 {
+  margin-top: 2px;
+}
+
+.campaign-report-root .summary-card {
+  padding: 16px 9px 16px 16px;
+}
+
+.campaign-report-root .summary-card.conn-calls .conn-number {
+  color: var(--light-feedback-success-80);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.campaign-report-root .summary-card.fail-calls .fail-number {
+  color: var(--light-feedback-error-80);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.campaign-report-root .summary-card.conn-calls .conn-percent {
+  padding: 0 4px;
+  border-radius: 12px;
+  display: block;
+  max-width: 60px !important;
+  background-color: var(--light-feedback-success-80);
+  color: var(--white);
+  height: 16px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.campaign-report-root .summary-card.fail-calls .failed-percent {
+  padding: 0 4px;
+  border-radius: 12px;
+  display: block;
+  max-width: 60px !important;
+  background-color: var(--light-feedback-error-80);
+  color: var(--white);
+  height: 16px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.campaign-report-root .mini-header {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+  color: var(--light-primary-grey-100);
+}
+
+.campaign-report-root .mtb-2 {
+  margin: 2px 0;
+}
+
+.campaign-report-root .body-text-14 {
+  font-size: var(--font-size-body);
+}
+
+.campaign-report-root .mr-6 {
+  margin-right: 6px;
+}
+
+.campaign-report-root .dot-circle {
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  background-color: var(--color-secondary);
+}
+
+.campaign-report-root .dot-circle.mint-green {
+  background-color: #7AEBD9;
+}
+
+.campaign-report-root .dot-circle.yellow {
+  background-color: #F7AB20;
+}
+
+.campaign-report-root .dot-circle.crimson {
+  background-color: #ED617F;
+}
+
+.campaign-report-root .dot-circle.sky-blue {
+  background-color: #89DCFF;
+}
+
+.campaign-report-root .dot-circle.violet {
+  background-color: #F680F9;
+}
+
+.campaign-report-root .mt-2 {
+  margin-top: 2px;
+}
+
+.campaign-report-root .mb-2 {
+  margin-bottom: 2px;
+}
+
+.campaign-report-root .tot-leads-dot {
+  background-color: var(--light-primary-40);
+}
+
+.campaign-report-root .con-calls-dot {
+  background-color: var(--light-feedback-success-50);
+}
+
+.campaign-report-root .failed-calls-dot {
+  background-color: var(--dark-feedback-error-50);
+}
+
+.campaign-report-root .cstm-dropdown__select-container {
+  width: 210px;
+}
+
+.campaign-report-root .cust-ml {
+  margin-left: 3rem;
+}
+
+.campaign-report-root .progressCls {
+  // background-color: var(--light-primary-50);
+  -webkit-appearance: none;
+  height: 8px;
+  border-radius: 8px;
+}
+
+.campaign-report-root progress::-webkit-progress-bar {
+  background-color: var(--light-primary-grey-40);
+  height: 8px;
+  border-radius: 8px;
+}
+
+.campaign-report-root progress::-webkit-progress-value {
+  background-color: var(--light-primary-50) !important;
+  height: 8px;
+  border-radius: 8px;
+}
+
+
+/* For Firefox */
+.campaign-report-root progress {
+  background-color: var(--light-primary-grey-40);
+  height: 8px;
+  border-radius: 8px;
+}
+
+.campaign-report-root progress::-moz-progress-bar {
+  background-color: var(--light-primary-50) !important;
+  height: 8px;
+  border-radius: 8px;
+}
+
+/* For IE10 */
+.campaign-report-root progress {
+  background-color: var(--light-primary-grey-40);
+  height: 8px;
+  border-radius: 8px;
+}
+
+.campaign-report-root progress {
+  background-color: var(--light-primary-50);
+  height: 8px;
+  border-radius: 8px;
+}
+
+.campaign-report-root .refresh-ico {
+  cursor: pointer;
+  height: 16px;
+  width: 16px;
+}
+
+.campaign-report-root .refresh-ico:active {
+  -webkit-animation-name: spin;
+  -webkit-animation-duration: 500ms;
+  -webkit-animation-iteration-count: 1;
+}
+
+.campaign-report-root .fcb-text-status .ellipsis-text{
+  width: 140px!important;
+}
+
+.campaign-report-root .cstm-dropdown__select-container{
+  padding: 8px 12px !important;
+}
+
+@-ms-keyframes spin {
+  from {
+    -ms-transform: rotate(0deg);
+  }
+
+  to {
+    -ms-transform: rotate(360deg);
+  }
+}
+
+@-moz-keyframes spin {
+  from {
+    -moz-transform: rotate(0deg);
+  }
+
+  to {
+    -moz-transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.campaign-report-root .desc-details {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--light-primary-grey-100);
+  position: absolute;
+  top: 22px;
+  left: -3px;
+  background-color: var(--white);
+  z-index: 100;
+  box-shadow: 0px 0px 3px 1px var(--light-primary-grey-40);
+  border-radius: 5px;
+  padding: 12px 16px;
+  width: 380px;
+  word-break: break-all;
+}
+
+.campaign-report-root .failed-calls-text {
+  font-weight: 500;
+  font-size: var(--font-size-mini);
+  line-height: 16px;
+  text-align: center;
+  position: absolute;
+  left: 65px;
+  top: 63px;
+  width: 50px;
+  height: 50px;
+}
+
+.campaign-report-root .sec-border {
+  border: 1px solid var(--light-primary-grey-40);
+  border-radius: 12px;
+  overflow: hidden;
+  // max-height: 432px;
+  // height: 100%;
+}
+
+.campaign-report-root .leads-border {
+  border: 1px solid var(--light-primary-grey-80);
+  border-radius: 16px;
+}
+
+.campaign-report-root .summary-card.conn-calls {
+  border: 1px solid var(--light-feedback-success-80);
+  border-radius: 16px;
+}
+
+.campaign-report-root .summary-card.fail-calls {
+  border: 1px solid var(--light-feedback-error-80);
+  border-radius: 16px;
+}
+
+.html2canvas-container {
+  width: 3000px !important;
+  height: 3000px !important;
+}
+
+.campaign-report-root .chart-nodata {
+  min-height: 90px;
+}
+
+.campaign-report-root .charts-empty-data {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
+
+.campaign-report-root .cstm-dropdown__list {
+  margin-top: 8px !important;
+}
+
+.campaign-report-root .campaign-status {
+  // padding: 4px 16px;
+  border-radius: 80px;
+  display: block;
+  max-width: 114px !important;
+  height: 24px;
+  line-height: 24px;
+  box-sizing: border-box;
+}
+
+.campaign-report-root .campaign-status.running-bg {
+  background: #E8FAF7;
+  color: #0E5C4f;
+}
+
+.campaign-report-root .campaign-status.default-bg {
+  background: var(--light-primary-grey-20) !important;
+  color: var(--light-primary-grey-70) !important;
+}
+
+.campaign-report-root .campaign-status.completed-bg {
+  background: var(--light-feedback-success-20) !important;
+  color: var(--light-feedback-success-80) !important;
+}
+
+.campaign-report-root .campaign-status.scheduled-bg {
+  background: var(--light-sparkle-20) !important;
+  color: var(--light-sparkle-70) !important;
+}
+
+.campaign-report-root .campaign-status.stop-bg {
+  background: #FCE6E7 !important;
+  color: #660209 !important;
+}
+
+.campaign-report-root .campaign-status.paused-bg {
+  background: var(--light-marigold-midnight-20) !important;
+  color: #7F4B10 !important;
+}
+
+#pdfTable {
+  // background: yellow;
+  // width: 100%;
+  // height: 100%;
+  // margin-top: 50px !important;
+  // // border: 1px solid orange;
+  // padding: 20px !important;
+  // overflow-y:auto;
+  // overflow-x:auto;
+}
+
+// .campaign-report-root .desc-details{
+//   position: absolute;
+//     top: 42;
+//     right: 10px;
+//     background-color: var(--white);
+//     border-radius: 5px;
+//     padding: 2px 10px;
+//     height: 30px;
+//     line-height: 30px;
+//     cursor: pointer;
+//     z-index: 100;
+//     display: none !important;
+// }

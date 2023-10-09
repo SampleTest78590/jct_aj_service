@@ -1,0 +1,13 @@
+{
+  "production": false,
+  "enableOtp": false,
+  "enablesocket": true,
+  "enableFirebase": true,
+  "DOMAIN_URL": "http://hrplatformdev.ril.com",
+  "HR_URL": "http://hrplatformdev.ril.com",
+  "COMMON_UTIL": "http://commonutilsdev.ril.com/",
+  "apmUrl": "http://hrplatformdev.ril.com/apmrum/",
+  "VEHICLE_LOG" : "https://devnwnjd.ril.com/sap/bc/ui5_ui5/ui2/ushell/shells/abap/Fiorilaunchpad.html?saml2=disabled&sap-client=186&sap-language=EN#ZHR_ESS-vehiclelog",
+  "COV" : "https://devnwnjd.ril.com/sap/bc/ui5_ui5/ui2/ushell/shells/abap/Fiorilaunchpad.html?saml2=disabled&sap-client=186&sap-language=EN#ZHR_ESS-covclv",
+  "env": "dev"
+}

@@ -1,0 +1,9 @@
+.month-view-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    overflow: overlay;
+    padding: 24px 0;
+    max-height: 200px;
+}

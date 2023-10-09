@@ -1,0 +1,10 @@
+<div
+    #customTooltip
+    [class]="'tooltip ' + tooltipClass"
+    [ngClass]="['tooltip--' + position]"
+    [class.tooltip--visible]="visible"
+    [style.left]="left + 'px'"
+    [style.top]="top + 'px'"
+>
+    <div [class]="contentClasses" [innerHtml]="tooltip"></div>
+</div>

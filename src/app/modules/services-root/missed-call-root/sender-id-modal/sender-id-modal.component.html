@@ -1,0 +1,30 @@
+<div fxLayoutAlign="space-between stretch" fxLayout="column" class="sender-id-modal-root">
+  <div fxLayout="row" fxLayoutAlign="space-between center" class="header-modal-action">
+    <h2 class="lh-28">Add New Sender ID</h2>
+    <button class="tertiary-button-icon close-btn ico-close-right-top" (click)="onCancel()">
+      <img src="assets/images/svg/ico-close-blue.svg" alt="close" />
+    </button>
+  </div>
+  <div fxLayout="column" fxLayoutGap="16px" class="content-modal-action">
+    <div fxLayout="column" class="" fxLayoutGap="24px">
+      <div fxLayout="column" fxLayoutGap="4px" class="cstm-input">
+        <div class="cstm-input__label mini-text">Sender ID*</div>
+        <input type="text" [(ngModel)]="senderId" (ngModelChange)="validatesenderIdAdd($event)"  placeholder="Sender ID" minlength="6" maxlength="6" autocomplete="off" />
+        <div class="cstm-input__message error" *ngIf="senderId?.length > 0 && senderId?.length != 6">
+          <span>Character limit minimum & maximum: 6</span>
+        </div>
+        <div class="cstm-input__message error" *ngIf="senderIdMsg != ''">
+          <span>{{senderIdMsg}}</span>
+        </div>  
+      </div>
+    </div>
+  </div>
+  <div class="footer-modal-action">
+    <div fxLayout="row" fxLayoutGap="12px" fxLayoutAlign="end end">
+      <button type="button" class="large-secondary-button" (click)="onCancel()">
+        Cancel
+      </button>
+      <button type="button"  [disabled]="senderId?.length != 6 || senderIdMsg != ''" (click)="onSaveSendor()" class="large-primary-button">Save</button>
+    </div>
+  </div>
+</div>

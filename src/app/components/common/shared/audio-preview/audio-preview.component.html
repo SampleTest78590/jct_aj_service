@@ -1,0 +1,26 @@
+<div class="audio-player">
+    <audio (timeupdate)="changeTimelinePosition()" #audioElement [src]="src"
+      preload="auto">
+      The “audio” tag is not supported by your browser.
+    </audio>
+  
+    <div class="controls">
+      <!-- <button mat-button #playerButton class="player-button" (click)="toggleAudio()" *ngIf="playAudio">
+        <img class="ico-medium" src="assets/images/svg/ico-play-outline.svg" alt="" />
+      </button> -->
+      <button class="cursor-pointer small-secondary-button-icon player-button" (click)="toggleAudio()" *ngIf="!playAudio">
+        <img src="assets/images/svg/ico-pause.svg" alt="ico-pause" />
+      </button>
+      <!-- <button mat-button #playerButton class="player-button" (click)="toggleAudio()" *ngIf="!playAudio">
+        <img class="ico-medium" src="assets/images/svg/ico-pause-btn.svg" alt="" />
+      </button> -->
+      <button class="cursor-pointer small-secondary-button-icon player-button" (click)="toggleAudio()" *ngIf="playAudio">
+        <img src="assets/images/svg/ico-{{replayButton?'replay':'play'}}.svg" alt="ico-play" />
+      </button>
+      <!-- <div > -->
+      <!-- <div #progress class="progress"></div> -->
+      <input (change)="changeSeek()" #progress type="range" class="timeline-{{index}} ml-8 mr-8" [ngClass]="[src ? 'timeline': 'hide-thumb timeline']"  max="100"/>
+      <!-- </div> -->
+      <div>{{ audioDuration}}</div>
+    </div>
+  </div>

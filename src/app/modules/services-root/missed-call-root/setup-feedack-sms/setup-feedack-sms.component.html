@@ -1,0 +1,57 @@
+<div fxLayout="column" class="setup-feedback-root">
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="header-modal-action lh-28">
+      <h2>Setup Feedback SMS (optional)</h2>
+      <button class="tertiary-button-icon close-btn ico-close-right-top" (click)="onCancel()">
+        <img src="assets/images/svg/ico-close-blue.svg" alt="close" />
+      </button>
+    </div>
+  
+      <div class="content-modal-action scrollable-content mt-24">  
+              <div fxLayout="column" fxLayoutGap="16px" class="grid-layout-column">
+                <div class="title-text lh-24 extra-bold grey-100">Select your DLT approved Sender ID & SMS template</div>
+                  <div fxLayout="column" fxFlex class="dropdown-mg">
+                    <div class="mini-text mb-4 lh-16">Choose your DLT approved sender ID</div>
+                    <ng-container *ngIf="sendorIdList?.length > 0">
+                        <app-dropdown placeholder="Select sender ID provided by the DLT Platform" [value]="selectedSendorId" [options]="sendorIdList" (handleChange)="selectCategory($event)"
+                        [AddButton]="true" (handleChangebutton)="newsenderId($event)">
+                        </app-dropdown>
+                    </ng-container>
+                  </div>
+  
+                  <div fxLayout="column" fxLayoutGap="8px">
+                    <label class="lh-20">Choose your DLT Approved SMS Template</label>
+                    <div>
+                        <button type="button" class="medium-secondary-button" (click)="openChooseSmsTemp()" [disabled]="!selectedSendorId">
+                          Choose SMS Template <img src="assets/images/svg/ico-chevron_right.svg"
+                                class="ico-small ml-8" alt="">
+                        </button>
+                    </div>
+                  </div>
+                  <div fxLayout="column" fxLayoutGap="8px" *ngIf="smstempText">
+                    <label class="lh-20">Selected  DLT Approved SMS Template</label>
+                    <div class="template grey-80" fxLayout="column" fxLayoutGap="8px">
+                      <div>
+                        <span class="status-boxs">{{smsType}}</span>
+                      </div>
+                      <div class="sms-format" [innerHTML]="smstempText">
+                      </div>
+                    </div>
+                  </div>
+              </div>
+    </div>
+  
+      <div class="footer-modal-action">
+          <ng-container>
+              <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="end end">
+                  <button type="button" class="large-secondary-button" (click)="onCancel()">
+                      Cancel
+                  </button>
+                 
+                  <button type="button" class="large-primary-button" (click)="saveSetup()" [disabled]="!smstempText || !selectedSendorId">
+                      Save
+                  </button>
+              </div>
+          </ng-container>
+      </div>
+  </div>
+  

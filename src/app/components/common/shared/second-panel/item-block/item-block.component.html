@@ -1,0 +1,25 @@
+<div [class]="'item-block-wrapper ' + className" [ngClass]="{ selected: isSelected }" [class.disabled]="activeMenu == 1 ? false : true">
+    <div *ngIf="icon" class="icon-wrapper">
+        <a *ngIf="icon" [ngClass]="[icon ? icon : '']" class="ico-extra-small"></a>
+    </div>
+
+    <div *ngIf="isEllipse" class="icon-wrapper">
+        <div class="ellipse-icon" [ngStyle]="{ 'background-color': ellipseColor }"></div>
+    </div>
+    <ng-content select="[prefix]"></ng-content>
+    <div class="item-label-container">
+        <ng-container *ngIf="label?.length > 22">
+            <div appTooltip [tooltipTemplate]="label" [ngClass]="{
+                    'disable-tooltip': disableTooltip
+                }" class="item-label">
+                {{ label }}
+            </div>
+        </ng-container>
+        <ng-container *ngIf="label?.length <= 22">
+            <div class="item-label">
+            {{ label }}
+            </div>
+        </ng-container>
+    </div>
+    <ng-content select="[menu]"></ng-content>
+</div>

@@ -1,0 +1,7 @@
+<div class="search-container {{ kind }}" [class.disabled]="disabled">
+    <img [src]="IconSrc" alt="Search" class="search-icon {{ iconSize }}" />
+    <input type="text" class="search-input" name="search"
+     [(ngModel)]="textInput" (ngModelChange)="onSearchInputChange(textInput)"
+        [attr.placeholder]="label" autocomplete="off" />
+    <img *ngIf="IconClr && textInput" [src]="IconClr" alt="Clear" class="search-clear-icon {{ iconSize }} cursor-pointer" (click)="onCancelIconClick($event)"/>
+</div>

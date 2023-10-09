@@ -1,0 +1,11 @@
+@media only screen and (min-width: 600px) {
+    .sevice-sidemenu { 
+        height: 60%; 
+        height: calc(100vh - 205px); 
+        overflow-y: overlay; 
+        // margin-right : -5px;
+    }
+}
+// .sevice-sidemenu .services-team > .item-block > .item-block-wrapper {
+//     padding: 0 20px 0 20px !important;
+// }

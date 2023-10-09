@@ -1,0 +1,72 @@
+.auto-call-submenu {
+  background-image: url(../../assets/images/menu-img/auto-call-sidebar.svg);
+}
+
+.audio-ico-submenu {
+  background-image: url(../../assets/images/menu-img/audio-sidebar.svg);
+}
+
+.contacts-ico-submenu {
+  background-image: url(../../assets/images/menu-img/contacts-sidebar.svg);
+}
+
+.campaigns-ico-submenu {
+  background-image: url(../../assets/images/menu-img/campaigns-sidebar.svg);
+}
+
+.getting-started-ico-submenu {
+  background-image: url(../../assets/images/menu-img/getting-started-sidebar.svg);
+}
+
+.reports-ico-submenu {
+  background-image: url(../../assets/images/menu-img/reports-sidebar.svg);
+}
+
+.clickto-call-ico-submenu {
+  background-image: url(../../assets/images/menu-img/clickto-call-sidebar.svg);
+}
+
+.tollfree-ico-submenu {
+  background-image: url(../../assets/images/menu-img/auto-call-sidebar.svg);
+}
+
+.smartivr-ico-submenu {
+  background-image: url(../../assets/images/menu-img/smartivr-sidebar.svg);
+}
+
+.conferencing-ico-submenu {
+  background-image: url(../../assets/images/menu-img/conferencing-sidebar.svg);
+}
+
+.virtual-number-ico-submenu {
+  background-image: url(../../assets/images/menu-img/virtual-number-sidebar.svg);
+}
+
+.missedcall-ico-submenu {
+  background-image: url(../../assets/images/menu-img/missedcall-sidebar.svg);
+}
+.info-ico {
+  background-image: url(../../assets/images/svg/info-ico.svg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+.success-ico {
+  background-image: url(../../assets/images/svg/ico-success.svg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+.error-ico {
+  background-image: url(../../assets/images/svg/ico-error.svg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+.close-ico {
+  background-image: url(../../assets/images/svg/ico-close.svg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+.time-ico {
+  background-image: url(../../assets/images/svg/time-ico.svg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+}

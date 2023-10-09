@@ -1,0 +1,97 @@
+@import './text';
+
+@mixin button($height: 48px) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: $height;
+    padding: 12px 16px;
+    border-radius: 250px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+@mixin primary-button($height: 48px, $font-style: 'text-button') {
+    @include button($height);
+    @include applyTextStyle($font-style);
+
+    background-color: var(--light-primary-50);
+    color: var(--white);
+
+    &:hover,
+    &:focus-visible {
+        color: var(--light-primary-70);
+        background-color: var(--light-primary-30);
+
+        img {
+            filter: var(--filter-grey-100);
+        }
+    }
+    &:active {
+        color: var(--light-primary-30);
+        background-color: var(--light-primary-60);
+    }
+
+    &.disabled,
+    &[disabled] {
+        pointer-events: none;
+        cursor: not-allowed;
+        opacity: 0.3;
+        color: var(--white);
+        background-color: var(--light-primary-60);
+    }
+
+    img {
+        filter: var(--filter-white);
+    }
+}
+
+@mixin secondary-button($height: 48px, $font-style: 'text-button') {
+    @include button($height);
+    @include applyTextStyle($font-style);
+    border: 1px solid var(--light-text-grey-40);
+    background-color: transparent;
+    color: var(--light-primary-60);
+
+    &:hover,
+    &:focus-visible {
+        border-color: var(--light-primary-60);
+    }
+    &:active {
+        border-color: var(--light-primary-60);
+        background-color: var(--light-primary-20);
+    }
+
+    &.disabled,
+    &[disabled] {
+        pointer-events: none;
+        cursor: not-allowed;
+        opacity: 0.3;
+        border-color: var(--light-text-grey-80);
+        background-color: transparent;
+    }
+}
+
+@mixin tertiary-button($height: 48px, $font-style: 'text-button') {
+    @include button($height);
+    @include applyTextStyle($font-style);
+    background-color: transparent;
+    color: var(--light-primary-60);
+
+    &:hover,
+    &:focus-visible {
+        background-color: var(--light-primary-20);
+    }
+    &:active {
+        background-color: var(--light-primary-30);
+    }
+
+    &.disabled,
+    &[disabled] {
+        pointer-events: none;
+        cursor: not-allowed;
+        opacity: 0.3;
+        background-color: transparent;
+    }
+}

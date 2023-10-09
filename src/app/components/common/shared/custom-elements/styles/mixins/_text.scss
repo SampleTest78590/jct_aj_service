@@ -1,0 +1,56 @@
+@use 'sass:list';
+@use 'sass:map';
+
+@use '../helper/breakpoints' as screen;
+
+@use '../dist-tokens/en/desktop.scss' as en-desktop;
+@use '../dist-tokens/en/mobile.scss' as en-mobile;
+
+/**
+  Iterates through key:value on a given map and lays out the sub key value as css properties
+ */
+@mixin _applyTextStyleSingle($style-name, $text-map) {
+    @if (map-has-key($text-map, $style-name)) {
+        $style-data: map_get($text-map, $style-name);
+        @each $key in map-keys($style-data) {
+            $value: map_get($style-data, $key);
+            @if type-of($value) == list {
+                #{$key}: join($value, (), 'comma', $bracketed: false);
+            } @else {
+                #{$key}: $value;
+            }
+        }
+    }
+}
+
+/**
+  Apply any pre-defined text style to current selector
+ */
+@mixin applyTextStyle($style-name-tag-token) {
+    $style-name: $style-name-tag-token;
+
+    @include _applyTextStyleSingle($style-name, en-desktop.$text-type-map);
+
+    @include screen.tablet {
+        @include _applyTextStyleSingle($style-name, en-mobile.$text-type-map);
+    }
+}
+
+@mixin applyTextStyleDesktop($style-name-tag-token) {
+    $style-name: $style-name-tag-token;
+
+    @include _applyTextStyleSingle($style-name, en-desktop.$text-type-map);
+}
+
+@mixin applyTextStyleMobile($style-name-tag-token) {
+    $style-name: $style-name-tag-token;
+
+    @include _applyTextStyleSingle($style-name, en-mobile.$text-type-map);
+}
+
+@mixin text-truncate($width: 100%) {
+    width: $width;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

@@ -1,0 +1,225 @@
+<!-- <p>campaign-report works!</p> -->
+<div class="campaign-report-root" fxLayout="column" fxLayoutGap="16px" id="pdfTable" #pdfTable>
+  <div fxLayout="row" fxLayoutAlign="space-between start" class="report-header">
+    <div fxLayout="row" fxLayoutGap="12px">
+      <div>
+        <img src="assets/images/svg/ico-back.svg" alt="back" class="ico-small cursor-pointer"
+          (click)="goBacktoCampaignList()" />
+      </div>
+      <div fxLayout="column" fxLayoutGap="8px">
+        <div class="header">{{campaignName}}</div>
+        <div fxLayout="row" fxLayoutGap="12px">
+          <div class="mini-text lh-16" *ngIf="updatedDate" >
+            Last updated {{differenceVal}} ago on {{ updatedDateTime | date : "HH:mm" || "-" }} , {{ updatedDate || "-" }}
+          </div>
+          <img src="assets/images/svg/ico-refresh-screen.svg" alt="screen-refresh" class="refresh-ico" (click)="getReportData()"/>
+        </div>
+      </div>
+      <div class="ml-4 campaign-status mini-text mt-2"  [ngClass]="[ campaignStatusData == 'RUNNING' || campaignStatusData == 'ACTIVE' ? 'running-bg' :campaignStatusData == 'SCHEDULE' || campaignStatusData == 'CREATED' || campaignStatusData == 'LEADS-READY' ? 'scheduled-bg' :campaignStatusData == 'DRAFT' ? 'default-bg' :campaignStatusData == 'COMPLETED' ? 'completed-bg' :campaignStatusData == 'STOP' || campaignStatusData == 'SUSPENDED' ? 'stop-bg' :campaignStatusData == 'PAUSED' ? 'paused-bg' : '' ]">{{campaignStatusData | titlecase}}</div>
+      <!-- <div class="ml-4 campaign-status mini-text mt-2"  [ngClass]="[ campPreviewDetails?.campaignStatus == 'RUNNING' || campPreviewDetails?.campaignStatus == 'ACTIVE' ? 'running-bg' :campPreviewDetails?.campaignStatus == 'SCHEDULE' || campPreviewDetails?.campaignStatus == 'CREATED' || campPreviewDetails?.campaignStatus == 'LEADS-READY' ? 'scheduled-bg' :campPreviewDetails?.campaignStatus == 'DRAFT' ? 'default-bg' :campPreviewDetails?.campaignStatus == 'COMPLETED' ? 'completed-bg' :campPreviewDetails?.campaignStatus == 'STOP' || campPreviewDetails?.campaignStatus == 'SUSPENDED' ? 'stop-bg' :campPreviewDetails?.campaignStatus == 'PAUSED' ? 'paused-bg' : '' ]">{{campPreviewDetails?.campaignStatus | titlecase}}</div> -->
+    </div>
+    <div fxLayout="row" fxLayoutGap="12px" id="buttonCapture">
+      <button class="medium-secondary-button" routerLink="app-failed-calls-chart" (click)="goTodetailReport()" [disabled]="campPieChart?.length == 0">
+        <img src="assets/images/svg/ico-detailed-report.svg" alt="" class="ico-small mr-8" />
+        Detailed Report
+      </button>
+      <button class="medium-primary-button" (click)="screenShotDownload(target)">
+        <img src="assets/images/svg/ico-download.svg" alt="" class="ico-small mr-8" />
+        Download Report
+      </button>
+    </div>
+  </div>
+
+  <div #target id="targetdiv" fxLayout="row" class="no-margin">
+    <span style="display: none;">&nbsp;</span>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="start stretch" fxLayoutGap="16px" fxFlex class="mt-4">
+    <div fxLayout="column" fxLayoutAlign="stretch stretch" class="sec-border p-16" fxFlex="54">
+      <div class="mb-16 extra-bold title-text grey-100 lh-24">
+        Call summary and Breakdown
+      </div>
+      <div fxLayout="row" fxLayoutGap="8px" class="mb-24" *ngIf="campPieChart">
+        <div fxLayout="column" fxLayoutGap="8px" class="summary-card leads-border" fxFlex="33.33">
+          <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="space-between center">
+            <div class="grey-80 lh-20">Total Leads</div>
+            <img src="assets/images/svg/ico-dot-menu.svg" alt="" class="ico-standard" />
+          </div>
+          <div class="grey-100 lh-24 title-text extra-bold">{{(campPieChart?.totalLeads | numberFormat) || '0' }}</div>
+        </div>
+        <div fxLayout="column" fxLayoutGap="8px" class="summary-card conn-calls" fxFlex="33.33">
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            <div class="grey-80 lh-20">Connected Calls</div>
+            <img src="assets/images/svg/ico-dot-menu.svg" alt="" class="ico-standard" />
+          </div>
+          <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="start center">
+            <div class="conn-number">{{(campPieChart?.leadsCompleted | numberFormat) || '0' }}</div>
+            <div class="conn-percent mini-text lh-16" *ngIf="campPieChart?.campaignConectivityRate">{{campPieChart?.campaignConectivityRate}}
+            </div>
+          </div>
+        </div>
+        <div fxLayout="column" fxLayoutGap="8px" class="summary-card fail-calls" fxFlex="33.33">
+          <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-between center">
+            <div class="grey-80 lh-20">Failed Calls</div>
+            <img src="assets/images/svg/ico-dot-menu.svg" alt="" class="ico-standard" />
+          </div>
+          <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="start center">
+            <div class="fail-number">{{(campPieChart?.leadsFailed | numberFormat) || '0' }}</div>
+            <div class="failed-percent mini-text lh-16" *ngIf="campPieChart?.campaignFailedRate">{{campPieChart?.campaignFailedRate}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div fxLayout="column" fxLayoutGap="12px" class="mb-15">
+        <div class="extra-bold body-text-14 lh-20 grey-100">
+          Failed Calls Breakdown
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="30px" class="mt-10 mb-10 position-relative">
+          <div fxFlex="42" class="position-relative" *ngIf="campPieChart">
+            <div class="failed-calls-text" *ngIf="!!campPieChart?.failedCallsBreakdown?.length">Failed Calls</div>
+            <app-failed-calls-chart  *ngIf="campPieChart?.failedCallsBreakdown?.length>0" [chartData]="campPieChart?.failedCallsBreakdown"></app-failed-calls-chart>
+          </div>
+          <div fxFlex="58" fxLayout="column" class="fcb-text-status" fxLayoutGap="20px" *ngIf="!!campPieChart?.failedCallsBreakdown?.length">
+            <div fxLayout="row" fxLayoutGap="12px" fxLayoutAlign="start start" *ngFor="let item of campPieChart?.failedCallsBreakdown;let i=index">
+              <div fxLayout="row" fxLayoutGap="12px" fxLayoutAlign="start start" fxFlex="60">
+                <div fxFlex="6">   
+                  <span class="dot-circle" [ngStyle]="{'background-color':backgroundColor[i]}"></span>
+                </div>
+                <div class="grey-70 lh-20" fxFlex="86">
+                  <span class="ellipsis-text" appTooltip [tooltipTemplate]="item._id">{{item._id | titlecase}}</span>
+                </div>
+              </div>
+              <div class="grey-100 lh-20" fxFlex="40">{{item.count | numberFormat}} calls</div>
+            </div>
+          </div>
+        </div>
+        <!-- Empty Data Code -->
+        <div *ngIf="!!!campPieChart?.failedCallsBreakdown?.length && piechartShow" class="mt-10 mb-10 position-relative chart-nodata"> 
+          <div fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="16px" class="charts-empty-data"> 
+            <div><img src="assets/images/svg/ico-info-grey.svg" class="ico-medium cursor-pointer" alt="" /></div> 
+            <div class="title-text grey-100 lh-24">{{nullStateMsg}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div fxLayout="column" fxFlex="46" fxLayoutGap="16px">
+      <div class="p-16 sec-border">
+        <div fxLayout="column">
+          <div fxLayout="row" fxLayoutAlign="space-between start" class="lh-20">
+            <div class="mini-header mb-16">Campaign Progress</div>
+            <div class="bold body-text-14 primary-60" *ngIf="campPieChart?.campaignCompletetionRate">
+              {{campPieChart?.campaignCompletetionRate}}%</div>
+          </div>
+          <div class="mb-12" fxFlex="100">
+            <progress value="{{campPieChart?.campaignCompletetionRate}}" max="100" fxFlex="100" class="mtb-2">
+              {{campPieChart?.campaignCompletetionRate}}%
+            </progress>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="19px" class="mb-12">
+            <div fxLayout="row" fxFlex="50" fxLayoutAlign="space-between start">
+              <div class="body-text-14 grey-70 lh-20" fxFlex="50">Start Date</div>
+              <div class="body-text-14 grey-100 lh-20 word-break-all text-right">{{campPreviewDetails?.campaignSchedule?.startDate |
+                date:'dd/MM/YYYY'}}</div>
+            </div>
+            <div fxLayout="row" fxFlex="50" fxLayoutAlign="space-between start">
+              <div class="body-text-14 grey-70 lh-20">End Date</div>
+              <div class="body-text-14 grey-100 lh-20 word-break-all text-right">{{campPreviewDetails?.campaignSchedule?.endDate |
+                  date:'dd/MM/YYYY'}}</div>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="19px" class="mb-12">
+            <div fxLayout="row" fxFlex="50" fxLayoutAlign="space-between start">
+              <div class="body-text-14 grey-70 lh-20">Campaign Type</div>
+              <div class="body-text-14 grey-100 lh-20 word-break-all text-right">{{campPreviewDetails?.campaignType}}</div>
+            </div>
+            <div fxLayout="row" fxFlex="50" fxLayoutAlign="space-between start">
+              <div class="body-text-14 grey-70 lh-20">Caller Id</div>
+              <div class="body-text-14 grey-100 lh-20 word-break-all">{{campPreviewDetails?.callerId || '-'}}</div>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="19px" class="mb-12">
+            <div fxLayout="row" fxFlex="50" fxLayoutAlign="space-between start" class="position-relative">
+              <div class="body-text-14 grey-70 lh-20">Description</div>
+              <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="center center" class="cursor-pointer" (click)="openDropdown = !openDropdown">
+                <div class="body-text-14 grey-100 lh-20">{{ openDropdown ? "Hide" : "View" }}</div>
+                <img src="assets/images/svg/ico-menu-{{openDropdown ? 'up' : 'down'}}-arrow.svg" alt="" class="ico-standard" />
+              </div>
+              <div class="desc-details" *ngIf="openDropdown">
+                <div class="lh-20">{{campPreviewDetails?.campaignDescription || '-'}}</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="divider-line mb-12"></div>
+          <div fxLayout="column" fxLayoutGap="8px">
+            <div class="mini-header mtb-2">Audio Message</div>
+            <div><app-audio-preview-play [src]="campPreviewDetails?.audioUrl" [index]="1" [audioDuration]="campPreviewDetails?.audioDuration"></app-audio-preview-play></div>
+          </div>
+        </div>
+      </div>
+      <div class="p-16 sec-border secondary-card">
+        <div fxLayout="column" fxLayoutGap="10px" class="mt-2">
+          <div class="mini-header">Other Stats</div>
+          <div fxLayout="row" fxLayoutAlign="space-between start">
+            <div class="body-text-14 grey-70 lh-20 mb-2" fxFlex="50">Avg Calls per Day</div>
+            <div class="body-text-14 grey-100 lh-20 mb-2 ">{{campPieChart?.avgCallPerDay}}</div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="space-between start">
+            <div class="body-text-14 grey-70 lh-20 mb-2" fxFlex="50">
+              Avg duration listened
+            </div>
+            <div class="body-text-14 grey-100 lh-20 mb-2">{{campPieChart?.avgDuration}}</div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="space-between start">
+            <div class="body-text-14 grey-70 lh-20 mb-2" fxFlex="50">Peak Hours</div>
+            <div class="body-text-14 grey-100 lh-20 mb-2">{{campPieChart?.peekHours}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div fxLayout="column" class="sec-border p-16">
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="mb-12">
+      <div fxLayout="row" fxLayoutGap="16px" class="cust-ml">
+        <div fxLayout="row" fxLayoutGap="6px" fxLayoutAlign="center center">
+          <div class="dot-circle tot-leads-dot"></div>
+          <div>Total Leads</div>
+        </div>
+        <div fxLayout="row" fxLayoutGap="6px" fxLayoutAlign="center center">
+          <div class="dot-circle con-calls-dot"></div>
+          <div>Connected Calls</div>
+        </div>
+        <div fxLayout="row" fxLayoutGap="6px" fxLayoutAlign="center center">
+          <div class="dot-circle failed-calls-dot"></div>
+          <div>Failed Calls</div>
+        </div>
+      </div>
+      <div class="dropdown-mg" fxLayout="column" fxLayoutGap="6px">
+        <app-dropdown placeholder="{{customDate === 'Custom' && inputDate ? inputDate : 'Today'}}" class="dropdown-pad"
+          [options]="durations" (handleChange)="customCalendar($event)"
+          [detectChangeEverytime]="customDate === 'Custom' ? false : true" [isPositionAboslute]="true"
+          [displayValue]="customDate === 'Custom' && inputDate ? true : false" [value]="'Today'"></app-dropdown>
+
+
+        <div class="cstm-input position-relative date-container" #range>
+          <!-- <input hidden type="text" placeholder="DD/MM/YYYY" #range
+              (click)="openDateRangePicker=true" class="date-input" [(ngModel)]="inputDate"/> -->
+          <!-- <div class="ico-right img-toggle" aria-label="Clear">
+              <img class="cursor-pointer" src="assets/images/svg/ico-calendar.svg" alt="" />
+          </div> -->
+
+          <ng-container *ngIf="openDateRangePicker">
+            <app-calendar-view [open]="true" [type]="'timeline'" [firstDate]="dateRangeStart"
+              [secondDate]="dateRangeEnd" [max]="validatedMinDate" [anchorEl]="range" (getValues)="getDates($event)"
+              (closeCalendarCb)="onCalendarClose($event)">
+            </app-calendar-view>
+          </ng-container>
+        </div>
+      </div>
+
+    </div>
+    <div *ngIf="campLinechart">
+      <app-calls-line-chart [chartData]="campLinechart" [nullStateMsg]="nullStateMsg"></app-calls-line-chart>
+    </div>
+  </div>
+</div>

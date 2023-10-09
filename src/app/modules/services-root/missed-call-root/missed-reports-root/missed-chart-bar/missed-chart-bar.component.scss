@@ -1,0 +1,61 @@
+.missed-chart-bar .summary-card {
+    border: 1px solid var(--light-primary-grey-60);
+    border-radius: 16px;
+    padding: 16px 16px 16px 16px;
+}
+
+.missed-chart-bar .summary-card.conn-calls .conn-number {
+    // color: var(--light-feedback-success-80);
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 24px;
+}
+
+.missed-chart-bar .summary-card.fail-calls .fail-number {
+    // color: var(--light-feedback-error-80);
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 24px;
+}
+
+.missed-chart-bar .summary-card.conn-calls .conn-percent {
+    padding: 0 4px;
+    border-radius: 4px;
+    display: block;
+    max-width: 60px !important;
+    background-color: var(--light-secondary-20);
+    color: var(--bold-secondary-inverse);
+    height: 16px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.missed-chart-bar .summary-card.fail-calls .failed-percent {
+    padding: 0 4px;
+    border-radius: 4px;
+    display: block;
+    max-width: 60px !important;
+    background-color: var(--light-sparkle-20);
+    color: #902B00;
+    height: 16px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.missed-chart-bar .progress-bar progress {
+    background-color: var(--light-midnight-orange-40) !important;
+    height: 8px;
+    border-radius: 8px;
+}
+
+.missed-chart-bar .progress-bar progress::-webkit-progress-bar {
+    background-color: var(--light-midnight-orange-40) !important;
+    height: 8px;
+    border-radius: 8px;
+}
+
+.missed-chart-bar .progress-bar progress::-webkit-progress-value {
+    background-color: var(--light-secondary-50) !important;
+    height: 8px;
+    border-radius: 8px;
+}

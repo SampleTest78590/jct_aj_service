@@ -1,0 +1,27 @@
+.number-sms-section .custom-table.grid-layout-row-wrap-2n > *:nth-child(even){
+    border-right:0!important;
+}
+.number-sms-section .custom-table .grid-layout-row-wrap-2n > *:nth-child(even){
+    border-right:0!important;
+}
+.number-sms-section .custom-table.grid-layout-row-wrap-2n > *:nth-child(even){
+    border-right:0!important;
+}
+.number-sms-section .separator-right-white{
+    border-right: 1px solid var(--white);
+}
+.number-sms-section .separator-right{
+    border-right: 1px solid var(--light-primary-grey-40) !important;
+}  
+.number-sms-section .custom-table > div div:first-child .custom-table-header-content .custom-table-header:first-child {
+    border-radius: 8px 0 0 0 !important;
+}
+.number-sms-section .custom-table > div div:last-child .custom-table-header-content .custom-table-header:last-child {
+    border-radius: 0 8px 0 0 !important;
+}
+// .number-sms-section .custom-table .border-radius-0.grid-layout-row-wrap-2n >{
+//     border-right:1px solid var(--white)!important;
+// }
+// .number-sms-section .custom-table .border-radius-02.grid-layout-row-wrap-2n >{
+//     border-right:1px solid var(--light-text-grey-40)!important;
+// }

@@ -1,0 +1,174 @@
+.sms-camp-root .p-all {
+    padding: 8px 24px;
+}
+
+.sms-camp-root .custom-mat-accordion .mat-expansion-panel {
+    border: 1px solid var(--light-primary-grey-40);
+}
+
+.sms-camp-root .sample-header-bold {
+    font-weight: 700;
+    line-height: 16px;
+}
+
+.sms-camp-root .mat-expansion-indicator {
+    position: relative;
+    top: -18px !important;
+    right: 16px;
+}
+
+.sms-camp-root .mat-expanded .mat-expansion-indicator {
+    top: -14px !important;
+}
+
+.sms-camp-root .custom-accordion {
+    background-color: var(--white);
+    border: 1px solid var(--light-text-grey-40);
+    border-radius: 8px;
+    color: var(--light-text-grey-100);
+    cursor: pointer;
+    padding: 15px 24px;
+    text-align: left;
+    outline: none;
+    transition: 0.4s;
+}
+
+.sms-camp-root .panel {
+    padding: 0 18px 0 64px;
+    display: none;
+    background-color: var(--white);
+    overflow: hidden;
+}
+
+.sms-camp-root .visible {
+    display: block;
+}
+
+.sms-camp-root .audio-player {
+    margin-top: 8px;
+}
+
+.sms-camp-root .pl-64 {
+    padding-left: 64px;
+}
+
+.sms-camp-root .campaign-custom-width {
+    max-width: 500px;
+    position: absolute;
+    z-index: 99;
+    margin-top: 50px !important;
+    border-radius: 24px;
+    background: var(--white);
+    box-shadow: var(--shadow-m);
+    padding: 8px 16px;
+    width: 100%;
+    box-sizing: border-box;
+    height: 240px;
+}
+
+.sms-camp-root .search-result-row {
+    height: 40px;
+    line-height: 40px;
+}
+
+.sms-camp-root .search-bar-divider {
+    margin: 0px -16px !important;
+    padding: 0px 16px;
+}
+
+.sms-camp-root .campaign-custom-width .cdk-virtual-scroll-content-wrapper {
+    flex-direction: column !important;
+}
+
+.sms-camp-root .campaign-custom-width .cdk-virtual-scroll-viewport {
+    // overflow: inherit !important;
+    height: 135px;
+    // contain: inherit !important;
+}
+
+.sms-camp-root .info-text-color {
+    color: var(--light-secondary-60);
+}
+
+.sms-camp-root .arrow-forword {
+    -ms-transform: rotate(-90deg);
+    /* IE 9 */
+    transform: rotate(-90deg);
+}
+
+.sms-camp-root .footer-modal-action {
+    bottom: 4px;
+    left: -24px;
+    right: -24px;
+    width: calc(100% + 48px);
+    background: var(--white) !important;
+    // background: var(--light-text-grey-20)!important;
+    z-index: 3;
+    border-radius: 0;
+}
+
+.sms-camp-root .two-line-ellipsis {
+    -webkit-line-clamp: 1 !important;
+}
+
+.sms-camp-root .plus-audio-accordion.custom-accordion {
+    border-color: var(--light-midnight-marigold-40);
+}
+
+.sms-camp-root .sub-title {
+    font-size: var(--font-size-body);
+    font-weight: 500;
+}
+
+.sms-camp-root .smscamp-subheader-info {
+    min-width: 110px;
+    margin-right: 16px;
+}
+
+.sms-camp-root .smscamp-subheader-info2 {
+    min-width: 196px;
+    margin-right: 16px;
+}
+
+.sms-camp-root .smscamp-subheader-info3 {
+    min-width: 100px;
+    margin-right: 16px;
+}
+
+.sms-camp-root .hand-cursor-defualt {
+    cursor: default !important;
+}
+
+.sms-camp-root .sms-format {
+    white-space: pre-wrap;
+}
+
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+
+    .sms-camp-root .smscamp-subheader-info {
+        min-width: 110px;
+    }
+    
+    .sms-camp-root .smscamp-subheader-info2 {
+        min-width: 196px;
+    }
+    
+    .sms-camp-root .smscamp-subheader-info3 {
+        min-width: 114px;
+    }
+}
+
+@media only screen and (min-width: 1920px) {
+
+    .sms-camp-root .smscamp-subheader-info {
+        min-width: 114px;
+    }
+    
+    .sms-camp-root .smscamp-subheader-info2 {
+        min-width: 122px;
+    }
+    
+    .sms-camp-root .smscamp-subheader-info3 {
+        min-width: 120px;
+    }
+}

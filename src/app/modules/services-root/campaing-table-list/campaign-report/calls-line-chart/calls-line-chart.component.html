@@ -1,0 +1,12 @@
+<!-- <p>calls-line-chart works!</p> -->
+<div fxLayout="column" fxLayoutAlign="space-between start" class="line-chart-root">
+    <div class="chart-container full-width" [style.height]="'445px'">
+        <canvas id="callLineChart">{{chart}}</canvas>
+    </div>
+    <!-- Empty Data Code -->
+    <div  fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="16px"
+        class="charts-empty-data" *ngIf="nullStateMsg  && !!!chartData?.label">
+        <div><img src="assets/images/svg/ico-info-grey.svg" class="ico-medium cursor-pointer" alt="" /></div>
+        <div class="title-text grey-100 lh-24">{{nullStateMsg}}</div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+.date-container {
+    .no-action-container {
+        display: flex;
+        position: relative;
+
+        .overlay-elem {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            cursor: pointer;
+        }
+
+        .date-text {
+            margin: 0 8px;
+            padding: 5px 0;
+            width: 100%;
+            text-align: left;
+        }
+
+        .date-separator {
+            transform: rotate(10deg);
+            background-color: var(--light-text-grey-60);
+            min-width: 1px;
+        }
+    }
+}

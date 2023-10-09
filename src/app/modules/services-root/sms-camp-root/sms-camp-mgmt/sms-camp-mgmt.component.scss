@@ -1,0 +1,89 @@
+.sms-camp-mgmt-root .info-mouse-hover .hover-two {
+  width: 300px;
+}
+
+.sms-camp-mgmt-root .footer-modal-action {
+  position: absolute;
+  bottom: -24px;
+  left: -24px;
+  z-index: 3;
+  border-radius: 0;
+  padding: 8px 32px;
+  width: calc(100% - -48px);
+  background: var(--white) !important;
+  // background: var(--light-text-grey-20) !important;
+  right: -24px;
+}
+
+.sms-camp-mgmt-root .nodata {
+  padding: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.12)
+}
+
+.sms-camp-mgmt-root .campaign-status {
+  border-radius: 80px;
+  display: block;
+  max-width: 114px !important;
+  height: 24px;
+  line-height: 24px;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-align: center;
+}
+
+.sms-camp-mgmt-root .campaign-status.running-bg {
+  background: #E8FAF7;
+  color: #0E5C4f !important;
+}
+
+.sms-camp-mgmt-root .campaign-status.default-bg {
+  background: var(--light-primary-grey-20) !important;
+  color: var(--light-primary-grey-70) !important;
+}
+
+.sms-camp-mgmt-root .campaign-status.completed-bg {
+  background: var(--light-feedback-success-20) !important;
+  color: var(--light-feedback-success-80) !important;
+}
+
+.sms-camp-mgmt-root .campaign-status.scheduled-bg {
+  background: var(--light-sparkle-20) !important;
+  color: var(--light-sparkle-70) !important;
+}
+
+.sms-camp-mgmt-root .campaign-status.stop-bg {
+  background: #FCE6E7;
+  color: #660209;
+}
+
+.sms-camp-mgmt-root .campaign-status.paused-bg {
+  background: var(--light-marigold-midnight-20) !important;
+  color: #7F4B10 !important;
+}
+
+.sms-camp-mgmt-root .mt-100 {
+  margin-top: 100px;
+}
+
+.sms-camp-mgmt-root .dot-menu-dropdown .dropdown-content {
+  cursor: inherit !important;
+}
+
+.sms-camp-mgmt-root .dot-menu-dropdown .dropdown-content .cam-action-bttn {
+  height: 36px;
+  padding: 8px 16px;
+  line-height: 20px;
+  cursor: pointer !important;
+  font-size: var(--font-size-body);
+  color: var(--light-primary-grey-80);
+}
+
+.sms-camp-mgmt-root .dot-menu-dropdown .dropdown-content .cam-action-bttn:hover {
+  background-color: var(--light-primary-grey-20);
+}
+
+@media only screen and (min-width: 1280px) and (max-width: 1439px) {
+  .sms-camp-minheight {
+    min-height: 45vh !important;
+  }
+}

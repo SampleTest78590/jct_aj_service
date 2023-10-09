@@ -1,0 +1,24 @@
+%spinner-vars {
+    --spinner-color-circle-0: var(--light-text-grey-40);
+    --spinner-label-color: var(--light-text-grey-80);
+    --spinner-unavailable-color: var(--light-text-grey-80);
+
+    // inline ------------------------------------------
+    --spinner-color-inline-circle-1: currentColor;
+
+    // normal ------------------------------------------
+    --spinner-color-normal-circle-1: var(--light-primary-50);
+
+    // vibrant ------------------------------------------
+    --spinner-color-vibrant-circle-1: var(--light-sparkle-50);
+    --spinner-color-vibrant-circle-2: var(--light-secondary-50);
+    --spinner-color-vibrant-circle-3: var(--light-primary-50);
+
+    --spinner-size-medium: 48px;
+    --spinner-size-small: 24px;
+    --spinner-size-xs: 16px;
+
+    --spinner-unavailable-padding: 12px 24px;
+    --spinner-unavailable-border-color: var(--light-text-grey-60);
+    --spinner-unavailable-border-radius: 24px;
+}

@@ -1,0 +1,201 @@
+<div class="sms-reports-root" fxLayoutAlign="space-between stretch" fxLayout="column" fxLayoutGap="16px" id="pdfTable"
+  #pdfTable>
+  <div fxLayout="row" fxLayoutAlign="space-between start"  [ngClass]=" !!selectedCampaign?.campaignId ? 'report-header' : ''">
+    <div fxLayout="row" fxLayoutGap="12px">
+    
+      <div fxLayout="column">
+        <div fxLayout="row" fxLayoutGap="12px" fxLayoutAlign="start center" class="dropdown-header">
+          <button class="header" (click)="show(); $event.stopPropagation()">
+            {{
+            !!selectedCampaign?.campaignId
+            ? (selectedCampaign?.campaignName | titlecase)
+            : "Choose your SMS Campaign"
+            }}
+          </button>
+          <div *ngIf="!!selectedCampaign?.campaignId" class="ml-4 campaign-status mini-text" [ngClass]="[
+              missedChartbar?.campaignStatus == 'ACTIVE'
+                ? 'running-bg'
+                : missedChartbar?.campaignStatus == 'DRAFT'
+                ? 'default-bg'
+                : missedChartbar?.campaignStatus == 'COMPLETED'
+                ? 'completed-bg'
+                : ''
+            ]">
+            {{ (missedChartbar?.campaignStatus | titlecase) || "-" }}
+          </div>
+          <div>
+            <img src="assets/images/svg/ico-chevron-down.svg" class="cstm-dropdown__icon cursor-pointer" alt=""
+              (click)="show(); $event.stopPropagation()" />
+          </div>
+        </div>
+        <div class="campaign-custom-width" *ngIf="visibleCampaigns">
+          <div class="search-box mb-8 mt-8">
+            <div fxLayout="column">
+              <div class="calc-width">
+                <app-custom-search [label]="'Search'" IconSrc="assets/images/svg/ico-search-grey.svg"
+                  IconClr="assets/images/svg/ico-close-outline.svg" (click)="$event.stopPropagation()"
+                  (outputText)="onSearch($event)">
+                </app-custom-search>
+              </div>
+            </div>
+          </div>
+          <div fxLayoutAlign="space-between center" fxLayout="row" fxLayoutGap="5px">
+            <div fxLayout="column" fxFlex="100" fxLayoutGap="24px">
+              <div [style.height]="calculateHeight(campaignList?.length)" *ngIf="campaignList?.length">
+                <cdk-virtual-scroll-viewport itemSize="40">
+                  <div class="search-result-row" fxLayout="column" fxFlex="100" fxLayoutGap="5px"
+                    *cdkVirtualFor="let item of campaignList">
+                    <div class="cursor-pointer" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100"
+                      (click)="
+                        selectedCampaign = item;
+                        missedChartSectionService.selectedCampaign = item;
+                        missedSummary();smsSendTime();
+                      ">
+                      <div fxLayoutAlign="center center" fxLayout="row" fxLayoutGap="8px" fxFlex="100">
+                        <!-- <img src="assets/images/svg/ico-uploded-gray.svg" alt="" class="ico-extra-small" /> -->
+                        <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-between center"
+                          class="sub-title-text bold grey-100">
+                          <div>{{ item?.campaignName || '-' }}</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </cdk-virtual-scroll-viewport>
+              </div>
+              <div fxLayout="column" fxFlex="100" fxLayoutGap="16px" class="text-center"
+                *ngIf="campaignList?.length == 0">
+                <div class="lh-24 sub-title-text">
+                  Your SMS Campaign List is empty
+                </div>
+
+                <div>
+                  <button class="small-primary-button" (click)="goToCreateSMS()">Create
+                    Campaign</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!!selectedCampaign?.campaignId" fxLayout="row" fxLayoutGap="12px" class="mt-6">
+          <div class="mini-text lh-16" *ngIf="updatedDateTime">
+            Last updated {{ differenceVal }} ago on
+            {{ updatedDateTime | date : "HH:mm" || "-" }} ,
+            {{ updatedDateTime | date : "dd/MM/YYYY" || "-" }}
+          </div>
+          <img src="assets/images/svg/ico-refresh-screen.svg" alt="screen-refresh"
+            (click)="missedSummary();smsSendTime();" class="refresh-ico" />
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!!selectedCampaign?.campaignId" fxLayout="row">
+      <!-- <app-dropdown fxFlex="170px" placeholder="Today" class="dropdown-pad" [value]=""></app-dropdown> -->
+      <app-dropdown placeholder="{{
+          filterTime === 'C' && inputDate ? inputDate : 'Today'
+        }}" class="dropdown-pad" [options]="durations" (handleChange)="customCalendar($event)"
+        [detectChangeEverytime]="filterTime === 'C' ? false : true" [isPositionAboslute]="true"
+        [displayValue]="filterTime === 'C' && inputDate ? true : false" [value]="filterTime">
+      </app-dropdown>
+      <div class="cstm-input position-relative date-container" #range>
+        <ng-container *ngIf="openDateRangePicker">
+          <app-calendar-view [open]="true" [type]="'timeline'" [firstDate]="dateRangeStart" [secondDate]="dateRangeEnd"
+            [max]="validatedMinDate" [anchorEl]="range" (getValues)="getDates($event)"
+            (closeCalendarCb)="onCalendarClose($event)">
+          </app-calendar-view>
+        </ng-container>
+      </div>
+      <div id="myDropdown" class="dot-menu-dropdown download-bttn" appDropdown>
+        <button class="medium-tertiary-button-icon cursor-pointer">
+          <img src="assets/images/svg/ico-dot-menu.svg" alt="ico-medium" class="" />
+        </button>
+        <div class="dropdown-content">
+          <div fxLayout="column">
+            <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px" class="menu-height"
+              (click)="screenShotDownload(target)">
+              <span><img src="assets/images/svg/ico-download.svg" alt="" class="ico-standard mt-10" /></span>
+              <span>Download Report</span>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px" class="menu-height"
+              (click)="goTodetailReport()">
+              <span><img src="assets/images/svg/ico-detailed-report.svg" alt="" class="ico-standard mt-10" /></span>
+              <span>Detailed Report</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div #target id="targetdiv" fxLayout="row" class="no-margin">
+    <span style="display: none">&nbsp;</span>
+  </div>
+  <div *ngIf="!!!selectedCampaign?.campaignId" class="overlay-white" fxLayoutAlign="stretch stretch" fxLayout="column">
+    <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="8px" class="empty-text">
+      <div>
+        <img src="assets/images/svg/ico-info.svg" alt="" class="ico-medium ico-grey-80 cursor-pointer" />
+      </div>
+      <p class="title-text lh-24 grey-100">
+        Please select a sms campaign to view the report.
+      </p>
+    </div>
+  </div>
+
+  <div fxLayout="column" fxLayoutGap="16px" fxLayoutAlign="stretch stretch" class="pr-4">
+    <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="stretch stretch">
+      <div fxLayout="column" fxLayoutAlign="stretch stretch" class="sec-border p-16" fxFlex="54">
+        <app-sms-chart-bar [missedChartSection]="missedChartbar" [selectedCampaign]="selectedCampaign">
+        </app-sms-chart-bar>
+      </div>
+      <div fxLayout="column" fxLayoutGap="16px" fxFlex="46">
+        <div class="sec-border p-16">
+          <app-virtual-section [virtualDetails]="selectedCampaign" [missedChartReport]="missedChartbar">
+          </app-virtual-section>
+        </div>
+        <div class="sec-border p-16">
+          <app-sms-other-stats [selectedCampaign]="selectedCampaign" [missedOtherSatsSection]="missedChartbar">
+          </app-sms-other-stats>
+        </div>
+      </div>
+    </div>
+    <div fxLayout="column" fxLayoutGap="16px" class="mb-15">
+      <div class="sec-border p-16" *ngIf="selectedCampaign?.campaignId">
+        <app-number-sms-section [chartsData]="missedChartbar" [dropDownValue]="filterTime"
+          [smsEmptyStateMsg]="!!!missedChartbar?.smsReport?.length">
+        </app-number-sms-section>
+      </div>
+    </div>
+    <div fxLayout="column" fxLayoutGap="16px" class="mb-15" *ngIf="smsTime?.length">
+      <div fxLayout="column" fxLayoutGap="16px" class="sec-border p-16">
+        <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="16px">
+          <div class="grey-100 lh-24 sub-title-text extra-bold">Submitted SMS <span
+              class="grey-70">({{missedChartbar?.smsCount || 0}})</span></div>
+        </div>
+        <div class="custom-table">
+          <div fxLayout="row" fxLayoutAlign="space-between start" class="custom-table-header-content">
+            <div class="custom-table-header separator-right" fxFlex>
+              <div fxLayout="row" fxLayoutGap="4px">
+                <div>Delivery Time</div>
+                <div><img appTooltip [tooltipTemplate]="'info'" src="assets/images/svg/ico-info-grey.svg"
+                    class="ico-extra-small ico-grey-60 cursor-pointer" alt="" /></div>
+              </div>
+            </div>
+            <div class="custom-table-header" fxFlex>Submitted SMS</div>
+          </div>
+          <div >
+            <div fxLayout="row" fxLayoutAlign="space-between start" class="custom-table-content"
+              *ngFor="let element of smsTime">
+              <div class="contact-list-details separator-right" fxFlex>
+                <label>
+                  {{element._id}}s
+                </label>
+              </div>
+              <div class="contact-list-details" fxFlex>
+                <label>
+                  {{element.count}}
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

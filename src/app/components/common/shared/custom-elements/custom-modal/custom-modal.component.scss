@@ -1,0 +1,85 @@
+.custom-modal-wrapper {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .overlay {
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 100%;
+        width: 100%;
+        background-color: var(--light-text-grey-80);
+    }
+
+    .modal-container {
+        background-color: var(--white);
+        display: flex;
+        flex-direction: column;
+        width: 384px;
+        border-radius: 32px;
+        opacity: 1;
+        transition: cubic-bezier(0.35, 0, 0.25, 1) 300ms;
+        position: static;
+        z-index: 1;
+        max-height: 80vh;
+
+        .modal-header-container {
+            background-color: var(--white);
+            padding: 24px 24px 0px 24px;
+            flex-direction: column;
+            align-items: flex-end;
+            display: flex;
+            border-radius: 32px 32px 0px 0px;
+
+            .modal-close-icon-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 48px;
+                width: 48px;
+                border-radius: 50%;
+                cursor: pointer;
+
+                .close-btn-icon {
+                    display: inline-block;
+                    height: 24px;
+                    width: 24px;
+                    filter: var(--filter-grey-100);
+                }
+
+                &:hover {
+                    background-color: var(--light-primary-20);
+                }
+
+                &:active {
+                    background-color: var(--light-primary-30);
+                }
+            }
+        }
+
+        .modal-body-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            padding: 0px 32px 32px 32px;
+            border-radius: 0px 0px 32px 32px;
+        }
+    }
+}
+
+.custom-modal-wrapper .tertiary-button-icon:hover img {
+    filter: none !important;
+}

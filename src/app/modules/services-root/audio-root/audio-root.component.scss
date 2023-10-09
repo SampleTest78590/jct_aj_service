@@ -1,0 +1,34 @@
+.audio-messages-root .user-pics {
+    display: block !important;
+}
+
+.audio-messages-root .pagination .large-secondary-button {
+    font-size: 0.874rem;
+}
+
+.audio-messages-root .mt-28 {
+    margin-top: 28px;
+}
+
+.audio-messages-root .custom-mat-card .card-header {
+    font-size: var(--font-size-sub-title) !important;
+    font-weight: 700;
+}
+
+// .audio-messages-root .custom-table .custom-table-content .hover-text:hover {
+//     color: var(--light-primary-grey-100);
+// }
+
+.audio-messages-root .nodata {
+    padding: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.12)
+}
+.audio-messages-root .search-input {
+    font-size: 14px !important;
+}
+
+@media only screen and (min-width: 1367px) {
+    .audio-messages-root .mt-36 {
+        margin-top: 35px !important;
+    }
+}

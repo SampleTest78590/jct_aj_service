@@ -1,0 +1,89 @@
+<div fxFlex="100" fxLayoutAlign="space-between stretch" fxLayout="column" class="camp-table-report-container">
+  <div fxLayout="column" fxLayoutGap="16px">
+    <div fxLayout="row" fxLayoutAlign="space-between start" class="report-header">
+      <div fxLayout="row" fxLayoutGap="12px">
+        <div (click)="navigateToCampReport()" class="cursor-pointer">
+          <img src="assets/images/svg/ico-back.svg" alt="back" class="ico-small"/>
+        </div>
+        <div fxLayout="column" fxLayoutGap="8px">
+          <div class="header lh-28">{{campaignName}}</div>
+          <div fxLayout="row" fxLayoutGap="12px">
+            <div class="mini-text lh-16" *ngIf="updatedDate">Last updated {{differenceVal}} ago on {{ updatedDateTime | date : "HH:mm" || "-" }} , {{ updatedDate || "-" }}</div>
+            <img src="assets/images/svg/ico-refresh-screen.svg" alt="screen-refresh" class="ico-standard cursor-pointer refresh-ico" (click)="refreshData()"/>
+          </div>
+        </div>
+        <div class="ml-4 campaign-status mini-text multi-status mt-2" [ngClass]=
+        "[campStatusData == 'RUNNING' || campStatusData == 'ACTIVE' ? 'running-bg' :campStatusData == 'SCHEDULE' || campStatusData == 'CREATED' || campStatusData == 'LEADS-READY' ? 'scheduled-bg' :campStatusData == 'DRAFT' ? 'default-bg' :campStatusData == 'COMPLETED' ? 'completed-bg' :campStatusData == 'STOP' || campStatusData == 'SUSPENDED' ? 'stop-bg' :campStatusData == 'PAUSED' ? 'paused-bg' : '' ]">{{campStatusData | titlecase}}</div>
+      </div>
+      <div fxLayout="row" fxLayoutGap="12px" class="dot-menu-dropdown download-bttn" appDropdown> 
+        <button class="medium-primary-button"> 
+          <img src="assets/images/svg/ico-download.svg" alt="" class="ico-small mr-8" /> Download Report 
+          <img src="assets/images/svg/ico-chevron-down.svg" alt="" class="ico-small ml-8" /> 
+        </button> 
+        <div id="myDropdown" class="dropdown-content">
+          <div fxLayout="column">
+            <div class="menu-height" (click)="downloadCampaignReport('csv')">as .csv</div>
+            <div class="menu-height" (click)="downloadCampaignReport('xlsx')">as .xlsx</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="mt-5 mb-16">
+      <label class="sub-title-text bold lh-24">Detailed Report List({{ total ? total : "0" }})</label>
+      <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="start center">
+        <div fxFlex="312px" class="search-align">
+          <app-custom-search [label]="'Search by Contact Name'" IconSrc="assets/images/svg/ico-search-grey.svg" (outputText)="outputSearch($event)"></app-custom-search>
+        </div>
+        <button type="button" class="medium-secondary-button disabled">
+          <img src="assets/images/svg/ico-filter-grey.svg" class="ico-small mr-8" alt=""/>
+          <span class="grey-80">Filter</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+    <div fxLayout="column" [style.overflow]="'auto'" class="flex-1 custom-table mt-12">
+      <div fxLayout="row" fxLayoutAlign="space-between start" class="custom-table-header-content" (click)="sortData('Name')"   *ngIf="!!ELEMENT_DATA?.length">
+        <div class="custom-table-header cursor-pointer" fxFlex="22">
+          <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
+            <div>Name</div>
+            <img src="assets/images/svg/ico-swap-vert.svg" class="ico-extra-small" alt=""/>
+          </div>
+        </div>
+        <div class="custom-table-header text-nowrap" fxFlex="14">Contact Number</div>
+        <div class="custom-table-header text-nowrap text-center" fxFlex="11">Connected</div>
+        <div class="custom-table-header text-nowrap text-center" fxFlex="12">Retry Count</div>
+        <div class="custom-table-header text-nowrap" fxFlex="15">Hang Up Cause</div>
+        <div class="custom-table-header text-nowrap" fxFlex="18">Connected Time</div>
+        <div class="custom-table-header text-nowrap" fxFlex="12">Call Duration</div>
+      </div>
+      <div class="scrollable-content" [style.overflow.y]="'auto'" [style.overflow-x]="'hidden'">
+        <div fxLayout="row" xLayoutAlign="space-between center" class="custom-table-content" *ngFor="let element of dataSource; let i = index">
+          <div class="contact-list-details" fxFlex="22">
+            <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="start center" class="table-user-info">
+              <div class="count-text">{{ 1 + i + ((pageIndex - 1) * pageSize) }}.</div>
+              <div class="ellipsis-text" appTooltip [tooltipTemplate]="element.Name">{{ element.Name || "-" }}</div>
+            </div>
+          </div>
+          <div class="contact-list-details" fxFlex="14">{{ element.Contact_Number || "-" }}</div>
+          <div class="contact-list-details text-center" fxFlex="11">{{ element.Connected }}</div>
+          <div class="contact-list-details text-center" fxFlex="12">{{ element.Retry_Count }}</div>
+          <div class="contact-list-details" fxFlex="15">
+            <div class="ellipsis-text" appTooltip [tooltipTemplate]="element.Hangup_Cause">{{ element.Hangup_Cause || "-" }}</div>
+          </div>
+          <div class="contact-list-details" fxFlex="18">
+            <div class="ellipsis-text" appTooltip [tooltipTemplate]="element.Connected_Time | date:'dd/MM/YYYY hh:mm:ss'">{{ (element.Connected_Time | date:'dd/MM/YYYY hh:mm:ss') || "-"}}</div>
+          </div>
+          <div class="contact-list-details" fxFlex="12">{{ element.Call_Duration || "-" }}</div>
+        </div>
+        <div *ngIf="!!!ELEMENT_DATA?.length && !initialflag" class="nodata text-center">
+          No Data Found
+        </div> 
+      </div>
+    </div>
+
+  <div class="pagination footer-modal-action no-margin" fxLayoutAlign="end end">
+    <app-custom-pagination [pageIndex]="pageIndex" [total]="total" [pageSize]="7" [pageSizeOptions]="[5, 10, 20]" (returnPage)="getCurrentPage($event)"></app-custom-pagination>
+  </div>
+</div>

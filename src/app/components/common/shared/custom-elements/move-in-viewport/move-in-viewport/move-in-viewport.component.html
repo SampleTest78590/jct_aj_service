@@ -1,0 +1,14 @@
+<div
+    #overlayEle
+    [ngClass]="classes"
+    (click)="onOverlayClick($event)"
+    (wheel)="onScroll($event)"
+>
+    <div
+        class="view-port-content-container"
+        #contentEle
+        (click)="$event.stopPropagation()"
+    >
+        <ng-content select="[content]"></ng-content>
+    </div>
+</div>

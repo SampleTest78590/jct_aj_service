@@ -1,0 +1,92 @@
+.campaing-table-list-root .campaign-status {
+  // padding: 5px 10px;
+  border-radius: 80px;
+  display: block;
+  max-width: 114px !important;
+  height: 24px;
+  line-height: 24px;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-align: center;
+}
+
+.campaing-table-list-root .campaign-status.running-bg {
+  background: #E8FAF7;
+  color: #0E5C4f !important;
+}
+
+.campaing-table-list-root .campaign-status.default-bg {
+  background: var(--light-primary-grey-20) !important;
+  color: var(--light-primary-grey-70) !important;
+}
+
+.campaing-table-list-root .campaign-status.completed-bg {
+  background: var(--light-feedback-success-20) !important;
+  color: var(--light-feedback-success-80) !important;
+}
+
+.campaing-table-list-root .campaign-status.scheduled-bg {
+  background: var(--light-sparkle-20) !important;
+  color: var(--light-sparkle-70) !important;
+}
+
+.campaing-table-list-root .campaign-status.stop-bg {
+  background: #FCE6E7;
+  color: #660209;
+}
+
+.campaing-table-list-root .campaign-status.paused-bg { 
+  background: var(--light-marigold-midnight-20) !important; 
+  color: #7F4B10 !important; 
+}
+
+.campaing-table-list-root .pagination .large-secondary-button {
+  font-size: 0.874rem;
+}
+
+.campaing-table-list-root .count-text {
+  color: var(--light-primary-grey-60);
+}
+
+.campaing-table-list-root .table-user-info:hover .info-mouse-hover {
+  width: 504px;
+}
+
+.campaing-table-list-root .table-user-info {
+  position: relative;
+  max-width: 200px;
+}
+
+.campaing-table-list-root .fs-16 {
+  font-size: var(--font-size-sub-title);
+}
+
+.campaing-table-list-root .nodata{
+  padding:15px !important;
+  border:1px solid rgba(0, 0, 0, 0.12) !important
+}
+
+.campaing-table-list-root .dot-menu-dropdown .dropdown-content{
+  cursor: inherit!important;
+}
+
+.campaing-table-list-root .dot-menu-dropdown .dropdown-content .cam-action-bttn{
+  height: 36px;
+  padding: 8px 16px;
+  line-height: 20px;
+  cursor: pointer!important;
+  font-size: var(--font-size-body);
+  color: var(--light-primary-grey-80);
+}
+
+.campaing-table-list-root .dot-menu-dropdown .dropdown-content .cam-action-bttn:hover{
+  background-color: var(--light-primary-grey-20); 
+}
+
+.campaing-table-list-root .search-input {
+    font-size: 14px !important;
+}
+
+.campaing-table-list-root .mt-22-custom{
+  margin-top: 22px;
+}

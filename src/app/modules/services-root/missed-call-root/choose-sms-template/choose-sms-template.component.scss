@@ -1,0 +1,75 @@
+.choose-sms-template-root .radio-button {
+    border-radius: 8px;
+    border: 1px solid var(--light-primary-grey-40);
+    padding: 12px;
+    display: inline-block;
+    min-height: 96px;
+    width: 476px;
+}
+.choose-sms-template-root .content-modal-action {
+    overflow: auto;
+    height: calc(100vh - 64px) !important;
+    padding: 80px 32px 32px 32px;
+    margin-top: 3px;
+}
+.choose-sms-template-root .mt-27{
+    margin-top: 27px;
+}
+.choose-sms-template-root .sms-format{
+    white-space: pre-wrap;
+}
+
+.choose-sms-template-root .status-boxs{
+  padding: 4px 8px;
+  border-radius: 4px;
+  background-color: var(--light-primary-grey-20);
+  font-weight: 700;
+  line-height: 16px;
+  font-size: var(--font-size-mini);
+  color: var(--light-primary-grey-80);
+}
+
+.choose-sms-template-root .open-filter-data{
+    width: 344px;
+    padding: 16px;
+    position: absolute;
+    right: 0;
+    top:44px;
+    border-radius: 8px;
+    background: var(--white);
+    box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.16);
+    z-index: 10;
+}
+.choose-sms-template-root .filter-header{
+    font-size: var(--font-size-head);
+    font-weight: 700;
+    line-height: 32px;
+    color: var(--light-primary-grey-100);
+}
+.choose-sms-template-root .loop-filter-type{
+    border-radius: 8px;
+    border: 1px solid var(--light-text-grey-40);
+    padding: 10px 12px;
+    display: flex;
+    width: 136px;
+    box-sizing: border-box;
+    color: var(--light-primary-grey-80);
+    font-size: var(--font-size-body);
+    line-height: 20px;
+    cursor: pointer;
+}
+.choose-sms-template-root .loop-filter-type:hover{
+    background: var(--light-text-grey-30);
+}
+.choose-sms-template-root .loop-filter-type.highlight{
+    border: 1px solid var(--light-primary-50);
+    background: var(--light-primary-20);
+}
+.choose-sms-template-root .sms-filter-text{
+    font-family: var(--font-familiy);
+    color: var(--light-primary-grey-100) !important;
+    font-weight: 500;
+}
+.choose-sms-template-root .loop-filter-type.highlight {
+    color: var(--light-primary-grey-100) !important;
+}

@@ -1,0 +1,58 @@
+@import '../custom-elements/styles/mixins/text';
+
+.expand-collapse-wrapper {
+    &.expanded {
+        background-color: var(--light-primary-grey-20);
+        .header-title-container{
+            color: var(--light-text-grey-100);
+            font-weight: 700;
+        }
+    }
+    &.selected {
+        background-color: var(--light-primary-20);
+    }
+}
+.expand-collapse-header {
+    display: flex;
+    align-items: center;
+    padding: 4px 12px;
+    background: var(--white);
+
+    .header-title-container {
+        @include applyTextStyle('text-body-xs');
+        flex: 1;
+        display: flex;
+        min-width: 0;
+        color: var(--light-text-grey-80);
+    }
+
+    .header-title {
+        @include text-truncate(unset);
+        display: inline-block;
+        max-width: 100%;
+    }
+
+    .header-icon {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        margin-right: 8px;
+        filter: var(--filter-grey-100);
+    }
+}
+
+.expand-collapse-body {
+    .loader {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 150px;
+    }
+}
+
+.arrow-btn {
+    margin-left: 4px;
+}
+.arrow-btn:hover img{
+    filter:var(--filter-primary-60)!important;
+}

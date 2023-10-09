@@ -1,0 +1,185 @@
+<div fxLayout="column" fxLayoutAlign="space-between stretch" class="campaign-schedule-root">
+  <div fxLayout="row" fxLayoutAlign="space-between center" class="header-modal-action lh-28">
+    <h2 *ngIf="!callerIdShow">Create New Campaign</h2>
+    <h2 *ngIf="callerIdShow">Select Caller ID</h2>
+    <button class="tertiary-button-icon close-btn ico-close-right-top" (click)="onClose()">
+      <img src="assets/images/svg/ico-close-blue.svg" alt="close" />
+    </button>
+  </div>
+
+  <div class="content-modal-action mt-24" fxLayout="column">
+    <ng-container *ngIf="!callerIdShow">
+      <div fxLayout="column" fxLayoutGap="24px" class="grid-layout-column">
+        <div fxLayout="column" fxLayoutGap="4px" class="cstm-input">
+          <div class="cstm-input__label mini-text lh-16">Campaign Name*</div>
+          <input type="text" placeholder=" Enter Campaign Name" maxlength="30" autocomplete="off" [(ngModel)]="CampName"
+            (keypress)="validateCharNum($event)" />
+          <div class="cstm-input__message error" *ngIf="CampName?.length > 0 && CampName?.length < 3">
+            <span>Minimum 3 character are required</span>
+          </div>
+        </div>
+
+        <div fxLayout="column" fxLayoutGap="4px" class="cstm-textarea">
+          <div class="cstm-input__label mini-text lh-16">Description</div>
+          <textarea id="camptextarea" (keyup)="autogrowtextArea()" #camptextarea class="resizer" name="description"
+            placeholder="Enter here..." rows="1" maxlength="200" [(ngModel)]="CampDescription"></textarea>
+        </div>
+        <div fxLayout="column" fxFlex class="dropdown-mg">
+          <div class="mini-text mb-4">Category of Campaigns*</div>
+          <app-dropdown placeholder="Select" [value]="selectedcategory" [options]="categoryList"
+            (handleChange)="selectCategory($event)">
+          </app-dropdown>
+        </div>
+
+        <div fxLayout="column">
+          <label class="body-text lh-20">Campaign Type</label>
+          <div class="grid-layout-row-wrap-2n">
+            <div fxLayout="row" fxLayoutGap="20px" fxFlex="100" class="mt-8 no-padding"
+              fxLayoutAlign="space-between start">
+              <div fxLayout="row" fxLayoutGap="8px" fxFlex="100" fxLayoutAlign="start start"
+                class="radio-options-container grid-layout-row-wrap-2n">
+                <div class="radio-button" fxLayout="row" fxLayoutAlign="start start">
+                  <label class="cstm-radio" [ngClass]="{ checked: radioSelected == 1 }">
+                    <input value="1" [checked]="radioSelected == 1" type="radio" name="inviteMember"
+                      [(ngModel)]="radioSelected" />
+                  </label>
+                  <div>
+                    <div class="body-text">Transactional Campaign</div>
+                    <div class="mini-text mt-4 grey-70">
+                      Choose a number which you want to be displayed when you
+                      call a customer
+                    </div>
+                  </div>
+                </div>
+
+                <div class="radio-button" fxLayout="row" fxLayoutAlign="start start">
+                  <label class="cstm-radio" [ngClass]="{ checked: radioSelected == 2 }">
+                    <input value="2" [checked]="radioSelected == 2" type="radio" name="inviteMember"
+                      [(ngModel)]="radioSelected" />
+                  </label>
+                  <div>
+                    <div class="body-text">Promotional Campaign</div>
+                    <div class="mini-text mt-4 grey-70">
+                      All calls will be sent from a 140 series number that will
+                      be displayed to your customer
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="body-text lh-20">All calls will be sent from a 140 series number that will be system generated number displayed to your customer</div> -->
+        <div fxLayout="column" fxLayoutGap="8px" *ngIf="radioSelected === '1'">
+          <label>Caller ID</label>
+          <div class="resize-btn">
+            <button type="button" class="medium-secondary-button" (click)="openCallerId()">
+              Select Caller ID <img src="assets/images/svg/ico-chevron_right.svg" class="ico-small ml-8" alt="">
+            </button>
+          </div>
+        </div>
+
+        <div fxLayout="column" fxLayoutGap="8px" *ngIf="radioSelected === '1' && contactSelected.number != ''">
+          <div class="grey-80 bold lh-20">Selected Caller ID</div>
+          <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="start center">
+            <div class="sub-title-text extra-bold text-color-id lh-24">{{ contactSelected?.number }}</div>
+            <div *ngIf="contactSelected?.trial_number" class="label-chip" fxLayout="row" fxLayoutAlign="center center">Trial</div>
+          </div>
+          
+        </div>
+        <div fxLayout="column" fxLayoutGap="5px" *ngIf="radioSelected === '2'">
+          <div class="body-text lh-20">
+            All calls will be sent from a 140 series number that will be system
+            generated number displayed to your customer
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="callerIdShow">
+      <div fxLayout="column" class="grid-layout-column">
+        <div fxFlex="100" fxLayout="column" class="create-campaign-search">
+          <div class="cstm-input position-relative">
+            <!-- <div class="cstm-input__label">Search *</div> -->
+            <div>
+              <app-custom-search [label]="'Search Number'" IconSrc="assets/images/svg/ico-search-grey.svg"
+                (outputText)="searchCallerId($event)"></app-custom-search>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="mt-8">Choose your number from below list</div> -->
+        <div class="mt-8" fxLayout="row" fxLayoutAlign="space-between center">
+          <div class="body-text">Choose from your subscribed number list</div>
+          <button type="button" class="small-secondary-button" (click)="redirectToVn()" appTooltip [tooltipDisable]="createCamp.preKycFlag" [ngClass]="{'callerid-disabled': !createCamp.preKycFlag}" [tooltipTemplate]="'Verified KYC is required to purchase a Virtual Number. Please complete your KYC process'">Buy Virtual Number</button>
+        </div>
+      </div>
+      <div fxLayout="column" [style.overflow]="'overlay'" class="custom-table flex-1 mt-15">
+        <div fxLayout="row" fxLayoutAlign="space-between start" class="custom-table-header-content">
+          <div fxLayout="column" fxLayoutAlign="center center" fxFlex="50" class="custom-table-header separator-right">
+            <div>Contact Numbers</div>
+          </div>
+          <div fxLayout="column" fxLayoutAlign="center center" fxFlex="50" class="custom-table-header">
+            <div>Contact Numbers</div>
+          </div>
+        </div>
+        <div class="scrollable-content select-caller-scrollbar" [style.overflow]="'overlay'"
+          [style.overflow-x]="'hidden'">
+          <div fxLayout="row" fxLayoutAlign="space-between start"
+            class="cust-camp-table-data">
+            <div fxLayout="column" fxLayoutAlign="start start" fxFlex="50" class="separator-right">
+              <div class="custom-table-content" fxFlex="100" *ngFor="let item of dataSourceOne">
+                <div class="contact-list-details" fxFlex="100">
+                  <label fxLayout="row" class="cstm-radio"
+                    [ngClass]="{ checked: callerIdRadioSelect?.number == item?.number }">
+                    <input [value]="item" type="radio" name="callerIdRadioSelect" [(ngModel)]="callerIdRadioSelect" />
+                    <span class="pl-20 mr-8">{{ item?.number }}</span>
+                    <div *ngIf="item?.trial_number" class="label-chip" fxLayout="row" fxLayoutAlign="center center">Trial</div>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div fxLayout="column" fxLayoutAlign="start start" fxFlex="50">
+              <div class="custom-table-content" fxFlex="100" *ngFor="let item of dataSourceTwo">
+                <div class="contact-list-details" fxFlex="100">
+                  <label fxLayout="row" class="cstm-radio"
+                    [ngClass]="{ checked: callerIdRadioSelect?.number == item?.number }">
+                    <input [value]="item" type="radio" name="callerIdRadioSelect" [(ngModel)]="callerIdRadioSelect" />
+                    <span class="pl-20 mr-8">{{ item?.number }}</span>
+                    <div *ngIf="item?.trial_number" class="label-chip" fxLayout="row" fxLayoutAlign="center center">Trial</div>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!dataSourceOne?.length && !dataSourceTwo?.length" class="nodata text-center mt-32">
+          No Data Found
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="footer-modal-action">
+    <ng-container *ngIf="!callerIdShow">
+      <div fxLayout="row" fxLayoutGap="12px" fxLayoutAlign="end end">
+        <button type="button" class="large-secondary-button" (click)="onClose()">
+          Cancel
+        </button>
+        <button type="button" class="large-primary-button" (click)="nextLandingPage()"
+          [disabled]="!(CampName?.length >= 3 && selectedcategory  && (this.radioSelected === '1' && callerIdRadioSelect?.number || this.radioSelected === '2'))">
+          Next
+        </button>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="callerIdShow">
+      <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="end end">
+        <button type="button" class="large-secondary-button" (click)="closeCallerId()">
+          Cancel
+        </button>
+        <button type="button" class="large-primary-button" [disabled]="!callerIdRadioSelect?.number" (click)="backtoscreen()">
+          Next
+        </button>
+      </div>
+    </ng-container>
+  </div>
+</div>

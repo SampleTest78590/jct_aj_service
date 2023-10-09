@@ -1,0 +1,18 @@
+<div class="secondary-card missed-other-stats">
+  <div fxLayout="column" fxLayoutGap="10px">
+    <div class="mini-header grey-100 extra-bold">Other Stats</div>
+    <div fxLayout="row" fxLayoutAlign="space-between start">
+      <!-- Avg Calls per Day -->
+      <div class="body-text-14 grey-70 lh-20 mb-2" fxFlex="50">Avg Calls</div>
+      <div class="body-text-14 grey-100 lh-20 mb-2">{{missedOtherSatsSection?.avgCallPerDay || '-'}}</div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between start" *ngIf="selectedCampaign?.audioData">
+      <div class="body-text-14 grey-70 lh-20 mb-2" fxFlex="50">Avg duration listened</div>
+      <div class="body-text-14 grey-100 lh-20 mb-2">{{missedOtherSatsSection?.avgAudioListened || '-'}}</div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between start">
+      <div class="body-text-14 grey-70 lh-20 mb-2" fxFlex="50">Peak Hours</div>
+      <div class="body-text-14 grey-100 lh-20 mb-2">{{missedOtherSatsSection?.peakHour || '-'}}</div>
+    </div>
+  </div>
+</div>

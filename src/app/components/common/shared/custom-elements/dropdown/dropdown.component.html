@@ -1,0 +1,77 @@
+<div
+    #dropdownContainer
+    [class]="'cstm-dropdown__container ' + className"
+    [ngClass]="{ disabled: disabled, open: isOpen }"
+>
+    <div class="cstm-dropdown__label" *ngIf="label">{{ label }}</div>
+    <label
+        class="cstm-dropdown__select-container"
+        (click)="openDropdown()"
+        role="select"
+    >
+        <div
+            class="cstm-dropdown__select"
+            [ngClass]="{ placeholder: !value && placeholder }"
+        >
+            {{ !displayValue ? selectedLabel || placeholder : placeholder || selectedLabel}}
+        </div>
+        <img
+            class="cstm-dropdown__icon"
+            alt="Chevron"
+            [src]="
+                isOpen
+                    ? 'assets/images/svg/ico-chevron-up.svg'
+                    : 'assets/images/svg/ico-chevron-down.svg'
+            "
+        />
+    </label>
+
+    <ng-container *ngIf="isOpen">
+        <div class="cstm-dropdown__list" #dropdownOptions>
+            <div class="scrollable-content" [style.overflow]="'auto'" [style.overflow-x]="'hidden'" [style.max-height.px]="'180'">
+                <ng-container *ngFor="let option of options">
+                    <div
+                        class="cstm-dropdown__option"
+                        (click)="onOptionClick(option)"
+                        role="option"
+                        [ngClass]="{
+                            disabled: option.disable,
+                            divider: option.divider,
+                            active: option.value === value
+                        }"
+                    >
+                        <img
+                            class="csmt-option__icon"
+                            *ngIf="option?.icon"
+                            [src]="option.icon"
+                            [alt]="option.label"
+                        />
+                        <div class="cstm-option__label-container">
+                            <div class="cstm-dropdown__option-label">
+                                {{ option.label }}
+                            </div>
+                            <div
+                                *ngIf="option.helper"
+                                class="cstm-dropdown__option-helper"
+                            >
+                                {{ option.helper }}
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+            <div>
+                <div *ngIf ="AddButton" class="mt-10 separator-top">
+                    <button (click)="addnewActivity($event)" class="medium-tertiary-button">
+                        <img src="assets/images/svg/ico-add-circle.svg" class="mr-8" alt="" />
+                        <div class="sub-title-text extra-bold lh-24 primary-60">Add New Sender ID</div>
+                    </button>
+                    <!-- <div fxLayout="row" fxLayoutGap="10px" (click)="addnewActivity($event)">
+                        
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    
+</div>

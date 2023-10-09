@@ -1,0 +1,114 @@
+.test-campaign-sub-title {
+  color: var(--light-text-grey-80);
+  line-height: 24px;
+}
+.test-campaign-header {
+  color: var(--light-text-grey-100);
+  margin-bottom: 16px;
+}
+.text-campaign-button {
+  margin-top: 18px;
+}
+.test-campaign-modal .test-camp-para {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  color: var(--light-primary-grey-80);
+}
+.test-campaign-modal .test-camp-title {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 24px;
+  color: var(--light-primary-grey-100);
+}
+.test-campaign-modal .test-camp-subtitle-one {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--light-text-grey-70);
+}
+.test-campaign-modal .test-camp-subtitle-two {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--light-text-grey-100);
+}
+.test-campaign-modal .test-no-color {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(light-text-grey-70);
+}
+.test-campaign-modal .tertiary-button-icon:hover img {
+  filter: none!important;
+}
+.test-campaign-modal .cust-width{
+  width: 267px !important;
+}
+// .test-campaign-modal .content-modal-action {
+//   height: calc(100vh - 52px) !important;
+// }
+.test-campaign-modal .large-secondary-button.custom-p {
+  padding: 8px 0px 8px 0px !important;
+}
+.phone-input .cstm-dropdown__select {
+  font-size: var(--font-size-body) !important;
+}
+.phone-input .cstm-dropdown__select-container {
+  border: none !important;
+  border-left: 1px solid var(--light-primary-grey-50) !important;
+  border-top: 1px solid var(--light-primary-grey-50) !important;
+  border-bottom: 1px solid var(--light-primary-grey-50) !important;
+  border-radius: 8px 0px 0px 8px !important;
+  height: 36px;
+  box-sizing: border-box;
+}
+.phone-input .campaign-schedule-root .dropdown-mg {
+  margin-top: 4.2px !important;
+}
+.phone-input .dropdown-pad .cstm-dropdown__select-container{
+  padding: 6px 5px 5px 12px!important;
+}
+.phone-input .cstm-dropdown__select-container .cstm-dropdown__icon{
+  margin-left: 4px;
+  filter: var(--filter-grey-60) !important;
+}
+.phone-input .cstm-input input {
+  border-right: 1px solid var(--light-primary-grey-50) !important;
+  border-top: 1px solid var(--light-primary-grey-50) !important;
+  border-bottom: 1px solid var(--light-primary-grey-50) !important;
+  padding: 9px 12px 7px 0px;
+  border-left: none;
+  border-radius: 0px 8px 8px 0px;
+  background-color: transparent;
+  line-height: 1.428571;
+  width: 268px;
+  height: 36px;
+  box-sizing: border-box;
+}
+
+.test-campaign-modal .content-modal-action{
+  padding: 90px 23px 32px 32px !important; 
+}
+
+.test-campaign-modal .delete-icon-test{
+  visibility: hidden;
+}
+.test-campaign-modal .add-no.medium-tertiary-button{
+  padding: 8px 0px;
+}
+
+.test-campaign-modal .cls-otp .cstm-dropdown__select{
+  font-size: 14px !important;
+}
+
+.test-campaign-modal .cls-otp .num-inp-field.cstm-input input{
+  width: 300px;
+}
+.test-campaign-modal .cls-otp .otp-box.cstm-input input{
+  width: 264px;
+}
+
+.test-campaign-modal .cls-otp .cstm-input .cstm-input__message{
+  margin-top: 0px !important;
+}

@@ -1,0 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'src/app/components/common/shared/custom-elements/styles/variables/index.scss';
+@import 'src/app/components/common/shared/custom-elements/styles/mixins/index.scss';
+@import 'src/app/components/common/shared/custom-elements/styles/functions/index.scss';
+@import 'src/app/components/common/shared/custom-elements/styles/helper/index.scss';
+
+@import 'src/app/components/common/shared/custom-elements/styles/custom-element-styles.scss';
+
+:root {
+    @include cssColorVariable();
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}

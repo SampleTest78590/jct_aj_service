@@ -1,0 +1,18 @@
+<div fxFlex fxLayout="column" class="sms-template-popup">
+    <div fxLayout="row" fxLayoutAlign="end end" class="cursor-pointer">
+        <button class="tertiary-button-icon " (click)="onModalClose('')">
+            <img src="assets/images/svg/ico-close-blue.svg" alt="close" />
+        </button>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="center center">
+        <div class="test-campaign-header header text-center ">{{ header }}</div>
+        <div class="test-campaign-sub-title grey-80 title-text bold lh-24 text-center mt-16">{{ subheader }}</div>
+    </div>
+
+    <div class="configure-button full-width mb-8">
+        <button fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="center center" type="button" class="large-primary-button full-width" (click)="onModalClose('success')">
+            <img src="assets/images/svg/ico-setting-white.svg" alt="">
+            <span>{{buttonText}}</span>
+        </button>
+    </div>
+</div>
